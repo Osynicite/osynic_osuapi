@@ -6,5 +6,5 @@ use serde::{Serialize, Deserialize};
 pub struct MonthlyPlaycounts {
     
     pub start_date: String,
-    pub count: u64,
+    pub count: u32,
 }

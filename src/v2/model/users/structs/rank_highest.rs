@@ -4,9 +4,7 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RankHighest {
-    pub rank: u64,
-    
-    
+    pub rank: u32,
     pub updated_at: String,
 }
 

@@ -4,5 +4,5 @@ use serde::{Serialize, Deserialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ReplaysWatchedCount {
     pub start_date: String,
-    pub count: u64,
+    pub count: u32,
 }

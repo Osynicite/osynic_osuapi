@@ -40,6 +40,14 @@ impl From<String> for Error {
     }
 }
 
+impl From<&str> for Error {
+    fn from(e: &str) -> Self {
+        Error::new(ErrorKind::OsynicOsuApiV2Error(e.to_string()))
+    }
+}
+
+
+
 impl From<std::io::Error> for Error {
     fn from(e: std::io::Error) -> Self {
         Error::new(ErrorKind::StdIoError(e))
@@ -51,6 +59,13 @@ impl From<reqwest::Error> for Error {
         Error::new(ErrorKind::RqwestError(e))
     }
 }
+
+impl From<reqwest::Response> for Error {
+    fn from(e: reqwest::Response) -> Self {
+        Error::new(ErrorKind::NetworkError(e))
+    }
+}
+
 
 #[cfg(feature = "wasm")]
 impl From<gloo_net::Error> for Error {
@@ -67,6 +82,7 @@ impl From<serde_json::Error> for Error {
 
 pub enum ErrorKind {
     OsynicOsuApiV2Error(String),
+    NetworkError(reqwest::Response),
     SerdeJsonError(serde_json::Error),
     StdIoError(std::io::Error),
     RqwestError(reqwest::Error),
@@ -78,7 +94,8 @@ pub enum ErrorKind {
 impl std::fmt::Display for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "osynic_osu_api::Error: {}", e),
+            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {}", e),
+            ErrorKind::NetworkError(e) => write!(f, "NetworkError: {:?}", e),
             ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {}", e),
             ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {}", e),
             ErrorKind::RqwestError(e) => write!(f, "reqwest::Error: {}", e),
@@ -91,7 +108,8 @@ impl std::fmt::Display for ErrorKind {
 impl std::fmt::Debug for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "osynic_osu_api::Error: {:?}", e),
+            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {}", e),
+            ErrorKind::NetworkError(e) => write!(f, "NetworkError: {:?}", e),
             ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {:?}", e),
             ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {:?}", e),
             ErrorKind::RqwestError(e) => write!(f, "reqwest::Error: {:?}", e),

@@ -1,3 +1,4 @@
+use crate::v2::client::request::check::check_res;
 use crate::error::Result;
 use crate::v2::interface::oauth::IOauth;
 use crate::v2::model::oauth::enums::scope::Scope;
@@ -111,7 +112,7 @@ impl IOauth for ReqwestOauth {
             scope: Some(Scope::default().to_string()),
         };
 
-        let response = self
+        let res = self
             .client
             .post("https://osu.ppy.sh/oauth/token")
             .header("Accept", "application/json")
@@ -119,6 +120,8 @@ impl IOauth for ReqwestOauth {
             .form(&request)
             .send()
             .await?;
+
+        let response = check_res(res)?;
 
         let token_response: GetTokenResponse = response.json().await?;
 
@@ -140,9 +143,6 @@ impl IOauth for ReqwestOauth {
     ) -> Result<OToken> {
         println!("ReqwestOauth refresh_token");
 
-        // let access_token = &self.o_token.read().await.access_token;
-        // let refresh_token = &self.o_token.read().await.refresh_token;
-        // 提前获取读锁并释放
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
@@ -151,8 +151,6 @@ impl IOauth for ReqwestOauth {
             let token = self.o_token.read().await;
             token.refresh_token.clone()
         };
-
-        // 如果refresh_token为空，返回错误
 
         if refresh_token.is_none() {
             return Err("No refresh token, Please check your authorization type.".to_string().into());
@@ -174,9 +172,7 @@ impl IOauth for ReqwestOauth {
             }),
         };
 
-        println!("{:?}", request);
-
-        let response = self
+        let res = self
             .client
             .post("https://osu.ppy.sh/oauth/token")
             .header("Accept", "application/json")
@@ -185,13 +181,11 @@ impl IOauth for ReqwestOauth {
             .json(&request)
             .send()
             .await?;
+        
+        let response = check_res(res)?;
 
-        println!("{:?}", response);
-
-        // 解析响应
         let token_response: GetTokenResponse = response.json().await?;
 
-        // 将 GetTokenResponse 转换为 OToken
         let o_token = OToken {
             token_type: token_response.token_type,
             expires_in: token_response.expires_in,
@@ -199,8 +193,6 @@ impl IOauth for ReqwestOauth {
             refresh_token: token_response.refresh_token,
         };
 
-        // let mut token = self.o_token.write().await;
-        // *token = o_token.clone();
 
         {
             let mut token = self.o_token.write().await;

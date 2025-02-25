@@ -8,5 +8,5 @@ use serde::{Serialize, Deserialize};
 pub struct UserAchievements {
     
     pub achieved_at: String,
-    pub achievement_id: u64,
+    pub achievement_id: u32,
 }

@@ -3,8 +3,8 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Kudosu {
-    pub available: u64,
-    pub total: u64,
+    pub available: u32,
+    pub total: u32,
 }
 
 impl Default for Kudosu {

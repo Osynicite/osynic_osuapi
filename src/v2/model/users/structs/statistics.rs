@@ -5,24 +5,26 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Statistics {
-    pub count_100: u64,
-    pub count_300: u64,
-    pub count_50: u64,
-    pub count_miss: u64,
-    pub country_rank: Option<u64>,
+    pub count_100: u32,
+    pub count_300: u32,
+    pub count_50: u32,
+    pub count_miss: u32,
+    pub country_rank: Option<u32>,
     pub level: Level,
-    pub global_rank: u64,
-    pub global_rank_exp: Option<u64>,
+    pub global_rank: u32,
+    pub global_rank_exp: Option<u32>,
     pub pp: f64,
     pub pp_exp: Option<f64>,
     pub ranked_score: u64,
     pub hit_accuracy: f64,
-    pub play_count: u64,
-    pub play_time: u64,
+    pub play_count: u32,
+    pub play_time: u32,
     pub total_score: u64,
     pub total_hits: u64,
-    pub maximum_combo: u64,
-    pub replays_watched_by_others: u64,
+    pub maximum_combo: u32,
+    pub replays_watched_by_others: u32,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub rank_change_since_30_days: Option<i32>,
     pub is_ranked: bool,
     pub grade_counts: GradeCounts,
     pub rank: Option<Rank>,
@@ -31,28 +33,28 @@ pub struct Statistics {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Level {
-    pub current: u64,
-    pub progress: u64,
+    pub current: u32,
+    pub progress: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GradeCounts {
-    pub ss: u64,
-    pub ssh: u64,
-    pub s: u64,
-    pub sh: u64,
-    pub a: u64,
+    pub ss: u32,
+    pub ssh: u32,
+    pub s: u32,
+    pub sh: u32,
+    pub a: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Rank {
-    pub global: Option<u64>,
-    pub country: u64,
+    pub global: Option<u32>,
+    pub country: u32,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Variant {
-    pub country_rank: u64,
-    pub global_rank: u64,
+    pub country_rank: u32,
+    pub global_rank: u32,
     pub mode: String,
     pub pp: f64,
     pub variant: String,
@@ -80,6 +82,7 @@ impl Default for Statistics {
             total_score: 0,
             total_hits: 0,
             maximum_combo: 0,
+            rank_change_since_30_days: None,
             replays_watched_by_others: 0,
             is_ranked: false,
             grade_counts: GradeCounts {
