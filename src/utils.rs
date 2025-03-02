@@ -32,6 +32,7 @@ pub struct OsuAccountFacadeA {
     pub world_rank: u32,
     pub country_code: String,
     pub country_rank: u32,
+    pub is_supporter: bool,
 }
 
 pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
@@ -51,5 +52,6 @@ pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
         world_rank: user.statistics.global_rank,
         country_code: user.country.code,
         country_rank: user.statistics.country_rank.unwrap_or_default(),
+        is_supporter: user.is_supporter,
     }
 }
