@@ -1,8 +1,1 @@
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
-pub enum Mode{
-    #[default]
-    Osu,
-    Mania,
-    Taiko,
-    Catch
-}
+pub use crate::v2::model::mode::enums::mode::Mode;

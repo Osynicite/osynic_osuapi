@@ -1,6 +1,7 @@
 use crate::v2::model::oauth::structs::o_token::OToken;
 use super::api::oauth::ReqwestOauth;
 use super::api::users::ReqwestUsers;
+use super::api::beatmapsets::ReqwestBeatmapsets;
 
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -8,6 +9,7 @@ use tokio::sync::RwLock;
 pub struct OsynicOsuApiV2Client {
     pub oauth: ReqwestOauth,
     pub users: ReqwestUsers,
+    pub beatmapsets: ReqwestBeatmapsets,
     pub o_token: Arc<RwLock<OToken>>,
     pub client: reqwest::Client,
 }
@@ -22,6 +24,10 @@ impl OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             oauth: ReqwestOauth {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            beatmapsets: ReqwestBeatmapsets {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },
@@ -47,6 +53,10 @@ impl Default for OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             oauth: ReqwestOauth {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            beatmapsets: ReqwestBeatmapsets {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },
