@@ -1,4 +1,5 @@
 pub mod difficulty_attributes;
 pub mod beatmap;
+pub mod beatmaps;
 
 pub mod extended;

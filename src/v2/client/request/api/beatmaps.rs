@@ -2,6 +2,7 @@ use crate::error::Result;
 use crate::v2::interface::beatmaps::IBeatmaps;
 use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
+use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 
@@ -65,6 +66,36 @@ impl IBeatmaps for ReqwestBeatmaps {
         let attributes: Attributes = response.json().await?;
 
         Ok(attributes)
+        
+    }
+
+    async fn get_beatmaps(&self,beatmap_ids:Vec<u32>) -> Result<Beatmaps> {
+        println!("ReqwestBeatmaps get_Beatmaps");
+
+        let access_token = {
+            let token = self.o_token.read().await;
+            token.access_token.clone()
+        };
+        // ids%5B%5D=5000992&ids%5B%5D=4457446,只取前50个
+
+        // let params = beatmap_ids.iter().take(50).map(|id| format!("ids%5B%5D={}",id)).collect::<Vec<String>>().join("&");
+        // Vec(&str,&str),左边都是ids[]，右边是id
+        let params = beatmap_ids.iter().take(50).enumerate().map(|(_,id)| ("ids[]".to_string(),id.to_string())).collect::<Vec<(String,String)>>();
+        // println!("{:?}", params);
+
+
+        let response = self.client
+        .get("https://osu.ppy.sh/api/v2/beatmaps")
+        .header("Accept", "application/json")
+        .header("Content-Type", "application/json")
+        .header("Authorization", format!("Bearer {}", access_token))
+        .query(&params)
+        .send()
+        .await?;
+
+        let beatmaps: Beatmaps = response.json().await?;
+
+        Ok(beatmaps)
         
     }
 
