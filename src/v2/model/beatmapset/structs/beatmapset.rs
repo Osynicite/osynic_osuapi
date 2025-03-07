@@ -51,10 +51,10 @@ pub struct Beatmapset {
     pub submitted_date: String,
     pub tags: String,
     pub availability: Availability,
-    pub beatmaps: Vec<Beatmap>,
-    pub pack_tags: Vec<String>,
-
+    pub beatmaps: Option<Vec<Beatmap>>,
+    
     // ----Extended Info----
+    pub pack_tags: Option<Vec<String>>,
     pub converts: Option<Vec<Convert>>, 
     pub current_nominations: Option<Vec<CurrentNomination>>,
     pub description: Option<Description>,

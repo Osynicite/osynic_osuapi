@@ -1,5 +1,6 @@
 use serde::{Serialize, Deserialize};
 
+use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
 use crate::v2::model::beatmap::enums::status::Status;
 use crate::v2::model::beatmap::enums::mode::Mode;
 
@@ -39,6 +40,7 @@ pub struct Beatmap {
 
     
     // ----Extended Info----
+    pub beatmapset: Option<Beatmapset>,
     pub current_user_tag_ids: Option<Vec<u32>>,
     pub failtimes: Option<Failtimes>,
     pub owners: Option<Vec<Owner>>,

@@ -1,0 +1,42 @@
+use crate::error::Result;
+use crate::v2::interface::beatmaps::IBeatmaps;
+use crate::v2::model::oauth::structs::o_token::OToken;
+use crate::v2::model::beatmap::structs::beatmap::Beatmap;
+
+use std::sync::Arc;
+use tokio::sync::RwLock;
+
+pub struct ReqwestBeatmaps {
+    pub client: reqwest::Client,
+    pub o_token: Arc<RwLock<OToken>>,
+}
+
+
+impl IBeatmaps for ReqwestBeatmaps {
+    
+    async fn get_beatmap(&self,beatmap_id: u32) -> Result<Beatmap> {
+        println!("ReqwestBeatmaps get_Beatmap");
+        
+        let access_token = {
+            let token = self.o_token.read().await;
+            token.access_token.clone()
+        };
+        
+        let response = self
+        .client
+        .get(format!("https://osu.ppy.sh/api/v2/beatmaps/{}",beatmap_id))
+        .header("Accept", "application/json")
+        .header("Content-Type", "application/x-www-form-urlencoded")
+        .header("Authorization", format!("Bearer {}", access_token))
+        .send()
+        .await?;
+
+        // println!("{:?}", response);
+        
+        let beatmap: Beatmap = response.json().await?;
+
+        Ok(beatmap)
+        
+    }
+
+}
