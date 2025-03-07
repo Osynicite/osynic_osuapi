@@ -31,4 +31,5 @@ pub struct Score {
     pub current_user_attributes: CurrentUserAttributes,
     pub beatmap: Option<Beatmap>,
     pub user: Option<User>,
+
 }

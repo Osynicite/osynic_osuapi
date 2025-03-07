@@ -6,3 +6,7 @@ pub mod statistics;
 pub mod user;
 pub mod current_user_attributes;
 pub mod team;
+
+pub mod non_legacy;
+pub mod non_legacy_score;
+pub mod non_legacy_scores;

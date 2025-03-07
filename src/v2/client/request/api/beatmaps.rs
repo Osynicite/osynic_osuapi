@@ -8,6 +8,7 @@ use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 use crate::v2::model::score::structs::beatmap_user_score::BeatmapUserScore;
 use crate::v2::model::score::structs::beatmap_scores::BeatmapScores;
 use crate::v2::model::score::structs::scores::Scores;
+use crate::v2::model::score::structs::non_legacy_scores::NonLegacyScores;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -100,7 +101,7 @@ impl IBeatmaps for ReqwestBeatmaps {
 
         }
 
-        async fn get_solo_scores(&self,beatmap_id:u32,mode:Option<Mode>,mods:Option<String>,ranking_type:Option<String>) -> Result<BeatmapScores> {
+        async fn get_solo_scores(&self,beatmap_id:u32,mode:Option<Mode>,mods:Option<String>,ranking_type:Option<String>) -> Result<NonLegacyScores> {
             println!("ReqwestBeatmaps get_Solo_Scores");
 
             let access_token = {
@@ -121,7 +122,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             .send()
             .await?;
 
-            let scores: BeatmapScores = response.json().await?;
+            let scores: NonLegacyScores = response.json().await?;
 
             Ok(scores)
         }
