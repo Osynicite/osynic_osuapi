@@ -3,3 +3,5 @@ pub mod beatmap;
 pub mod beatmaps;
 
 pub mod extended;
+
+pub mod beatmap_playcount;

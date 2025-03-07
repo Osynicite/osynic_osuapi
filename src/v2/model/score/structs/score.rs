@@ -4,6 +4,9 @@ use crate::v2::model::score::enums::mode::Mode;
 use crate::v2::model::score::enums::rank::Rank;
 
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
+use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
+use crate::v2::model::score::structs::weight::Weight;
+
 use crate::v2::model::score::structs::current_user_attributes::CurrentUserAttributes;
 use crate::v2::model::score::structs::statistics::Statistics;
 use crate::v2::model::score::structs::user::User;
@@ -31,5 +34,9 @@ pub struct Score {
     pub current_user_attributes: CurrentUserAttributes,
     pub beatmap: Option<Beatmap>,
     pub user: Option<User>,
+
+    // ------- In Get User Scores ------
+    pub beatmapset: Option<Beatmapset>,
+    pub weight: Option<Weight>,
 
 }

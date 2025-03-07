@@ -16,7 +16,7 @@ async fn main() -> Result<()> {
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let user = client.users.get_user("Islatri",None).await?;
+    let user = client.users.get_user("Islatri",None,None).await?;
     println!("{:?}", user);
     println!("osu_account_id: {}", user.id);
     println!("username: {}", user.username);

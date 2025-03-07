@@ -8,3 +8,5 @@ pub mod genre;
 pub mod language;
 
 pub mod sort;
+
+pub mod search_mode;

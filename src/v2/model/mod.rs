@@ -5,3 +5,5 @@ pub mod beatmap;
 pub mod beatmapset;
 pub mod search;
 pub mod score;
+pub mod wiki;
+pub mod event;
