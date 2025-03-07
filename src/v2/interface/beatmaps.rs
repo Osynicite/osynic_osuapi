@@ -1,5 +1,7 @@
 use crate::error::Result;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
+use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
+use crate::v2::model::mode::enums::mode::Mode;
 
 pub trait IBeatmaps {
     // fn lookup(&self) -> impl std::future::Future<Output = Result<()>> + Send;
@@ -9,5 +11,5 @@ pub trait IBeatmaps {
     // fn get_solo_scores(&self) -> impl std::future::Future<Output = Result<()>> + Send;
     // fn get_beatmaps(&self) -> impl std::future::Future<Output = Result<()>> + Send;
     fn get_beatmap(&self,beatmap_id:u32) -> impl std::future::Future<Output = Result<Beatmap>> + Send;
-    // fn get_beatmap_attributes(&self) -> impl std::future::Future<Output = Result<()>> + Send;
+    fn get_beatmap_attributes(&self,beatmap_id:u32,mods:Option<Vec<String>>,ruleset:Option<Mode>,ruleset_id:Option<i32>) -> impl std::future::Future<Output = Result<Attributes>> + Send;
 }

@@ -2,6 +2,8 @@ use crate::error::Result;
 use crate::v2::interface::beatmaps::IBeatmaps;
 use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
+use crate::v2::model::mode::enums::mode::Mode;
+use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -32,10 +34,37 @@ impl IBeatmaps for ReqwestBeatmaps {
         .await?;
 
         // println!("{:?}", response);
-        
+
         let beatmap: Beatmap = response.json().await?;
 
         Ok(beatmap)
+        
+    }
+
+    async fn get_beatmap_attributes(&self,beatmap_id:u32,mods:Option<Vec<String>>,ruleset:Option<Mode>,ruleset_id:Option<i32>) -> Result<Attributes> {
+        println!("ReqwestBeatmaps get_Beatmap_Attributes");
+
+        let access_token = {
+            let token = self.o_token.read().await;
+            token.access_token.clone()
+        };
+
+        let response = self.client
+        .post(format!("https://osu.ppy.sh/api/v2/beatmaps/{}/attributes",beatmap_id))
+        .header("Accept", "application/json")
+        .header("Content-Type", "application/json")
+        .header("Authorization", format!("Bearer {}", access_token))
+        .json(&serde_json::json!({
+            "mods": mods,
+            "ruleset": ruleset,
+            "ruleset_id": ruleset_id
+        }))
+        .send()
+        .await?;
+
+        let attributes: Attributes = response.json().await?;
+
+        Ok(attributes)
         
     }
 
