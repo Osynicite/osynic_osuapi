@@ -2,9 +2,7 @@
 
 use serde::{Serialize, Deserialize};
 
-// use crate::v2::model::users::enums::achievement::Achievement;
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct UserAchievements {
     
     pub achieved_at: String,

@@ -4,3 +4,4 @@ pub mod user;
 pub mod beatmap;
 pub mod beatmapset;
 pub mod search;
+pub mod score;

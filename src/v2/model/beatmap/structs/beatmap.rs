@@ -36,10 +36,10 @@ pub struct Beatmap {
     pub ranked: u32,
     pub url: String,
     pub checksum: String,
-    pub max_combo: u32,
-
+    
     
     // ----Extended Info----
+    pub max_combo: Option<u32>,
     pub beatmapset: Option<Beatmapset>,
     pub current_user_tag_ids: Option<Vec<u32>>,
     pub failtimes: Option<Failtimes>,

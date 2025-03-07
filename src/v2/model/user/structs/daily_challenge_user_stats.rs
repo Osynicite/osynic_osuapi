@@ -2,7 +2,7 @@
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct DailyChallengeUserStats {
     pub daily_streak_best: u32,
     pub daily_streak_current: u32,
@@ -16,21 +16,4 @@ pub struct DailyChallengeUserStats {
     pub user_id: u32,
     pub weekly_streak_best: u32,
     pub weekly_streak_current: u32,
-}
-
-impl Default for DailyChallengeUserStats {
-    fn default() -> Self {
-        DailyChallengeUserStats {
-            daily_streak_best: 0,
-            daily_streak_current: 0,
-            last_update: "".to_string(),
-            last_weekly_streak: "".to_string(),
-            playcount: 0,
-            top_10p_placements: 0,
-            top_50p_placements: 0,
-            user_id: 0,
-            weekly_streak_best: 0,
-            weekly_streak_current: 0,
-        }
-    }
 }

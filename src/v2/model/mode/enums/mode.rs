@@ -23,6 +23,16 @@ impl Mode{
         }
     }
 
+    pub fn to_ruleset(&self) -> String{
+        match self{
+            Mode::Osu => "osu".to_string(),
+            Mode::Mania => "mania".to_string(),
+            Mode::Taiko => "taiko".to_string(),
+            Mode::Catch => "fruits".to_string()
+
+        }
+    }
+
     pub fn to_beatmapset_search(&self) -> String{
         match self{
             Mode::Osu => "0".to_string(),

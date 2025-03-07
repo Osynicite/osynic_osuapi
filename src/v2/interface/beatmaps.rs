@@ -3,10 +3,11 @@ use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
 use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 use crate::v2::model::mode::enums::mode::Mode;
+use crate::v2::model::score::structs::beatmap_user_score::BeatmapUserScore;
 
 pub trait IBeatmaps {
     // fn lookup(&self) -> impl std::future::Future<Output = Result<()>> + Send;
-    // fn get_user_score(&self) -> impl std::future::Future<Output = Result<()>> + Send;
+    fn get_user_score(&self,beatmap_id:u32,user_id:u32,legacy_only:Option<u32>,mode:Option<Mode>,mods:Option<String>) -> impl std::future::Future<Output = Result<BeatmapUserScore>> + Send;
     // fn get_user_scores(&self) -> impl std::future::Future<Output = Result<()>> + Send;
     // fn get_scores(&self) -> impl std::future::Future<Output = Result<()>> + Send;
     // fn get_solo_scores(&self) -> impl std::future::Future<Output = Result<()>> + Send;

@@ -16,7 +16,7 @@ use crate::v2::model::user::structs::rank_history::RankHistory;
 use crate::v2::model::user::structs::group::Group;
 use crate::v2::model::user::structs::replays_watched_count::ReplaysWatchedCount;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct User {
     pub avatar_url: String,
     pub country_code: String,
@@ -94,89 +94,8 @@ pub struct User {
     pub unranked_beatmapset_count: Option<u32>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct Page {
     pub html: String,
     pub raw: String,
-}
-
-impl Default for User {
-    fn default() -> Self {
-        User {
-            avatar_url: "".to_string(),
-            country_code: "".to_string(),
-            default_group: None,
-            id: 0,
-            is_active: false,
-            is_bot: false,
-            is_deleted: false,
-            is_online: false,
-            is_supporter: false,
-            last_visit: "".to_string(),
-            pm_friends_only: false,
-            profile_colour: None,
-            username: "".to_string(),
-            cover_url: "".to_string(),
-            discord: None,
-            has_supported: false,
-            interests: None,
-            join_date: "".to_string(),
-            location: None,
-            max_blocks: 0,
-            max_friends: 0,
-            occupation: None,
-            playmode: "".to_string(),
-            playstyle: Vec::new(),
-            post_count: 0,
-            profile_hue: None,
-            profile_order: Vec::new(),
-            title: None,
-            title_url: None,
-            twitter: None,
-            website: None,
-            country: Country::default(),
-            cover: Cover::default(),
-            is_restricted: None,
-            kudosu: Kudosu::default(),
-            account_history: Vec::new(),
-            active_tournament_banner: None,
-            active_tournament_banners: Vec::new(),
-            badges: Vec::new(),
-            beatmap_playcounts_count: 0,
-            comments_count: 0,
-            daily_challenge_user_stats: DailyChallengeUserStats::default(),
-            favourite_beatmapset_count: 0,
-            follower_count: 0,
-            graveyard_beatmapset_count: 0,
-            groups: Vec::new(),
-            guest_beatmapset_count: 0,
-            loved_beatmapset_count: 0,
-            mapping_follower_count: 0,
-            monthly_playcounts: Vec::new(),
-            nominated_beatmapset_count: 0,
-            page: Page {
-                html: "".to_string(),
-                raw: "".to_string(),
-            },
-            pending_beatmapset_count: 0,
-            previous_usernames: Vec::new(),
-            rank_highest: RankHighest::default(),
-            ranked_beatmapset_count: 0,
-            replays_watched_counts: Vec::new(),
-            scores_best_count: 0,
-            scores_first_count: 0,
-            scores_pinned_count: 0,
-            scores_recent_count: 0,
-            session_verified: None,
-            statistics: Statistics::default(),
-            statistics_rulesets: None,
-            support_level: 0,
-            team: None,
-            user_achievements: Vec::new(),
-            rank_history: None,
-            rank_istoriya: None,
-            ranked_and_approved_beatmapset_count: None,
-            unranked_beatmapset_count: None,
-        }
-    }
 }

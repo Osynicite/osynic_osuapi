@@ -2,17 +2,8 @@
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct RankHighest {
     pub rank: u32,
     pub updated_at: String,
-}
-
-impl Default for RankHighest {
-    fn default() -> Self {
-        RankHighest {
-            rank: 0,
-            updated_at: "".to_string(),
-        }
-    }
 }

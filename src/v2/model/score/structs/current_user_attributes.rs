@@ -1,8 +1,6 @@
-// src/structs/country.rs
 use serde::{Serialize, Deserialize};
 
 #[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
-pub struct Country {
-    pub code: String,
-    pub name: String,
+pub struct CurrentUserAttributes {
+    pub pin: Option<String>,
 }
