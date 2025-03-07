@@ -28,6 +28,6 @@ pub struct Score {
     pub r#type: String,
     pub user_id: u32,
     pub current_user_attributes: CurrentUserAttributes,
-    pub beatmap: Beatmap,
-    pub user: User,
+    pub beatmap: Option<Beatmap>,
+    pub user: Option<User>,
 }

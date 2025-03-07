@@ -6,6 +6,7 @@ use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 use crate::v2::model::score::structs::beatmap_user_score::BeatmapUserScore;
+use crate::v2::model::score::structs::scores::Scores;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -42,6 +43,32 @@ impl IBeatmaps for ReqwestBeatmaps {
 
         Ok(user_score)
 
+        }
+
+        async fn get_user_scores(&self,beatmap_id:u32,user_id:u32,legacy_only:Option<u32>,mode:Option<Mode>,ruleset:Option<Mode>) ->Result<Scores>{
+            println!("ReqwestBeatmaps get_User_Scores");
+
+            let access_token = {
+                let token = self.o_token.read().await;
+                token.access_token.clone()
+            };
+
+            let response = self.client
+            .get(format!("https://osu.ppy.sh/api/v2/beatmaps/{}/scores/users/{}/all",beatmap_id,user_id))
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/json")
+            .header("Authorization", format!("Bearer {}", access_token))
+            .query(&[
+                ("legacy",legacy_only.map(|x| x.to_string())),
+                ("mode",mode.map(|x| x.to_ruleset())),
+                ("ruleset",ruleset.map(|x| x.to_ruleset()))
+            ])
+            .send()
+            .await?;
+
+            let scores: Scores = response.json().await?;
+
+            Ok(scores)
         }
     
     async fn get_beatmap(&self,beatmap_id: u32) -> Result<Beatmap> {
