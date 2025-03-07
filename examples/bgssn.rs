@@ -1,5 +1,6 @@
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
+use osynic_osuapi::v2::model::mode::enums::mode::Mode;
 use osynic_osuapi::v2::model::oauth::structs::o_token::OToken;
 use osynic_osuapi::v2::interface::beatmaps::IBeatmaps;
 
@@ -17,8 +18,8 @@ async fn main() -> Result<()> {
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let beatmaps = client.beatmaps.get_beatmaps([5000433,4457446].to_vec()).await?;
-    println!("{:?}", beatmaps);
+    let solo_scores = client.beatmaps.get_solo_scores(4801662,Some(Mode::Catch),None,None).await?;
+    println!("{:?}", solo_scores);
     
     
     Ok(())

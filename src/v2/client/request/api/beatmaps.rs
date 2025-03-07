@@ -6,6 +6,7 @@ use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 use crate::v2::model::score::structs::beatmap_user_score::BeatmapUserScore;
+use crate::v2::model::score::structs::beatmap_scores::BeatmapScores;
 use crate::v2::model::score::structs::scores::Scores;
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -67,6 +68,60 @@ impl IBeatmaps for ReqwestBeatmaps {
             .await?;
 
             let scores: Scores = response.json().await?;
+
+            Ok(scores)
+        }
+
+        async fn get_scores(&self,beatmap_id:u32,legacy_only:Option<u32>,mode:Option<Mode>,mods:Option<String>,ranking_type:Option<String>) -> Result<BeatmapScores> {
+            println!("ReqwestBeatmaps get_Scores");
+
+            let access_token = {
+                let token = self.o_token.read().await;
+                token.access_token.clone()
+            };
+
+            let response = self.client
+            .get(format!("https://osu.ppy.sh/api/v2/beatmaps/{}/scores",beatmap_id))
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/json")
+            .header("Authorization", format!("Bearer {}", access_token))    
+            .query(&[
+                ("legacy",legacy_only.map(|x| x.to_string())),
+                ("mode",mode.map(|x| x.to_ruleset())),
+                ("mods",mods),
+                ("type",ranking_type)
+            ])
+            .send()
+            .await?;
+
+            let scores: BeatmapScores = response.json().await?;
+
+            Ok(scores)
+
+        }
+
+        async fn get_solo_scores(&self,beatmap_id:u32,mode:Option<Mode>,mods:Option<String>,ranking_type:Option<String>) -> Result<BeatmapScores> {
+            println!("ReqwestBeatmaps get_Solo_Scores");
+
+            let access_token = {
+                let token = self.o_token.read().await;
+                token.access_token.clone()
+            };
+
+            let response = self.client
+            .get(format!("https://osu.ppy.sh/api/v2/beatmaps/{}/solo-scores",beatmap_id))
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/json")
+            .header("Authorization", format!("Bearer {}", access_token))
+            .query(&[
+                ("mode",mode.map(|x| x.to_ruleset())),
+                ("mods",mods),
+                ("type",ranking_type)
+            ])
+            .send()
+            .await?;
+
+            let scores: BeatmapScores = response.json().await?;
 
             Ok(scores)
         }

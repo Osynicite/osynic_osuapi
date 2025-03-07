@@ -4,5 +4,5 @@ use super::score::Score;
 
 #[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct Scores {
-    scores: Vec<Score>,
+    pub scores: Vec<Score>,
 }

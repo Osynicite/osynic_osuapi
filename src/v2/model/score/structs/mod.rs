@@ -5,3 +5,4 @@ pub mod score;
 pub mod statistics;
 pub mod user;
 pub mod current_user_attributes;
+pub mod team;

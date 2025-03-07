@@ -11,7 +11,7 @@ use crate::v2::model::score::structs::user::User;
 #[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct Score {
     pub accuracy: f64,
-    pub best_id: u32,
+    pub best_id: Option<u32>,
     pub created_at: String,
     pub id: u32,
     pub max_combo: u32,
@@ -25,7 +25,8 @@ pub struct Score {
     pub replay: bool,
     pub score: u32,
     pub statistics: Statistics,
-    pub r#type: String,
+    #[serde(rename = "type")]
+    pub ranking_type: String,
     pub user_id: u32,
     pub current_user_attributes: CurrentUserAttributes,
     pub beatmap: Option<Beatmap>,

@@ -2,7 +2,7 @@ use serde::{Serialize, Deserialize};
 
 use crate::v2::model::score::enums::country::Country;
 use crate::v2::model::score::enums::cover::Cover;
-
+use crate::v2::model::score::structs::team::Team;
 #[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct User {
     pub avatar_url: String,
@@ -20,5 +20,5 @@ pub struct User {
     pub username: String,
     pub country: Country,
     pub cover: Cover,
-    pub team: Option<String>,
+    pub team: Option<Team>,
 }
