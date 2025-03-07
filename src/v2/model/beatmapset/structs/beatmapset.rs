@@ -8,6 +8,12 @@ use crate::v2::model::beatmapset::structs::nominations_summary::NominationsSumma
 use crate::v2::model::beatmapset::structs::availability::Availability;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 
+use super::extended::convert::Convert;
+use super::extended::current_nomination::CurrentNomination;
+use super::extended::description::Description;
+use super::extended::genre::Genre;
+use super::extended::language::Language;
+use super::extended::user::User;
 
 #[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct Beatmapset {
@@ -24,8 +30,6 @@ pub struct Beatmapset {
     pub preview_url: String,
     pub source: String,
     pub spotlight: bool,
-    // 按照字符串解析
-    // pub status: String,
     pub status: Status,
     pub title: String,
     pub title_unicode: String,
@@ -49,4 +53,16 @@ pub struct Beatmapset {
     pub availability: Availability,
     pub beatmaps: Vec<Beatmap>,
     pub pack_tags: Vec<String>,
+
+    // ----Extended Info----
+    pub converts: Option<Vec<Convert>>, 
+    pub current_nominations: Option<Vec<CurrentNomination>>,
+    pub description: Option<Description>,
+    pub genre: Option<Genre>,
+    pub language: Option<Language>,
+    pub ratings: Option<Vec<u32>>,
+    pub recent_favourites: Option<Vec<User>>,
+    pub related_users: Option<Vec<User>>,
+    pub related_tags: Option<Vec<String>>,
+    pub user: Option<User>,
 }

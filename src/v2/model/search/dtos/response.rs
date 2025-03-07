@@ -6,7 +6,7 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct BeatmapsetsSearchResponse{
-    pub beatmapsets: Option<Vec<Beatmapset>>,
+    pub beatmapsets: Vec<Beatmapset>,
     pub search: Search,
     pub recommended_difficulty: Option<String>,
     pub error: Option<String>,

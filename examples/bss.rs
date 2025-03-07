@@ -18,6 +18,7 @@ async fn main() -> Result<()> {
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
+    // let params = BeatmapsetsSearchParams::default().query("Bougainv543534534534534534334534illea".to_string());
     let params = BeatmapsetsSearchParams::default();
     let res = client.beatmapsets.search(params).await?;
     println!("{}", res.total);
@@ -28,13 +29,15 @@ async fn main() -> Result<()> {
     println!("{:?}", res.cursor);
     println!("{:?}", res.cursor_string);
     // println!("{:?}", res.beatmapsets);
-    if let Some(beatmapsets) = res.beatmapsets {
-        // for beatmapset in beatmapsets {
-        //     println!("{:?}", beatmapset);
-        // }
-        // 只打印第一个
-        println!("{:?}", beatmapsets[0]);
-    }
+    // if let Some(beatmapsets) = res.beatmapsets {
+    //     // for beatmapset in beatmapsets {
+    //     //     println!("{:?}", beatmapset);
+    //     // }
+    //     // 只打印第一个
+    //     println!("{:?}", beatmapsets[0]);
+    // }
+    
+    println!("{:?}", res.beatmapsets[0]);
     Ok(())
     
     // ReqwestBeatmapsets search

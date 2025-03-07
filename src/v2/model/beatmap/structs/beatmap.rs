@@ -3,6 +3,9 @@ use serde::{Serialize, Deserialize};
 use crate::v2::model::beatmap::enums::status::Status;
 use crate::v2::model::beatmap::enums::mode::Mode;
 
+use super::extended::failtimes::Failtimes;
+use super::extended::owner::Owner;
+
 #[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
 pub struct Beatmap {
     pub beatmapset_id: u32,
@@ -33,4 +36,11 @@ pub struct Beatmap {
     pub url: String,
     pub checksum: String,
     pub max_combo: u32,
+
+    
+    // ----Extended Info----
+    pub current_user_tag_ids: Option<Vec<u32>>,
+    pub failtimes: Option<Failtimes>,
+    pub owners: Option<Vec<Owner>>,
+    pub top_tag_ids: Option<Vec<u32>>,
 }

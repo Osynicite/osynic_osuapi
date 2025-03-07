@@ -1,6 +1,7 @@
 use crate::error::Result;
 use crate::v2::interface::beatmapsets::IBeatmapsets;
 use crate::v2::model::oauth::structs::o_token::OToken;
+use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
 use crate::v2::model::search::dtos::params::BeatmapsetsSearchParams;
 use crate::v2::model::search::dtos::response::BeatmapsetsSearchResponse;
 use tokio::io::AsyncWriteExt;
@@ -60,6 +61,31 @@ impl IBeatmapsets for ReqwestBeatmapsets {
         let beatmapsets_search_response: BeatmapsetsSearchResponse = response.json().await?;
 
         Ok(beatmapsets_search_response)
+    }
+
+    async fn get_beatmapset(&self,beatmapset_id: u32) -> Result<Beatmapset> {
+        println!("ReqwestBeatmapsets get_beatmapset");
+        
+        let access_token = {
+            let token = self.o_token.read().await;
+            token.access_token.clone()
+        };
+        
+        let response = self
+        .client
+        .get(format!("https://osu.ppy.sh/api/v2/beatmapsets/{}",beatmapset_id))
+        .header("Accept", "application/json")
+        .header("Content-Type", "application/x-www-form-urlencoded")
+        .header("Authorization", format!("Bearer {}", access_token))
+        .send()
+        .await?;
+
+        // println!("{:?}", response);
+        // 解析成结构体
+        let beatmapset: Beatmapset = response.json().await?;
+
+        Ok(beatmapset)
+        
     }
 
     async fn download(&self,beatmapset_id: u32) -> Result<()> {
