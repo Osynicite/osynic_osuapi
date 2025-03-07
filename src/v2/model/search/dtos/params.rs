@@ -1,10 +1,11 @@
-use crate::v2::model::beatmapsets::enums::general::General;
-use crate::v2::model::beatmapsets::enums::mode::Mode;
-use crate::v2::model::beatmapsets::enums::categories::Categories;
-use crate::v2::model::beatmapsets::enums::genre::Genre;
-use crate::v2::model::beatmapsets::enums::language::Language;
-use crate::v2::model::beatmapsets::enums::extra::Extra;
-use crate::v2::model::beatmapsets::enums::rank_achieved::RankAchieved;
+use crate::v2::model::search::enums::general::General;
+use crate::v2::model::search::enums::mode::Mode;
+use crate::v2::model::search::enums::categories::Categories;
+use crate::v2::model::search::enums::genre::Genre;
+use crate::v2::model::search::enums::language::Language;
+use crate::v2::model::search::enums::extra::Extra;
+use crate::v2::model::search::enums::rank_achieved::RankAchieved;
+use crate::v2::model::search::enums::sort::Sort;
 
 use serde::{Serialize, Deserialize};
 
@@ -19,7 +20,8 @@ pub struct BeatmapsetsSearchParams{
     pub language: Option<Language>,
     pub extra: Option<Vec<Extra>>,
     pub rank_achieved: Option<Vec<RankAchieved>>,
-    pub played: Option<bool>
+    pub played: Option<bool>,
+    pub sort: Option<Sort>,
 }
 
 impl BeatmapsetsSearchParams{
@@ -70,6 +72,11 @@ impl BeatmapsetsSearchParams{
 
     pub fn played(mut self, played: bool) -> Self{
         self.played = Some(played);
+        self
+    }
+
+    pub fn sort(mut self, sort: Sort) -> Self{
+        self.sort = Some(sort);
         self
     }
 
@@ -130,6 +137,9 @@ impl BeatmapsetsSearchParams{
                 params.push(("played".to_string(),"unplayed".to_string()));
             }
         }
+        if let Some(sort) = &self.sort{
+            params.push(("sort".to_string(),sort.to_beatmapset_search()));
+        }
         params
     }
 
@@ -146,7 +156,8 @@ impl BeatmapsetsSearchParams{
             l: self.language.clone(),
             e: self.extra.clone(),
             r: self.rank_achieved.clone(),
-            played: self.played.clone()
+            played: self.played.clone(),
+            sort: self.sort.clone()
         }
     }
 }
@@ -165,7 +176,8 @@ pub struct BeatmapsetsSearchParamsRaw{
     pub l: Option<Language>,
     pub e: Option<Vec<Extra>>,
     pub r: Option<Vec<RankAchieved>>,
-    pub played: Option<bool>
+    pub played: Option<bool>,
+    pub sort: Option<Sort>
 }
 
 
@@ -217,6 +229,11 @@ impl BeatmapsetsSearchParamsRaw{
 
     pub fn played(mut self,played: bool) -> Self{
         self.played = Some(played);
+        self
+    }
+
+    pub fn sort(mut self,sort: Sort) -> Self{
+        self.sort = Some(sort);
         self
     }
 
@@ -276,6 +293,9 @@ impl BeatmapsetsSearchParamsRaw{
             }else{
                 params.push(("played".to_string(),"unplayed".to_string()));
             }
+        }
+        if let Some(sort) = &self.sort{
+            params.push(("sort".to_string(),sort.to_beatmapset_search()));
         }
         params
     }

@@ -1,4 +1,6 @@
 pub mod oauth;
 pub mod mode;
-pub mod users;
-pub mod beatmapsets;
+pub mod user;
+pub mod beatmap;
+pub mod beatmapset;
+pub mod search;

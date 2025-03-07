@@ -1,20 +1,20 @@
 // src/structs/user.rs
 
 use serde::{Deserialize, Serialize};
-use crate::v2::model::users::enums::playstyle::Playstyle;
-use crate::v2::model::users::enums::profile_order::ProfileOrder;
-use crate::v2::model::users::structs::country::Country;
-use crate::v2::model::users::structs::cover::Cover;
-use crate::v2::model::users::structs::kudosu::Kudosu;
-use crate::v2::model::users::structs::daily_challenge_user_stats::DailyChallengeUserStats;
-use crate::v2::model::users::structs::monthly_playcounts::MonthlyPlaycounts;
-use crate::v2::model::users::structs::rank_highest::RankHighest;
-use crate::v2::model::users::structs::statistics::Statistics;
-use crate::v2::model::users::structs::statistics_rulesets::StatisticsRulesets;
-use crate::v2::model::users::structs::user_achievements::UserAchievements;
-use crate::v2::model::users::structs::rank_history::RankHistory;
-use crate::v2::model::users::structs::group::Group;
-use crate::v2::model::users::structs::replays_watched_count::ReplaysWatchedCount;
+use crate::v2::model::user::enums::playstyle::Playstyle;
+use crate::v2::model::user::enums::profile_order::ProfileOrder;
+use crate::v2::model::user::structs::country::Country;
+use crate::v2::model::user::structs::cover::Cover;
+use crate::v2::model::user::structs::kudosu::Kudosu;
+use crate::v2::model::user::structs::daily_challenge_user_stats::DailyChallengeUserStats;
+use crate::v2::model::user::structs::monthly_playcounts::MonthlyPlaycounts;
+use crate::v2::model::user::structs::rank_highest::RankHighest;
+use crate::v2::model::user::structs::statistics::Statistics;
+use crate::v2::model::user::structs::statistics_rulesets::StatisticsRulesets;
+use crate::v2::model::user::structs::user_achievements::UserAchievements;
+use crate::v2::model::user::structs::rank_history::RankHistory;
+use crate::v2::model::user::structs::group::Group;
+use crate::v2::model::user::structs::replays_watched_count::ReplaysWatchedCount;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct User {

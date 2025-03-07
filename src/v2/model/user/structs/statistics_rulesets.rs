@@ -1,7 +1,7 @@
 // src/structs/statistics_rulesets.rs
 
 use serde::{Serialize, Deserialize};
-use crate::v2::model::users::structs::statistics::Statistics;
+use crate::v2::model::user::structs::statistics::Statistics;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StatisticsRulesets {

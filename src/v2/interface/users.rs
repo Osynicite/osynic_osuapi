@@ -1,5 +1,5 @@
 use crate::error::Result;
-use crate::v2::model::users::structs::user::User;
+use crate::v2::model::user::structs::user::User;
 use crate::v2::model::mode::enums::mode::Mode;
 
 pub trait IUsers {

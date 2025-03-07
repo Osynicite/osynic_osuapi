@@ -1,5 +1,5 @@
 
-use crate::v2::model::users::structs::user::User;
+use crate::v2::model::user::structs::user::User;
 use serde::{Serialize, Deserialize};
 
 // e.g. CN -> 1f1e8-1f1f3, for /assets/images/flags/1f1e8-1f1f3.svg

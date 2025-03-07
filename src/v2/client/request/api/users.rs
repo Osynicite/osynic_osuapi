@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::v2::interface::users::IUsers;
 use crate::v2::model::oauth::structs::o_token::OToken;
-use crate::v2::model::users::structs::user::User;
+use crate::v2::model::user::structs::user::User;
 use crate::v2::model::mode::enums::mode::Mode;
 
 

@@ -1,21 +1,25 @@
 use serde::{Serialize, Deserialize};
 
-#[derive(Default,Debug, Clone, PartialEq, Serialize, Deserialize)] 
+#[derive(Copy, Clone, Debug,Default, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
 pub enum Mode{
     #[default]
+    #[serde(rename = "osu")]
     Osu = 0,
+    #[serde(rename = "mania")]
     Mania = 1,
+    #[serde(rename = "taiko")]
     Taiko = 2,
+    #[serde(rename = "fruits")]
     Catch = 3
 }
 
 impl Mode{
     pub fn to_string(&self) -> String{
         match self{
-            Mode::Osu => "osu".to_string(),
-            Mode::Mania => "mania".to_string(),
-            Mode::Taiko => "taiko".to_string(),
-            Mode::Catch => "catch".to_string()
+            Mode::Osu => "Osu".to_string(),
+            Mode::Mania => "Mania".to_string(),
+            Mode::Taiko => "Taiko".to_string(),
+            Mode::Catch => "Catch".to_string()
         }
     }
 
