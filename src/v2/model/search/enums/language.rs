@@ -55,6 +55,25 @@ impl Language{
             Language::Unspecified => "14".to_string(),
         }
     }
+    pub fn from_id(id: u32) -> Language {
+        match id {
+            1 => Language::Other,
+            2 => Language::English,
+            3 => Language::Japanese,
+            4 => Language::Chinese,
+            5 => Language::Instrumental,
+            6 => Language::Korean,
+            7 => Language::French,
+            8 => Language::German,
+            9 => Language::Swedish,
+            10 => Language::Spanish,
+            11 => Language::Italian,
+            12 => Language::Russian,
+            13 => Language::Polish,
+            14 => Language::Unspecified,
+            _ => Language::Unspecified,
+        }
+    }
 }
 
 

@@ -53,4 +53,22 @@ impl Genre {
             Genre::Jazz => "14".to_string(),
         }
     }
+    pub fn from_id(id: u32) -> Genre {
+        match id {
+            1 => Genre::Unspecified,
+            2 => Genre::VideoGame,
+            3 => Genre::Anime,
+            4 => Genre::Rock,
+            5 => Genre::Pop,
+            6 => Genre::Other,
+            7 => Genre::Novelty,
+            9 => Genre::HipHop,
+            10 => Genre::Electronic,
+            11 => Genre::Metal,
+            12 => Genre::Classical,
+            13 => Genre::Folk,
+            14 => Genre::Jazz,
+            _ => Genre::Unspecified,
+        }
+    }
 }
