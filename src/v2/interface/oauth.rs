@@ -10,7 +10,11 @@ pub trait IOauth {
         code: &str,
         redirect_uri: &str,
     ) -> impl std::future::Future<Output = Result<OToken>> + Send;
-    fn get_token_without_code(&self, client_id: u64, client_secret: &str) -> impl std::future::Future<Output = Result<OToken>> + Send;
+    fn get_token_without_code(
+        &self,
+        client_id: u64,
+        client_secret: &str,
+    ) -> impl std::future::Future<Output = Result<OToken>> + Send;
     fn refresh_token(
         &self,
         client_id: u64,

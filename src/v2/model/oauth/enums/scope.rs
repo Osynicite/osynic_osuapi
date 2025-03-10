@@ -1,4 +1,8 @@
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+use serde::{Deserialize, Serialize};
+
+#[derive(
+    Copy, Clone, Debug, Default, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd,
+)]
 pub enum Scope {
     ChatRead,
     ChatWrite,
@@ -9,6 +13,36 @@ pub enum Scope {
     Identify,
     #[default]
     Public,
+}
+
+impl Scope {
+    pub fn as_str(&self) -> &str {
+        match self {
+            Scope::ChatRead => "chat.read",
+            Scope::ChatWrite => "chat.write",
+            Scope::ChatWriteMessage => "chat.write.message",
+            Scope::Delegrate => "delegate",
+            Scope::ForumWrite => "forum.write",
+            Scope::FriendRead => "friend.read",
+            Scope::Identify => "identify",
+            Scope::Public => "public",
+        }
+    }
+    pub fn to_string(&self) -> String {
+        self.as_str().to_string()
+    }
+    pub fn to_param(&self) -> String {
+        match self {
+            Scope::ChatRead => "chat.read".to_string(),
+            Scope::ChatWrite => "chat.write".to_string(),
+            Scope::ChatWriteMessage => "chat.write.message".to_string(),
+            Scope::Delegrate => "delegate".to_string(),
+            Scope::ForumWrite => "forum.write".to_string(),
+            Scope::FriendRead => "friend.read".to_string(),
+            Scope::Identify => "identify".to_string(),
+            Scope::Public => "public".to_string(),
+        }
+    }
 }
 
 impl std::fmt::Display for Scope {

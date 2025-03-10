@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
-pub enum Sort{
+pub enum Sort {
     TitleDesc = 0,
     TitleAsc = 1,
     ArtistDesc = 2,
@@ -18,7 +18,7 @@ pub enum Sort{
     FavouritesAsc = 13,
 }
 
-impl Sort{
+impl Sort {
     pub fn to_string(&self) -> String {
         match self {
             Sort::TitleDesc => "TitleDesc".to_string(),

@@ -1,8 +1,8 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use super::beatmap::Beatmap;
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Beatmaps {
-    pub beatmaps: Vec<Beatmap>
+    pub beatmaps: Vec<Beatmap>,
 }

@@ -12,17 +12,20 @@ pub struct ReqwestSearch {
     pub o_token: Arc<RwLock<OToken>>,
 }
 
-
 impl ISearch for ReqwestSearch {
-
-    async fn search(&self, mode: Option<SearchMode>,query: Option<String>,page: Option<u32>) -> Result<SearchResponse> {
+    async fn search(
+        &self,
+        mode: Option<SearchMode>,
+        query: Option<String>,
+        page: Option<u32>,
+    ) -> Result<SearchResponse> {
         println!("ReqwestSearch get_beatmapset");
-        
+
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
-        
+
         let response = self
             .client
             .get("https://osu.ppy.sh/api/v2/search")
@@ -40,6 +43,5 @@ impl ISearch for ReqwestSearch {
         let search: SearchResponse = response.json().await?;
 
         Ok(search)
-        
     }
 }

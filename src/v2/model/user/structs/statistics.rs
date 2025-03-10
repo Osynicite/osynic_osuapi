@@ -1,8 +1,8 @@
 // src/structs/statistics.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Statistics {
     pub count_100: u32,
     pub count_300: u32,
@@ -30,13 +30,13 @@ pub struct Statistics {
     pub variants: Option<Vec<Variant>>,
 }
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Level {
     pub current: u32,
     pub progress: u32,
 }
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GradeCounts {
     pub ss: u32,
     pub ssh: u32,
@@ -45,12 +45,12 @@ pub struct GradeCounts {
     pub a: u32,
 }
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Rank {
     pub global: Option<u32>,
     pub country: u32,
 }
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Variant {
     pub country_rank: u32,
     pub global_rank: u32,

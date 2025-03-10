@@ -1,14 +1,12 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-
+use super::non_legacy::acronym_mod::AcronymMod;
+use super::non_legacy::statistics::Statistics;
 use crate::v2::model::score::structs::current_user_attributes::CurrentUserAttributes;
 use crate::v2::model::score::structs::user::User;
-use super::non_legacy::statistics::Statistics;
-use super::non_legacy::acronym_mod::AcronymMod;
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct NonLegacyScore {
-    
     pub classic_total_score: u64,
     pub preserve: bool,
     pub processed: bool,
@@ -40,5 +38,4 @@ pub struct NonLegacyScore {
     pub replay: bool,
     pub current_user_attributes: Option<CurrentUserAttributes>,
     pub user: Option<User>,
-
 }

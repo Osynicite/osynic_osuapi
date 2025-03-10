@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
-pub enum Language{
+pub enum Language {
     Other = 1,
     English = 2,
     Japanese = 3,
@@ -18,7 +18,7 @@ pub enum Language{
     Unspecified = 14,
 }
 
-impl Language{
+impl Language {
     pub fn to_string(&self) -> String {
         match self {
             Language::Other => "Other".to_string(),
@@ -75,13 +75,3 @@ impl Language{
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

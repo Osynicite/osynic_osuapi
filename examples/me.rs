@@ -1,8 +1,8 @@
 use osynic_osuapi::error::Result;
-use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
-use osynic_osuapi::v2::model::oauth::structs::o_token::OToken;
-use osynic_osuapi::v2::interface::users::IUsers;
 use osynic_osuapi::utils::country_code_to_unicode_flag;
+use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
+use osynic_osuapi::v2::interface::users::IUsers;
+use osynic_osuapi::v2::model::oauth::structs::o_token::OToken;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -23,7 +23,10 @@ async fn main() -> Result<()> {
     // println!("country_code: {}", me.country.code);
     let country_flag = country_code_to_unicode_flag(&me.country.code).unwrap_or_default();
     // println!("country_flag: {}", country_flag);
-    let country_svg_path = format!("https://osu.ppy.sh/assets/images/flags/{}.svg", country_flag);
+    let country_svg_path = format!(
+        "https://osu.ppy.sh/assets/images/flags/{}.svg",
+        country_flag
+    );
     println!("country_svg_path: {}", country_svg_path);
     // playmode
     println!("playmode: {:?}", me.playmode);

@@ -1,5 +1,5 @@
-use crate::v2::client::request::check::check_res;
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::oauth::IOauth;
 use crate::v2::model::oauth::enums::scope::Scope;
 use crate::v2::model::oauth::structs::o_token::OToken;
@@ -153,7 +153,9 @@ impl IOauth for ReqwestOauth {
         };
 
         if refresh_token.is_none() {
-            return Err("No refresh token, Please check your authorization type.".to_string().into());
+            return Err("No refresh token, Please check your authorization type."
+                .to_string()
+                .into());
         }
 
         let request = GetTokenRequest {
@@ -181,7 +183,7 @@ impl IOauth for ReqwestOauth {
             .json(&request)
             .send()
             .await?;
-        
+
         let response = check_res(res)?;
 
         let token_response: GetTokenResponse = response.json().await?;
@@ -192,7 +194,6 @@ impl IOauth for ReqwestOauth {
             access_token: token_response.access_token,
             refresh_token: token_response.refresh_token,
         };
-
 
         {
             let mut token = self.o_token.write().await;

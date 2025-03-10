@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::v2::interface::beatmapsets::IBeatmapsets;
-use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
+use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::search::dtos::params::BeatmapsetsSearchParams;
 use crate::v2::model::search::dtos::response::BeatmapsetsSearchResponse;
 use tokio::io::AsyncWriteExt;
@@ -14,14 +14,10 @@ pub struct ReqwestBeatmapsets {
     pub o_token: Arc<RwLock<OToken>>,
 }
 
-
 impl IBeatmapsets for ReqwestBeatmapsets {
-    async fn search(
-        &self,
-        params: BeatmapsetsSearchParams,
-    ) -> Result<BeatmapsetsSearchResponse> {
+    async fn search(&self, params: BeatmapsetsSearchParams) -> Result<BeatmapsetsSearchResponse> {
         println!("ReqwestBeatmapsets search");
-        
+
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
@@ -40,7 +36,6 @@ impl IBeatmapsets for ReqwestBeatmapsets {
         // ];
 
         let params = params.build_params();
-
 
         // 1. [x] 搜索参数选项封装
         // 2. [ ] 写好谱面结构体的解析，就能用了
@@ -63,55 +58,60 @@ impl IBeatmapsets for ReqwestBeatmapsets {
         Ok(beatmapsets_search_response)
     }
 
-    async fn get_beatmapset(&self,beatmapset_id: u32) -> Result<Beatmapset> {
+    async fn get_beatmapset(&self, beatmapset_id: u32) -> Result<Beatmapset> {
         println!("ReqwestBeatmapsets get_beatmapset");
-        
+
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
-        
+
         let response = self
-        .client
-        .get(format!("https://osu.ppy.sh/api/v2/beatmapsets/{}",beatmapset_id))
-        .header("Accept", "application/json")
-        .header("Content-Type", "application/x-www-form-urlencoded")
-        .header("Authorization", format!("Bearer {}", access_token))
-        .send()
-        .await?;
+            .client
+            .get(format!(
+                "https://osu.ppy.sh/api/v2/beatmapsets/{}",
+                beatmapset_id
+            ))
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/x-www-form-urlencoded")
+            .header("Authorization", format!("Bearer {}", access_token))
+            .send()
+            .await?;
 
         // println!("{:?}", response);
         // 解析成结构体
         let beatmapset: Beatmapset = response.json().await?;
 
         Ok(beatmapset)
-        
     }
 
-    async fn download(&self,beatmapset_id: u32) -> Result<()> {
+    async fn download(&self, beatmapset_id: u32) -> Result<()> {
         println!("ReqwestBeatmapsets download");
-        
+
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
-        
-        let response = self
-        .client
-        .get(format!("https://osu.ppy.sh/api/v2/beatmapsets/{}/download",beatmapset_id))
-        .header("Accept", "application/json")
-        .header("Content-Type", "application/x-www-form-urlencoded")
-        .header("Authorization", format!("Bearer {}", access_token))
-        .send()
-        .await?;
 
-    // println!("{:?}", response);
-    // 把文件写入本地
-    let mut file = tokio::fs::File::create(format!("{}.osz",beatmapset_id)).await?;
-    let bytes = response.bytes().await?;
-    file.write_all(&bytes).await?;
-    // {"authentication":"basic"}
-        
+        let response = self
+            .client
+            .get(format!(
+                "https://osu.ppy.sh/api/v2/beatmapsets/{}/download",
+                beatmapset_id
+            ))
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/x-www-form-urlencoded")
+            .header("Authorization", format!("Bearer {}", access_token))
+            .send()
+            .await?;
+
+        // println!("{:?}", response);
+        // 把文件写入本地
+        let mut file = tokio::fs::File::create(format!("{}.osz", beatmapset_id)).await?;
+        let bytes = response.bytes().await?;
+        file.write_all(&bytes).await?;
+        // {"authentication":"basic"}
+
         Ok(())
     }
 }

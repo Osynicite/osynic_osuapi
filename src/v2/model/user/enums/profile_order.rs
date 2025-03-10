@@ -1,6 +1,6 @@
 // src/enums/profile_order.rs
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
 pub enum ProfileOrder {
     #[serde(rename = "me")]

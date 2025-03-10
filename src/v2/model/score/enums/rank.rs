@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
-pub enum Rank{
+pub enum Rank {
     #[serde(rename = "XH")]
     XH,
     #[serde(rename = "X")]

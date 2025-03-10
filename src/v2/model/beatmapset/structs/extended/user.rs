@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
-pub struct User{
+use serde::{Deserialize, Serialize};
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct User {
     pub avatar_url: String,
     pub country_code: String,
     pub default_group: String,

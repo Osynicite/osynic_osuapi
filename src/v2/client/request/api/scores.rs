@@ -12,18 +12,19 @@ pub struct ReqwestScores {
     pub o_token: Arc<RwLock<OToken>>,
 }
 
-
 impl IScores for ReqwestScores {
-    
-
-    async fn get_scores(&self, ruleset: Option<Mode>,cursor_string: Option<String>) -> Result<GetScoresResponse> {
+    async fn get_scores(
+        &self,
+        ruleset: Option<Mode>,
+        cursor_string: Option<String>,
+    ) -> Result<GetScoresResponse> {
         println!("ReqwestScores get_beatmapset");
-        
+
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
-        
+
         let response = self
             .client
             .get("https://osu.ppy.sh/api/v2/scores")
@@ -31,8 +32,8 @@ impl IScores for ReqwestScores {
             .header("Content-Type", "application/x-www-form-urlencoded")
             .header("Authorization", format!("Bearer {}", access_token))
             .query(&[
-                ("ruleset",ruleset.map(|x| x.to_ruleset())),
-                ("cursor",cursor_string.map(|x| x.to_string()))
+                ("ruleset", ruleset.map(|x| x.to_ruleset())),
+                ("cursor", cursor_string.map(|x| x.to_string())),
             ])
             .send()
             .await?;
@@ -40,6 +41,5 @@ impl IScores for ReqwestScores {
         let scores: GetScoresResponse = response.json().await?;
 
         Ok(scores)
-        
     }
 }

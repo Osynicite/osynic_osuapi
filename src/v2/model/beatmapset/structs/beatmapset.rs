@@ -1,12 +1,10 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-
-
+use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 use crate::v2::model::beatmapset::enums::status::Status;
+use crate::v2::model::beatmapset::structs::availability::Availability;
 use crate::v2::model::beatmapset::structs::covers::Covers;
 use crate::v2::model::beatmapset::structs::nominations_summary::NominationsSummary;
-use crate::v2::model::beatmapset::structs::availability::Availability;
-use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 
 use super::extended::convert::Convert;
 use super::extended::current_nomination::CurrentNomination;
@@ -15,7 +13,7 @@ use super::extended::genre::Genre;
 use super::extended::language::Language;
 use super::extended::user::User;
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Beatmapset {
     pub artist: String,
     pub artist_unicode: String,
@@ -52,10 +50,10 @@ pub struct Beatmapset {
     pub tags: String,
     pub availability: Availability,
     pub beatmaps: Option<Vec<Beatmap>>,
-    
+
     // ----Extended Info----
     pub pack_tags: Option<Vec<String>>,
-    pub converts: Option<Vec<Convert>>, 
+    pub converts: Option<Vec<Convert>>,
     pub current_nominations: Option<Vec<CurrentNomination>>,
     pub description: Option<Description>,
     pub genre: Option<Genre>,

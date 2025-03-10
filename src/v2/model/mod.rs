@@ -1,9 +1,9 @@
-pub mod oauth;
-pub mod mode;
-pub mod user;
 pub mod beatmap;
 pub mod beatmapset;
-pub mod search;
-pub mod score;
-pub mod wiki;
 pub mod event;
+pub mod mode;
+pub mod oauth;
+pub mod score;
+pub mod search;
+pub mod user;
+pub mod wiki;

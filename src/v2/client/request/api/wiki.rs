@@ -11,21 +11,21 @@ pub struct ReqwestWiki {
     pub o_token: Arc<RwLock<OToken>>,
 }
 
-
 impl IWiki for ReqwestWiki {
-    
-
-    async fn get_wiki_page(&self, locale:String,path: String) -> Result<WikiPage> {
+    async fn get_wiki_page(&self, locale: String, path: String) -> Result<WikiPage> {
         println!("ReqwestWiki get_beatmapset");
-        
+
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
-        
+
         let response = self
             .client
-            .get(format!("https://osu.ppy.sh/api/v2/wiki/{}/{}",locale,path))
+            .get(format!(
+                "https://osu.ppy.sh/api/v2/wiki/{}/{}",
+                locale, path
+            ))
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
             .header("Authorization", format!("Bearer {}", access_token))
@@ -35,6 +35,5 @@ impl IWiki for ReqwestWiki {
         let wiki: WikiPage = response.json().await?;
 
         Ok(wiki)
-        
     }
 }

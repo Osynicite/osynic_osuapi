@@ -1,13 +1,13 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
-use crate::v2::model::beatmap::enums::status::Status;
 use crate::v2::model::beatmap::enums::mode::Mode;
+use crate::v2::model::beatmap::enums::status::Status;
+use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
 
 use super::extended::failtimes::Failtimes;
 use super::extended::owner::Owner;
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Beatmap {
     pub beatmapset_id: u32,
     pub difficulty_rating: f32,
@@ -36,8 +36,7 @@ pub struct Beatmap {
     pub ranked: u32,
     pub url: String,
     pub checksum: String,
-    
-    
+
     // ----Extended Info----
     pub max_combo: Option<u32>,
     pub beatmapset: Option<Beatmapset>,

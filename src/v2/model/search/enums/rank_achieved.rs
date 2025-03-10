@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum RankAchieved {
     XH = 0,
     X = 1,
@@ -12,9 +12,9 @@ pub enum RankAchieved {
     D = 7,
 }
 
-impl RankAchieved{
-    pub fn to_string(&self) -> String{
-        match self{
+impl RankAchieved {
+    pub fn to_string(&self) -> String {
+        match self {
             RankAchieved::XH => "XH".to_string(),
             RankAchieved::X => "X".to_string(),
             RankAchieved::SH => "SH".to_string(),
@@ -26,8 +26,8 @@ impl RankAchieved{
         }
     }
 
-    pub fn to_beatmapset_search(&self) -> String{
-        match self{
+    pub fn to_beatmapset_search(&self) -> String {
+        match self {
             RankAchieved::XH => "XH".to_string(),
             RankAchieved::X => "X".to_string(),
             RankAchieved::SH => "SH".to_string(),

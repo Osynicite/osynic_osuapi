@@ -1,22 +1,22 @@
 // src/structs/user.rs
 
-use serde::{Deserialize, Serialize};
 use crate::v2::model::user::enums::playstyle::Playstyle;
 use crate::v2::model::user::enums::profile_order::ProfileOrder;
 use crate::v2::model::user::structs::country::Country;
 use crate::v2::model::user::structs::cover::Cover;
-use crate::v2::model::user::structs::kudosu::Kudosu;
 use crate::v2::model::user::structs::daily_challenge_user_stats::DailyChallengeUserStats;
+use crate::v2::model::user::structs::group::Group;
+use crate::v2::model::user::structs::kudosu::Kudosu;
 use crate::v2::model::user::structs::monthly_playcounts::MonthlyPlaycounts;
 use crate::v2::model::user::structs::rank_highest::RankHighest;
+use crate::v2::model::user::structs::rank_history::RankHistory;
+use crate::v2::model::user::structs::replays_watched_count::ReplaysWatchedCount;
 use crate::v2::model::user::structs::statistics::Statistics;
 use crate::v2::model::user::structs::statistics_rulesets::StatisticsRulesets;
 use crate::v2::model::user::structs::user_achievements::UserAchievements;
-use crate::v2::model::user::structs::rank_history::RankHistory;
-use crate::v2::model::user::structs::group::Group;
-use crate::v2::model::user::structs::replays_watched_count::ReplaysWatchedCount;
+use serde::{Deserialize, Serialize};
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct User {
     pub avatar_url: String,
     pub country_code: String,
@@ -27,7 +27,7 @@ pub struct User {
     pub is_deleted: bool,
     pub is_online: bool,
     pub is_supporter: bool,
-    
+
     pub last_visit: String,
     pub pm_friends_only: bool,
     pub profile_colour: Option<String>,
@@ -36,7 +36,7 @@ pub struct User {
     pub discord: Option<String>,
     pub has_supported: bool,
     pub interests: Option<String>,
-    
+
     pub join_date: String,
     pub location: Option<String>,
     pub max_blocks: u32,
@@ -58,7 +58,7 @@ pub struct User {
     pub account_history: Vec<()>, // Assuming this is an empty array
     pub active_tournament_banner: Option<String>,
     pub active_tournament_banners: Vec<()>, // Assuming this is an empty array
-    pub badges: Vec<()>, // Assuming this is an empty array
+    pub badges: Vec<()>,                    // Assuming this is an empty array
     pub beatmap_playcounts_count: u32,
     pub comments_count: u32,
     pub daily_challenge_user_stats: DailyChallengeUserStats,
@@ -89,12 +89,12 @@ pub struct User {
     pub user_achievements: Vec<UserAchievements>,
     pub rank_history: Option<RankHistory>,
     #[serde(rename = "rankHistory")] // 好没素质
-    pub rank_istoriya: Option<RankHistory>,  
+    pub rank_istoriya: Option<RankHistory>,
     pub ranked_and_approved_beatmapset_count: Option<u32>,
     pub unranked_beatmapset_count: Option<u32>,
 }
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Page {
     pub html: String,
     pub raw: String,

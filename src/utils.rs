@@ -1,12 +1,12 @@
-
 use crate::v2::model::user::structs::user::User;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 // e.g. CN -> 1f1e8-1f1f3, for /assets/images/flags/1f1e8-1f1f3.svg
 pub fn country_code_to_unicode_flag(code: &str) -> Option<String> {
     if code.len() == 2 && code.chars().all(|c| c.is_ascii_alphabetic()) {
         let base = 0x1F1E6 - 'A' as u32;
-        let flag = code.to_uppercase()
+        let flag = code
+            .to_uppercase()
             .chars()
             .map(|c| format!("{:x}", base + c as u32))
             .collect::<Vec<_>>()
@@ -37,7 +37,10 @@ pub struct OsuAccountFacadeA {
 
 pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
     let country_flag = country_code_to_unicode_flag(&user.country.code).unwrap_or_default();
-    let country_svg_url = format!("https://osu.ppy.sh/assets/images/flags/{}.svg", country_flag);
+    let country_svg_url = format!(
+        "https://osu.ppy.sh/assets/images/flags/{}.svg",
+        country_flag
+    );
     OsuAccountFacadeA {
         id: user.id,
         remember_token: false,

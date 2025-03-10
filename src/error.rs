@@ -1,10 +1,9 @@
 /// Error handling for the all module.
 pub type Result<T> = core::result::Result<T, Error>;
 
-pub struct Error{
-    inner: Box<ErrorKind>
+pub struct Error {
+    inner: Box<ErrorKind>,
 }
-
 
 impl Error {
     pub fn new(inner: ErrorKind) -> Self {
@@ -46,8 +45,6 @@ impl From<&str> for Error {
     }
 }
 
-
-
 impl From<std::io::Error> for Error {
     fn from(e: std::io::Error) -> Self {
         Error::new(ErrorKind::StdIoError(e))
@@ -65,7 +62,6 @@ impl From<reqwest::Response> for Error {
         Error::new(ErrorKind::NetworkError(e))
     }
 }
-
 
 #[cfg(feature = "wasm")]
 impl From<gloo_net::Error> for Error {
@@ -89,7 +85,6 @@ pub enum ErrorKind {
     #[cfg(feature = "wasm")]
     GlooError(gloo_net::Error),
 }
-
 
 impl std::fmt::Display for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {

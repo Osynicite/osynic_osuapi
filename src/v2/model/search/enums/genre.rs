@@ -1,15 +1,17 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Copy, Clone, Debug,Default, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
+#[derive(
+    Copy, Clone, Debug, Default, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd,
+)]
 pub enum Genre {
     #[default]
-    Unspecified = 1 ,
-    VideoGame = 2 ,
-    Anime = 3 ,
-    Rock = 4 ,
-    Pop = 5 ,
-    Other = 6 ,
-    Novelty = 7 ,
+    Unspecified = 1,
+    VideoGame = 2,
+    Anime = 3,
+    Rock = 4,
+    Pop = 5,
+    Other = 6,
+    Novelty = 7,
     HipHop = 9,
     Electronic = 10,
     Metal = 11,

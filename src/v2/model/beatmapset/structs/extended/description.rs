@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
-pub struct Description{
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Description {
     description: String,
 }

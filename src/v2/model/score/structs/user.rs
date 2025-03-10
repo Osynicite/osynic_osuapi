@@ -1,9 +1,9 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use crate::v2::model::score::enums::country::Country;
 use crate::v2::model::score::enums::cover::Cover;
 use crate::v2::model::score::structs::team::Team;
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct User {
     pub avatar_url: String,
     pub country_code: String,

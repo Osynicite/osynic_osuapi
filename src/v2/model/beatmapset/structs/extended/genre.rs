@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Default,Debug, Clone, PartialEq,Serialize, Deserialize)]
-pub struct Genre{
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Genre {
     pub id: u32,
     pub name: String,
 }

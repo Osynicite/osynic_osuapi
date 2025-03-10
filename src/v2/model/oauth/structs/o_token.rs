@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Clone,Debug, Serialize, Deserialize)]
-pub struct OToken{
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct OToken {
     pub access_token: String,
     pub expires_in: u64,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -10,7 +10,7 @@ pub struct OToken{
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct OCToken{
+pub struct OCToken {
     pub access_token: String,
     pub expires_in: u64,
     pub token_type: String,

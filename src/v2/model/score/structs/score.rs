@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use crate::v2::model::score::enums::mode::Mode;
 use crate::v2::model::score::enums::rank::Rank;
@@ -11,7 +11,7 @@ use crate::v2::model::score::structs::current_user_attributes::CurrentUserAttrib
 use crate::v2::model::score::structs::statistics::Statistics;
 use crate::v2::model::score::structs::user::User;
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Score {
     pub accuracy: f64,
     pub best_id: Option<u32>,
@@ -38,5 +38,4 @@ pub struct Score {
     // ------- In Get User Scores ------
     pub beatmapset: Option<Beatmapset>,
     pub weight: Option<Weight>,
-
 }

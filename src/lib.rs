@@ -3,5 +3,5 @@ pub mod v1;
 #[cfg(feature = "v2")]
 pub mod v2;
 
-pub mod utils;
 pub mod error;
+pub mod utils;

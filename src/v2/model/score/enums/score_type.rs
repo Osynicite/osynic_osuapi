@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
-pub enum ScoreType{
+pub enum ScoreType {
     #[serde(rename = "best")]
     Best,
     #[serde(rename = "first")]
@@ -32,5 +32,4 @@ impl ScoreType {
             ScoreType::Recent => "recent".to_string(),
         }
     }
-
 }

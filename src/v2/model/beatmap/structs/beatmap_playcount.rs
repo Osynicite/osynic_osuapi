@@ -1,8 +1,8 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct BeatmapPlaycount {
     pub beatmap_id: u32,
     pub count: u32,
@@ -10,7 +10,7 @@ pub struct BeatmapPlaycount {
     pub beatmapset: Beatmapset,
 }
 
-#[derive(Debug, Clone, PartialEq,Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Beatmap {
     pub beatmapset_id: u32,
     pub difficulty_rating: f32,

@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize, Ord, PartialOrd)]
-pub enum Categories{
+pub enum Categories {
     Any = 0,
     Ranked = 1,
     Qualified = 2,
@@ -13,9 +13,9 @@ pub enum Categories{
     Mine = 8,
 }
 
-impl Categories{
-    pub fn to_string(&self) -> String{
-        match self{
+impl Categories {
+    pub fn to_string(&self) -> String {
+        match self {
             Categories::Any => "Any".to_string(),
             Categories::Ranked => "Ranked".to_string(),
             Categories::Qualified => "Qualified".to_string(),
@@ -27,8 +27,8 @@ impl Categories{
             Categories::Mine => "Mine".to_string(),
         }
     }
-    pub fn to_beatmapset_search(&self) -> String{
-        match self{
+    pub fn to_beatmapset_search(&self) -> String {
+        match self {
             Categories::Any => "any".to_string(),
             Categories::Ranked => "ranked".to_string(),
             Categories::Qualified => "qualified".to_string(),

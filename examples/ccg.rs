@@ -2,7 +2,6 @@ use osynic_osuapi::error::Result;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
 use osynic_osuapi::v2::interface::oauth::IOauth;
 
-
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
@@ -11,7 +10,15 @@ async fn main() -> Result<()> {
     let redirect_uri = std::env::var("REDIRECT_URI").unwrap();
     let code = std::env::var("CODE").unwrap();
     let client = OsynicOsuApiV2Client::default();
-    let token = client.oauth.get_token_with_code(client_id.parse().unwrap(), &client_secret, &code, &redirect_uri).await?;
+    let token = client
+        .oauth
+        .get_token_with_code(
+            client_id.parse().unwrap(),
+            &client_secret,
+            &code,
+            &redirect_uri,
+        )
+        .await?;
     println!("{:?}", token);
     Ok(())
 }
