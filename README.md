@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    OSU!曲谱同步器Osynic的OSU!API封装
+    Osynic的OSU!API封装
 </p>
 
 <hr />

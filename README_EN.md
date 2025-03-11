@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    Osu!Api wrapper for Osynic Osu! Beatmapsets Sync
+    Osu!Api wrapper for Osynic
 </p>
 
 <hr />
