@@ -26,7 +26,7 @@ struct GetTokenRequest {
 #[derive(Deserialize, Debug)]
 struct GetTokenResponse {
     token_type: String,
-    expires_in: u64,
+    expires_in: u32,
     access_token: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     refresh_token: Option<String>,

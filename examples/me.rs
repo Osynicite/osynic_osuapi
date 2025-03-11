@@ -8,13 +8,16 @@ use osynic_osuapi::v2::model::oauth::structs::o_token::OToken;
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
     // ACG can't get me
+    let access_token = std::env::var("ACCESS_TOKEN").expect(
+        "Please set the ACCESS_TOKEN environment variable to a valid osu! API v2 access token",
+    );
     let client = OsynicOsuApiV2Client::new(OToken{
-        access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzNjEwNCIsImp0aSI6IjA0OTI2ZGJjN2Q1YmEzNWZmZTNiOTlkODQ5MjkwZWJiNTVlZGJmODcwYjI2YmQ5NDI0Y2UwZmVmNmRiNGEzM2VkZjJiNmMwNWVjZjY3YmUxIiwiaWF0IjoxNzQwNDUzMTkyLjkxODY0NywibmJmIjoxNzQwNDUzMTkyLjkxODY0OSwiZXhwIjoxNzQwNTM5NTkyLjkwOTQ0MSwic3ViIjoiIiwic2NvcGVzIjpbInB1YmxpYyJdfQ.L1o7nTTkZivbJicj0IxgzPgk4DapbZ2GVu5TC61kuVNtHoPl7gAtT7xOyd47VkQKVD54rsPeUn7HfEWF1gHlm3F5bqpEK_2JJxwObYezYLitK2jubcsHLmHIsL0TQYUooX2fSi0AqdSnjP55lfpDVUo4gyfRiQnMUcysUdFpKQ28p4hV6b-ZM4AaSOeR_lU7MYNjfR2UcufR8pPQ1gcJ8IymBKs_2NDS0ouEbgm2YKyxfl8mIb3MUcPCeybDrO-3MoadpvgJlCbluTfI8vwLSoSWRTaDvPumBb1h4R8nQfCI1zJmQjPbe6wt7bbgAET80hEZeINTBxwZgKzSSwYZAfVW_TwoVsEjispYZlXiON9L3bxFsXT1ZBDEBITG00A6KIF5dT2ylhc0pGAvM-IOqQ_OSrd3O4WIJxAjUoddSyIHkhdbV9zFjlYZ-O-6-xzWT3UIoB_hpnd8ykbQ-jweACmg0D3e0Ha0pMDFnz0gvFRQNwvImc0jObmSDqKojVMpcB0wXac8cX9-wWGB0Q3C9Y4zTNeKT_gEC3ijp3h9EJLMB1tvteq8jzEi5J0iJwCe7cNqHP8lBSq7kR7VtX3wqlPMpkpstAogFtxb8vfL1MVFvSoGrdjxa-XOlcKSqlnguNoQy0blN6WLKddz_PsUof2mxI1STgawqSYCPI5g6gs".to_string(),
+        access_token,
         refresh_token: None,
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let me = client.users.get_own_data(None).await?;
+    let me = client.users.get_own_data(None,None).await?;
     println!("{:?}", me);
     println!("osu_account_id: {}", me.id);
     println!("username: {}", me.username);

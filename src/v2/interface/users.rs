@@ -13,6 +13,7 @@ pub trait IUsers {
     fn get_own_data(
         &self,
         mode: Option<Mode>,
+        key: Option<String>,
     ) -> impl std::future::Future<Output = Result<User>> + Send;
     fn get_user_kudosu(
         &self,

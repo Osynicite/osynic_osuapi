@@ -20,7 +20,8 @@ pub struct ReqwestUsers {
 }
 
 impl IUsers for ReqwestUsers {
-    async fn get_own_data(&self, mode: Option<Mode>) -> Result<User> {
+    async fn get_own_data(&self, mode: Option<Mode>,
+        key: Option<String>) -> Result<User> {
         println!("ReqwestUsers get_own_data");
 
         let access_token = {
@@ -28,11 +29,21 @@ impl IUsers for ReqwestUsers {
             token.access_token.clone()
         };
 
-        let params = [("mode", mode)];
+        // let params = [("mode", mode)];
+        let params = [("key", key.map(|x| x.to_string()))];
+
+        let mut url= "https://osu.ppy.sh/api/v2/me/".to_string();
+
+        if mode.is_some() {
+            url = format!(
+                "https://osu.ppy.sh/api/v2/me/{}",
+                mode.map(|x| x.to_ruleset()).unwrap_or_default()
+            );
+        }
 
         let response = self
             .client
-            .get("https://osu.ppy.sh/api/v2/me")
+            .get(url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
             .header("Authorization", format!("Bearer {}", access_token))
@@ -65,7 +76,9 @@ impl IUsers for ReqwestUsers {
 
         // let json = serde_json::from_str::<User>(&response.text().await?)?;
         // println!("{:?}", json);
+        
         // 解析响应
+
         let user_response: User = response.json().await?;
 
         Ok(user_response)

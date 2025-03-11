@@ -13,7 +13,7 @@ async fn main() -> Result<()> {
     let token = client
         .oauth
         .get_token_with_code(
-            client_id.parse().unwrap(),
+            client_id.parse().unwrap_or_default(),
             &client_secret,
             &code,
             &redirect_uri,

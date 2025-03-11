@@ -52,7 +52,7 @@ pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
         level: user.statistics.level.current,
         progress: user.statistics.level.progress,
         pp: user.statistics.pp,
-        world_rank: user.statistics.global_rank,
+        world_rank: user.statistics.global_rank.unwrap_or_default(),
         country_code: user.country.code,
         country_rank: user.statistics.country_rank.unwrap_or_default(),
         is_supporter: user.is_supporter,

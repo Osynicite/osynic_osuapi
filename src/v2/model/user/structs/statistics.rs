@@ -10,7 +10,7 @@ pub struct Statistics {
     pub count_miss: u32,
     pub country_rank: Option<u32>,
     pub level: Level,
-    pub global_rank: u32,
+    pub global_rank: Option<u32>,
     pub global_rank_exp: Option<u32>,
     pub pp: f64,
     pub pp_exp: Option<f64>,

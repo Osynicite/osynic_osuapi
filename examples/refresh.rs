@@ -31,7 +31,7 @@ async fn main() -> Result<()> {
         .refresh_token(client_id.parse().unwrap(), &client_secret, None)
         .await?;
     println!("{:?}", token);
-    let me = client.users.get_own_data(Some(Mode::Osu)).await?;
+    let me = client.users.get_own_data(Some(Mode::Osu),None).await?;
     println!("{:?}", me);
     Ok(())
 }
