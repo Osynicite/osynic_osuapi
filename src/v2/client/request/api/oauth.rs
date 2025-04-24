@@ -69,7 +69,7 @@ impl IOauth for ReqwestOauth {
 
         // println!("{:?}", params);
 
-        let response = self
+        let res = self
             .client
             .post("https://osu.ppy.sh/oauth/token")
             .header("Accept", "application/json")
@@ -77,8 +77,8 @@ impl IOauth for ReqwestOauth {
             .form(&request)
             .send()
             .await?;
-
-        println!("{:?}", response);
+        
+        let response = check_res(res)?;
 
         // 解析响应
         let token_response: GetTokenResponse = response.json().await?;
