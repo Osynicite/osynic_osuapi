@@ -23,6 +23,11 @@
 
 [中文版本](README.md) | [English Version](README_EN.md)
 
+# OSU!API 官方文档
+
+- [V1文档](https://github.com/ppy/osu-api/wiki)
+- [V2文档](https://osu.ppy.sh/docs/index.html)
+
 # 🤝 贡献指南
 
 这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装，目前只做了v2的部分，v1的部分和WASM支持还没有做。

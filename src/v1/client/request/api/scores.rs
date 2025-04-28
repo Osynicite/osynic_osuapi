@@ -6,14 +6,14 @@ use std::sync::Arc;
 use tokio::sync::RwLock;
 
 #[derive(Clone)]
-pub struct ReqwestScore {
+pub struct ReqwestScores {
     pub client: reqwest::Client,
     pub api_key: Arc<RwLock<String>>,
 }
 
-impl IScores for ReqwestScore {
+impl IScores for ReqwestScores {
     async fn get_scores(&self, params: GetScoresParams) -> Result<Vec<Score>> {
-        println!("ReqwestScore get_Scores");
+        println!("ReqwestScore get_scores");
 
         let key = {
             let key = self.api_key.read().await;

@@ -15,43 +15,6 @@ impl IBeatmap for ReqwestBeatmap {
     async fn get_beatmaps(&self, params: GetBeatmapsParams) -> Result<Vec<Beatmap>> {
         println!("ReqwestBeatmap get_beatmaps");
 
-        // let GetBeatmapsParams {
-        //     since,
-        //     sid,
-        //     bid,
-        //     uid,
-        //     typee,
-        //     mode,
-        //     has_converted,
-        //     hash,
-        //     limit,
-        //     mods,
-        // } = params;
-
-        // let key = {
-        //     let key = self.api_key.read().await;
-        //     key.clone()
-        // };
-
-        // let m_str = mode.map(|x| x.to_string());
-        // let a_str = has_converted.map(|x| x.to_string());
-        // let limit_str = limit.map(|x| x.to_string());
-        // let mods_str = mods.map(|x| x.to_string());
-
-        // let params = [
-        //     ("k", Some(key.as_str())),
-        //     ("since", since.as_deref()),
-        //     ("s", sid.as_deref()),
-        //     ("b", bid.as_deref()),
-        //     ("u", uid.as_deref()),
-        //     ("type", typee.as_deref()),
-        //     ("m", m_str.as_deref()),
-        //     ("a", a_str.as_deref()),
-        //     ("h", hash.as_deref()),
-        //     ("limit", limit_str.as_deref()),
-        //     ("mods", mods_str.as_deref()),
-        // ];
-
         let key = {
             let key = self.api_key.read().await;
             key.clone()

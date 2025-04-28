@@ -15,7 +15,7 @@ pub struct ReqwestUser {
 
 impl IUser for ReqwestUser {
     async fn get_user(&self, params: GetUserParams) -> Result<User> {
-        println!("ReqwestUser get_Users");
+        println!("ReqwestUser get_user");
 
         let key = {
             let key = self.api_key.read().await;
@@ -41,7 +41,7 @@ impl IUser for ReqwestUser {
     }
 
     async fn get_user_best(&self, params: GetUserBestParams) -> Result<Vec<BestScore>> {
-        println!("ReqwestUser get_user_best");
+        println!("ReqwestUserBest get_user_best");
 
         let key = {
             let key = self.api_key.read().await;
@@ -67,7 +67,7 @@ impl IUser for ReqwestUser {
     }
 
     async fn get_user_recent(&self, params: GetUserRecentParams) -> Result<Vec<RecentPlay>> {
-        println!("ReqwestUser get_user_recent");
+        println!("ReqwestUserRecent get_user_recent");
 
         let key = {
             let key = self.api_key.read().await;

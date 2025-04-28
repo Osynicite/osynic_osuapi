@@ -23,6 +23,11 @@
 
 [中文版本](README.md) | [English Version](README_EN.md)
 
+# OSU!API Official Documentation
+
+- [V1 Documentation](https://github.com/ppy/osu-api/wiki)
+- [V2 Documentation](https://osu.ppy.sh/docs/index.html)
+
 # 🤝 Contribution Guidelines
 
 This library is basically a module developed for the Osynic application, but it is also a complete Rust encapsulation of the osu!api. Currently, only the v2 part is done, and the v1 part and WASM support have not been done.

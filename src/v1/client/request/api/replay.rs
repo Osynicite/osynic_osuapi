@@ -13,7 +13,7 @@ pub struct ReqwestReplay {
 
 impl IReplay for ReqwestReplay {
     async fn get_replay(&self, params: GetReplayParams) -> Result<Replay> {
-        println!("ReqwestReplay get_Replays");
+        println!("ReqwestReplay get_replay");
 
         let key = {
             let key = self.api_key.read().await;
