@@ -3,7 +3,7 @@
     <img style="height:240px;width:240px" src="https://s2.loli.net/2025/03/10/GSsjOcHqdtBkyu9.png" alt="logo"/>
 </p>
 
-<h1 align="center" tabindex="-1" class="heading-element" dir="auto">OsynicOsudb</h1>
+<h1 align="center" tabindex="-1" class="heading-element" dir="auto">OsynicOsuapi</h1>
 
 <p align="center">
   <a href="https://www.rust-lang.org/" target="_blank"><img src="https://img.shields.io/badge/Rust-1.85%2B-blue"/></a>
