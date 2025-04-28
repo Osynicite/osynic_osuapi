@@ -21,8 +21,8 @@ async fn main() -> Result<()> {
 /*
 ReqwestUser get_user
 Error: reqwest::Error: reqwest::Error {
-	kind: Decode,
-	source: Error("invalid type: map, expected a string", line: 1, column: 1)
+    kind: Decode,
+    source: Error("invalid type: map, expected a string", line: 1, column: 1)
 }
 
 WDF? this is not all of string?

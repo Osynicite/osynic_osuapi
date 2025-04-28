@@ -21,11 +21,10 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-
 /*
 ReqwestReplay get_replay
 Replay {
-	content: "Something about 20.2KiB"
-	encoding: "base64"
+    content: "Something about 20.2KiB"
+    encoding: "base64"
 }
 */
