@@ -12,6 +12,7 @@ use crate::v2::model::score::structs::scores::Scores;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+#[derive(Clone)]
 pub struct ReqwestBeatmaps {
     pub client: reqwest::Client,
     pub o_token: Arc<RwLock<OToken>>,

@@ -32,6 +32,7 @@ struct GetTokenResponse {
     refresh_token: Option<String>,
 }
 
+#[derive(Clone)]
 pub struct ReqwestOauth {
     pub client: reqwest::Client,
     pub o_token: Arc<RwLock<OToken>>,

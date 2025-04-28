@@ -7,6 +7,7 @@ use crate::v2::model::score::dtos::response::GetScoresResponse;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+#[derive(Clone)]
 pub struct ReqwestScores {
     pub client: reqwest::Client,
     pub o_token: Arc<RwLock<OToken>>,

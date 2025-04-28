@@ -14,6 +14,7 @@ use crate::v2::model::user::structs::users::Users;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+#[derive(Clone)]
 pub struct ReqwestUsers {
     pub client: reqwest::Client,
     pub o_token: Arc<RwLock<OToken>>,

@@ -20,13 +20,13 @@ serde_json = { version = "1.0.140"}
 serde-wasm-bindgen = { version ="0.6.5", optional = true }
 web-sys = { version = "0.3.76", features = ["RequestInit", "Headers","console", "Window", "Performance"] ,optional=true}
 chrono = { version = "0.4.40", features = ["serde"] }
-
+bitflags =  { version = "2.9.0", optional = true }
 [dev-dependencies]
 dotenvy = "0.15.7"
 
 [features]
-default = ["v2","not-wasm"]
-v1 = []
+default = ["v1","v2","not-wasm"]
+v1 = ["bitflags"]
 v2 = []
 wasm = ["gloo-net","web-sys","serde-wasm-bindgen"]
 not-wasm = ["tokio","reqwest"]

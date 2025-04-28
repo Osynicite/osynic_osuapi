@@ -6,6 +6,7 @@ use crate::v2::model::wiki::WikiPage;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+#[derive(Clone)]
 pub struct ReqwestWiki {
     pub client: reqwest::Client,
     pub o_token: Arc<RwLock<OToken>>,

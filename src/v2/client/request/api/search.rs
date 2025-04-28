@@ -7,6 +7,7 @@ use crate::v2::model::search::enums::search_mode::SearchMode;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+#[derive(Clone)]
 pub struct ReqwestSearch {
     pub client: reqwest::Client,
     pub o_token: Arc<RwLock<OToken>>,

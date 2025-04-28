@@ -9,6 +9,7 @@ use tokio::io::AsyncWriteExt;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+#[derive(Clone)]
 pub struct ReqwestBeatmapsets {
     pub client: reqwest::Client,
     pub o_token: Arc<RwLock<OToken>>,

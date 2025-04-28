@@ -11,6 +11,7 @@ use crate::v2::model::oauth::structs::o_token::OToken;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
+#[derive(Clone)]
 pub struct OsynicOsuApiV2Client {
     pub oauth: ReqwestOauth,
     pub users: ReqwestUsers,
