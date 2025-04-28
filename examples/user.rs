@@ -1,3 +1,4 @@
+// Get user information by id or username
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
 use osynic_osuapi::v2::interface::users::IUsers;

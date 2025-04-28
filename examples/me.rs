@@ -1,3 +1,4 @@
+// Get your user information by oauth token
 use osynic_osuapi::error::Result;
 use osynic_osuapi::utils::country_code_to_unicode_flag;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;

@@ -1,3 +1,4 @@
+// Beatmapset Search
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
 use osynic_osuapi::v2::interface::beatmapsets::IBeatmapsets;

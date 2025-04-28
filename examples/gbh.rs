@@ -1,4 +1,4 @@
-// get beatmap checksum
+// Get beatmap by hash
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v1::client::request::client::OsynicOsuApiV1Client;
 use osynic_osuapi::v1::interface::beatmap::IBeatmap;
