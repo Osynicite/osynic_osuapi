@@ -1,8 +1,8 @@
 pub mod beatmap;
-pub mod user;
 pub mod best;
-pub mod recent;
-pub mod scores;
-pub mod multiplayer;
-pub mod replay;
 pub mod mods;
+pub mod multiplayer;
+pub mod recent;
+pub mod replay;
+pub mod scores;
+pub mod user;

@@ -1,5 +1,5 @@
 use crate::error::Result;
-use crate::v1::model::multiplayer::{MultiplayerResponse,GetMatchParams};
+use crate::v1::model::multiplayer::{GetMatchParams, MultiplayerResponse};
 
 pub trait IMultiplayer {
     fn get_match(

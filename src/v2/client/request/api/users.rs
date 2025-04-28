@@ -21,8 +21,7 @@ pub struct ReqwestUsers {
 }
 
 impl IUsers for ReqwestUsers {
-    async fn get_own_data(&self, mode: Option<Mode>,
-        key: Option<String>) -> Result<User> {
+    async fn get_own_data(&self, mode: Option<Mode>, key: Option<String>) -> Result<User> {
         println!("ReqwestUsers get_own_data");
 
         let access_token = {
@@ -33,7 +32,7 @@ impl IUsers for ReqwestUsers {
         // let params = [("mode", mode)];
         let params = [("key", key.map(|x| x.to_string()))];
 
-        let mut url= "https://osu.ppy.sh/api/v2/me/".to_string();
+        let mut url = "https://osu.ppy.sh/api/v2/me/".to_string();
 
         if mode.is_some() {
             url = format!(
@@ -77,7 +76,7 @@ impl IUsers for ReqwestUsers {
 
         // let json = serde_json::from_str::<User>(&response.text().await?)?;
         // println!("{:?}", json);
-        
+
         // 解析响应
 
         let user_response: User = response.json().await?;

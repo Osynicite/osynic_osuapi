@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::v1::client::request::check::check_res;
 use crate::v1::interface::multiplayer::IMultiplayer;
-use crate::v1::model::multiplayer::{MultiplayerResponse, GetMatchParams};
+use crate::v1::model::multiplayer::{GetMatchParams, MultiplayerResponse};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -12,22 +12,15 @@ pub struct ReqwestMultiplayer {
 }
 
 impl IMultiplayer for ReqwestMultiplayer {
-
-    async fn get_match(
-        &self,
-        params: GetMatchParams,
-    ) -> Result<MultiplayerResponse> {
+    async fn get_match(&self, params: GetMatchParams) -> Result<MultiplayerResponse> {
         println!("ReqwestMultiplayer get_match");
-
 
         let key = {
             let key = self.api_key.read().await;
             key.clone()
         };
 
-        let params = params.api_key(key)
-            .build_params();
-
+        let params = params.api_key(key).build_params();
 
         let res = self
             .client
@@ -40,9 +33,8 @@ impl IMultiplayer for ReqwestMultiplayer {
 
         let response = check_res(res)?;
 
-        let multiplayer: MultiplayerResponse  = response.json().await?;
+        let multiplayer: MultiplayerResponse = response.json().await?;
 
         Ok(multiplayer)
-
     }
 }

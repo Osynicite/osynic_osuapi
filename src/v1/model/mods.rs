@@ -35,21 +35,21 @@ bitflags! {
         const KEY2           = 268435456;
         const SCORE_V2       = 536870912;
         const MIRROR         = 1073741824;
-        
+
         // 复合标志 - 正确的语法
-        const KEY_MOD = Self::KEY1.bits() | Self::KEY2.bits() | Self::KEY3.bits() | 
-                        Self::KEY4.bits() | Self::KEY5.bits() | Self::KEY6.bits() | 
-                        Self::KEY7.bits() | Self::KEY8.bits() | Self::KEY9.bits() | 
+        const KEY_MOD = Self::KEY1.bits() | Self::KEY2.bits() | Self::KEY3.bits() |
+                        Self::KEY4.bits() | Self::KEY5.bits() | Self::KEY6.bits() |
+                        Self::KEY7.bits() | Self::KEY8.bits() | Self::KEY9.bits() |
                         Self::KEY_COOP.bits();
-                        
-        const FREE_MOD_ALLOWED = Self::NO_FAIL.bits() | Self::EASY.bits() | Self::HIDDEN.bits() | 
-                                Self::HARD_ROCK.bits() | Self::SUDDEN_DEATH.bits() | 
-                                Self::FLASHLIGHT.bits() | Self::FADE_IN.bits() | 
-                                Self::RELAX.bits() | Self::RELAX2.bits() | 
+
+        const FREE_MOD_ALLOWED = Self::NO_FAIL.bits() | Self::EASY.bits() | Self::HIDDEN.bits() |
+                                Self::HARD_ROCK.bits() | Self::SUDDEN_DEATH.bits() |
+                                Self::FLASHLIGHT.bits() | Self::FADE_IN.bits() |
+                                Self::RELAX.bits() | Self::RELAX2.bits() |
                                 Self::SPUN_OUT.bits() | Self::KEY_MOD.bits();
-                                
-        const SCORE_INCREASE_MODS = Self::HIDDEN.bits() | Self::HARD_ROCK.bits() | 
-                                   Self::DOUBLE_TIME.bits() | Self::FLASHLIGHT.bits() | 
+
+        const SCORE_INCREASE_MODS = Self::HIDDEN.bits() | Self::HARD_ROCK.bits() |
+                                   Self::DOUBLE_TIME.bits() | Self::FLASHLIGHT.bits() |
                                    Self::FADE_IN.bits();
     }
 }
@@ -59,7 +59,7 @@ impl Mods {
     pub fn has_nightcore_double_time(&self) -> bool {
         self.contains(Mods::NIGHTCORE) && self.contains(Mods::DOUBLE_TIME)
     }
-    
+
     pub fn has_perfect_sudden_death(&self) -> bool {
         self.contains(Mods::PERFECT) && self.contains(Mods::SUDDEN_DEATH)
     }

@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::v1::client::request::check::check_res;
 use crate::v1::interface::scores::IScores;
-use crate::v1::model::scores::{Score, GetScoresParams};
+use crate::v1::model::scores::{GetScoresParams, Score};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -12,11 +12,7 @@ pub struct ReqwestScore {
 }
 
 impl IScores for ReqwestScore {
-
-    async fn get_scores(
-        &self,
-        params: GetScoresParams,
-    ) -> Result<Vec<Score>> {
+    async fn get_scores(&self, params: GetScoresParams) -> Result<Vec<Score>> {
         println!("ReqwestScore get_Scores");
 
         let key = {
@@ -24,9 +20,8 @@ impl IScores for ReqwestScore {
             key.clone()
         };
 
-        let params = params.api_key(key)
-            .build_params();
-        
+        let params = params.api_key(key).build_params();
+
         let res = self
             .client
             .get("https://osu.ppy.sh/api/get_scores")
@@ -41,6 +36,5 @@ impl IScores for ReqwestScore {
         let scores: Vec<Score> = response.json().await?;
 
         Ok(scores)
-
     }
 }

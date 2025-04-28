@@ -1,5 +1,5 @@
 use crate::error::Result;
-use crate::v1::model::scores::{Score,GetScoresParams};
+use crate::v1::model::scores::{GetScoresParams, Score};
 
 pub trait IScores {
     fn get_scores(

@@ -1,7 +1,7 @@
 use crate::error::Result;
-use crate::v1::model::user::{User,GetUserParams};
 use crate::v1::model::best::{BestScore, GetUserBestParams};
-use crate::v1::model::recent::{RecentPlay, GetUserRecentParams};
+use crate::v1::model::recent::{GetUserRecentParams, RecentPlay};
+use crate::v1::model::user::{GetUserParams, User};
 pub trait IUser {
     fn get_user(
         &self,

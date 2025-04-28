@@ -4,34 +4,34 @@ use serde::{Deserialize, Serialize};
 /// Replay data structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Replay {
-    pub content: String,           // base64编码的回放数据（LZMA流）
-    pub encoding: String,          // 编码方式，通常为"base64"
+    pub content: String,  // base64编码的回放数据（LZMA流）
+    pub encoding: String, // 编码方式，通常为"base64"
 }
 
 /// 获取回放数据的原始参数
 /// Raw parameters for getting replay data
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetReplayParamsRaw {
-    pub k: Option<String>,         // API密钥（必需）
-    pub b: Option<String>,         // 谱面ID（不是谱面集ID！）（必需，除非指定了s参数）
-    pub u: Option<String>,         // 游玩该谱面的用户（必需，除非指定了s参数）
-    pub m: Option<u8>,             // 游玩的模式
-    pub s: Option<String>,         // 指定要获取回放数据的分数ID，可以代替b和u参数
-    pub t: Option<String>,         // 指定u是用户ID还是用户名。使用"string"表示用户名，"id"表示用户ID。可选，默认为自动识别
-    pub mods: Option<u32>,         // 指定mod或mod组合（见位运算枚举）
+    pub k: Option<String>, // API密钥（必需）
+    pub b: Option<String>, // 谱面ID（不是谱面集ID！）（必需，除非指定了s参数）
+    pub u: Option<String>, // 游玩该谱面的用户（必需，除非指定了s参数）
+    pub m: Option<u8>,     // 游玩的模式
+    pub s: Option<String>, // 指定要获取回放数据的分数ID，可以代替b和u参数
+    pub t: Option<String>, // 指定u是用户ID还是用户名。使用"string"表示用户名，"id"表示用户ID。可选，默认为自动识别
+    pub mods: Option<u32>, // 指定mod或mod组合（见位运算枚举）
 }
 
 /// 获取回放数据的参数
 /// Parameters for getting replay data
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetReplayParams {
-    pub api_key: Option<String>,       // API密钥（必需）
-    pub beatmap_id: Option<String>,    // 谱面ID（不是谱面集ID！）（必需，除非指定了score_id参数）
-    pub user: Option<String>,          // 游玩该谱面的用户（必需，除非指定了score_id参数）
-    pub mode: Option<u8>,              // 游玩的模式
-    pub score_id: Option<String>,      // 指定要获取回放数据的分数ID，可以代替beatmap_id和user参数
-    pub typee: Option<String>,         // 指定user是用户ID还是用户名。使用"string"表示用户名，"id"表示用户ID。可选，默认为自动识别
-    pub mods: Option<u32>,             // 指定mod或mod组合（见位运算枚举）
+    pub api_key: Option<String>,    // API密钥（必需）
+    pub beatmap_id: Option<String>, // 谱面ID（不是谱面集ID！）（必需，除非指定了score_id参数）
+    pub user: Option<String>,       // 游玩该谱面的用户（必需，除非指定了score_id参数）
+    pub mode: Option<u8>,           // 游玩的模式
+    pub score_id: Option<String>,   // 指定要获取回放数据的分数ID，可以代替beatmap_id和user参数
+    pub typee: Option<String>, // 指定user是用户ID还是用户名。使用"string"表示用户名，"id"表示用户ID。可选，默认为自动识别
+    pub mods: Option<u32>,     // 指定mod或mod组合（见位运算枚举）
 }
 
 impl GetReplayParams {

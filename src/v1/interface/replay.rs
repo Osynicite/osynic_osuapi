@@ -1,5 +1,5 @@
 use crate::error::Result;
-use crate::v1::model::replay::{Replay,GetReplayParams};
+use crate::v1::model::replay::{GetReplayParams, Replay};
 
 pub trait IReplay {
     fn get_replay(

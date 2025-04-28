@@ -11,13 +11,13 @@ async fn main() -> Result<()> {
     let access_token = std::env::var("ACCESS_TOKEN").expect(
         "Please set the ACCESS_TOKEN environment variable to a valid osu! API v2 access token",
     );
-    let client = OsynicOsuApiV2Client::new(OToken{
+    let client = OsynicOsuApiV2Client::new(OToken {
         access_token,
         refresh_token: None,
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let me = client.users.get_own_data(None,None).await?;
+    let me = client.users.get_own_data(None, None).await?;
     println!("{:?}", me);
     println!("osu_account_id: {}", me.id);
     println!("username: {}", me.username);

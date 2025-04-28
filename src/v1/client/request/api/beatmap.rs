@@ -12,11 +12,7 @@ pub struct ReqwestBeatmap {
 }
 
 impl IBeatmap for ReqwestBeatmap {
-
-    async fn get_beatmaps(
-        &self,
-        params: GetBeatmapsParams,
-    ) -> Result<Vec<Beatmap>> {
+    async fn get_beatmaps(&self, params: GetBeatmapsParams) -> Result<Vec<Beatmap>> {
         println!("ReqwestBeatmap get_beatmaps");
 
         // let GetBeatmapsParams {
@@ -56,7 +52,6 @@ impl IBeatmap for ReqwestBeatmap {
         //     ("mods", mods_str.as_deref()),
         // ];
 
-        
         let key = {
             let key = self.api_key.read().await;
             key.clone()
@@ -78,6 +73,5 @@ impl IBeatmap for ReqwestBeatmap {
         let beatmaps: Vec<Beatmap> = response.json().await?;
 
         Ok(beatmaps)
-
     }
 }

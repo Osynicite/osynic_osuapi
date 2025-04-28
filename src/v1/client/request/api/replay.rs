@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::v1::client::request::check::check_res;
 use crate::v1::interface::replay::IReplay;
-use crate::v1::model::replay::{Replay, GetReplayParams};
+use crate::v1::model::replay::{GetReplayParams, Replay};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -12,22 +12,16 @@ pub struct ReqwestReplay {
 }
 
 impl IReplay for ReqwestReplay {
-
-    async fn get_replay(
-        &self,
-        params: GetReplayParams,
-    ) -> Result<Replay> {
+    async fn get_replay(&self, params: GetReplayParams) -> Result<Replay> {
         println!("ReqwestReplay get_Replays");
-
 
         let key = {
             let key = self.api_key.read().await;
             key.clone()
         };
 
-        let params = params.api_key(key)
-            .build_params();
-        
+        let params = params.api_key(key).build_params();
+
         let res = self
             .client
             .get("https://osu.ppy.sh/api/get_replay")
@@ -42,6 +36,5 @@ impl IReplay for ReqwestReplay {
         let replay: Replay = response.json().await?;
 
         Ok(replay)
-
     }
 }

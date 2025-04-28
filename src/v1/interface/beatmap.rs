@@ -1,5 +1,5 @@
 use crate::error::Result;
-use crate::v1::model::beatmap::{Beatmap,GetBeatmapsParams};
+use crate::v1::model::beatmap::{Beatmap, GetBeatmapsParams};
 
 pub trait IBeatmap {
     fn get_beatmaps(
