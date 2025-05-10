@@ -1,4 +1,15 @@
 # TODO
 
-1. [ ] 测试已有的杂项接口
-2. [ ] WASM支持
+1. [ ] 体力活部分，等哪天课上没事情做就尽早整一下算了
+   1. [ ] V1的WASM支持
+   2. [ ] V2的ReqwestAPI，接口、结构与客户端
+      1. [ ] Changelog
+      2. [ ] Chat
+      3. [ ] Comments
+      4. [ ] Events
+      5. [ ] Forums
+      6. [ ] Home
+      7. [ ] Matches
+      8. [ ] Multiplayer
+      9. [ ] News
+      10. [ ] Notifications
