@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::users::IUsers;
 use crate::v2::model::beatmap::structs::beatmap_playcount::BeatmapPlaycount;
 use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
@@ -41,7 +42,7 @@ impl IUsers for ReqwestUsers {
             );
         }
 
-        let response = self
+        let res = self
             .client
             .get(url)
             .header("Accept", "application/json")
@@ -51,7 +52,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         // let response_text = response.text().await?;
         // println!("{:?}", response_text);
@@ -102,7 +105,7 @@ impl IUsers for ReqwestUsers {
             ("offset", offset.map(|x| x.to_string())),
         ];
 
-        let response = self
+        let res = self
             .client
             .get(format!("https://osu.ppy.sh/api/v2/users/{}/kudosu", id))
             .header("Accept", "application/json")
@@ -112,7 +115,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         let kudosu_history: Vec<KudosuHisotry> = response.json().await?;
 
@@ -140,7 +145,7 @@ impl IUsers for ReqwestUsers {
             ("offset", offset.map(|x| x.to_string())),
         ];
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/users/{}/scores/{}",
@@ -154,7 +159,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         let scores: Vec<Score> = response.json().await?;
 
@@ -180,7 +187,7 @@ impl IUsers for ReqwestUsers {
             ("offset", offset.map(|x| x.to_string())),
         ];
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/users/{}/beatmapsets/{}",
@@ -193,7 +200,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         let beatmapsets: Vec<Beatmapset> = response.json().await?;
 
@@ -218,7 +227,7 @@ impl IUsers for ReqwestUsers {
             ("offset", offset.map(|x| x.to_string())),
         ];
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/users/{}/beatmapsets/most_played",
@@ -231,7 +240,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         let beatmap_playcount: Vec<BeatmapPlaycount> = response.json().await?;
 
@@ -256,7 +267,7 @@ impl IUsers for ReqwestUsers {
             ("offset", offset.map(|x| x.to_string())),
         ];
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/users/{}/recent_activity",
@@ -269,7 +280,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         let recent_activity: Vec<Event> = response.json().await?;
 
@@ -303,7 +316,7 @@ impl IUsers for ReqwestUsers {
             );
         }
 
-        let response = self
+        let res = self
             .client
             .get(url)
             .header("Accept", "application/json")
@@ -313,7 +326,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         let user_response: User = response.json().await?;
 
@@ -344,7 +359,7 @@ impl IUsers for ReqwestUsers {
             );
         }
 
-        let response = self
+        let res = self
             .client
             .get(url)
             .header("Accept", "application/json")
@@ -354,7 +369,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         // 获取响应体的文本内容
         // let text = response.text().await?;
@@ -397,7 +414,7 @@ impl IUsers for ReqwestUsers {
             .collect::<Vec<(String, String)>>();
         let ivs_params = [("include_variant_statistics", include_variant_statistics)];
 
-        let response = self
+        let res = self
             .client
             .get("https://osu.ppy.sh/api/v2/users")
             .header("Accept", "application/json")
@@ -408,7 +425,9 @@ impl IUsers for ReqwestUsers {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         let users_response: Users = response.json().await?;
 

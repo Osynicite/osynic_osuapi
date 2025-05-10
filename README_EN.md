@@ -28,6 +28,24 @@
 - [V1 Documentation](https://github.com/ppy/osu-api/wiki)
 - [V2 Documentation](https://osu.ppy.sh/docs/index.html)
 
+# API Checklist
+
+You can run the API corresponding example by `cargo run --example example_name`
+
+## V1
+
+|API|Support|Remarks|Example Name|
+|---|---|---|---|
+|/get_beatmaps|✅|Get beatmap|`gb`|
+|/get_user|✅|Get user|`gu`|
+|/get_user_best|✅|Get user best score|`gub`|
+|/get_user_recent|✅|Get user recent score|`gur`|
+|/get_match|✅|Get match|`gm`|
+|/get_scores|✅|Get beatmap scores|`gss`|
+|/get_replay|✅|Get replay|`gr`|
+
+## V2
+
 # 🤝 Contribution Guidelines
 
 This library is basically a module developed for the Osynic application, but it is also a complete Rust encapsulation of the osu!api. Currently, only the v2 part is done, and the v1 part and WASM support have not been done.
