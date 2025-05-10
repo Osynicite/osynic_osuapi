@@ -14,7 +14,7 @@ pub struct ReqwestUser {
 }
 
 impl IUser for ReqwestUser {
-    async fn get_user(&self, params: GetUserParams) -> Result<User> {
+    async fn get_user(&self, params: GetUserParams) -> Result<Vec<User>> {
         println!("ReqwestUser get_user");
 
         let key = {
@@ -35,7 +35,11 @@ impl IUser for ReqwestUser {
 
         let response = check_res(res)?;
 
-        let user: User = response.json().await?;
+        let user: Vec<User> = response.json().await?;
+
+        // let text = response.text().await?;
+        // println!("Text: {:?}", text);
+        // let user: User = serde_json::from_str(&text)?;
 
         Ok(user)
     }

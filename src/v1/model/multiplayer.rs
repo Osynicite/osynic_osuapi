@@ -1,4 +1,4 @@
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Deserializer};
 
 /// 多人游戏玩家分数结构体
 /// Multiplayer player score structure
@@ -39,7 +39,7 @@ pub struct MultiplayerGame {
 
 /// 多人游戏匹配结构体
 /// Multiplayer match structure
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug,Default, Clone, Serialize, Deserialize)]
 pub struct MultiplayerMatch {
     pub match_id: String,         // 匹配ID
     pub name: String,             // 房间名称
@@ -51,10 +51,37 @@ pub struct MultiplayerMatch {
 /// Multiplayer response structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MultiplayerResponse {
-    #[serde(rename = "match")]
+    #[serde(rename = "match", deserialize_with = "deserialize_match")]
     pub matchh: MultiplayerMatch, // 匹配信息
     pub games: Vec<MultiplayerGame>, // 游戏列表
 }
+
+/// 自定义反序列化函数，处理match字段为0的情况
+fn deserialize_match<'de, D>(deserializer: D) -> Result<MultiplayerMatch, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    // 尝试从各种类型反序列化
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    #[allow(dead_code)]
+    enum MatchField {
+        Object(MultiplayerMatch),
+        Number(i64),
+        Bool(bool),
+        Null,
+    }
+
+    let value = MatchField::deserialize(deserializer)?;
+    match value {
+        MatchField::Object(obj) => Ok(obj),
+        // 如果match字段是数字、布尔值或null，返回默认的MultiplayerMatch
+        MatchField::Number(_) | MatchField::Bool(_) | MatchField::Null => {
+            Ok(MultiplayerMatch::default())
+        }
+    }
+}
+
 
 /// 获取多人游戏信息的原始参数
 /// Raw parameters for getting multiplayer match information

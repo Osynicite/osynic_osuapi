@@ -6,7 +6,7 @@ pub trait IUser {
     fn get_user(
         &self,
         params: GetUserParams,
-    ) -> impl std::future::Future<Output = Result<User>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<User>>> + Send;
     fn get_user_best(
         &self,
         params: GetUserBestParams,

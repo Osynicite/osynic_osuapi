@@ -20,10 +20,14 @@ async fn main() -> Result<()> {
 
 /*
 ReqwestMultiplayer get_match
-Error: reqwest::Error: reqwest::Error {
-    kind: Decode,
-    source: Error("invalid type: integer `0`, expected struct MultiplayerMatch", line: 1, column: 10)
+Text: "{\"match\":0,\"games\":[]}"
+MultiplayerResponse {
+	matchh: MultiplayerMatch {
+		match_id: "",
+		name: "",
+		start_time: "",
+		end_time: None
+	},
+	games: []
 }
-
-Oh idk how to use this api, lol
 */

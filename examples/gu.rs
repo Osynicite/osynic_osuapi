@@ -20,12 +20,28 @@ async fn main() -> Result<()> {
 
 /*
 ReqwestUser get_user
-Error: reqwest::Error: reqwest::Error {
-    kind: Decode,
-    source: Error("invalid type: map, expected a string", line: 1, column: 1)
-}
-
-WDF? this is not all of string?
-
-ill adjust this soon.
+[User {
+    user_id: "31175842",
+    username: "Islatri",
+    join_date: "2022-08-30 06:57:47",
+    count300: "676156",
+    count100: "136433",
+    count50: "22732",
+    playcount: "4966",
+    ranked_score: "625695631",
+    total_score: "2413072414",
+    pp_rank: "0",
+    level: "71.5153",
+    pp_raw: "0",
+    accuracy: "90.64440131187439",
+    count_rank_ss: "2",
+    count_rank_ssh: "1",
+    count_rank_s: "47",
+    count_rank_sh: "1",
+    count_rank_a: "112",
+    country: "CN",
+    total_seconds_played: "321075",
+    pp_country_rank: "60272",
+    events: []
+}]
 */

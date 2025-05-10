@@ -35,6 +35,10 @@ impl IMultiplayer for ReqwestMultiplayer {
 
         let multiplayer: MultiplayerResponse = response.json().await?;
 
+        // let text = response.text().await?;
+        // println!("Text: {:?}", text);
+        // let multiplayer: MultiplayerResponse = serde_json::from_str(&text)?;
+
         Ok(multiplayer)
     }
 }
