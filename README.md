@@ -50,36 +50,74 @@
 
 其中接口模块对应可以在`src/v2/interface`中找到，相应实现则在`src/v2/client/request/api`或者`src/v2/client/gloo/api`中可以找到
 
-| 大类           | API数量 | 备注        | 模块名        |
-| -------------- | ------- | ----------- | ------------- |
-| Authentication | 3       | OAuth与认证 | oauth          |
-| Beatmaps       | 4       | 谱面API     | beatmaps      |
-| Beatmapsets    | 4       | 谱面集API   | beatmapsets   |
-| Changelogs     | 1       | 变更日志API | changelogs    |
-| Chat           | 1       | 聊天API     | chat          |
-| Comments       | 2       | 评论API     | comments      |
-| Events         | 1       | 事件API     | events        |
-| Forums         | 1       | 论坛API     | forums        |
-| Home           | 1       | 首页API     | home          |
-| Matches        | 1       | 比赛API     | matches       |
-| Multiplayer    | 1       | 多人API     | multiplayer   |
-| News           | 1       | 新闻API     | news          |
-| Notifications  | 1       | 通知API     | notifications |
-| Rankings       | 1       | 排行榜API   | rankings      |
-| Scores         | 1       | 成绩API     | scores        |
-| Search         | 1       | 搜索API     | search        |
-| Users          | 1       | 用户API     | users         |
-| Wiki           | 1       | Wiki API    | wiki          |
+| 大类           | API支持数 | 备注        | 模块名          |
+| -------------- | --------- | ----------- | --------------- |
+| Authentication | 4         | OAuth与认证 | `oauth`         |
+| Beatmaps       | 4         | 谱面API     | `beatmaps`      |
+| Beatmapsets    | 3         | 谱面集API   | `beatmapsets`   |
+| Changelogs     | 1         | 变更日志API | `changelogs`    |
+| Chat           | 1         | 聊天API     | `chat`          |
+| Comments       | 2         | 评论API     | `comments`      |
+| Events         | 1         | 事件API     | `events`        |
+| Forums         | 1         | 论坛API     | `forums`        |
+| Home           | 1         | 首页API     | `home`          |
+| Matches        | 1         | 比赛API     | `matches`       |
+| Multiplayer    | 1         | 多人API     | `multiplayer`   |
+| News           | 1         | 新闻API     | `news`          |
+| Notifications  | 1         | 通知API     | `notifications` |
+| Rankings       | 1         | 排行榜API   | `rankings`      |
+| Scores         | 1         | 成绩API     | `scores`        |
+| Search         | 1         | 搜索API     | `search`        |
+| Users          | 1         | 用户API     | `users`         |
+| Wiki           | 1         | Wiki API    | `wiki`          |
 
 ### Authentication
 
-| API                     | 支持 | 备注                                                                                                        | 示例名 |
-| ----------------------- | ---- | ----------------------------------------------------------------------------------------------------------- | ------ |
-| /get_token_with_code    | ✅    | 即Authorization Code Grant的缩写，需要用户在浏览器OAuth授权来拿到code，进而来请求token，不需要client_secret | `acg`  |
-| /get_token_without_code | ✅    | 即Client Credentials Grant的缩写，直接请求token，不需要用户授权，client_secret需要在环境变量中设置          | `ccg`  |
-| /refresh_token         | ✅    | CCG认证下，通过拿到的refresh_token刷新token                                                                                                  | `refresh`   |
-|/revoke_current_token| ✅    | 撤销当前token                                                                                              | `revoke`  |
+| API                     | 支持 | 备注                                                                                                        | 示例名    |
+| ----------------------- | ---- | ----------------------------------------------------------------------------------------------------------- | --------- |
+| /get_token_with_code    | ✅    | 即Authorization Code Grant的缩写，需要用户在浏览器OAuth授权来拿到code，进而来请求token，不需要client_secret | `acg`     |
+| /get_token_without_code | ✅    | 即Client Credentials Grant的缩写，直接请求token，不需要用户授权，client_secret需要在环境变量中设置          | `ccg`     |
+| /refresh_token          | ✅    | CCG认证下，通过拿到的refresh_token刷新token                                                                 | `refresh` |
+| /revoke_current_token   | ✅    | 撤销当前token                                                                                               | `revoke`  |
 
+### Beatmaps
+
+| API                     | 支持 | 备注                 | 示例名  |
+| ----------------------- | ---- | -------------------- | ------- |
+| /get_beatmap            | ✅    | 获取谱面             | `bg`    |
+| /get_beatmap_attributes | ✅    | 获取谱面属性         | `bga`   |
+| /get_beatmaps           | ✅    | 获取多个谱面         | `bgs`   |
+| /get_scores             | ✅    | 获取谱面成绩         | `bgss`  |
+| /get_solo_scores        | ✅    | 获取谱面成绩(Legacy) | `bgssn` |
+| /get_user_score         | ✅    | 获取用户成绩         | `bgus`  |
+| /get_user_scores        | ✅    | 获取用户多个成绩     | `bguss` |
+
+### Beatmapsets
+
+| API             | 支持 | 备注                | 示例名 |
+| --------------- | ---- | ------------------- | ------ |
+| /download       | ❌    | 下载谱面集（lazer） | `bsd`  |
+| /get_beatmapset | ✅    | 获取谱面集          | `bsg`  |
+| /search         | ✅    | 搜索谱面集          | `bss`  |
+
+### Changelogs
+
+| API         | 支持 | 备注         | 示例名 |
+| ----------- | ---- | ------------ | ------ |
+| /changelogs | ✅    | 获取变更日志 | `cl`   |
+
+### Users
+
+| API           | 支持 | 备注           | 示例名 |
+| ------------- | ---- | -------------- | ------ |
+| /get_own_data | ✅    | 获取自己的数据 | `me`   |
+| /get_user     | ✅    | 获取用户数据   | `user` |
+
+### Wiki
+
+| API            | 支持 | 备注         | 示例名 |
+| -------------- | ---- | ------------ | ------ |
+| /get_wiki_page | ✅    | 获取Wiki页面 | `wiki` |
 
 # 🤝 贡献指南
 

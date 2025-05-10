@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::wiki::IWiki;
 use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::wiki::WikiPage;
@@ -14,14 +15,14 @@ pub struct ReqwestWiki {
 
 impl IWiki for ReqwestWiki {
     async fn get_wiki_page(&self, locale: String, path: String) -> Result<WikiPage> {
-        println!("ReqwestWiki get_beatmapset");
+        println!("ReqwestWiki get_wiki_page");
 
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/wiki/{}/{}",
@@ -32,6 +33,8 @@ impl IWiki for ReqwestWiki {
             .header("Authorization", format!("Bearer {}", access_token))
             .send()
             .await?;
+
+        let response = check_res(res)?;
 
         let wiki: WikiPage = response.json().await?;
 
