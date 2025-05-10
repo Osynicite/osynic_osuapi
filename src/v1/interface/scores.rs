@@ -5,5 +5,5 @@ pub trait IScores {
     fn get_scores(
         &self,
         params: GetScoresParams,
-    ) -> impl std::future::Future<Output = Result<Vec<Score>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<Score>>>;
 }

@@ -1,41 +1,43 @@
 use crate::error::Result;
-use crate::v1::client::request::check::check_res;
+use crate::v1::client::gloo::check::check_res;
 use crate::v1::interface::beatmap::IBeatmap;
 use crate::v1::model::beatmap::{Beatmap, GetBeatmapsParams};
-use std::sync::Arc;
-use tokio::sync::RwLock;
-
+use gloo_net::http::Request;
+use std::sync::{Arc, Mutex};
+use wasm_bindgen::JsValue;
+use web_sys::console;
 
 #[derive(Clone)]
-pub struct ReqwestBeatmap {
-    pub client: reqwest::Client,
-    pub api_key: Arc<RwLock<String>>,
+pub struct GlooBeatmap {
+    pub api_key: Arc<Mutex<String>>,
 }
 
-impl IBeatmap for ReqwestBeatmap {
+impl IBeatmap for GlooBeatmap {
     async fn get_beatmaps(&self, params: GetBeatmapsParams) -> Result<Vec<Beatmap>> {
-        println!("ReqwestBeatmap get_beatmaps");
+        console::log_1(&JsValue::from_str("GlooBeatmap get_beatmaps"));
 
         let key = {
-            let key = self.api_key.read().await;
+            let key = self.api_key.lock().unwrap();
             key.clone()
         };
 
         let params = params.api_key(key).build_params();
+        
+        let url = format!(
+            "https://osu.ppy.sh/api/get_beatmaps?{}",
+            serde_urlencoded::to_string(&params)?
+        );
 
-        let res = self
-            .client
-            .get("https://osu.ppy.sh/api/get_beatmaps")
+        let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .query(&params)
             .send()
             .await?;
 
         let response = check_res(res)?;
-
+        
         let beatmaps: Vec<Beatmap> = response.json().await?;
-
+        
         Ok(beatmaps)
     }
 }

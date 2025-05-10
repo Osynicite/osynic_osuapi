@@ -5,5 +5,5 @@ pub trait IMultiplayer {
     fn get_match(
         &self,
         params: GetMatchParams,
-    ) -> impl std::future::Future<Output = Result<MultiplayerResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<MultiplayerResponse>>;
 }

@@ -6,13 +6,13 @@ pub trait IUser {
     fn get_user(
         &self,
         params: GetUserParams,
-    ) -> impl std::future::Future<Output = Result<Vec<User>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<User>>>;
     fn get_user_best(
         &self,
         params: GetUserBestParams,
-    ) -> impl std::future::Future<Output = Result<Vec<BestScore>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<BestScore>>>;
     fn get_user_recent(
         &self,
         params: GetUserRecentParams,
-    ) -> impl std::future::Future<Output = Result<Vec<RecentPlay>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<RecentPlay>>>;
 }

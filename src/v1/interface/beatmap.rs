@@ -5,5 +5,5 @@ pub trait IBeatmap {
     fn get_beatmaps(
         &self,
         params: GetBeatmapsParams,
-    ) -> impl std::future::Future<Output = Result<Vec<Beatmap>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<Beatmap>>>;
 }
