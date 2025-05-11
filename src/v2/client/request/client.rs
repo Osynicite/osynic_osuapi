@@ -3,6 +3,7 @@ use super::api::beatmapsets::ReqwestBeatmapsets;
 use super::api::events::ReqwestEvents;
 use super::api::notifications::ReqwestNotifications;
 use super::api::matches::ReqwestMatches;
+use super::api::news::ReqwestNews;
 use super::api::oauth::ReqwestOauth;
 use super::api::scores::ReqwestScores;
 use super::api::search::ReqwestSearch;
@@ -22,6 +23,7 @@ pub struct OsynicOsuApiV2Client {
     pub events: ReqwestEvents,
     pub notifications: ReqwestNotifications,
     pub matches: ReqwestMatches,
+    pub news: ReqwestNews,
     pub search: ReqwestSearch,
     pub scores: ReqwestScores,
     pub wiki: ReqwestWiki,
@@ -59,6 +61,10 @@ impl OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             matches: ReqwestMatches {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            news: ReqwestNews {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },
@@ -115,6 +121,10 @@ impl Default for OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             matches: ReqwestMatches {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            news: ReqwestNews {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },

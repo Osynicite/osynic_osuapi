@@ -34,21 +34,25 @@
 
 ## V1
 
-| API              | 支持 | 备注             | 示例名 |
-| ---------------- | ---- | ---------------- | ------ |
-| /get_beatmaps    | ✅    | 获取谱面         | `gb`   |
-| /get_user        | ✅    | 获取用户         | `gu`   |
-| /get_user_best   | ✅    | 获取用户最佳成绩 | `gub`  |
-| /get_user_recent | ✅    | 获取用户最近成绩 | `gur`  |
-| /get_match       | ✅    | 获取比赛         | `gm`   |
-| /get_scores      | ✅    | 获取谱面成绩     | `gss`  |
-| /get_replay      | ✅    | 获取回放         | `gr`   |
+本条目基于[V1官方文档](https://github.com/ppy/osu-api/wiki)的API大类进行划分，分类如下
+
+其中接口模块对应可以在`src/v1/interface`中找到，相应实现则在`src/v1/client/request/api`或者`src/v1/client/gloo/api`中可以找到
+
+| API              | 支持 | 备注             | 示例名 | 模块名        |
+| ---------------- | ---- | ---------------- | ------ | ------------- |
+| /get_beatmaps    | ✅    | 获取谱面         | `gb`   | `beatmap`     |
+| /get_user        | ✅    | 获取用户         | `gu`   | `user`        |
+| /get_user_best   | ✅    | 获取用户最佳成绩 | `gub`  | `user`        |
+| /get_user_recent | ✅    | 获取用户最近成绩 | `gur`  | `user`        |
+| /get_match       | ✅    | 获取比赛         | `gm`   | `multiplayer` |
+| /get_scores      | ✅    | 获取谱面成绩     | `gss`  | `scores`      |
+| /get_replay      | ✅    | 获取回放         | `gr`   | `replay`      |
 
 ## V2
 
-本条目基于[官方文档](https://osu.ppy.sh/docs/index.html)的API大类进行划分，分类如下
+本条目基于[V2官方文档](https://osu.ppy.sh/docs/index.html)的API大类进行划分，分类如下
 
-其中接口模块对应可以在`src/v2/interface`中找到，相应实现则在`src/v2/client/request/api`或者`src/v2/client/gloo/api`中可以找到
+其中接口模块对应可以在`src/v2/interface`中找到，相应实现则在`src/v2/client/request/api`中可以找到
 
 | 大类           | API总数 | API支持数        | 备注        | 模块名          |
 | -------------- | ------- | ---------------- | ----------- | --------------- |
@@ -150,9 +154,10 @@
 
 ### News
 
-| API       | 支持 | 备注     | 示例名 |
-| --------- | ---- | -------- | ------ |
-| /get_news | ❌    | 获取新闻 | `news` |
+| API               | 支持 | 备注         | 示例名 |
+| ----------------- | ---- | ------------ | ------ |
+| /get_news_listing | ✅    | 获取新闻列表 | `nlg`  |
+| /get_news_post    | ✅    | 获取新闻     | `npg`  |
 
 ### Notifications
 

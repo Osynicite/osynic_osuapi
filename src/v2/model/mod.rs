@@ -3,6 +3,7 @@ pub mod beatmapset;
 pub mod event;
 pub mod notification;
 pub mod matches;
+pub mod news;
 pub mod mode;
 pub mod oauth;
 pub mod score;
