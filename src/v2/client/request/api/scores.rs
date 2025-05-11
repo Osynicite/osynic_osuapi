@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::scores::IScores;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::oauth::structs::o_token::OToken;
@@ -26,7 +27,7 @@ impl IScores for ReqwestScores {
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get("https://osu.ppy.sh/api/v2/scores")
             .header("Accept", "application/json")
@@ -39,7 +40,13 @@ impl IScores for ReqwestScores {
             .send()
             .await?;
 
+        let response = check_res(res)?;
+
         let scores: GetScoresResponse = response.json().await?;
+
+        // let text = response.text().await?;
+        // println!("Response text: {}", text);
+        // let scores: GetScoresResponse = serde_json::from_str(&text)?;
 
         Ok(scores)
     }

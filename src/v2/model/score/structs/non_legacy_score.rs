@@ -31,7 +31,7 @@ pub struct NonLegacyScore {
     pub legacy_total_score: u64,
     pub max_combo: u32,
     pub passed: bool,
-    pub pp: f32,
+    pub pp: Option<f32>,
     pub ruleset_id: u32,
     pub started_at: Option<String>,
     pub total_score: u64,

@@ -7,7 +7,7 @@ pub mod statistics;
 pub mod team;
 pub mod user;
 pub mod weight;
-
+pub mod cursor;
 pub mod non_legacy;
 pub mod non_legacy_score;
 pub mod non_legacy_scores;
