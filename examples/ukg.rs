@@ -16,16 +16,15 @@ async fn main() -> Result<()> {
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let user = client
+    let kudosu = client
         .users
-        .get_user_by_username("Islatri", None, None)
+        .get_user_kudosu(31175842, None, None)
         .await?;
-    println!("{:?}", user);
-    println!("osu_account_id: {}", user.id);
-    println!("username: {}", user.username);
-    println!("join_date: {}", user.join_date);
-    println!("country_code: {}", user.country.code);
-    println!("country_name: {}", user.country.name);
-    println!("cover_url: {}", user.cover_url);
+    println!("{:?}", kudosu);
     Ok(())
 }
+
+/*
+ReqwestUsers get_user_kudosu
+[]
+*/

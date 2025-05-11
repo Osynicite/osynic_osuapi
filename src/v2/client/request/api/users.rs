@@ -165,6 +165,10 @@ impl IUsers for ReqwestUsers {
 
         let scores: Vec<Score> = response.json().await?;
 
+        // let text = response.text().await?;
+        // println!("Response text: {}", text);
+        // let scores: Vec<Score> = serde_json::from_str(&text)?;
+
         Ok(scores)
     }
 
@@ -430,6 +434,10 @@ impl IUsers for ReqwestUsers {
         let response = check_res(res)?;
 
         let users_response: Users = response.json().await?;
+
+        // let text = response.text().await?;
+        // println!("Response text: {}", text);
+        // let users_response: Users = serde_json::from_str(&text)?;
 
         Ok(users_response)
     }

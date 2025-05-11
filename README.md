@@ -67,7 +67,7 @@
 | Notifications  | 1         | 通知API     | `notifications` |
 | Rankings       | 1         | 排行榜API   | `rankings`      |
 | Scores         | 1         | 成绩API     | `scores`        |
-| Users          | ✅1        | 用户API     | `users`         |
+| Users          | ✅7        | 用户API     | `users`         |
 | Wiki           | ✅1        | Wiki API    | `wiki`          |
 
 ### Authentication
@@ -174,10 +174,15 @@
 
 ### Users
 
-| API           | 支持 | 备注           | 示例名 |
-| ------------- | ---- | -------------- | ------ |
-| /get_own_data | ✅    | 获取自己的数据 | `me`   |
-| /get_user     | ✅    | 获取用户数据   | `user` |
+| API                                                | 支持 | 备注                    | 示例名 |
+| -------------------------------------------------- | ---- | ----------------------- | ------ |
+| /get_own_data                                      | ✅    | 获取自己的用户信息(CCG) | `me`   |
+| /get_user_kudosu                                   | ✅    | 获取用户Kudosu          | `ukg`  |
+| /get_user_scores                                   | ✅    | 获取用户分数            | `ussg` |
+| /get_user_beatmaps, /get_user_beatmaps_most_played | ✅    | 获取用户谱面信息        | `ubsg` |
+| /get_user_recent_activity                          | ✅    | 获取用户最近活动        | `urag` |
+| /get_user, /get_user_by_username                   | ✅    | 获取用户信息            | `ug`   |
+| /get_users                                         | ✅    | 获取多个用户信息        | `usg`  |
 
 ### Wiki
 

@@ -18,7 +18,7 @@ pub struct User {
     pub pm_friends_only: bool,
     pub profile_colour: Option<String>,
     pub username: String,
-    pub country: Country,
-    pub cover: Cover,
+    pub country: Option<Country>,
+    pub cover: Option<Cover>,
     pub team: Option<Team>,
 }

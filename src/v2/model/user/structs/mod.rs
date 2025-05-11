@@ -12,6 +12,7 @@ pub mod rank_history;
 pub mod replays_watched_count;
 pub mod statistics;
 pub mod statistics_rulesets;
+pub mod team;
 pub mod user;
 pub mod user_achievements;
 

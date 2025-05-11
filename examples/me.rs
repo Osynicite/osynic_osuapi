@@ -40,18 +40,18 @@ async fn main() -> Result<()> {
     // println!("statistics_rulesets: {:?}", me.statistics_rulesets);
 
     // acc
-    println!("acc: {:?}", me.statistics.hit_accuracy);
+    println!("acc: {:?}", me.statistics.as_ref().map(|s| s.hit_accuracy));
     // level
-    println!("level: {:?}", me.statistics.level.current);
+    println!("level: {:?}", me.statistics.as_ref().map(|s| s.level.current));
     // progress
-    println!("progress: {:?}", me.statistics.level.progress);
+    println!("progress: {:?}", me.statistics.as_ref().map(|s| s.level.progress));
     // global_rank
-    println!("global_rank: {:?}", me.statistics.global_rank);
+    println!("global_rank: {:?}", me.statistics.as_ref().map(|s| s.global_rank));
     // country_rank
-    println!("country_rank: {:?}", me.statistics.country_rank);
+    println!("country_rank: {:?}", me.statistics.as_ref().map(|s| s.country_rank));
     // pp
-    println!("pp: {:?}", me.statistics.pp);
+    println!("pp: {:?}", me.statistics.as_ref().map(|s| s.pp));
     println!("avatar_url: {}", me.avatar_url);
-    println!("cover_url: {}", me.cover_url);
+    println!("cover_url: {}", me.cover_url.unwrap_or_default());
     Ok(())
 }
