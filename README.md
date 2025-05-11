@@ -50,25 +50,25 @@
 
 其中接口模块对应可以在`src/v2/interface`中找到，相应实现则在`src/v2/client/request/api`或者`src/v2/client/gloo/api`中可以找到
 
-| 大类           | API支持数 | 备注        | 模块名          |
-| -------------- | --------- | ----------- | --------------- |
-| Authentication | ✅4        | OAuth与认证 | `oauth`         |
-| Beatmaps       | ✅7        | 谱面API     | `beatmaps`      |
-| Beatmapsets    | ✅3        | 谱面集API   | `beatmapsets`   |
-| Changelog      | 1         | 变更日志API | `changelog`     |
-| Chat           | 1         | 聊天API     | `chat`          |
-| Comments       | 2         | 评论API     | `comments`      |
-| Events         | ✅1        | 事件API     | `events`        |
-| Forums         | 1         | 论坛API     | `forums`        |
-| Home           | ✅1        | 首页API     | `search`        |
-| Matches        | ✅2        | 比赛API     | `matches`       |
-| Multiplayer    | 1         | 多人API     | `multiplayer`   |
-| News           | 1         | 新闻API     | `news`          |
-| Notifications  | 1         | 通知API     | `notifications` |
-| Rankings       | 1         | 排行榜API   | `rankings`      |
-| Scores         | 1         | 成绩API     | `scores`        |
-| Users          | ✅7        | 用户API     | `users`         |
-| Wiki           | ✅1        | Wiki API    | `wiki`          |
+| 大类           | API总数 | API支持数        | 备注        | 模块名          |
+| -------------- | ------- | ---------------- | ----------- | --------------- |
+| Authentication | 4       | 4 ✅              | OAuth与认证 | `oauth`         |
+| Beatmaps       | 7       | 7 ✅              | 谱面API     | `beatmaps`      |
+| Beatmapsets    | 3       | 2 ⚠️              | 谱面集API   | `beatmapsets`   |
+| Changelog      | 3       | 0 🈳              | 变更日志API | `changelog`     |
+| Chat           | 11      | 0 🈳              | 聊天API     | `chat`          |
+| Comments       | 7       | 0 🈳              | 评论API     | `comments`      |
+| Events         | 1       | 1 ✅              | 事件API     | `events`        |
+| Forums         | 8       | 0 🈳              | 论坛API     | `forums`        |
+| Home           | 1       | 1 ✅              | 首页API     | `search`        |
+| Matches        | 1       | 2 ✅              | 比赛API     | `matches`       |
+| Multiplayer    | 4       | 0 🈳              | 多人API     | `multiplayer`   |
+| News           | 2       | 0 🈳              | 新闻API     | `news`          |
+| Notifications  | 2       | 0 ❌403 Forbidden | 通知API     | `notifications` |
+| Rankings       | 3       | 0 🈳              | 排行榜API   | `rankings`      |
+| Scores         | 1       | 1 ✅              | 成绩API     | `scores`        |
+| Users          | 7       | 7 ✅              | 用户API     | `users`         |
+| Wiki           | 1       | 1 ✅              | Wiki API    | `wiki`          |
 
 ### Authentication
 
@@ -156,9 +156,10 @@
 
 ### Notifications
 
-| API                | 支持 | 备注     | 示例名          |
-| ------------------ | ---- | -------- | --------------- |
-| /get_notifications | ❌    | 获取通知 | `notifications` |
+| API                         | 支持           | 备注     | 示例名 |
+| --------------------------- | -------------- | -------- | ------ |
+| /get_notifications          | ❌403 Forbidden | 获取通知 | `ng`   |
+| /mark_notifications_as_read | ❌403 Forbidden | 标为已读 | `nm`   |
 
 ### Rankings
 

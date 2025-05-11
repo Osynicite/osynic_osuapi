@@ -1,6 +1,7 @@
 pub mod beatmap;
 pub mod beatmapset;
 pub mod event;
+pub mod notification;
 pub mod matches;
 pub mod mode;
 pub mod oauth;

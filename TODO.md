@@ -14,5 +14,6 @@
       8. [ ] Multiplayer 4个
       9. [ ] News 2个
       10. [ ] Notifications 2个
-      11. [x] Scores
-      12. [x] Users 7个
+      11. [ ] Ranking 3个
+      12. [x] Scores
+      13. [x] Users
