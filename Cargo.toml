@@ -28,7 +28,7 @@ bitflags =  { version = "2.9.0", optional = true }
 dotenvy = "0.15.7"
 
 [features]
-default = ["v1","v2","not-wasm","wasm"]
+default = ["v1","v2","not-wasm"]
 v1 = ["bitflags"]
 v2 = []
 wasm = ["gloo-net","web-sys","serde-wasm-bindgen","serde_urlencoded","wasm-bindgen-futures","wasm-bindgen"]

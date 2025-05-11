@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::events::IEvents;
 use crate::v2::model::event::dtos::response::GetEventsResponse;
 use crate::v2::model::oauth::structs::o_token::OToken;
@@ -18,14 +19,14 @@ impl IEvents for ReqwestEvents {
         sort: Option<String>,
         cursor_string: Option<String>,
     ) -> Result<GetEventsResponse> {
-        println!("ReqwestEvents get_beatmapset");
+        println!("ReqwestEvents get_events");
 
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get("https://osu.ppy.sh/api/v2/events")
             .header("Accept", "application/json")
@@ -38,7 +39,13 @@ impl IEvents for ReqwestEvents {
             .send()
             .await?;
 
+        let response = check_res(res)?;
+        
         let events: GetEventsResponse = response.json().await?;
+
+        // let text = response.text().await?;
+        // println!("Response text: {}", text);
+        // let events: GetEventsResponse = serde_json::from_str(&text)?;
 
         Ok(events)
     }

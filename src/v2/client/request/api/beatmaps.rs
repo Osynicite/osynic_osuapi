@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::beatmaps::IBeatmaps;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
@@ -27,14 +28,14 @@ impl IBeatmaps for ReqwestBeatmaps {
         mode: Option<Mode>,
         mods: Option<String>,
     ) -> Result<BeatmapUserScore> {
-        println!("ReqwestBeatmaps get_User_Score");
+        println!("ReqwestBeatmaps get_user_score");
 
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/beatmaps/{}/scores/users/{}",
@@ -51,6 +52,8 @@ impl IBeatmaps for ReqwestBeatmaps {
             .send()
             .await?;
 
+        let response = check_res(res)?;
+
         let user_score: BeatmapUserScore = response.json().await?;
 
         Ok(user_score)
@@ -64,14 +67,14 @@ impl IBeatmaps for ReqwestBeatmaps {
         mode: Option<Mode>,
         ruleset: Option<Mode>,
     ) -> Result<Scores> {
-        println!("ReqwestBeatmaps get_User_Scores");
+        println!("ReqwestBeatmaps get_user_scores");
 
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/beatmaps/{}/scores/users/{}/all",
@@ -87,6 +90,8 @@ impl IBeatmaps for ReqwestBeatmaps {
             ])
             .send()
             .await?;
+
+        let response = check_res(res)?;
 
         let scores: Scores = response.json().await?;
 
@@ -108,7 +113,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/beatmaps/{}/scores",
@@ -126,6 +131,8 @@ impl IBeatmaps for ReqwestBeatmaps {
             .send()
             .await?;
 
+        let response = check_res(res)?;
+
         let scores: BeatmapScores = response.json().await?;
 
         Ok(scores)
@@ -138,14 +145,14 @@ impl IBeatmaps for ReqwestBeatmaps {
         mods: Option<String>,
         ranking_type: Option<String>,
     ) -> Result<NonLegacyScores> {
-        println!("ReqwestBeatmaps get_Solo_Scores");
+        println!("ReqwestBeatmaps get_solo_scores");
 
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/beatmaps/{}/solo-scores",
@@ -162,20 +169,21 @@ impl IBeatmaps for ReqwestBeatmaps {
             .send()
             .await?;
 
+        let response = check_res(res)?;
         let scores: NonLegacyScores = response.json().await?;
 
         Ok(scores)
     }
 
     async fn get_beatmap(&self, beatmap_id: u32) -> Result<Beatmap> {
-        println!("ReqwestBeatmaps get_Beatmap");
+        println!("ReqwestBeatmaps get_beatmap");
 
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!("https://osu.ppy.sh/api/v2/beatmaps/{}", beatmap_id))
             .header("Accept", "application/json")
@@ -184,7 +192,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             .send()
             .await?;
 
-        // println!("{:?}", response);
+        let response = check_res(res)?;
 
         let beatmap: Beatmap = response.json().await?;
 
@@ -205,7 +213,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .post(format!(
                 "https://osu.ppy.sh/api/v2/beatmaps/{}/attributes",
@@ -222,13 +230,15 @@ impl IBeatmaps for ReqwestBeatmaps {
             .send()
             .await?;
 
+        let response = check_res(res)?;
+
         let attributes: Attributes = response.json().await?;
 
         Ok(attributes)
     }
 
     async fn get_beatmaps(&self, beatmap_ids: Vec<u32>) -> Result<Beatmaps> {
-        println!("ReqwestBeatmaps get_Beatmaps");
+        println!("ReqwestBeatmaps get_beatmaps");
 
         let access_token = {
             let token = self.o_token.read().await;
@@ -246,7 +256,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             .collect::<Vec<(String, String)>>();
         // println!("{:?}", params);
 
-        let response = self
+        let res = self
             .client
             .get("https://osu.ppy.sh/api/v2/beatmaps")
             .header("Accept", "application/json")
@@ -256,6 +266,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             .send()
             .await?;
 
+        let response = check_res(res)?;
         let beatmaps: Beatmaps = response.json().await?;
 
         Ok(beatmaps)

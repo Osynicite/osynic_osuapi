@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::beatmapsets::IBeatmapsets;
 use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
 use crate::v2::model::oauth::structs::o_token::OToken;
@@ -41,7 +42,7 @@ impl IBeatmapsets for ReqwestBeatmapsets {
         // 1. [x] 搜索参数选项封装
         // 2. [ ] 写好谱面结构体的解析，就能用了
 
-        let response = self
+        let res = self
             .client
             .get("https://osu.ppy.sh/api/v2/beatmapsets/search")
             .header("Accept", "application/json")
@@ -51,7 +52,9 @@ impl IBeatmapsets for ReqwestBeatmapsets {
             .send()
             .await?;
 
-        println!("{:?}", response);
+        // println!("{:?}", response);
+
+        let response = check_res(res)?;
 
         // 解析成结构体
         let beatmapsets_search_response: BeatmapsetsSearchResponse = response.json().await?;
@@ -67,7 +70,7 @@ impl IBeatmapsets for ReqwestBeatmapsets {
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/beatmapsets/{}",
@@ -81,6 +84,7 @@ impl IBeatmapsets for ReqwestBeatmapsets {
 
         // println!("{:?}", response);
         // 解析成结构体
+        let response = check_res(res)?;
         let beatmapset: Beatmapset = response.json().await?;
 
         Ok(beatmapset)
@@ -94,7 +98,7 @@ impl IBeatmapsets for ReqwestBeatmapsets {
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/beatmapsets/{}/download",
@@ -108,6 +112,7 @@ impl IBeatmapsets for ReqwestBeatmapsets {
 
         // println!("{:?}", response);
         // 把文件写入本地
+        let response = check_res(res)?;
         let mut file = tokio::fs::File::create(format!("{}.osz", beatmapset_id)).await?;
         let bytes = response.bytes().await?;
         file.write_all(&bytes).await?;
