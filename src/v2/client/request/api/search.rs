@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::request::check::check_res;
 use crate::v2::interface::search::ISearch;
 use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::search::dtos::response::SearchResponse;
@@ -20,14 +21,14 @@ impl ISearch for ReqwestSearch {
         query: Option<String>,
         page: Option<u32>,
     ) -> Result<SearchResponse> {
-        println!("ReqwestSearch get_beatmapset");
+        println!("ReqwestSearch search");
 
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
 
-        let response = self
+        let res = self
             .client
             .get("https://osu.ppy.sh/api/v2/search")
             .header("Accept", "application/json")
@@ -41,7 +42,12 @@ impl ISearch for ReqwestSearch {
             .send()
             .await?;
 
+        let response = check_res(res)?;
         let search: SearchResponse = response.json().await?;
+
+        // let text = response.text().await?;
+        // println!("Response text: {}", text);
+        // let search: SearchResponse = serde_json::from_str(&text)?;
 
         Ok(search)
     }

@@ -5,13 +5,12 @@
    2. [ ] V2的WASM支持，以及LeptosOsuapiPlayground的页面修缮，及其对应的后端
    3. [ ] V2的ReqwestAPI，接口、结构与客户端
       1. [ ] Changelog
-      2. [ ] Chat
-      3. [ ] Comments
-      4. [ ] Events
-      5. [ ] Forums
-      6. [ ] Home
+      2. [ ] Chat 较多
+      3. [ ] Comments 较多
+      4. [x] Events
+      5. [ ] Forums 较多
+      6. [x] Home
       7. [ ] Matches
       8. [ ] Multiplayer
       9. [ ] News
       10. [ ] Notifications
-
