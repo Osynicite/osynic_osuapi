@@ -61,7 +61,7 @@
 | Events         | ✅1        | 事件API     | `events`        |
 | Forums         | 1         | 论坛API     | `forums`        |
 | Home           | ✅1        | 首页API     | `search`        |
-| Matches        | 1         | 比赛API     | `matches`       |
+| Matches        | ✅2        | 比赛API     | `matches`       |
 | Multiplayer    | 1         | 多人API     | `multiplayer`   |
 | News           | 1         | 新闻API     | `news`          |
 | Notifications  | 1         | 通知API     | `notifications` |
@@ -137,9 +137,10 @@
 
 ### Matches
 
-| API        | 支持 | 备注     | 示例名  |
-| ---------- | ---- | -------- | ------- |
-| /get_match | ❌    | 获取比赛 | `match` |
+| API                  | 支持 | 备注         | 示例名 |
+| -------------------- | ---- | ------------ | ------ |
+| /get_matches_listing | ✅    | 获取比赛列表 | `mlg`  |
+| /get_match           | ✅    | 获取比赛     | `mg`   |
 
 ### Multiplayer
 

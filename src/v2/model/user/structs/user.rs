@@ -28,7 +28,7 @@ pub struct User {
     pub is_online: bool,
     pub is_supporter: bool,
 
-    pub last_visit: String,
+    pub last_visit: Option<String>,
     pub pm_friends_only: bool,
     pub profile_colour: Option<String>,
     pub username: String,
