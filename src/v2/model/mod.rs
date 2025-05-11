@@ -4,6 +4,7 @@ pub mod event;
 pub mod notification;
 pub mod matches;
 pub mod news;
+pub mod ranking;
 pub mod mode;
 pub mod oauth;
 pub mod score;

@@ -67,7 +67,7 @@
 | Home           | 1       | 1 ✅              | 首页API     | `search`        |
 | Matches        | 1       | 2 ✅              | 比赛API     | `matches`       |
 | Multiplayer    | 4       | 0 🈳              | 多人API     | `multiplayer`   |
-| News           | 2       | 0 🈳              | 新闻API     | `news`          |
+| News           | 2       | 2 ✅              | 新闻API     | `news`          |
 | Notifications  | 2       | 0 ❌403 Forbidden | 通知API     | `notifications` |
 | Rankings       | 3       | 0 🈳              | 排行榜API   | `rankings`      |
 | Scores         | 1       | 1 ✅              | 成绩API     | `scores`        |
