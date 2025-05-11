@@ -1,3 +1,4 @@
+#[cfg(feature = "v2")]
 use crate::v2::model::user::structs::user::User;
 use serde::{Deserialize, Serialize};
 
@@ -35,6 +36,7 @@ pub struct OsuAccountFacadeA {
     pub is_supporter: bool,
 }
 
+#[cfg(feature = "v2")]
 pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
     let country_flag = country_code_to_unicode_flag(&user.country.code).unwrap_or_default();
     let country_svg_url = format!(
