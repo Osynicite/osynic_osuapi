@@ -27,6 +27,7 @@ pub struct Spotlight {
     pub id: u32,
     pub mode_specific: bool,
     pub name: String,
+    pub participant_count: Option<u32>,
     pub start_date: String,
     #[serde(rename = "type")]
     pub spotlight_type: String,

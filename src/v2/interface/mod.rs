@@ -14,7 +14,7 @@ pub mod matches;
 pub mod multiplayer;
 pub mod news;
 pub mod notifications;
-pub mod rankings;
+pub mod ranking;
 pub mod scores;
 pub mod search;
 pub mod session;

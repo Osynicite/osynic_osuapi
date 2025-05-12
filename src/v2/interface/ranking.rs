@@ -1,15 +1,14 @@
 // Placeholder
 use crate::error::Result;
-use crate::v2::model::changelog::structs::build::ChanglogBuild;
-use crate::v2::model::changelog::structs::changelog::ChangelogListing;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::ranking::enums::ranking_type::RankingType;
-
+use crate::v2::model::ranking::structs::rankings::{Rankings, KudosuRankings};
+use crate::v2::model::ranking::structs::spotlights::Spotlights;
 pub trait IRanking {
     fn get_kudosu_ranking(
         &self,
         page: Option<u32>,
-    ) -> impl std::future::Future<Output = Result<ChangelogListing>> + Send;
+    ) -> impl std::future::Future<Output = Result<KudosuRankings>> + Send;
 
     fn get_ranking(
         &self,
@@ -20,12 +19,9 @@ pub trait IRanking {
         filter: Option<String>,
         spotlight: Option<String>,
         variant: Option<String>,
-    ) -> impl std::future::Future<Output = Result<ChanglogBuild>> + Send;
+    ) -> impl std::future::Future<Output = Result<Rankings>> + Send;
     
-    fn lookup_spotlights(
+    fn get_spotlights(
         &self,
-        changelog: String,
-        key: Option<String>,
-        message_formats: Option<Vec<String>>,
-    ) -> impl std::future::Future<Output = Result<ChanglogBuild>> + Send;
+    ) -> impl std::future::Future<Output = Result<Spotlights>> + Send;
 }

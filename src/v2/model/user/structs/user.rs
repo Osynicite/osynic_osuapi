@@ -52,8 +52,8 @@ pub struct User {
     pub title_url: Option<String>,
     pub twitter: Option<String>,
     pub website: Option<String>,
-    pub country: Country,
-    pub cover: Cover,
+    pub country: Option<Country>,
+    pub cover: Option<Cover>,
     pub is_restricted: Option<bool>,
     pub kudosu: Option<Kudosu>,
     pub account_history: Option<Vec<String>>, // Assuming this is an empty array

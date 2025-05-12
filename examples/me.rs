@@ -25,7 +25,10 @@ async fn main() -> Result<()> {
     // println!("join_date: {}", me.join_date);
     // println!("country_name: {}", me.country.name);
     // println!("country_code: {}", me.country.code);
-    let country_flag = country_code_to_unicode_flag(&me.country.code).unwrap_or_default();
+    let country_flag = country_code_to_unicode_flag(&me.country.as_ref().map_or_else(
+        || "XX".to_string(),
+        |country| country.code.clone(),
+    )).unwrap_or_default();
     // println!("country_flag: {}", country_flag);
     let country_svg_path = format!(
         "https://osu.ppy.sh/assets/images/flags/{}.svg",

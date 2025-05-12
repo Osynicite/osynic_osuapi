@@ -115,7 +115,7 @@ async fn main() -> Result<()> {
 | Multiplayer    | 4       | 2 ⚠️403 Forbidden | 多人API     | `multiplayer`   |
 | News           | 2       | 2 ✅              | 新闻API     | `news`          |
 | Notifications  | 2       | 0 ❌403 Forbidden | 通知API     | `notifications` |
-| Rankings       | 3       | 0 🈳              | 排行榜API   | `rankings`      |
+| Rankings       | 3       | 3 ✅              | 排行榜API   | `rankings`      |
 | Scores         | 1       | 1 ✅              | 成绩API     | `scores`        |
 | Users          | 7       | 7 ✅              | 用户API     | `users`         |
 | Wiki           | 1       | 1 ✅              | Wiki API    | `wiki`          |
@@ -244,9 +244,9 @@ async fn main() -> Result<()> {
 
 | API                 | 支持 | 备注             | 示例名 |
 | ------------------- | ---- | ---------------- | ------ |
-| /get_ranking        | 🈳    | 获取排行榜       | `rg`   |
-| /get_kudosu_ranking | 🈳    | 获取Kudosu排行榜 | `rkg`  |
-| /get_spotlights     | 🈳    | 获取聚光灯       | `rsg`  |
+| /get_ranking        | ✅    | 获取排行榜       | `rg`   |
+| /get_kudosu_ranking | ✅    | 获取Kudosu排行榜 | `rkg`  |
+| /get_spotlights     | ✅    | 获取聚光灯       | `rsg`  |
 
 ### Scores
 

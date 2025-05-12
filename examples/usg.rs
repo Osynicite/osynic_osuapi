@@ -25,8 +25,8 @@ async fn main() -> Result<()> {
         println!("osu_account_id: {}", user.id);
         println!("username: {}", user.username);
         println!("join_date: {}", user.join_date.unwrap_or_default());
-        println!("country_code: {}", user.country.code);
-        println!("country_name: {}", user.country.name);
+		println!("country_code: {}", user.country.as_ref().map_or("None".to_string(), |c| c.code.clone()));
+	    println!("country_name: {}", user.country.as_ref().map_or("None".to_string(), |c| c.name.clone()));
         println!("cover_url: {}", user.cover_url.unwrap_or_default());
     }
     Ok(())
