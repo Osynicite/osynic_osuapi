@@ -32,7 +32,7 @@
 
 # 📜 特性
 
-- **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了Chat以及文档未归类的接口）
+- **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了文档未归类的接口）
 - **WASM 兼容性**: 为 V1 接口 提供了 WebAssembly 支持，支持直接从网页应用访问 OSU API（但是会遇到CORS）
 - **项目结构良好**: 基于`client`、`interface`、`model`三重模块划分；`client`部分聚合`interface`接口并支持多种HTTP客户端，便于拓展
 - **非常完整的示例支持**: 在`examples`目录下，我们提供了非常完整的示例代码与返回数据，详见下方的[API检查表](#-api检查表)部分
@@ -136,7 +136,7 @@ async fn main() -> Result<()> {
 
 本条目基于[V2官方文档](https://osu.ppy.sh/docs/index.html)的API大类进行划分，分类如下
 
-其中接口模块对应可以在`src/v2/interface`中找到，相应实现则在`src/v2/client/request/api`中可以找到
+其中接口模块对应可以在`src/v2/interface`中找到，相应实现则在`src/v2/client/request/api`中可以找到，示例代码和相应数据在`src/v2/examples`中可以找到
 
 | 大类           | API总数 | API支持数        | 备注        | 模块名          |
 | -------------- | ------- | ---------------- | ----------- | --------------- |
@@ -144,7 +144,7 @@ async fn main() -> Result<()> {
 | Beatmaps       | 7       | 7 ✅              | 谱面API     | `beatmaps`      |
 | Beatmapsets    | 3       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
 | Changelog      | 3       | 3 ✅              | 变更日志API | `changelog`     |
-| Chat           | 11      | 0 🈳              | 聊天API     | `chat`          |
+| Chat           | 11      | 0 ❌403 Forbidden | 聊天API     | `chat`          |
 | Comments       | 7       | 2 ⚠️403 Forbidden | 评论API     | `comments`      |
 | Events         | 1       | 1 ✅              | 事件API     | `events`        |
 | Forum          | 8       | 4 ⚠️403 Forbidden | 论坛API     | `forum`         |
@@ -197,19 +197,19 @@ async fn main() -> Result<()> {
 
 ### Chat
 
-| API                      | 支持 | 备注         | 示例名 |
-| ------------------------ | ---- | ------------ | ------ |
-| /chat_keepalive          | 🈳    | 保持连接     | `chk`  |
-| /create_new_pm           | 🈳    | 创建新私信   | `chpc` |
-| /get_updates             | 🈳    | 获取更新     | `chug` |
-| /get_channel_messages    | 🈳    | 获取频道消息 | `chmg` |
-| /send_message_to_channel | 🈳    | 发送消息     | `chms` |
-| /join_channel            | 🈳    | 加入频道     | `chj`  |
-| /leave_channel           | 🈳    | 离开频道     | `chl`  |
-| /mark_channel_as_read    | 🈳    | 标记频道已读 | `chmr` |
-| /get_channel_list        | 🈳    | 获取频道列表 | `chlg` |
-| /create_channel          | 🈳    | 创建频道     | `chc`  |
-| /get_channel             | 🈳    | 获取频道     | `chg`  |
+| API                      | 支持           | 备注         | 示例名 |
+| ------------------------ | -------------- | ------------ | ------ |
+| /chat_keepalive          | ❌403 Forbidden | 保持连接     | `chk`  |
+| /create_new_pm           | ❌403 Forbidden | 创建新私信   | `chpc` |
+| /get_updates             | ❌403 Forbidden | 获取更新     | `chug` |
+| /get_channel_messages    | ❌403 Forbidden | 获取频道消息 | `chmg` |
+| /send_message_to_channel | ❌403 Forbidden | 发送消息     | `chms` |
+| /join_channel            | ❌403 Forbidden | 加入频道     | `chj`  |
+| /leave_channel           | ❌403 Forbidden | 离开频道     | `chl`  |
+| /mark_channel_as_read    | ❌403 Forbidden | 标记频道已读 | `chmr` |
+| /get_channel_list        | ❌403 Forbidden | 获取频道列表 | `chlg` |
+| /create_channel          | ❌403 Forbidden | 创建频道     | `chc`  |
+| /get_channel             | ❌403 Forbidden | 获取频道     | `chg`  |
 
 ### Comments
 
@@ -322,7 +322,7 @@ async fn main() -> Result<()> {
 
 这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装；
 
-目前，v1和v2的大部分(除了Chat以及文档未归类的接口)已经实现，v2的WASM支持暂时还没有做。
+目前，v1和v2的大部分(除了文档未归类的接口)已经实现，v2的WASM支持暂时还没有做。
 
 这个库仍然在开发中，可能会有一些bug或者不完善的地方；
 

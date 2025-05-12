@@ -1,1 +1,1 @@
-pub mod ranking_type;
+pub mod channel_type;
