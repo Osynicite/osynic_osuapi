@@ -303,6 +303,14 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | -------------- | ------- | -------------- | ------------ |
 | /get_wiki_page | ✅       | Get Wiki page  | `wiki`       |
 
+# ❤️ Acknowledgements
+
+Originally, this project was intended to directly use the [rosu-v2](https://crates.io/crates/rosu-v2) library, but at that time, I noticed that `rosu-v2` hadn't been updated for several months, and I wasn't very comfortable with its project organization and usage patterns (possibly because `rosu-v2` has a four-year history, with many early Rust code patterns in the library that aren't very convenient to modify directly), so I decided to start from scratch and write my own;
+
+During the development of `osynic_osuapi`, I still referenced the interface design of `rosu-v2` (though not adopted) and some type choices (such as the selection between u64 and u32). Thanks to the authors of [rosu-v2](https://crates.io/crates/rosu-v2)!
+
+The `rosu-v2` project is based on the [MIT License](./licenses/LICENSE-rosu-v2), with the project license located in `licenses/LICENSE-rosu-v2`
+
 # 🤝 Contribution Guidelines
 
 This library is basically a module developed for the Osynic application, but it is also a complete Rust encapsulation of the osu!api.

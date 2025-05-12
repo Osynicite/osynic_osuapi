@@ -303,6 +303,14 @@ async fn main() -> Result<()> {
 | -------------- | ---- | ------------ | ------ |
 | /get_wiki_page | ✅    | 获取Wiki页面 | `wiki` |
 
+# ❤️ 鸣谢
+
+最开始项目本来是打算直接用[rosu-v2](https://crates.io/crates/rosu-v2)这个库的，但是由于当时看到`rosu-v2`已经就大几个月没更新了，并且项目组织和使用方式也不太习惯（可能是`rosu-v2`至今已经有四年历史的缘故，库里面有很多早期Rust代码，也不是很方便直接修改），所以就另起炉灶决定自己写一个了；
+
+在`osynic_osuapi`的开发过程中，还是参考了`rosu-v2`的接口设计（但并未沿用）和部分类型（比如u64和u32的选取），感谢[rosu-v2](https://crates.io/crates/rosu-v2)的作者们！
+
+`rosu-v2`项目基于[MIT License](./licenses/LICENSE-rosu-v2)，项目证书放置在`licenses/LICENSE-rosu-v2`中
+
 # 🤝 贡献指南
 
 这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装；

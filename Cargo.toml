@@ -12,24 +12,43 @@ documentation = "https://docs.rs/osynic_osuapi"
 repository = "https://github.com/osynicite/osynic_osuapi"
 
 [dependencies]
-tokio = { version = "1.45.0", features = ["full"], optional = true }
-reqwest = { version = "0.12.15", default-features = false, features = ["rustls-tls", "blocking","json","cookies"] ,optional = true}
-gloo-net = { version = "0.6.0", optional = true }
 serde = { version = "1.0.219", features = ["derive"] }
-serde_json = { version = "1.0.140"}
-serde_urlencoded = { version = "0.7.1", optional = true }
-serde-wasm-bindgen = { version ="0.6.5", optional = true }
-wasm-bindgen-futures = { version = "0.4.45", optional = true }
-wasm-bindgen = { version = "0.2.84", optional = true }
-web-sys = { version = "0.3.76", features = ["RequestInit", "Headers","console", "Window", "Performance"] ,optional=true}
+serde_json = { version = "1.0.140" }
 chrono = { version = "0.4.41", features = ["serde"] }
-bitflags =  { version = "2.9.0", optional = true }
+
+tokio = { version = "1.45.0", features = ["full"], optional = true }
+reqwest = { version = "0.12.15", default-features = false, features = [
+    "rustls-tls",
+    "blocking",
+    "json",
+    "cookies",
+], optional = true }
+
+gloo-net = { version = "0.6.0", optional = true }
+serde_urlencoded = { version = "0.7.1", optional = true }
+serde-wasm-bindgen = { version = "0.6.5", optional = true }
+wasm-bindgen = { version = "0.2.100", optional = true }
+web-sys = { version = "0.3.77", features = [
+    "RequestInit",
+    "Headers",
+    "console",
+    "Window",
+    "Performance",
+], optional = true }
+
+bitflags = { version = "2.9.0", optional = true }
 [dev-dependencies]
 dotenvy = "0.15.7"
 
 [features]
-default = ["v1","v2","not-wasm"]
+default = ["v1", "v2", "not-wasm"]
 v1 = ["bitflags"]
 v2 = []
-wasm = ["gloo-net","web-sys","serde-wasm-bindgen","serde_urlencoded","wasm-bindgen-futures","wasm-bindgen"]
-not-wasm = ["tokio","reqwest"]
+wasm = [
+    "gloo-net",
+    "web-sys",
+    "serde-wasm-bindgen",
+    "serde_urlencoded",
+    "wasm-bindgen",
+]
+not-wasm = ["tokio", "reqwest"]
