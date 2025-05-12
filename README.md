@@ -32,7 +32,7 @@
 
 # 📜 特性
 
-- **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了Chat、Comments、Forums以及文档未归类的接口）
+- **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了Chat以及文档未归类的接口）
 - **WASM 兼容性**: 为 V1 接口 提供了 WebAssembly 支持，支持直接从网页应用访问 OSU API（但是会遇到CORS）
 - **项目结构良好**: 基于`client`、`interface`、`model`三重模块划分；`client`部分聚合`interface`接口并支持多种HTTP客户端，便于拓展
 - **非常完整的示例支持**: 在`examples`目录下，我们提供了非常完整的示例代码与返回数据，详见下方的[API检查表](#-api检查表)部分
@@ -147,7 +147,7 @@ async fn main() -> Result<()> {
 | Chat           | 11      | 0 🈳              | 聊天API     | `chat`          |
 | Comments       | 7       | 2 ⚠️403 Forbidden | 评论API     | `comments`      |
 | Events         | 1       | 1 ✅              | 事件API     | `events`        |
-| Forum          | 8       | 0 🈳              | 论坛API     | `forum`         |
+| Forum          | 8       | 4 ⚠️403 Forbidden | 论坛API     | `forum`         |
 | Home           | 1       | 1 ✅              | 首页API     | `search`        |
 | Matches        | 1       | 2 ✅              | 比赛API     | `matches`       |
 | Multiplayer    | 4       | 2 ⚠️403 Forbidden | 多人API     | `multiplayer`   |
@@ -231,16 +231,16 @@ async fn main() -> Result<()> {
 
 ### Forum
 
-| API                  | 支持 | 备注             | 示例名 |
-| -------------------- | ---- | ---------------- | ------ |
-| /reply_topic         | 🈳    | 回帖             | `ftr`  |
-| /get_topics_listing  | 🈳    | 获取主题列表     | `ftlg` |
-| /create_topic        | 🈳    | 创建主题         | `ftc`  |
-| /get_topic_and_posts | 🈳    | 获取主题及其帖子 | `ftpg` |
-| /edit_topic          | 🈳    | 编辑主题         | `fte`  |
-| /edit_post           | 🈳    | 编辑帖子         | `fpe`  |
-| /get_forum_listing   | 🈳    | 获取论坛列表     | `flg`  |
-| /get_forum_and_topic | 🈳    | 获取论坛及其主题 | `ftg`  |
+| API                  | 支持              | 备注             | 示例名 |
+| -------------------- | ----------------- | ---------------- | ------ |
+| /reply_topic         | ❌401 Unauthorized | 回帖             | `ftr`  |
+| /get_topics_listing  | ✅                 | 获取主题列表     | `ftlg` |
+| /create_topic        | ❌401 Unauthorized | 创建主题         | `ftc`  |
+| /get_topic_and_posts | ✅                 | 获取主题及其帖子 | `ftpg` |
+| /edit_topic          | ❌403 Forbidden    | 编辑主题         | `fte`  |
+| /edit_post           | ❌403 Forbidden    | 编辑帖子         | `fpe`  |
+| /get_forum_listing   | ✅                 | 获取论坛列表     | `flg`  |
+| /get_forum_and_topic | ✅                 | 获取论坛及其主题 | `ftg`  |
 
 ### Home
 
@@ -322,7 +322,7 @@ async fn main() -> Result<()> {
 
 这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装；
 
-目前，v1和v2的大部分(除了Chat、Comments、Forums以及文档未归类的接口)已经实现，v2的WASM支持暂时还没有做。
+目前，v1和v2的大部分(除了Chat以及文档未归类的接口)已经实现，v2的WASM支持暂时还没有做。
 
 这个库仍然在开发中，可能会有一些bug或者不完善的地方；
 
