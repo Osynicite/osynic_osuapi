@@ -28,6 +28,62 @@
 - [V1文档](https://github.com/ppy/osu-api/wiki)
 - [V2文档](https://osu.ppy.sh/docs/index.html)
 
+# 快速开始
+
+首先在`Cargo.toml`中添加依赖
+
+```toml
+[dependencies]
+osynic_osuapi = "0.1.0"
+```
+
+然后在代码中使用即可~，例如下面的代码是一个完成CCG认证并获取peppy的用户信息的示例，你也可以在`examples`中找到对应的示例代码`peppy.rs`
+
+```rust
+// Client Credentials Grant and Get Peppy's User Info
+use osynic_osuapi::error::Result;
+use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
+use osynic_osuapi::v2::interface::oauth::IOauth;
+use osynic_osuapi::v2::interface::users::IUsers;
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    dotenvy::dotenv().ok();
+    let client_id = std::env::var("CLIENT_ID").unwrap();
+    let client_secret = std::env::var("CLIENT_SECRET").unwrap();
+    let client = OsynicOsuApiV2Client::default();
+    let token = client
+        .oauth
+        .get_token_without_code(client_id.parse().unwrap(), &client_secret)
+        .await?;
+    println!("{:?}", token);
+
+    let peppy = client
+        .users
+        .get_user_by_username("peppy", None, None)
+        .await?;
+    println!("{:?}", peppy);
+    println!("osu_account_id: {}", peppy.id);
+    println!("username: {}", peppy.username);
+    println!("join_date: {}", peppy.join_date.unwrap_or_default());
+    println!("country_code: {}", peppy.country.code);
+    println!("country_name: {}", peppy.country.name);
+    println!("cover_url: {}", peppy.cover_url.unwrap_or_default());
+
+    Ok(())
+}
+
+/*
+osu_account_id: 2
+username: peppy
+join_date: 2007-08-28T03:09:12+00:00
+country_code: AU
+country_name: Australia
+cover_url: https://assets.ppy.sh/user-profile-covers/2/baba245ef60834b769694178f8f6d4f6166c5188c740de084656ad2b80f1eea7.jpeg       
+*/
+
+```
+
 # API检查表
 
 可通过`cargo run --exmaple 示例名`来运行API对应示例

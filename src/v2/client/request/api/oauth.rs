@@ -133,6 +133,11 @@ impl IOauth for ReqwestOauth {
             refresh_token: None,
         };
 
+        {
+            let mut token = self.o_token.write().await;
+            *token = o_token.clone();
+        }
+
         Ok(o_token)
     }
 

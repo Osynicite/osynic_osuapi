@@ -45,6 +45,18 @@ impl From<&str> for Error {
     }
 }
 
+impl From<std::num::ParseIntError> for Error {
+    fn from(e: std::num::ParseIntError) -> Self {
+        Error::new(ErrorKind::ParseIntError(e))
+    }
+}
+
+impl From<serde_json::Error> for Error {
+    fn from(e: serde_json::Error) -> Self {
+        Error::new(ErrorKind::SerdeJsonError(e))
+    }
+}
+
 impl From<std::io::Error> for Error {
     fn from(e: std::io::Error) -> Self {
         Error::new(ErrorKind::StdIoError(e))
@@ -81,12 +93,6 @@ impl From<gloo_net::http::Response> for Error {
     }
 }
 
-impl From<serde_json::Error> for Error {
-    fn from(e: serde_json::Error) -> Self {
-        Error::new(ErrorKind::SerdeJsonError(e))
-    }
-}
-
 #[cfg(feature = "wasm")]
 impl From<serde_urlencoded::ser::Error> for Error {
     fn from(e: serde_urlencoded::ser::Error) -> Self {
@@ -97,6 +103,7 @@ impl From<serde_urlencoded::ser::Error> for Error {
 pub enum ErrorKind {
     OsynicOsuApiV2Error(String),
     SerdeJsonError(serde_json::Error),
+    ParseIntError(std::num::ParseIntError),
     StdIoError(std::io::Error),
     #[cfg(feature = "not-wasm")]
     RqwestError(reqwest::Error),
@@ -114,6 +121,7 @@ impl std::fmt::Display for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
             ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {}", e),
+            ErrorKind::ParseIntError(e) => write!(f, "std::num::ParseIntError: {}", e),
             ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {}", e),
             ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {}", e),
             #[cfg(feature = "not-wasm")]
@@ -135,6 +143,7 @@ impl std::fmt::Debug for ErrorKind {
         match self {
             ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {}", e),
             ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {:?}", e),
+            ErrorKind::ParseIntError(e) => write!(f, "std::num::ParseIntError: {:?}", e),
             ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {:?}", e),
             #[cfg(feature = "not-wasm")]
             ErrorKind::RqwestError(e) => write!(f, "reqwest::Error: {:?}", e),
