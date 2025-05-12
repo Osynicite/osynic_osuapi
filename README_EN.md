@@ -79,6 +79,9 @@ use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
 use osynic_osuapi::v2::interface::oauth::IOauth;
 use osynic_osuapi::v2::interface::users::IUsers;
 
+// You can also import all the client and interface modules by prelude
+// use osynic_osuapi::prelude::*;
+
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();

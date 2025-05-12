@@ -21,20 +21,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Comment {
-    pub commentable_id: i64,
+    pub commentable_id: u32,
     pub commentable_type: String,
     pub created_at: String,
     pub deleted_at: Option<String>,
     pub edited_at: Option<String>,
-    pub edited_by_id: Option<i64>,
-    pub id: i64,
+    pub edited_by_id: Option<u32>,
+    pub id: u32,
     pub legacy_name: Option<String>,
     pub message: Option<String>,
     pub message_html: Option<String>,
-    pub parent_id: Option<i64>,
+    pub parent_id: Option<u32>,
     pub pinned: bool,
-    pub replies_count: i64,
+    pub replies_count: u32,
     pub updated_at: String,
-    pub user_id: i64,
-    pub votes_count: i64,
+    pub user_id: u32,
+    pub votes_count: u32,
 }

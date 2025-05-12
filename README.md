@@ -81,6 +81,9 @@ use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
 use osynic_osuapi::v2::interface::oauth::IOauth;
 use osynic_osuapi::v2::interface::users::IUsers;
 
+// You can also import all the client and interface modules by prelude
+// use osynic_osuapi::prelude::*;
+
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
@@ -142,9 +145,9 @@ async fn main() -> Result<()> {
 | Beatmapsets    | 3       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
 | Changelog      | 3       | 3 ✅              | 变更日志API | `changelog`     |
 | Chat           | 11      | 0 🈳              | 聊天API     | `chat`          |
-| Comments       | 7       | 0 🈳              | 评论API     | `comments`      |
+| Comments       | 7       | 2 ⚠️403 Forbidden | 评论API     | `comments`      |
 | Events         | 1       | 1 ✅              | 事件API     | `events`        |
-| Forum         | 8       | 0 🈳              | 论坛API     | `forum`        |
+| Forum          | 8       | 0 🈳              | 论坛API     | `forum`         |
 | Home           | 1       | 1 ✅              | 首页API     | `search`        |
 | Matches        | 1       | 2 ✅              | 比赛API     | `matches`       |
 | Multiplayer    | 4       | 2 ⚠️403 Forbidden | 多人API     | `multiplayer`   |
@@ -210,15 +213,15 @@ async fn main() -> Result<()> {
 
 ### Comments
 
-| API                  | 支持 | 备注         | 示例名 |
-| -------------------- | ---- | ------------ | ------ |
-| /get_comments        | 🈳    | 获取多条评论 | `csg`  |
-| /post_comment        | 🈳    | 发送评论     | `cp`   |
-| /get_comment         | 🈳    | 获取评论     | `cg`   |
-| /edit_comment        | 🈳    | 编辑评论     | `ce`   |
-| /delete_comment      | 🈳    | 删除评论     | `cd`   |
-| /add_comment_vote    | 🈳    | 投票         | `cva`  |
-| /remove_comment_vote | 🈳    | 撤销投票     | `cvr`  |
+| API                  | 支持           | 备注         | 示例名 |
+| -------------------- | -------------- | ------------ | ------ |
+| /get_comments        | ✅              | 获取多条评论 | `csg`  |
+| /post_comment        | ❌403 Forbidden | 发送评论     | `cp`   |
+| /get_comment         | ✅              | 获取评论     | `cg`   |
+| /edit_comment        | ❌403 Forbidden | 编辑评论     | `ce`   |
+| /delete_comment      | ❌403 Forbidden | 删除评论     | `cd`   |
+| /add_comment_vote    | ❌403 Forbidden | 投票         | `cva`  |
+| /remove_comment_vote | ❌403 Forbidden | 撤销投票     | `cvr`  |
 
 ### Events
 

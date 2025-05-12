@@ -22,17 +22,23 @@ use crate::v2::model::comment::structs::user::User;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CommentBundle {
-    pub commentable_meta: Option<CommentableMeta>,
+    pub commentable_meta: Option<Vec<CommentableMeta>>,
     pub comments: Vec<Comment>,
-    pub cursor: Option<String>,
+    pub cursor: Option<Cursor>,
     pub has_more: bool,
-    pub has_more_id: Option<i64>,
+    pub has_more_id: Option<u32>,
     pub included_comments: Vec<Comment>,
     pub pinned_comments: Option<Vec<Comment>>,
     pub sort: String,
-    pub top_level_count: Option<i64>,
-    pub total: Option<i64>,
+    pub top_level_count: Option<u32>,
+    pub total: Option<u32>,
     pub user_follow: bool,
-    pub user_votes: Vec<i64>,
+    pub user_votes: Vec<u32>,
     pub users: Vec<User>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Cursor {
+    pub created_at: Option<String>,
+    pub id: Option<u32>,
 }

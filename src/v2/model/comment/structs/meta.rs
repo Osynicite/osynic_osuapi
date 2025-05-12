@@ -12,13 +12,13 @@ use serde::{Deserialize, Serialize};
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CommentableMeta {
     pub current_user_attributes: Option<CurrentUserAttributes>,
-    pub id: i64,
-    pub owner_id: Option<i64>,
+    pub id: Option<u32>,
+    pub owner_id: Option<u32>,
     pub owner_title: Option<String>,
     pub title: String,
     #[serde(rename = "type")]
-    pub object_type: String,
-    pub url: String,
+    pub object_type: Option<String>,
+    pub url: Option<String>,
 }
 
 // CurrentUserAttributes
@@ -42,12 +42,12 @@ pub struct CommentableMeta {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CurrentUserAttributes {
     pub can_new_comment_reason: Option<String>,
-    pub can_destroy: bool,
-    pub can_reopen: bool,
-    pub can_moderate_kudosu: bool,
-    pub can_resolve: bool,
-    pub vote_score: i64,
-    pub can_message: bool,
-    pub can_message_error: Option<String>,
-    pub last_read_id: i64,
+    // pub can_destroy: bool,
+    // pub can_reopen: bool,
+    // pub can_moderate_kudosu: bool,
+    // pub can_resolve: bool,
+    // pub vote_score: i64,
+    // pub can_message: bool,
+    // pub can_message_error: Option<String>,
+    // pub last_read_id: i64,
 }
