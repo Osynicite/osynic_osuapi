@@ -1,2 +1,1 @@
-pub mod spotlight;
-pub mod spotlights;
+pub mod forum_post;

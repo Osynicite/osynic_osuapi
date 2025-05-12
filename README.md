@@ -28,6 +28,8 @@
 - [V1文档](https://github.com/ppy/osu-api/wiki)
 - [V2文档](https://osu.ppy.sh/docs/index.html)
 
+# 🧻 V1体验网站（目前仍CORS中）
+
 # 📜 特性
 
 - **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了Chat、Comments、Forums以及文档未归类的接口）
@@ -142,7 +144,7 @@ async fn main() -> Result<()> {
 | Chat           | 11      | 0 🈳              | 聊天API     | `chat`          |
 | Comments       | 7       | 0 🈳              | 评论API     | `comments`      |
 | Events         | 1       | 1 ✅              | 事件API     | `events`        |
-| Forums         | 8       | 0 🈳              | 论坛API     | `forums`        |
+| Forum         | 8       | 0 🈳              | 论坛API     | `forum`        |
 | Home           | 1       | 1 ✅              | 首页API     | `search`        |
 | Matches        | 1       | 2 ✅              | 比赛API     | `matches`       |
 | Multiplayer    | 4       | 2 ⚠️403 Forbidden | 多人API     | `multiplayer`   |
@@ -224,7 +226,7 @@ async fn main() -> Result<()> {
 | ----------- | ---- | -------- | -------- |
 | /get_events | ✅    | 获取事件 | `events` |
 
-### Forums
+### Forum
 
 | API                  | 支持 | 备注             | 示例名 |
 | -------------------- | ---- | ---------------- | ------ |

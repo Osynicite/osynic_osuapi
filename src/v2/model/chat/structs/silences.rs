@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use super::spotlight::Spotlight;
+use super::user_silence::UserSilence;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Spotlights {
-    pub spotlights: Vec<Spotlight>,
+pub struct Silences {
+    pub silences: Vec<UserSilence>,
 }

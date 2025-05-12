@@ -142,7 +142,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | Chat           | 11         | 0 🈳             | Chat API     | `chat`          |
 | Comments       | 7          | 0 🈳             | Comments API | `comments`      |
 | Events         | 1          | 1 ✅             | Events API   | `events`        |
-| Forums         | 8          | 0 🈳             | Forums API   | `forums`        |
+| Forum         | 8          | 0 🈳             | Forum API   | `forum`        |
 | Home           | 1          | 1 ✅             | Home API     | `search`        |
 | Matches        | 1          | 2 ✅             | Matches API  | `matches`       |
 | Multiplayer    | 4          | 2 ⚠️403 Forbidden | Multiplayer API| `multiplayer`   |
@@ -224,7 +224,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | ----------- | ------- | ---------- | ------------ |
 | /get_events | ✅       | Get events | `events`     |
 
-### Forums
+### Forum
 
 | API                  | Support | Note                       | Example Name |
 | -------------------- | ------- | -------------------------- | ------------ |

@@ -1,2 +1,2 @@
-pub mod spotlight;
-pub mod spotlights;
+pub mod user_silence;
+pub mod silences;

@@ -5,6 +5,9 @@ use super::api::events::ReqwestEvents;
 use super::api::matches::ReqwestMatches;
 use super::api::multiplayer::ReqwestMultiplayer;
 use super::api::news::ReqwestNews;
+use super::api::comments::ReqwestComments;
+use super::api::chat::ReqwestChat;
+use super::api::forum::ReqwestForum;
 use super::api::notifications::ReqwestNotifications;
 use super::api::oauth::ReqwestOauth;
 use super::api::ranking::ReqwestRanking;
@@ -27,6 +30,9 @@ pub struct OsynicOsuApiV2Client {
     pub notifications: ReqwestNotifications,
     pub matches: ReqwestMatches,
     pub news: ReqwestNews,
+    pub comments: ReqwestComments,
+    pub chat: ReqwestChat,
+    pub forum: ReqwestForum,
     pub ranking: ReqwestRanking,
     pub multiplayer: ReqwestMultiplayer,
     pub changelog: ReqwestChangelog,
@@ -71,6 +77,18 @@ impl OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             news: ReqwestNews {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            comments: ReqwestComments {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            chat: ReqwestChat {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            forum: ReqwestForum {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },
@@ -143,6 +161,18 @@ impl Default for OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             news: ReqwestNews {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            comments: ReqwestComments {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            chat: ReqwestChat {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            forum: ReqwestForum {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },
