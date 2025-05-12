@@ -33,6 +33,7 @@
 - **Support for both old and new APIs**: Supports all V1 endpoints and most V2 endpoints (except for Chat, Comments, Forums, and undocumented interfaces)
 - **WASM Compatibility**: Provides WebAssembly support for V1 interfaces, allowing direct access to the OSU API from web applications (though you may encounter CORS issues)
 - **Well-structured project**: Based on a three-module division of `client`, `interface`, and `model`; the `client` part aggregates `interface` interfaces and supports various HTTP clients for easy extension
+- **Very complete example support**: The `examples` directory contains very complete example code and return data, see the [API Checklist](#-api-checklist) section below for details
 
 # 🚀 Quick Start
 

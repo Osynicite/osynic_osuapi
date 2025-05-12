@@ -33,6 +33,7 @@
 - **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了Chat、Comments、Forums以及文档未归类的接口）
 - **WASM 兼容性**: 为 V1 接口 提供了 WebAssembly 支持，支持直接从网页应用访问 OSU API（但是会遇到CORS）
 - **项目结构良好**: 基于`client`、`interface`、`model`三重模块划分；`client`部分聚合`interface`接口并支持多种HTTP客户端，便于拓展
+- **非常完整的示例支持**: 在`examples`目录下，我们提供了非常完整的示例代码与返回数据，详见下方的[API检查表](#-api检查表)部分
 
 # 🚀 快速开始
 
