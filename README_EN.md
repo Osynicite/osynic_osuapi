@@ -34,6 +34,7 @@
 - **WASM Compatibility**: Provides WebAssembly support for V1 interfaces, allowing direct access to the OSU API from web applications (though you may encounter CORS issues)
 - **Well-structured project**: Based on a three-module division of `client`, `interface`, and `model`; the `client` part aggregates `interface` interfaces and supports various HTTP clients for easy extension
 - **Very complete example support**: The `examples` directory contains very complete example code and return data, see the [API Checklist](#-api-checklist) section below for details
+- **Learn by example**: The best way to learn how to use this library is to directly view the rich example code in `examples`, or run `cargo run --example example_name` to see the corresponding return data. Once you get used to the style of the examples, you'll quickly be able to use it
 
 # 🚀 Quick Start
 
