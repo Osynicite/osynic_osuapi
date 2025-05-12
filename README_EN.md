@@ -28,9 +28,15 @@
 - [V1 Documentation](https://github.com/ppy/osu-api/wiki)
 - [V2 Documentation](https://osu.ppy.sh/docs/index.html)
 
+# 🧻 V1(WASM) Experience Website (Currently Still Facing CORS Issues)
+
+[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a demonstration website for `osynic_osuapi` quickly built using the [leptos](https://www.leptos.dev/) framework. It primarily utilizes V1's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, due to CORS issues, directly using the V1 API in the browser encounters cross-origin problems (since the WASM portion sends requests from the browser frontend), so this website is currently still affected by CORS and cannot function normally.
+
+The website is currently deployed on [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/) via [Deno](deno.dev), but at this point it's basically just for viewing.
+
 # 📜 Features
 
-- **Support for both old and new APIs**: Supports all V1 endpoints and most V2 endpoints (except for Chat, Comments, Forums, and undocumented interfaces)
+- **Support for both old and new APIs**: Supports all V1 endpoints and most V2 endpoints (except for the undocumented modules)
 - **WASM Compatibility**: Provides WebAssembly support for V1 interfaces, allowing direct access to the OSU API from web applications (though you may encounter CORS issues)
 - **Well-structured project**: Based on a three-module division of `client`, `interface`, and `model`; the `client` part aggregates `interface` interfaces and supports various HTTP clients for easy extension
 - **Very complete example support**: The `examples` directory contains very complete example code and return data, see the [API Checklist](#-api-checklist) section below for details
@@ -142,10 +148,10 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | Beatmaps       | 7          | 7 ✅             | Beatmap API  | `beatmaps`      |
 | Beatmapsets    | 3          | 2 ⚠️403 Forbidden | Beatmapset API| `beatmapsets`   |
 | Changelog      | 3          | 3 ✅             | Changelog API| `changelog`     |
-| Chat           | 11         | 0 🈳             | Chat API     | `chat`          |
-| Comments       | 7          | 0 🈳             | Comments API | `comments`      |
+| Chat           | 11         | 0 ❌403 Forbidden| Chat API     | `chat`          |
+| Comments       | 7          | 2 ⚠️403 Forbidden| Comments API | `comments`      |
 | Events         | 1          | 1 ✅             | Events API   | `events`        |
-| Forum         | 8          | 0 🈳             | Forum API   | `forum`        |
+| Forum         | 8           | 4 ⚠️403 Forbidden| Forum API   | `forum`        |
 | Home           | 1          | 1 ✅             | Home API     | `search`        |
 | Matches        | 1          | 2 ✅             | Matches API  | `matches`       |
 | Multiplayer    | 4          | 2 ⚠️403 Forbidden | Multiplayer API| `multiplayer`   |
@@ -197,29 +203,29 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 | API                      | Support | Note                  | Example Name |
 | ------------------------ | ------- | --------------------- | ------------ |
-| /chat_keepalive          | 🈳       | Keep connection alive | `chk`        |
-| /create_new_pm           | 🈳       | Create new PM         | `chpc`       |
-| /get_updates             | 🈳       | Get updates           | `chug`       |
-| /get_channel_messages    | 🈳       | Get channel messages  | `chmg`       |
-| /send_message_to_channel | 🈳       | Send message          | `chms`       |
-| /join_channel            | 🈳       | Join channel          | `chj`        |
-| /leave_channel           | 🈳       | Leave channel         | `chl`        |
-| /mark_channel_as_read    | 🈳       | Mark channel as read  | `chmr`       |
-| /get_channel_list        | 🈳       | Get channel list      | `chlg`       |
-| /create_channel          | 🈳       | Create channel        | `chc`        |
-| /get_channel             | 🈳       | Get channel           | `chg`        |
+| /chat_keepalive          | ❌403 Forbidden | Keep connection alive | `chk`        |
+| /create_new_pm           | ❌403 Forbidden | Create new PM         | `chpc`       |
+| /get_updates             | ❌403 Forbidden | Get updates           | `chug`       |
+| /get_channel_messages    | ❌403 Forbidden | Get channel messages  | `chmg`       |
+| /send_message_to_channel | ❌403 Forbidden | Send message          | `chms`       |
+| /join_channel            | ❌403 Forbidden | Join channel          | `chj`        |
+| /leave_channel           | ❌403 Forbidden | Leave channel         | `chl`        |
+| /mark_channel_as_read    | ❌403 Forbidden | Mark channel as read  | `chmr`       |
+| /get_channel_list        | ❌403 Forbidden | Get channel list      | `chlg`       |
+| /create_channel          | ❌403 Forbidden | Create channel        | `chc`        |
+| /get_channel             | ❌403 Forbidden | Get channel           | `chg`        |
 
 ### Comments
 
 | API                  | Support | Note            | Example Name |
 | -------------------- | ------- | --------------- | ------------ |
-| /get_comments        | 🈳       | Get comments    | `csg`        |
-| /post_comment        | 🈳       | Post comment    | `cp`         |
-| /get_comment         | 🈳       | Get comment     | `cg`         |
-| /edit_comment        | 🈳       | Edit comment    | `ce`         |
-| /delete_comment      | 🈳       | Delete comment  | `cd`         |
-| /add_comment_vote    | 🈳       | Add vote        | `cva`        |
-| /remove_comment_vote | 🈳       | Remove vote     | `cvr`        |
+| /get_comments        | ✅              | Get comments    | `csg`        |
+| /post_comment        | ❌403 Forbidden | Post comment    | `cp`         |
+| /get_comment         | ✅              | Get comment     | `cg`         |
+| /edit_comment        | ❌403 Forbidden | Edit comment    | `ce`         |
+| /delete_comment      | ❌403 Forbidden | Delete comment  | `cd`         |
+| /add_comment_vote    | ❌403 Forbidden | Add vote        | `cva`        |
+| /remove_comment_vote | ❌403 Forbidden | Remove vote     | `cvr`        |
 
 ### Events
 
@@ -231,14 +237,14 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 | API                  | Support | Note                       | Example Name |
 | -------------------- | ------- | -------------------------- | ------------ |
-| /reply_topic         | 🈳       | Reply to topic             | `ftr`        |
-| /get_topics_listing  | 🈳       | Get topics list            | `ftlg`       |
-| /create_topic        | 🈳       | Create topic               | `ftc`        |
-| /get_topic_and_posts | 🈳       | Get topic and posts        | `ftpg`       |
-| /edit_topic          | 🈳       | Edit topic                 | `fte`        |
-| /edit_post           | 🈳       | Edit post                  | `fpe`        |
-| /get_forum_listing   | 🈳       | Get forum list             | `flg`        |
-| /get_forum_and_topic | 🈳       | Get forum and topic        | `ftg`        |
+| /reply_topic         | ❌401 Unauthorized  | Reply to topic             | `ftr`        |
+| /get_topics_listing  | ✅                  | Get topics list            | `ftlg`       |
+| /create_topic        | ❌401 Unauthorized  | Create topic               | `ftc`        |
+| /get_topic_and_posts | ✅                  | Get topic and posts        | `ftpg`       |
+| /edit_topic          | ❌403 Forbidden     | Edit topic                 | `fte`        |
+| /edit_post           | ❌403 Forbidden     | Edit post                  | `fpe`        |
+| /get_forum_listing   | ✅                  | Get forum list             | `flg`        |
+| /get_forum_and_topic | ✅                  | Get forum and topic        | `ftg`        |
 
 ### Home
 
@@ -320,7 +326,7 @@ The `rosu-v2` project is based on the [MIT License](./licenses/LICENSE-rosu-v2),
 
 This library is basically a module developed for the Osynic application, but it is also a complete Rust encapsulation of the osu!api.
 
-Currently, the V1 API is fully supported, and the V2 API is almost complete(except for the chat, comment, forum, and undocumented modules).
+Currently, the V1 API is fully supported, and the V2 API is almost complete(except for the undocumented modules).
 
 The library is still in the early stages of development, and there may be some bugs or missing features.
 

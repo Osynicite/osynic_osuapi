@@ -28,7 +28,11 @@
 - [V1文档](https://github.com/ppy/osu-api/wiki)
 - [V2文档](https://osu.ppy.sh/docs/index.html)
 
-# 🧻 V1体验网站（目前仍CORS中）
+# 🧻 V1(WASM)体验网站（目前仍CORS中）
+
+[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground)是基于[leptos](https://www.leptos.dev/)框架快速搭建了一个`osynic_osuapi`体验网站，主要使用了的V1的WASM客户端支持（基于[gloo-net](https://crates.io/crates/gloo-net)）,不过很显然，由于CORS的问题，直接在浏览器中使用V1的API会遇到跨域问题（毕竟WASM部分是浏览器前端发的请求嘛），所以目前这个网站仍然处于CORS中，无法正常使用
+
+目前网站通过[Deno](deno.dev)部署在[osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/)上，目前基本上仅供观赏了
 
 # 📜 特性
 
