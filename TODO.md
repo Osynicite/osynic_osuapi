@@ -4,8 +4,8 @@
    1. [x] V1的WASM支持，以及一个新的Leptos项目用来跑示例
    2. [ ] V2的WASM支持，以及LeptosOsuapiPlayground的页面修缮，及其对应的后端
    3. [ ] V2的ReqwestAPI，接口、结构与客户端
-      1. [ ] Changelog 3个
-      2. [ ] Chat 较多
+      1. [x] Changelog
+      2. [ ] Chat 较多 chat.read
       3. [ ] Comments 较多
       4. [x] Events
       5. [ ] Forums 较多

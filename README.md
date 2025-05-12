@@ -59,7 +59,7 @@
 | Authentication | 4       | 4 ✅              | OAuth与认证 | `oauth`         |
 | Beatmaps       | 7       | 7 ✅              | 谱面API     | `beatmaps`      |
 | Beatmapsets    | 3       | 2 ⚠️              | 谱面集API   | `beatmapsets`   |
-| Changelog      | 3       | 0 🈳              | 变更日志API | `changelog`     |
+| Changelog      | 3       | 3 ✅              | 变更日志API | `changelog`     |
 | Chat           | 11      | 0 🈳              | 聊天API     | `chat`          |
 | Comments       | 7       | 0 🈳              | 评论API     | `comments`      |
 | Events         | 1       | 1 ✅              | 事件API     | `events`        |
@@ -107,7 +107,9 @@
 
 | API        | 支持 | 备注         | 示例名 |
 | ---------- | ---- | ------------ | ------ |
-| /changelog | ❌    | 获取变更日志 | `cl`   |
+| /get_changelog_build | ✅    | 获取变更日志 | `cbg`   |
+| /get_changelog_listing | ✅    | 获取变更日志列表 | `clg`   |
+| /lookup_changelog_build | ✅    | 查阅变更日志 | `cbl`   |
 
 ### Chat
 

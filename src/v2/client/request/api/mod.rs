@@ -4,6 +4,7 @@ pub mod events;
 pub mod notifications;
 pub mod matches;
 pub mod news;
+pub mod changelog;
 pub mod oauth;
 pub mod scores;
 pub mod search;
