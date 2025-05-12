@@ -16,10 +16,7 @@ async fn main() -> Result<()> {
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let notifications = client
-        .notifications
-        .get_notifications(None)
-        .await?;
+    let notifications = client.notifications.get_notifications(None).await?;
     println!("{:?}", notifications);
     Ok(())
 }
@@ -27,22 +24,22 @@ async fn main() -> Result<()> {
 /*
 Reqwestnotifications get_notifications
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/notifications",
-	status: 403,
-	headers: {
-		"date": "Sun, 11 May 2025 15:50:05 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93e2d47c5afe3424-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/notifications",
+    status: 403,
+    headers: {
+        "date": "Sun, 11 May 2025 15:50:05 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93e2d47c5afe3424-HKG"
+    }
 }
 */

@@ -1,4 +1,4 @@
-use serde::{Deserialize, Serialize, Deserializer};
+use serde::{Deserialize, Deserializer, Serialize};
 
 /// 多人游戏玩家分数结构体
 /// Multiplayer player score structure
@@ -39,7 +39,7 @@ pub struct MultiplayerGame {
 
 /// 多人游戏匹配结构体
 /// Multiplayer match structure
-#[derive(Debug,Default, Clone, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MultiplayerMatch {
     pub match_id: String,         // 匹配ID
     pub name: String,             // 房间名称
@@ -81,7 +81,6 @@ where
         }
     }
 }
-
 
 /// 获取多人游戏信息的原始参数
 /// Raw parameters for getting multiplayer match information

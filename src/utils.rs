@@ -38,10 +38,12 @@ pub struct OsuAccountFacadeA {
 
 #[cfg(feature = "v2")]
 pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
-    let country_flag = country_code_to_unicode_flag(&user.country.as_ref().map_or_else(
-        || "XX".to_string(),
-        |country| country.code.clone(),
-    ))
+    let country_flag = country_code_to_unicode_flag(
+        &user
+            .country
+            .as_ref()
+            .map_or_else(|| "XX".to_string(), |country| country.code.clone()),
+    )
     .unwrap_or_else(|| "XX".to_string());
     let country_svg_url = format!(
         "https://osu.ppy.sh/assets/images/flags/{}.svg",
@@ -54,13 +56,41 @@ pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
         avatar_url: user.avatar_url,
         cover_url: user.cover_url.unwrap_or_default(),
         country_svg_url,
-        accuracy: user.statistics.as_ref().map(|stats| stats.hit_accuracy).unwrap_or(0.0),
-        level: user.statistics.as_ref().map(|stats| stats.level.current).unwrap_or(0),
-        progress: user.statistics.as_ref().map(|stats| stats.level.progress).unwrap_or(0),
-        pp: user.statistics.as_ref().map(|stats| stats.pp).unwrap_or(0.0),
-        world_rank: user.statistics.as_ref().and_then(|stats| stats.global_rank).unwrap_or(0),
-        country_code: user.country.as_ref().map(|country| country.code.clone()).unwrap_or_default(),
-        country_rank: user.statistics.as_ref().and_then(|stats| stats.country_rank).unwrap_or(0),
+        accuracy: user
+            .statistics
+            .as_ref()
+            .map(|stats| stats.hit_accuracy)
+            .unwrap_or(0.0),
+        level: user
+            .statistics
+            .as_ref()
+            .map(|stats| stats.level.current)
+            .unwrap_or(0),
+        progress: user
+            .statistics
+            .as_ref()
+            .map(|stats| stats.level.progress)
+            .unwrap_or(0),
+        pp: user
+            .statistics
+            .as_ref()
+            .map(|stats| stats.pp)
+            .unwrap_or(0.0),
+        world_rank: user
+            .statistics
+            .as_ref()
+            .and_then(|stats| stats.global_rank)
+            .unwrap_or(0),
+        country_code: user
+            .country
+            .as_ref()
+            .map(|country| country.code.clone())
+            .unwrap_or_default(),
+        country_rank: user
+            .statistics
+            .as_ref()
+            .and_then(|stats| stats.country_rank)
+            .unwrap_or(0),
         is_supporter: user.is_supporter,
     }
 }

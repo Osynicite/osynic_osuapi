@@ -22,7 +22,7 @@ impl IBeatmap for GlooBeatmap {
         };
 
         let params = params.api_key(key).build_params();
-        
+
         let url = format!(
             "https://osu.ppy.sh/api/get_beatmaps?{}",
             serde_urlencoded::to_string(&params)?
@@ -35,9 +35,9 @@ impl IBeatmap for GlooBeatmap {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let beatmaps: Vec<Beatmap> = response.json().await?;
-        
+
         Ok(beatmaps)
     }
 }

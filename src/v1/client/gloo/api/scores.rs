@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::v1::client::gloo::check::check_res;
 use crate::v1::interface::scores::IScores;
-use crate::v1::model::scores::{Score, GetScoresParams};
+use crate::v1::model::scores::{GetScoresParams, Score};
 use gloo_net::http::Request;
 use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
@@ -22,7 +22,7 @@ impl IScores for GlooScores {
         };
 
         let params = params.api_key(key).build_params();
-        
+
         let url = format!(
             "https://osu.ppy.sh/api/get_Scores?{}",
             serde_urlencoded::to_string(&params)?
@@ -35,9 +35,9 @@ impl IScores for GlooScores {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let scores: Vec<Score> = response.json().await?;
-        
+
         Ok(scores)
     }
 }

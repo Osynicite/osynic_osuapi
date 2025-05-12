@@ -1,7 +1,7 @@
-pub mod news;
-pub mod navigation;
-pub mod stream;
 pub mod build;
-pub mod search;
 pub mod changelog;
+pub mod navigation;
+pub mod news;
+pub mod search;
+pub mod stream;
 pub mod versions;

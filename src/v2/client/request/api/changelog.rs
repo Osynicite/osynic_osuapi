@@ -15,11 +15,7 @@ pub struct ReqwestChangelog {
 }
 
 impl IChangelog for ReqwestChangelog {
-    async fn get_changelog_build(
-        &self,
-        stream: String,
-        build: String,
-    ) -> Result<ChanglogBuild> {
+    async fn get_changelog_build(&self, stream: String, build: String) -> Result<ChanglogBuild> {
         println!("ReqwestChangelog get_changelog_build");
 
         let access_token = {
@@ -31,8 +27,7 @@ impl IChangelog for ReqwestChangelog {
             .client
             .get(format!(
                 "https://osu.ppy.sh/api/v2/changelog/{}/{}",
-                stream,
-                build
+                stream, build
             ))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
@@ -41,8 +36,8 @@ impl IChangelog for ReqwestChangelog {
             .await?;
 
         let response = check_res(res)?;
-        
-        let changelog_build: ChanglogBuild  = response.json().await?;
+
+        let changelog_build: ChanglogBuild = response.json().await?;
 
         // let text = response.text().await?;
         // println!("Response text: {}", text);
@@ -76,14 +71,19 @@ impl IChangelog for ReqwestChangelog {
                 ("max_id", max_id.map(|s| s.to_string())),
                 ("stream", stream.map(|s| s.to_string())),
                 ("to", to.map(|s| s.to_string())),
-                ("message_formats", message_formats.map(|v| v.join(",")).or(Some("html,markdown".to_string())))
+                (
+                    "message_formats",
+                    message_formats
+                        .map(|v| v.join(","))
+                        .or(Some("html,markdown".to_string())),
+                ),
             ])
             .send()
             .await?;
 
         let response = check_res(res)?;
-        
-        let changelog_listing: ChangelogListing  = response.json().await?;
+
+        let changelog_listing: ChangelogListing = response.json().await?;
 
         // let text = response.text().await?;
         // println!("Response text: {}", text);
@@ -103,28 +103,30 @@ impl IChangelog for ReqwestChangelog {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
-     
-         // message_formats 如果为空，则默认填入html,markdown
+
+        // message_formats 如果为空，则默认填入html,markdown
 
         let res = self
             .client
-            .get(format!(
-                "https://osu.ppy.sh/api/v2/changelog/{}",
-                changelog
-            ))
+            .get(format!("https://osu.ppy.sh/api/v2/changelog/{}", changelog))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
             .query(&[
                 ("key", key.map(|x| x.to_string())),
-                ("message_formats", message_formats.map(|v| v.join(",")).or(Some("html,markdown".to_string())))
+                (
+                    "message_formats",
+                    message_formats
+                        .map(|v| v.join(","))
+                        .or(Some("html,markdown".to_string())),
+                ),
             ])
             .send()
             .await?;
 
         let response = check_res(res)?;
-        
-        let changelog_build: ChanglogBuild  = response.json().await?;
+
+        let changelog_build: ChanglogBuild = response.json().await?;
 
         // let text = response.text().await?;
         // println!("Response text: {}", text);

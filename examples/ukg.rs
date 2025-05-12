@@ -16,10 +16,7 @@ async fn main() -> Result<()> {
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let kudosu = client
-        .users
-        .get_user_kudosu(31175842, None, None)
-        .await?;
+    let kudosu = client.users.get_user_kudosu(31175842, None, None).await?;
     println!("{:?}", kudosu);
     Ok(())
 }

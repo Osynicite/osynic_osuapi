@@ -25,14 +25,12 @@ async fn main() -> Result<()> {
 
     Ok(())
 }
-/* 
+/*
 ReqwestBeatmaps get_Beatmap_Attributes
 Attributes {
-	attributes: DifficultyAttributes {
-		max_combo: 0,
-		star_rating: 6.40266
-	}
+    attributes: DifficultyAttributes {
+        max_combo: 0,
+        star_rating: 6.40266
+    }
 }
-*/ 
-
-
+*/

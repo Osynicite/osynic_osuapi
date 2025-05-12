@@ -1,10 +1,10 @@
 use crate::error::Result;
 use crate::v2::client::request::check::check_res;
-use crate::v2::model::score::structs::multiplayer::multiplayer_scores::MultiplayerScores;
 use crate::v2::interface::multiplayer::IMultiplayer;
 use crate::v2::model::oauth::structs::o_token::OToken;
-use crate::v2::model::score::structs::score::Score;
 use crate::v2::model::room::structs::room::Room;
+use crate::v2::model::score::structs::multiplayer::multiplayer_scores::MultiplayerScores;
+use crate::v2::model::score::structs::score::Score;
 
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -16,12 +16,7 @@ pub struct ReqwestMultiplayer {
 }
 
 impl IMultiplayer for ReqwestMultiplayer {
-    async fn get_user_high_score(
-        &self,
-        room: String,
-        playlist: u64,
-        user: u64,
-    ) ->Result<Score> {
+    async fn get_user_high_score(&self, room: String, playlist: u64, user: u64) -> Result<Score> {
         println!("ReqwestMultiplayer get_user_high_score");
 
         let access_token = {
@@ -90,13 +85,8 @@ impl IMultiplayer for ReqwestMultiplayer {
 
         Ok(scores)
     }
-    
-    async fn get_score(
-            &self,
-            room: String,
-            playlist: u64,
-            score: u64,
-        ) -> Result<Score> {
+
+    async fn get_score(&self, room: String, playlist: u64, score: u64) -> Result<Score> {
         println!("ReqwestMultiplayer get_score");
         let access_token = {
             let token = self.o_token.read().await;
@@ -115,11 +105,10 @@ impl IMultiplayer for ReqwestMultiplayer {
             .send()
             .await?;
         let response = check_res(res)?;
-    
+
         let score: Score = response.json().await?;
-    
+
         Ok(score)
-    
     }
 
     async fn get_multiplayer_rooms(
@@ -155,7 +144,7 @@ impl IMultiplayer for ReqwestMultiplayer {
 
         let response = check_res(res)?;
 
-        let rooms:  Vec<Room> = response.json().await?;
+        let rooms: Vec<Room> = response.json().await?;
 
         // let text = response.text().await?;
         // println!("Response text: {}", text);

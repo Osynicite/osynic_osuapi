@@ -1,9 +1,9 @@
 use crate::error::Result;
 use crate::v1::client::gloo::check::check_res;
 use crate::v1::interface::user::IUser;
-use crate::v1::model::user::{User, GetUserParams};
-use crate::v1::model::best::{BestScore,GetUserBestParams};
+use crate::v1::model::best::{BestScore, GetUserBestParams};
 use crate::v1::model::recent::{GetUserRecentParams, RecentPlay};
+use crate::v1::model::user::{GetUserParams, User};
 use gloo_net::http::Request;
 use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
@@ -24,7 +24,7 @@ impl IUser for GlooUser {
         };
 
         let params = params.api_key(key).build_params();
-        
+
         let url = format!(
             "https://osu.ppy.sh/api/get_users?{}",
             serde_urlencoded::to_string(&params)?
@@ -37,9 +37,9 @@ impl IUser for GlooUser {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let users: Vec<User> = response.json().await?;
-        
+
         Ok(users)
     }
 
@@ -52,7 +52,7 @@ impl IUser for GlooUser {
         };
 
         let params = params.api_key(key).build_params();
-        
+
         let url = format!(
             "https://osu.ppy.sh/api/get_user_best?{}",
             serde_urlencoded::to_string(&params)?
@@ -65,9 +65,9 @@ impl IUser for GlooUser {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let bests: Vec<BestScore> = response.json().await?;
-        
+
         Ok(bests)
     }
 
@@ -80,7 +80,7 @@ impl IUser for GlooUser {
         };
 
         let params = params.api_key(key).build_params();
-        
+
         let url = format!(
             "https://osu.ppy.sh/api/get_user_recent?{}",
             serde_urlencoded::to_string(&params)?
@@ -93,9 +93,9 @@ impl IUser for GlooUser {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let recents: Vec<RecentPlay> = response.json().await?;
-        
+
         Ok(recents)
     }
 }

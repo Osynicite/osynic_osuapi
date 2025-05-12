@@ -50,4 +50,3 @@ pub struct User {
     pub profile_colour: Option<String>,
     pub username: String,
 }
-

@@ -14,8 +14,8 @@
 //         }
 //     }
 
-use serde::{Deserialize, Serialize};
 use crate::v2::model::changelog::structs::stream::UpdateStream;
+use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Versions {
@@ -32,5 +32,3 @@ pub struct VersionsBuild {
     pub created_at: String,
     pub update_stream: UpdateStream,
 }
-
-

@@ -42,7 +42,7 @@ impl IMatches for ReqwestMatches {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let matches_listing: GetMatchesListingResponse = response.json().await?;
 
         // let text = response.text().await?;
@@ -67,10 +67,7 @@ impl IMatches for ReqwestMatches {
 
         let res = self
             .client
-            .get(format!(
-                "https://osu.ppy.sh/api/v2/matches/{}",
-                match_id
-            ))
+            .get(format!("https://osu.ppy.sh/api/v2/matches/{}", match_id))
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
             .header("Authorization", format!("Bearer {}", access_token))
@@ -83,7 +80,7 @@ impl IMatches for ReqwestMatches {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let matchh: GetMatchResponse = response.json().await?;
 
         // let text = response.text().await?;
@@ -92,5 +89,4 @@ impl IMatches for ReqwestMatches {
 
         Ok(matchh)
     }
-    
 }

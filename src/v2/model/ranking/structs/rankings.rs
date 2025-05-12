@@ -1,10 +1,9 @@
 use serde::{Deserialize, Serialize};
 
-use crate::v2::model::user::structs::statistics::Statistics;
 use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
 use crate::v2::model::ranking::structs::spotlight::Spotlight;
+use crate::v2::model::user::structs::statistics::Statistics;
 use crate::v2::model::user::structs::user::User;
-
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct KudosuRankings {

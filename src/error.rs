@@ -70,7 +70,6 @@ impl From<reqwest::Error> for Error {
     }
 }
 
-
 #[cfg(feature = "not-wasm")]
 impl From<reqwest::Response> for Error {
     fn from(e: reqwest::Response) -> Self {
@@ -84,7 +83,6 @@ impl From<gloo_net::Error> for Error {
         Error::new(ErrorKind::GlooError(e))
     }
 }
-
 
 #[cfg(feature = "wasm")]
 impl From<gloo_net::http::Response> for Error {

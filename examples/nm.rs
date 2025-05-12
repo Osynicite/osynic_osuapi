@@ -26,22 +26,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestNotifications mark_notifications_as_read
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/notifications/mark-read",
-	status: 403,
-	headers: {
-		"date": "Sun, 11 May 2025 16:08:54 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93e2f00c5f9409e4-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/notifications/mark-read",
+    status: 403,
+    headers: {
+        "date": "Sun, 11 May 2025 16:08:54 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93e2f00c5f9409e4-HKG"
+    }
 }
 */

@@ -1,6 +1,6 @@
 use crate::error::Result;
-use crate::v2::model::score::structs::multiplayer::multiplayer_scores::MultiplayerScores;
 use crate::v2::model::room::structs::room::Room;
+use crate::v2::model::score::structs::multiplayer::multiplayer_scores::MultiplayerScores;
 use crate::v2::model::score::structs::score::Score;
 
 pub trait IMultiplayer {
@@ -32,5 +32,4 @@ pub trait IMultiplayer {
         sort: Option<String>,
         type_group: Option<String>,
     ) -> impl std::future::Future<Output = Result<Vec<Room>>> + Send;
-
 }

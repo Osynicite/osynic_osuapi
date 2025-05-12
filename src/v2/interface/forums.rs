@@ -37,12 +37,9 @@ pub trait IForums {
         post: String,
         body: String,
     ) -> impl std::future::Future<Output = Result<Score>> + Send;
-    fn get_forum_listing(
-        &self,
-    ) -> impl std::future::Future<Output = Result<Score>> + Send;
+    fn get_forum_listing(&self) -> impl std::future::Future<Output = Result<Score>> + Send;
     fn get_forum_and_topic(
         &self,
         forum: u64,
     ) -> impl std::future::Future<Output = Result<Score>> + Send;
-
 }

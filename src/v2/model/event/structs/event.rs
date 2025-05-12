@@ -40,7 +40,7 @@ pub enum Event {
         base: BaseEvent,
     },
     // 添加其他类型...
-    
+
     // 捕获所有其他未知格式
     Unknown(BaseEvent),
 }

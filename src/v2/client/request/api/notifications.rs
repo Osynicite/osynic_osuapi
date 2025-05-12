@@ -15,10 +15,7 @@ pub struct ReqwestNotifications {
 }
 
 impl INotifications for ReqwestNotifications {
-    async fn get_notifications(
-        &self,
-        max_id: Option<String>,
-    ) -> Result<GetNotificationsResponse> {
+    async fn get_notifications(&self, max_id: Option<String>) -> Result<GetNotificationsResponse> {
         println!("ReqwestNotifications get_notifications");
 
         let access_token = {
@@ -32,14 +29,12 @@ impl INotifications for ReqwestNotifications {
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .query(&[
-                ("max_id", max_id.map(|s| s.to_string())),
-            ])
+            .query(&[("max_id", max_id.map(|s| s.to_string()))])
             .send()
             .await?;
 
         let response = check_res(res)?;
-        
+
         let notifications: GetNotificationsResponse = response.json().await?;
 
         // let text = response.text().await?;
@@ -50,9 +45,9 @@ impl INotifications for ReqwestNotifications {
     }
 
     async fn mark_notifications_as_read(
-            &self,
-            params: Option<MarkNotificationsRequest>,
-        ) -> Result<()> {
+        &self,
+        params: Option<MarkNotificationsRequest>,
+    ) -> Result<()> {
         println!("ReqwestNotifications mark_notifications_as_read");
 
         let access_token = {
@@ -80,4 +75,3 @@ impl INotifications for ReqwestNotifications {
         }
     }
 }
-

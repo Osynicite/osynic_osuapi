@@ -13,8 +13,8 @@ use crate::v2::model::user::structs::rank_history::RankHistory;
 use crate::v2::model::user::structs::replays_watched_count::ReplaysWatchedCount;
 use crate::v2::model::user::structs::statistics::Statistics;
 use crate::v2::model::user::structs::statistics_rulesets::StatisticsRulesets;
-use crate::v2::model::user::structs::user_achievements::UserAchievements;
 use crate::v2::model::user::structs::team::Team;
+use crate::v2::model::user::structs::user_achievements::UserAchievements;
 use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]

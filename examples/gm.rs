@@ -22,12 +22,12 @@ async fn main() -> Result<()> {
 ReqwestMultiplayer get_match
 Text: "{\"match\":0,\"games\":[]}"
 MultiplayerResponse {
-	matchh: MultiplayerMatch {
-		match_id: "",
-		name: "",
-		start_time: "",
-		end_time: None
-	},
-	games: []
+    matchh: MultiplayerMatch {
+        match_id: "",
+        name: "",
+        start_time: "",
+        end_time: None
+    },
+    games: []
 }
 */

@@ -1,7 +1,7 @@
 use crate::error::Result;
 use crate::v1::client::gloo::check::check_res;
 use crate::v1::interface::multiplayer::IMultiplayer;
-use crate::v1::model::multiplayer::{MultiplayerResponse, GetMatchParams};
+use crate::v1::model::multiplayer::{GetMatchParams, MultiplayerResponse};
 use gloo_net::http::Request;
 use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
@@ -22,7 +22,7 @@ impl IMultiplayer for GlooMultiplayer {
         };
 
         let params = params.api_key(key).build_params();
-        
+
         let url = format!(
             "https://osu.ppy.sh/api/get_match?{}",
             serde_urlencoded::to_string(&params)?
@@ -35,9 +35,9 @@ impl IMultiplayer for GlooMultiplayer {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let multiplayer: MultiplayerResponse = response.json().await?;
-        
+
         Ok(multiplayer)
     }
 }

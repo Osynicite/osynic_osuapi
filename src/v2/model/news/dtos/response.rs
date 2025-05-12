@@ -34,8 +34,6 @@ pub struct Search {
     pub sort: String,
 }
 
-
-
 // {
 //   "news_posts": [
 //     {
@@ -74,5 +72,3 @@ pub struct Search {
 //   },
 //   "cursor_string": "WyJodHRwczpcL1wvd3d3LnlvdXR1YmUuY29tXC93YXRjaD92PWRRdzR3OVdnWGNRIl0"
 // }
-
- 

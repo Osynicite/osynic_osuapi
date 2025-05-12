@@ -13,12 +13,7 @@ async fn main() -> Result<()> {
     let client = OsynicOsuApiV2Client::default();
     let token = client
         .oauth
-        .get_token_with_code(
-            client_id.parse()?,
-            &client_secret,
-            &code,
-            &redirect_uri,
-        )
+        .get_token_with_code(client_id.parse()?, &client_secret, &code, &redirect_uri)
         .await?;
     println!("{:?}", token);
     Ok(())

@@ -42,7 +42,6 @@ pub struct Params {
 //     "cursor_string": "eyJtYXRjaF9pZCI6MTE0NDI4Njg1fQ"
 // }
 
- 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GetMatchResponse {
     #[serde(rename = "match")]
@@ -133,5 +132,3 @@ pub struct Country {
 //     "latest_event_id": 484410607,
 //     "current_game_id": null
 // }
-
- 

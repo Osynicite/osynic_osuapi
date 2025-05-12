@@ -12,4 +12,3 @@ pub struct ChangelogListing {
     pub builds: Vec<ChanglogBuild>,
     pub search: Search,
 }
-

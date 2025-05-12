@@ -15,28 +15,26 @@ pub trait INotifications {
     ) -> impl std::future::Future<Output = Result<()>> + Send;
 }
 
-
-// identities   object  optional  
-// category   string  optional  
+// identities   object  optional
+// category   string  optional
 
 // Notification category.
-// object_id   string  optional  
+// object_id   string  optional
 
 // Id of the object triggered the notification.
-// object_type   string  optional  
+// object_type   string  optional
 
 // Type of the object triggered the notification.
-// notifications   object  optional  
-// category   string  optional  
+// notifications   object  optional
+// category   string  optional
 
 // Notification category.
-// id   integer  optional  
+// id   integer  optional
 
 // Id of notifications to be marked as read.
-// object_id   string  optional  
+// object_id   string  optional
 
 // Id of the object triggered the notification.
-// object_type   string  optional  
+// object_type   string  optional
 
 // Type of the object triggered the notification.
-

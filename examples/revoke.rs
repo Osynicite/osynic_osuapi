@@ -1,9 +1,9 @@
 // Get user information by id or username
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
+use osynic_osuapi::v2::interface::oauth::IOauth;
 use osynic_osuapi::v2::interface::users::IUsers;
 use osynic_osuapi::v2::model::mode::enums::mode::Mode;
-use osynic_osuapi::v2::interface::oauth::IOauth;
 use osynic_osuapi::v2::model::oauth::structs::o_token::OToken;
 
 #[tokio::main]
@@ -24,18 +24,12 @@ async fn main() -> Result<()> {
         .await?;
     println!("{:?}", user);
 
-        // Revoke Token
-    client
-        .oauth
-        .revoke_current_token()
-        .await?;
+    // Revoke Token
+    client.oauth.revoke_current_token().await?;
 
     // Check if the token is revoked
-    let result = client
-        .users
-        .get_own_data(Some(Mode::Osu), None)
-        .await;
-    
+    let result = client.users.get_own_data(Some(Mode::Osu), None).await;
+
     match result {
         Ok(_) => println!("Token is still valid"),
         Err(e) => println!("Token is revoked: {:?}", e),

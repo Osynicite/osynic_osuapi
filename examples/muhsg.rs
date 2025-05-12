@@ -18,7 +18,7 @@ async fn main() -> Result<()> {
     });
     let rooms = client
         .multiplayer
-        .get_user_high_score("1354141".to_string(),16008432,11106929)
+        .get_user_high_score("1354141".to_string(), 16008432, 11106929)
         .await?;
     println!("{:?}", rooms);
     Ok(())
@@ -27,22 +27,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestMultiplayer get_user_high_score
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/rooms/1354141/playlist/16008432/scores/users/11106929",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 07:25:13 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93e82e4c9ffd04ee-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/rooms/1354141/playlist/16008432/scores/users/11106929",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 07:25:13 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93e82e4c9ffd04ee-HKG"
+    }
 }
 */

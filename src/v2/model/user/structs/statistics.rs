@@ -60,7 +60,6 @@ pub struct Variant {
     pub variant: String,
 }
 
-
 //  "user": {
 //       "avatar_url": "https://a.ppy.sh/2?1519081077.png",
 //       "country": {

@@ -40,7 +40,7 @@ impl IEvents for ReqwestEvents {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let events: GetEventsResponse = response.json().await?;
 
         // let text = response.text().await?;

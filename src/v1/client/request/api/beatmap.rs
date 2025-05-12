@@ -5,7 +5,6 @@ use crate::v1::model::beatmap::{Beatmap, GetBeatmapsParams};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
-
 #[derive(Clone)]
 pub struct ReqwestBeatmap {
     pub client: reqwest::Client,

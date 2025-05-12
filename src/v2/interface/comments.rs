@@ -40,5 +40,4 @@ pub trait IComments {
         &self,
         comment: String,
     ) -> impl std::future::Future<Output = Result<Score>> + Send;
-
 }

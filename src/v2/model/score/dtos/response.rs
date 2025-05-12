@@ -1,5 +1,5 @@
-use crate::v2::model::score::structs::non_legacy_score::NonLegacyScore;
 use crate::v2::model::score::structs::cursor::Cursor;
+use crate::v2::model::score::structs::non_legacy_score::NonLegacyScore;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

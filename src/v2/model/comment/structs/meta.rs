@@ -1,5 +1,5 @@
 // Field 	Type 	Description
-// current_user_attributes 	CurrentUserAttributes 	
+// current_user_attributes 	CurrentUserAttributes
 // id 	integer 	the ID of the object
 // owner_id 	integer? 	User ID which owns the object
 // owner_title 	string? 	Object owner type, used for display (MAPPER for beatmapset)
@@ -10,7 +10,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct CommentableMeta{
+pub struct CommentableMeta {
     pub current_user_attributes: Option<CurrentUserAttributes>,
     pub id: i64,
     pub owner_id: Option<i64>,
@@ -40,7 +40,7 @@ pub struct CommentableMeta{
 // last_read_id 	integer 	message_id of last message read.
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct CurrentUserAttributes{
+pub struct CurrentUserAttributes {
     pub can_new_comment_reason: Option<String>,
     pub can_destroy: bool,
     pub can_reopen: bool,

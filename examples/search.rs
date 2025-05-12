@@ -18,7 +18,7 @@ async fn main() -> Result<()> {
     });
     let search = client
         .search
-        .search(None,Some("Islatri".to_string()),Some(1))
+        .search(None, Some("Islatri".to_string()), Some(1))
         .await?;
     println!("{:?}", search);
     Ok(())
@@ -27,27 +27,27 @@ async fn main() -> Result<()> {
 /*
 ReqwestSearch search
 SearchResponse {
-	user: Some(UserSearchResponse {
-		data: [User {
-			avatar_url: "https://a.ppy.sh/31175842?1738717996.jpeg",
-			country_code: "CN",
-			default_group: Some("default"),
-			id: 31175842,
-			is_active: true,
-			is_bot: false,
-			is_deleted: false,
-			is_online: false,
-			is_supporter: false,
-			last_visit: "2025-05-10T15:41:06+00:00",
-			pm_friends_only: false,
-			profile_colour: None,
-			username: "Islatri"
-		}],
-		total: 1
-	}),
-	wiki_page: Some(WikiPageSearchResponse {
-		data: [],
-		total: 0
-	})
+    user: Some(UserSearchResponse {
+        data: [User {
+            avatar_url: "https://a.ppy.sh/31175842?1738717996.jpeg",
+            country_code: "CN",
+            default_group: Some("default"),
+            id: 31175842,
+            is_active: true,
+            is_bot: false,
+            is_deleted: false,
+            is_online: false,
+            is_supporter: false,
+            last_visit: "2025-05-10T15:41:06+00:00",
+            pm_friends_only: false,
+            profile_colour: None,
+            username: "Islatri"
+        }],
+        total: 1
+    }),
+    wiki_page: Some(WikiPageSearchResponse {
+        data: [],
+        total: 0
+    })
 }
 */

@@ -1,8 +1,8 @@
 use crate::error::Result;
 use crate::v2::client::request::check::check_res;
 use crate::v2::interface::news::INews;
-use crate::v2::model::news::structs::news::News;
 use crate::v2::model::news::dtos::response::GetNewsListingResponse;
+use crate::v2::model::news::structs::news::News;
 use crate::v2::model::oauth::structs::o_token::OToken;
 
 use std::sync::Arc;
@@ -43,7 +43,7 @@ impl INews for ReqwestNews {
             .await?;
 
         let response = check_res(res)?;
-        
+
         let news_listing: GetNewsListingResponse = response.json().await?;
 
         // let text = response.text().await?;
@@ -52,11 +52,7 @@ impl INews for ReqwestNews {
 
         Ok(news_listing)
     }
-    async fn get_news_post(
-        &self,
-        news: String,
-        key: Option<String>,
-    ) -> Result<News> {
+    async fn get_news_post(&self, news: String, key: Option<String>) -> Result<News> {
         println!("Reqwestnews get_news");
 
         let access_token = {
@@ -66,21 +62,16 @@ impl INews for ReqwestNews {
 
         let res = self
             .client
-            .get(format!(
-                "https://osu.ppy.sh/api/v2/news/{}",
-                news
-            ))
+            .get(format!("https://osu.ppy.sh/api/v2/news/{}", news))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .query(&[
-                ("key", key.map(|x| x.to_string()))
-            ])
+            .query(&[("key", key.map(|x| x.to_string()))])
             .send()
             .await?;
 
         let response = check_res(res)?;
-        
+
         let news: News = response.json().await?;
 
         // let text = response.text().await?;
@@ -89,5 +80,4 @@ impl INews for ReqwestNews {
 
         Ok(news)
     }
-    
 }

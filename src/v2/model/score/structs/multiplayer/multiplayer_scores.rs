@@ -4,7 +4,7 @@
 // Field 	Type 	Description
 // cursor_string 	CursorString 	To be used to fetch the next page.
 // params 	object 	Parameters used for score listing.
-// scores 	Score[] 	
+// scores 	Score[]
 // total 	integer? 	Index only. Total scores of the specified playlist item.
 // user_score 	Score? 	Index only. Score of the accessing user if exists.
 
@@ -37,5 +37,5 @@ pub struct Params {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MultiplayerScoresAround {
     pub higher: MultiplayerScores,
-    pub lower: MultiplayerScores
+    pub lower: MultiplayerScores,
 }

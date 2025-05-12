@@ -169,4 +169,3 @@ pub struct Cover {
     pub url: String,
     pub id: Option<String>,
 }
-
