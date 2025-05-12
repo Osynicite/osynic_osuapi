@@ -11,3 +11,4 @@ pub mod cursor;
 pub mod non_legacy;
 pub mod non_legacy_score;
 pub mod non_legacy_scores;
+pub mod multiplayer;

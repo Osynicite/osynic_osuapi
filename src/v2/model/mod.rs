@@ -5,6 +5,7 @@ pub mod notification;
 pub mod matches;
 pub mod news;
 pub mod chat;
+pub mod forum;
 pub mod comment;
 pub mod changelog;
 pub mod ranking;
