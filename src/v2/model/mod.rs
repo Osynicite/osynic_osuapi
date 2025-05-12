@@ -4,6 +4,8 @@ pub mod event;
 pub mod notification;
 pub mod matches;
 pub mod news;
+pub mod chat;
+pub mod comment;
 pub mod changelog;
 pub mod ranking;
 pub mod mode;
