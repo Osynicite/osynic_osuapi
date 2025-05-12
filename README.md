@@ -49,12 +49,12 @@ use osynic_osuapi::v2::interface::users::IUsers;
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
-    let client_id = std::env::var("CLIENT_ID").unwrap();
-    let client_secret = std::env::var("CLIENT_SECRET").unwrap();
+    let client_id = std::env::var("CLIENT_ID").expect("CLIENT_ID not set");
+    let client_secret = std::env::var("CLIENT_SECRET").expect("CLIENT_SECRET not set");
     let client = OsynicOsuApiV2Client::default();
     let token = client
         .oauth
-        .get_token_without_code(client_id.parse().unwrap(), &client_secret)
+        .get_token_without_code(client_id.parse()?, &client_secret)
         .await?;
     println!("{:?}", token);
 
@@ -72,16 +72,6 @@ async fn main() -> Result<()> {
 
     Ok(())
 }
-
-/*
-osu_account_id: 2
-username: peppy
-join_date: 2007-08-28T03:09:12+00:00
-country_code: AU
-country_name: Australia
-cover_url: https://assets.ppy.sh/user-profile-covers/2/baba245ef60834b769694178f8f6d4f6166c5188c740de084656ad2b80f1eea7.jpeg       
-*/
-
 ```
 
 # API检查表
