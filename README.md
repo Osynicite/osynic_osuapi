@@ -23,12 +23,17 @@
 
 [中文版本](README.md) | [English Version](README_EN.md)
 
-# OSU!API 官方文档
+# 📄 OSU!API 官方文档
 
 - [V1文档](https://github.com/ppy/osu-api/wiki)
 - [V2文档](https://osu.ppy.sh/docs/index.html)
 
-# 快速开始
+# 📜 特性
+
+- [x] 支持V1和V2 API
+- [x] 支持WASM(目前仅V1)
+
+# 🚀 快速开始
 
 首先在`Cargo.toml`中添加依赖
 
@@ -66,15 +71,15 @@ async fn main() -> Result<()> {
     println!("osu_account_id: {}", peppy.id);
     println!("username: {}", peppy.username);
     println!("join_date: {}", peppy.join_date.unwrap_or_default());
-    println!("country_code: {}", peppy.country.code);
-    println!("country_name: {}", peppy.country.name);
+    println!("country_code: {}", peppy.country.as_ref().map_or("None".to_string(), |c| c.code.clone()));
+    println!("country_name: {}", peppy.country.as_ref().map_or("None".to_string(), |c| c.name.clone()));
     println!("cover_url: {}", peppy.cover_url.unwrap_or_default());
 
     Ok(())
 }
 ```
 
-# API检查表
+# 🍕 API检查表
 
 可通过`cargo run --exmaple 示例名`来运行API对应示例
 
@@ -274,7 +279,11 @@ async fn main() -> Result<()> {
 
 # 🤝 贡献指南
 
-这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装，v1和v2的大部分(除了文档未归类的接口)已经实现，v2的WASM支持暂时还没有做。
+这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装；
+
+目前，v1和v2的大部分(除了Chat、Comments、Forums以及文档未归类的接口)已经实现，v2的WASM支持暂时还没有做。
+
+这个库仍然在开发中，可能会有一些bug或者不完善的地方；
 
 所以，如果代码有任何问题，或者你有任何建议，欢迎提交PR或者Issue，我会尽快处理~
 
