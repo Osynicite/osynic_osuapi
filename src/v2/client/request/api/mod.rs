@@ -5,6 +5,7 @@ pub mod notifications;
 pub mod matches;
 pub mod news;
 pub mod changelog;
+pub mod multiplayer;
 pub mod oauth;
 pub mod scores;
 pub mod search;

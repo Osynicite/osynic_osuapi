@@ -20,6 +20,20 @@
 2. [ ] 即是说，V2还剩下五组API，2小3大，时间分配上，大概是需要一整天时间来完成的
    1. [ ] 其中，chat-comment-forum这三个大的，都还有很多独立的struct，ranking也是，但是multiplayer额外只有一个struct
    2. [ ] 然后的接口编写就很轻松了，今天下午快点完事休息即可，2h左右吧
+      1. [x] Interface
+      2. [ ] Model 这个是工作量最大的
+         1. [ ] multiplayer
+            1. [ ] rooms， 这个文档没写，需要手动测
+         2. [ ] ranking
+         3. [ ] chat
+         4. [ ] comment
+         5. [ ] forum
+      3. [ ] Client 这个主要耗时在测试上了
+         1. [ ] multiplayer
+         2. [ ] ranking
+         3. [ ] chat
+         4. [ ] comment
+         5. [ ] forum
    3. [ ] 在这之后，就是
       1. [ ] 修文档
       2. [ ] 修网站，并deno部署

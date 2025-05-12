@@ -10,21 +10,28 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::v2::model::score::structs::score::Score;
+use crate::v2::model::score::structs::multiplayer::multiplayer_score::MultiplayerScore;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MultiplayerScores {
     pub cursor_string: Option<String>,
     pub params: Params,
-    pub scores: Vec<Score>,
-    pub total: Option<i64>,
-    pub user_score: Option<Score>,
+    pub scores: Vec<MultiplayerScore>,
+    pub total: Option<u32>,
+    pub user_score: Option<MultiplayerScore>,
+    pub cursor: Option<Cursor>,
 }
 
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Cursor {
+    pub total_score: Option<u32>,
+    pub score_id: Option<u64>,
+}
 // wried docs...
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Params {
-    pub idk: Option<String>,
+    pub limit: Option<u32>,
+    pub sort: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]

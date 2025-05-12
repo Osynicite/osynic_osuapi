@@ -4,6 +4,7 @@ use super::api::events::ReqwestEvents;
 use super::api::notifications::ReqwestNotifications;
 use super::api::matches::ReqwestMatches;
 use super::api::news::ReqwestNews;
+use super::api::multiplayer::ReqwestMultiplayer;
 use super::api::changelog::ReqwestChangelog;
 use super::api::oauth::ReqwestOauth;
 use super::api::scores::ReqwestScores;
@@ -25,6 +26,7 @@ pub struct OsynicOsuApiV2Client {
     pub notifications: ReqwestNotifications,
     pub matches: ReqwestMatches,
     pub news: ReqwestNews,
+    pub multiplayer: ReqwestMultiplayer,
     pub changelog: ReqwestChangelog,
     pub search: ReqwestSearch,
     pub scores: ReqwestScores,
@@ -67,6 +69,10 @@ impl OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             news: ReqwestNews {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            multiplayer: ReqwestMultiplayer {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },
@@ -131,6 +137,10 @@ impl Default for OsynicOsuApiV2Client {
                 o_token: o_token.clone(),
             },
             news: ReqwestNews {
+                client: client.clone(),
+                o_token: o_token.clone(),
+            },
+            multiplayer: ReqwestMultiplayer {
                 client: client.clone(),
                 o_token: o_token.clone(),
             },

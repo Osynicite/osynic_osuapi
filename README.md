@@ -104,7 +104,7 @@ async fn main() -> Result<()> {
 | -------------- | ------- | ---------------- | ----------- | --------------- |
 | Authentication | 4       | 4 ✅              | OAuth与认证 | `oauth`         |
 | Beatmaps       | 7       | 7 ✅              | 谱面API     | `beatmaps`      |
-| Beatmapsets    | 3       | 2 ⚠️              | 谱面集API   | `beatmapsets`   |
+| Beatmapsets    | 3       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
 | Changelog      | 3       | 3 ✅              | 变更日志API | `changelog`     |
 | Chat           | 11      | 0 🈳              | 聊天API     | `chat`          |
 | Comments       | 7       | 0 🈳              | 评论API     | `comments`      |
@@ -112,7 +112,7 @@ async fn main() -> Result<()> {
 | Forums         | 8       | 0 🈳              | 论坛API     | `forums`        |
 | Home           | 1       | 1 ✅              | 首页API     | `search`        |
 | Matches        | 1       | 2 ✅              | 比赛API     | `matches`       |
-| Multiplayer    | 4       | 0 🈳              | 多人API     | `multiplayer`   |
+| Multiplayer    | 4       | 2 ⚠️403 Forbidden | 多人API     | `multiplayer`   |
 | News           | 2       | 2 ✅              | 新闻API     | `news`          |
 | Notifications  | 2       | 0 ❌403 Forbidden | 通知API     | `notifications` |
 | Rankings       | 3       | 0 🈳              | 排行榜API   | `rankings`      |
@@ -219,12 +219,12 @@ async fn main() -> Result<()> {
 
 ### Multiplayer
 
-| API                    | 支持 | 备注         | 示例名  |
-| ---------------------- | ---- | ------------ | ------- |
-| /get_user_high_score   | 🈳    | 获取用户高分 | `muhsg` |
-| /get_scores            | 🈳    | 获取多个分数 | `mssg`  |
-| /get_score             | 🈳    | 获取分数     | `msg`   |
-| /get_multiplayer_rooms | 🈳    | 获取房间     | `mrg`   |
+| API                    | 支持           | 备注         | 示例名  |
+| ---------------------- | -------------- | ------------ | ------- |
+| /get_user_high_score   | ❌403 Forbidden | 获取用户高分 | `muhsg` |
+| /get_scores            | ✅              | 获取多个分数 | `mssg`  |
+| /get_score             | ❌403 Forbidden | 获取分数     | `msg`   |
+| /get_multiplayer_rooms | ✅              | 获取房间     | `mrg`   |
 
 ### News
 

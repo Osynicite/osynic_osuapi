@@ -1,5 +1,6 @@
 use crate::error::Result;
-use crate::v1::model::multiplayer::MultiplayerScore;
+use crate::v2::model::score::structs::multiplayer::multiplayer_scores::MultiplayerScores;
+use crate::v2::model::room::structs::room::Room;
 use crate::v2::model::score::structs::score::Score;
 
 pub trait IMultiplayer {
@@ -16,7 +17,7 @@ pub trait IMultiplayer {
         limit: Option<u32>,
         sort: Option<String>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<MultiplayerScore>> + Send;
+    ) -> impl std::future::Future<Output = Result<MultiplayerScores>> + Send;
     fn get_score(
         &self,
         room: String,
@@ -30,6 +31,6 @@ pub trait IMultiplayer {
         season_id: Option<u32>,
         sort: Option<String>,
         type_group: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Score>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<Room>>> + Send;
 
 }
