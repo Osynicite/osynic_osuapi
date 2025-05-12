@@ -30,10 +30,34 @@
 
 # 📜 Features
 
-- [x] Support for V1 and V2 API
-- [x] Support for WASM(Only V1 Now)
+- **Support for both old and new APIs**: Supports all V1 endpoints and most V2 endpoints (except for Chat, Comments, Forums, and undocumented interfaces)
+- **WASM Compatibility**: Provides WebAssembly support for V1 interfaces, allowing direct access to the OSU API from web applications (though you may encounter CORS issues)
+- **Well-structured project**: Based on a three-module division of `client`, `interface`, and `model`; the `client` part aggregates `interface` interfaces and supports various HTTP clients for easy extension
 
 # 🚀 Quick Start
+
+## 1. Applying for OSU! API OAuth (V2) or Legacy API (V1)
+
+You can apply for API access through your [osu settings page](https://osu.ppy.sh/home/account/edit). Simply navigate to either the OAuth (V2) or Legacy API (V1) section to complete your application.
+
+## 2. Setting Up Environment Variables
+
+Create a `.env` file in your project's root directory with the following content:
+
+```env
+# V2 API
+CLIENT_ID="your_client_id"
+CLIENT_SECRET="your_client_secret"
+REDIRECT_URI="your_redirect_uri"
+CODE="your_code"  # Required for Authorization Code Grant authentication
+
+# V1 API
+API_KEY="your_api_key"
+```
+
+After setting up this file, you can use the `dotenvy` dependency to read these environment variables from the `.env` file in your project.
+
+### 3. Installing and Using the Library
 
 First, add the dependency to your `Cargo.toml`:
 
@@ -42,7 +66,9 @@ First, add the dependency to your `Cargo.toml`:
 osynic_osuapi = "0.1.0"
 ```
 
-Then, you can use it in your code:
+Then you can use it in your code~
+
+For example, the following code completes the CCG authentication and retrieves user information for "peppy". You can also find the corresponding example code `peppy.rs` in the `examples` directory.
 
 ```rust
 // Client Credentials Grant and Get Peppy's User Info

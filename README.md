@@ -30,10 +30,34 @@
 
 # 📜 特性
 
-- [x] 支持V1和V2 API
-- [x] 支持WASM(目前仅V1)
+- **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了Chat、Comments、Forums以及文档未归类的接口）
+- **WASM 兼容性**: 为 V1 接口 提供了 WebAssembly 支持，支持直接从网页应用访问 OSU API（但是会遇到CORS）
+- **项目结构良好**: 基于`client`、`interface`、`model`三重模块划分；`client`部分聚合`interface`接口并支持多种HTTP客户端，便于拓展
 
 # 🚀 快速开始
+
+## 1. 申请OSU!API的开放授权(V2)或者旧版本API(V1)
+
+申请网址就在你的[osu设置页](https://osu.ppy.sh/home/account/edit)，在开放授权(V2)或者旧版本API(V1)中申请即可
+
+## 2. 设置环境变量
+
+在你的项目根目录下创建一个`.env`文件，内容如下
+
+```env
+# V2 API
+CLIENT_ID="你的client_id"
+CLIENT_SECRET="你的client_secret"
+REDIRECT_URI="你的redirect_uri"
+CODE="你的code"(Authorization Code Grant认证时需要)
+
+# V1 API
+API_KEY="你的api_key"
+```
+
+然后我们就可以通过`dotenvy`依赖来读取`.env`中的环境变量了
+
+## 3. 添加依赖并使用
 
 首先在`Cargo.toml`中添加依赖
 
@@ -42,7 +66,9 @@
 osynic_osuapi = "0.1.0"
 ```
 
-然后在代码中使用即可~，例如下面的代码是一个完成CCG认证并获取peppy的用户信息的示例，你也可以在`examples`中找到对应的示例代码`peppy.rs`
+然后在代码中使用即可~
+
+例如下面的代码是一个完成CCG认证并获取peppy的用户信息的示例，你也可以在`examples`中找到对应的示例代码`peppy.rs`
 
 ```rust
 // Client Credentials Grant and Get Peppy's User Info
