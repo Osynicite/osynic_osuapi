@@ -53,15 +53,26 @@ pub struct Beatmapset {
     pub beatmaps: Option<Vec<Beatmap>>,
 
     // ----Extended Info----
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub pack_tags: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub converts: Option<Vec<Convert>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub current_nominations: Option<Vec<CurrentNomination>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<Description>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub genre: Option<Genre>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub language: Option<Language>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ratings: Option<Vec<u32>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub recent_favourites: Option<Vec<User>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub related_users: Option<Vec<User>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub related_tags: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub user: Option<User>,
 }

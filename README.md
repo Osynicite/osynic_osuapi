@@ -145,7 +145,7 @@ async fn main() -> Result<()> {
 | 大类           | API总数 | API支持数        | 备注        | 模块名          |
 | -------------- | ------- | ---------------- | ----------- | --------------- |
 | Authentication | 4       | 4 ✅              | OAuth与认证 | `oauth`         |
-| Beatmaps       | 7       | 7 ✅              | 谱面API     | `beatmaps`      |
+| Beatmaps       | 10      | 10 ✅             | 谱面API     | `beatmaps`      |
 | Beatmapsets    | 3       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
 | Changelog      | 3       | 3 ✅              | 变更日志API | `changelog`     |
 | Chat           | 11      | 0 ❌403 Forbidden | 聊天API     | `chat`          |
@@ -175,6 +175,9 @@ async fn main() -> Result<()> {
 
 | API                     | 支持 | 备注                 | 示例名  |
 | ----------------------- | ---- | -------------------- | ------- |
+| /get_beatmap_packs      | ✅    | 获取多个谱面包       | `bpsg`  |
+| /get_beatmap_pack       | ✅    | 获取谱面包           | `bpg`   |
+| /lookup_beatmap         | ✅    | 查阅谱面             | `bl`    |
 | /get_beatmap            | ✅    | 获取谱面             | `bg`    |
 | /get_beatmap_attributes | ✅    | 获取谱面属性         | `bga`   |
 | /get_beatmaps           | ✅    | 获取多个谱面         | `bgs`   |

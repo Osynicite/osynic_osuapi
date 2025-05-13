@@ -3,6 +3,8 @@ use crate::v2::client::request::check::check_res;
 use crate::v2::interface::beatmaps::IBeatmaps;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
+use crate::v2::model::beatmap::structs::pack::BeatmapPack;
+use crate::v2::model::beatmap::structs::packs::BeatmapPacks;
 use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::oauth::structs::o_token::OToken;
@@ -20,6 +22,83 @@ pub struct ReqwestBeatmaps {
 }
 
 impl IBeatmaps for ReqwestBeatmaps {
+    async fn get_beatmap_packs(
+            &self,
+            pack_type: Option<String>,
+            cursor_string: Option<String>,
+        ) -> Result<BeatmapPacks> {
+        println!("ReqwestBeatmaps get_beatmap_packs");
+        let access_token = {
+            let token = self.o_token.read().await;
+            token.access_token.clone()
+        };
+        let res = self
+            .client
+            .get("https://osu.ppy.sh/api/v2/beatmaps/packs")
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/json")
+            .header("Authorization", format!("Bearer {}", access_token))
+            .query(&[
+                ("type", pack_type),
+                ("cursor", cursor_string),
+            ])
+            .send()
+            .await?;
+        let response = check_res(res)?;
+        let beatmap_packs: BeatmapPacks = response.json().await?;
+        Ok(beatmap_packs)
+    }
+    async fn get_beatmap_pack(
+            &self,
+            pack: String,
+            legacy_only: Option<u32>,
+        ) -> Result<BeatmapPack> {
+        println!("ReqwestBeatmaps get_beatmap_pack");
+        let access_token = {
+            let token = self.o_token.read().await;
+            token.access_token.clone()
+        };
+        let res = self
+            .client
+            .get(format!("https://osu.ppy.sh/api/v2/beatmaps/packs/{}", pack))
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/json")
+            .header("Authorization", format!("Bearer {}", access_token))
+            .query(&[("legacy_only", legacy_only.map(|x| x.to_string()))])
+            .send()
+            .await?;
+        let response = check_res(res)?;
+        let beatmap_pack: BeatmapPack = response.json().await?;
+        Ok(beatmap_pack)
+    }
+    async fn lookup(
+            &self,
+            checksum: Option<String>,
+            filename: Option<String>,
+            id: Option<String>,
+        ) -> Result<Beatmap> {
+        println!("ReqwestBeatmaps lookup");
+        let access_token = {
+            let token = self.o_token.read().await;
+            token.access_token.clone()
+        };
+        let res = self
+            .client
+            .get("https://osu.ppy.sh/api/v2/beatmaps/lookup")
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/json")
+            .header("Authorization", format!("Bearer {}", access_token))
+            .query(&[
+                ("checksum", checksum),
+                ("filename", filename),
+                ("id", id),
+            ])
+            .send()
+            .await?;
+        let response = check_res(res)?;
+        let beatmap: Beatmap = response.json().await?;
+        Ok(beatmap)
+    }
     async fn get_user_score(
         &self,
         beatmap_id: u32,
@@ -106,7 +185,7 @@ impl IBeatmaps for ReqwestBeatmaps {
         mods: Option<String>,
         ranking_type: Option<String>,
     ) -> Result<BeatmapScores> {
-        println!("ReqwestBeatmaps get_Scores");
+        println!("ReqwestBeatmaps get_scores");
 
         let access_token = {
             let token = self.o_token.read().await;
@@ -206,7 +285,7 @@ impl IBeatmaps for ReqwestBeatmaps {
         ruleset: Option<Mode>,
         ruleset_id: Option<i32>,
     ) -> Result<Attributes> {
-        println!("ReqwestBeatmaps get_Beatmap_Attributes");
+        println!("ReqwestBeatmaps get_beatmap_attributes");
 
         let access_token = {
             let token = self.o_token.read().await;

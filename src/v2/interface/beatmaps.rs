@@ -2,6 +2,8 @@ use crate::error::Result;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
 use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
+use crate::v2::model::beatmap::structs::pack::BeatmapPack;
+use crate::v2::model::beatmap::structs::packs::BeatmapPacks;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::score::structs::beatmap_scores::BeatmapScores;
 use crate::v2::model::score::structs::beatmap_user_score::BeatmapUserScore;
@@ -9,7 +11,22 @@ use crate::v2::model::score::structs::non_legacy_scores::NonLegacyScores;
 use crate::v2::model::score::structs::scores::Scores;
 
 pub trait IBeatmaps {
-    // fn lookup(&self) -> impl std::future::Future<Output = Result<()>> + Send;
+    fn get_beatmap_packs(
+        &self,
+        pack_type: Option<String>,
+        cursor_string: Option<String>,
+    ) -> impl std::future::Future<Output = Result<BeatmapPacks>> + Send;
+    fn get_beatmap_pack(
+        &self,
+        pack: String,
+        legacy_only: Option<u32>,
+    ) -> impl std::future::Future<Output = Result<BeatmapPack>> + Send;
+    fn lookup(
+        &self,
+        checksum: Option<String>,
+        filename: Option<String>,
+        id: Option<String>,
+    ) -> impl std::future::Future<Output = Result<Beatmap>> + Send;
     fn get_user_score(
         &self,
         beatmap_id: u32,

@@ -126,15 +126,15 @@ This section is categorized based on the API classes from the [V1 Official Docum
 
 Interface modules can be found in `src/v1/interface`, with corresponding implementations in `src/v1/client/request/api` or `src/v1/client/gloo/api`.
 
-| API              | Support | Note             | Example Name | Module Name   |
-| ---------------- | ------- | ---------------- | ------------ | ------------- |
-| /get_beatmaps    | ✅       | Get beatmaps     | `gb`         | `beatmap`     |
-| /get_user        | ✅       | Get user         | `gu`         | `user`        |
-| /get_user_best   | ✅       | Get user's best  | `gub`        | `user`        |
-| /get_user_recent | ✅       | Get user's recent| `gur`        | `user`        |
-| /get_match       | ✅       | Get match        | `gm`         | `multiplayer` |
-| /get_scores      | ✅       | Get scores       | `gss`        | `scores`      |
-| /get_replay      | ✅       | Get replay       | `gr`         | `replay`      |
+| API              | Support | Note              | Example Name | Module Name   |
+| ---------------- | ------- | ----------------- | ------------ | ------------- |
+| /get_beatmaps    | ✅       | Get beatmaps      | `gb`         | `beatmap`     |
+| /get_user        | ✅       | Get user          | `gu`         | `user`        |
+| /get_user_best   | ✅       | Get user's best   | `gub`        | `user`        |
+| /get_user_recent | ✅       | Get user's recent | `gur`        | `user`        |
+| /get_match       | ✅       | Get match         | `gm`         | `multiplayer` |
+| /get_scores      | ✅       | Get scores        | `gss`        | `scores`      |
+| /get_replay      | ✅       | Get replay        | `gr`         | `replay`      |
 
 ## V2
 
@@ -142,54 +142,57 @@ This section is categorized based on the API classes from the [V2 Official Docum
 
 Interface modules can be found in `src/v2/interface`, with corresponding implementations in `src/v2/client/request/api`.
 
-| Category       | Total APIs | Supported        | Notes        | Module Name     |
-| -------------- | ---------- | ---------------- | ------------ | --------------- |
-| Authentication | 4          | 4 ✅             | OAuth & Auth | `oauth`         |
-| Beatmaps       | 7          | 7 ✅             | Beatmap API  | `beatmaps`      |
-| Beatmapsets    | 3          | 2 ⚠️403 Forbidden | Beatmapset API| `beatmapsets`   |
-| Changelog      | 3          | 3 ✅             | Changelog API| `changelog`     |
-| Chat           | 11         | 0 ❌403 Forbidden| Chat API     | `chat`          |
-| Comments       | 7          | 2 ⚠️403 Forbidden| Comments API | `comments`      |
-| Events         | 1          | 1 ✅             | Events API   | `events`        |
-| Forum         | 8           | 4 ⚠️403 Forbidden| Forum API   | `forum`        |
-| Home           | 1          | 1 ✅             | Home API     | `search`        |
-| Matches        | 1          | 2 ✅             | Matches API  | `matches`       |
-| Multiplayer    | 4          | 2 ⚠️403 Forbidden | Multiplayer API| `multiplayer`   |
-| News           | 2          | 2 ✅             | News API     | `news`          |
-| Notifications  | 2          | 0 ❌403 Forbidden | Notifications API| `notifications` |
-| Rankings       | 3          | 3 ✅             | Rankings API | `rankings`      |
-| Scores         | 1          | 1 ✅             | Scores API   | `scores`        |
-| Users          | 7          | 7 ✅             | Users API    | `users`         |
-| Wiki           | 1          | 1 ✅             | Wiki API     | `wiki`          |
+| Category       | Total APIs | Supported        | Notes             | Module Name     |
+| -------------- | ---------- | ---------------- | ----------------- | --------------- |
+| Authentication | 4          | 4 ✅              | OAuth & Auth      | `oauth`         |
+| Beatmaps       | 10         | 10 ✅             | Beatmap API       | `beatmaps`      |
+| Beatmapsets    | 3          | 2 ⚠️403 Forbidden | Beatmapset API    | `beatmapsets`   |
+| Changelog      | 3          | 3 ✅              | Changelog API     | `changelog`     |
+| Chat           | 11         | 0 ❌403 Forbidden | Chat API          | `chat`          |
+| Comments       | 7          | 2 ⚠️403 Forbidden | Comments API      | `comments`      |
+| Events         | 1          | 1 ✅              | Events API        | `events`        |
+| Forum          | 8          | 4 ⚠️403 Forbidden | Forum API         | `forum`         |
+| Home           | 1          | 1 ✅              | Home API          | `search`        |
+| Matches        | 1          | 2 ✅              | Matches API       | `matches`       |
+| Multiplayer    | 4          | 2 ⚠️403 Forbidden | Multiplayer API   | `multiplayer`   |
+| News           | 2          | 2 ✅              | News API          | `news`          |
+| Notifications  | 2          | 0 ❌403 Forbidden | Notifications API | `notifications` |
+| Rankings       | 3          | 3 ✅              | Rankings API      | `rankings`      |
+| Scores         | 1          | 1 ✅              | Scores API        | `scores`        |
+| Users          | 7          | 7 ✅              | Users API         | `users`         |
+| Wiki           | 1          | 1 ✅              | Wiki API          | `wiki`          |
 
 ### Authentication
 
-| API                     | Support | Note                                                                                                      | Example Name |
-| ----------------------- | ------- | --------------------------------------------------------------------------------------------------------- | ------------ |
-| /get_token_with_code    | ✅       | Short for Authorization Code Grant. Requires user browser OAuth authorization to get code for token request. No client_secret needed | `acg`      |
-| /get_token_without_code | ✅       | Short for Client Credentials Grant. Directly requests token without user authorization. client_secret must be set in environment variables | `ccg`      |
-| /refresh_token          | ✅       | Refresh token using refresh_token obtained with CCG authentication                                         | `refresh`    |
-| /revoke_current_token   | ✅       | Revoke current token                                                                                       | `revoke`     |
+| API                     | Support | Note                                                                                                                                       | Example Name |
+| ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| /get_token_with_code    | ✅       | Short for Authorization Code Grant. Requires user browser OAuth authorization to get code for token request. No client_secret needed       | `acg`        |
+| /get_token_without_code | ✅       | Short for Client Credentials Grant. Directly requests token without user authorization. client_secret must be set in environment variables | `ccg`        |
+| /refresh_token          | ✅       | Refresh token using refresh_token obtained with CCG authentication                                                                         | `refresh`    |
+| /revoke_current_token   | ✅       | Revoke current token                                                                                                                       | `revoke`     |
 
 ### Beatmaps
 
-| API                     | Support | Note                     | Example Name |
-| ----------------------- | ------- | ------------------------ | ------------ |
-| /get_beatmap            | ✅       | Get beatmap              | `bg`         |
-| /get_beatmap_attributes | ✅       | Get beatmap attributes   | `bga`        |
-| /get_beatmaps           | ✅       | Get multiple beatmaps    | `bgs`        |
-| /get_scores             | ✅       | Get beatmap scores       | `bgss`       |
-| /get_solo_scores        | ✅       | Get beatmap scores (Legacy)| `bgssn`      |
-| /get_user_score         | ✅       | Get user score           | `bgus`       |
-| /get_user_scores        | ✅       | Get multiple user scores | `bguss`      |
+| API                     | Support | Note                        | Example Name |
+| ----------------------- | ------- | --------------------------- | ------------ |
+| /get_beatmap_packs      | ✅       | Get beatmap packs           | `bpsg`       |
+| /get_beatmap_pack       | ✅       | Get beatmap pack            | `bpg`        |
+| /lookup_beatmap         | ✅       | Look up beatmap             | `bl`         |
+| /get_beatmap            | ✅       | Get beatmap                 | `bg`         |
+| /get_beatmap_attributes | ✅       | Get beatmap attributes      | `bga`        |
+| /get_beatmaps           | ✅       | Get multiple beatmaps       | `bgs`        |
+| /get_scores             | ✅       | Get beatmap scores          | `bgss`       |
+| /get_solo_scores        | ✅       | Get beatmap scores (Legacy) | `bgssn`      |
+| /get_user_score         | ✅       | Get user score              | `bgus`       |
+| /get_user_scores        | ✅       | Get multiple user scores    | `bguss`      |
 
 ### Beatmapsets
 
-| API             | Support | Note                 | Example Name |
-| --------------- | ------- | -------------------- | ------------ |
-| /download       | ❌       | Download beatmapset (lazer) | `bsd`  |
-| /get_beatmapset | ✅       | Get beatmapset       | `bsg`        |
-| /search         | ✅       | Search beatmapsets    | `bss`        |
+| API             | Support | Note                        | Example Name |
+| --------------- | ------- | --------------------------- | ------------ |
+| /download       | ❌       | Download beatmapset (lazer) | `bsd`        |
+| /get_beatmapset | ✅       | Get beatmapset              | `bsg`        |
+| /search         | ✅       | Search beatmapsets          | `bss`        |
 
 ### Changelog
 
@@ -201,8 +204,8 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 ### Chat
 
-| API                      | Support | Note                  | Example Name |
-| ------------------------ | ------- | --------------------- | ------------ |
+| API                      | Support        | Note                  | Example Name |
+| ------------------------ | -------------- | --------------------- | ------------ |
 | /chat_keepalive          | ❌403 Forbidden | Keep connection alive | `chk`        |
 | /create_new_pm           | ❌403 Forbidden | Create new PM         | `chpc`       |
 | /get_updates             | ❌403 Forbidden | Get updates           | `chug`       |
@@ -217,15 +220,15 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 ### Comments
 
-| API                  | Support | Note            | Example Name |
-| -------------------- | ------- | --------------- | ------------ |
-| /get_comments        | ✅              | Get comments    | `csg`        |
-| /post_comment        | ❌403 Forbidden | Post comment    | `cp`         |
-| /get_comment         | ✅              | Get comment     | `cg`         |
-| /edit_comment        | ❌403 Forbidden | Edit comment    | `ce`         |
-| /delete_comment      | ❌403 Forbidden | Delete comment  | `cd`         |
-| /add_comment_vote    | ❌403 Forbidden | Add vote        | `cva`        |
-| /remove_comment_vote | ❌403 Forbidden | Remove vote     | `cvr`        |
+| API                  | Support        | Note           | Example Name |
+| -------------------- | -------------- | -------------- | ------------ |
+| /get_comments        | ✅              | Get comments   | `csg`        |
+| /post_comment        | ❌403 Forbidden | Post comment   | `cp`         |
+| /get_comment         | ✅              | Get comment    | `cg`         |
+| /edit_comment        | ❌403 Forbidden | Edit comment   | `ce`         |
+| /delete_comment      | ❌403 Forbidden | Delete comment | `cd`         |
+| /add_comment_vote    | ❌403 Forbidden | Add vote       | `cva`        |
+| /remove_comment_vote | ❌403 Forbidden | Remove vote    | `cvr`        |
 
 ### Events
 
@@ -235,16 +238,16 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 ### Forum
 
-| API                  | Support | Note                       | Example Name |
-| -------------------- | ------- | -------------------------- | ------------ |
-| /reply_topic         | ❌401 Unauthorized  | Reply to topic             | `ftr`        |
-| /get_topics_listing  | ✅                  | Get topics list            | `ftlg`       |
-| /create_topic        | ❌401 Unauthorized  | Create topic               | `ftc`        |
-| /get_topic_and_posts | ✅                  | Get topic and posts        | `ftpg`       |
-| /edit_topic          | ❌403 Forbidden     | Edit topic                 | `fte`        |
-| /edit_post           | ❌403 Forbidden     | Edit post                  | `fpe`        |
-| /get_forum_listing   | ✅                  | Get forum list             | `flg`        |
-| /get_forum_and_topic | ✅                  | Get forum and topic        | `ftg`        |
+| API                  | Support           | Note                | Example Name |
+| -------------------- | ----------------- | ------------------- | ------------ |
+| /reply_topic         | ❌401 Unauthorized | Reply to topic      | `ftr`        |
+| /get_topics_listing  | ✅                 | Get topics list     | `ftlg`       |
+| /create_topic        | ❌401 Unauthorized | Create topic        | `ftc`        |
+| /get_topic_and_posts | ✅                 | Get topic and posts | `ftpg`       |
+| /edit_topic          | ❌403 Forbidden    | Edit topic          | `fte`        |
+| /edit_post           | ❌403 Forbidden    | Edit post           | `fpe`        |
+| /get_forum_listing   | ✅                 | Get forum list      | `flg`        |
+| /get_forum_and_topic | ✅                 | Get forum and topic | `ftg`        |
 
 ### Home
 
@@ -261,34 +264,34 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 ### Multiplayer
 
-| API                    | Support           | Note               | Example Name |
-| ---------------------- | ----------------- | ------------------ | ------------ |
-| /get_user_high_score   | ❌403 Forbidden    | Get user high score| `muhsg`      |
-| /get_scores            | ✅                 | Get multiple scores| `mssg`       |
-| /get_score             | ❌403 Forbidden    | Get score          | `msg`        |
-| /get_multiplayer_rooms | ✅                 | Get rooms          | `mrg`        |
+| API                    | Support        | Note                | Example Name |
+| ---------------------- | -------------- | ------------------- | ------------ |
+| /get_user_high_score   | ❌403 Forbidden | Get user high score | `muhsg`      |
+| /get_scores            | ✅              | Get multiple scores | `mssg`       |
+| /get_score             | ❌403 Forbidden | Get score           | `msg`        |
+| /get_multiplayer_rooms | ✅              | Get rooms           | `mrg`        |
 
 ### News
 
-| API               | Support | Note           | Example Name |
-| ----------------- | ------- | -------------- | ------------ |
-| /get_news_listing | ✅       | Get news list  | `nlg`        |
-| /get_news_post    | ✅       | Get news       | `npg`        |
+| API               | Support | Note          | Example Name |
+| ----------------- | ------- | ------------- | ------------ |
+| /get_news_listing | ✅       | Get news list | `nlg`        |
+| /get_news_post    | ✅       | Get news      | `npg`        |
 
 ### Notifications
 
-| API                         | Support           | Note              | Example Name |
-| --------------------------- | ----------------- | ----------------- | ------------ |
-| /get_notifications          | ❌403 Forbidden    | Get notifications | `ng`         |
-| /mark_notifications_as_read | ❌403 Forbidden    | Mark as read      | `nm`         |
+| API                         | Support        | Note              | Example Name |
+| --------------------------- | -------------- | ----------------- | ------------ |
+| /get_notifications          | ❌403 Forbidden | Get notifications | `ng`         |
+| /mark_notifications_as_read | ❌403 Forbidden | Mark as read      | `nm`         |
 
 ### Rankings
 
-| API                 | Support | Note                | Example Name |
-| ------------------- | ------- | ------------------- | ------------ |
-| /get_ranking        | ✅       | Get ranking         | `rg`         |
-| /get_kudosu_ranking | ✅       | Get Kudosu ranking  | `rkg`        |
-| /get_spotlights     | ✅       | Get spotlights      | `rsg`        |
+| API                 | Support | Note               | Example Name |
+| ------------------- | ------- | ------------------ | ------------ |
+| /get_ranking        | ✅       | Get ranking        | `rg`         |
+| /get_kudosu_ranking | ✅       | Get Kudosu ranking | `rkg`        |
+| /get_spotlights     | ✅       | Get spotlights     | `rsg`        |
 
 ### Scores
 
@@ -298,21 +301,21 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 ### Users
 
-| API                                                | Support | Note                          | Example Name |
-| -------------------------------------------------- | ------- | ----------------------------- | ------------ |
-| /get_own_data                                      | ✅       | Get own user info (CCG)       | `me`         |
-| /get_user_kudosu                                   | ✅       | Get user Kudosu               | `ukg`        |
-| /get_user_scores                                   | ✅       | Get user scores               | `ussg`       |
-| /get_user_beatmaps, /get_user_beatmaps_most_played | ✅       | Get user beatmap info         | `ubsg`       |
-| /get_user_recent_activity                          | ✅       | Get user recent activity      | `urag`       |
-| /get_user, /get_user_by_username                   | ✅       | Get user info                 | `ug`         |
-| /get_users                                         | ✅       | Get multiple users info       | `usg`        |
+| API                                                | Support | Note                     | Example Name |
+| -------------------------------------------------- | ------- | ------------------------ | ------------ |
+| /get_own_data                                      | ✅       | Get own user info (CCG)  | `me`         |
+| /get_user_kudosu                                   | ✅       | Get user Kudosu          | `ukg`        |
+| /get_user_scores                                   | ✅       | Get user scores          | `ussg`       |
+| /get_user_beatmaps, /get_user_beatmaps_most_played | ✅       | Get user beatmap info    | `ubsg`       |
+| /get_user_recent_activity                          | ✅       | Get user recent activity | `urag`       |
+| /get_user, /get_user_by_username                   | ✅       | Get user info            | `ug`         |
+| /get_users                                         | ✅       | Get multiple users info  | `usg`        |
 
 ### Wiki
 
-| API            | Support | Note           | Example Name |
-| -------------- | ------- | -------------- | ------------ |
-| /get_wiki_page | ✅       | Get Wiki page  | `wiki`       |
+| API            | Support | Note          | Example Name |
+| -------------- | ------- | ------------- | ------------ |
+| /get_wiki_page | ✅       | Get Wiki page | `wiki`       |
 
 # ❤️ Acknowledgements
 

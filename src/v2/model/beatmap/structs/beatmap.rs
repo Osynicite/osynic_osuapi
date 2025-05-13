@@ -38,10 +38,16 @@ pub struct Beatmap {
     pub checksum: String,
 
     // ----Extended Info----
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub max_combo: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub beatmapset: Option<Beatmapset>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub current_user_tag_ids: Option<Vec<u32>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub failtimes: Option<Failtimes>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub owners: Option<Vec<Owner>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub top_tag_ids: Option<Vec<u32>>,
 }
