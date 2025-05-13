@@ -1,3 +1,5 @@
+#![doc = include_str!("../README_EN.md")]
+
 #[cfg(feature = "v1")]
 pub mod v1;
 #[cfg(feature = "v2")]

@@ -57,7 +57,7 @@
 CLIENT_ID="你的client_id"
 CLIENT_SECRET="你的client_secret"
 REDIRECT_URI="你的redirect_uri"
-CODE="你的code"(Authorization Code Grant认证时需要)
+CODE="你的code" # Authorization Code Grant认证时需要
 
 # V1 API
 API_KEY="你的api_key"
@@ -76,7 +76,9 @@ osynic_osuapi = "0.1.0"
 
 然后在代码中使用即可~
 
-例如下面的代码是一个完成CCG认证并获取peppy的用户信息的示例，你也可以在`examples`中找到对应的示例代码`peppy.rs`
+### 示例一：用V2完成CCG认证并获取peppy的用户信息
+
+下面的代码来自`examples/peppy.rs`，可以直接运行`cargo run --example peppy`来查看效果
 
 ```rust
 // Client Credentials Grant and Get Peppy's User Info
@@ -105,12 +107,34 @@ async fn main() -> Result<()> {
         .get_user_by_username("peppy", None, None)
         .await?;
     println!("{:?}", peppy);
-    println!("osu_account_id: {}", peppy.id);
-    println!("username: {}", peppy.username);
-    println!("join_date: {}", peppy.join_date.unwrap_or_default());
-    println!("country_code: {}", peppy.country.as_ref().map_or("None".to_string(), |c| c.code.clone()));
-    println!("country_name: {}", peppy.country.as_ref().map_or("None".to_string(), |c| c.name.clone()));
-    println!("cover_url: {}", peppy.cover_url.unwrap_or_default());
+
+    Ok(())
+}
+```
+
+### 示例二：用V1查阅谱面信息
+
+下面的代码来自`examples/gb.rs`，可以直接运行`cargo run --example gb`来查看效果
+
+```rust
+// Get beatmap by hash
+use osynic_osuapi::error::Result;
+use osynic_osuapi::v1::client::request::client::OsynicOsuApiV1Client;
+use osynic_osuapi::v1::interface::beatmap::IBeatmap;
+use osynic_osuapi::v1::model::beatmap::GetBeatmapsParams;
+
+// You can also import all the client and interface modules by prelude
+// use osynic_osuapi::prelude::*;
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    dotenvy::dotenv().ok();
+    let api_key = std::env::var("API_KEY").expect("API_KEY is not set.");
+    let client = OsynicOsuApiV1Client::new(api_key.clone());
+    let params = GetBeatmapsParams::default().hash("69f77b0dfe67d288c1bf748f91ceb133".to_string());
+
+    let beatmaps = client.beatmap.get_beatmaps(params).await?;
+    println!("{:?}", beatmaps);
 
     Ok(())
 }

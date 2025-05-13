@@ -76,7 +76,9 @@ osynic_osuapi = "0.1.0"
 
 Then you can use it in your code~
 
-For example, the following code completes the CCG authentication and retrieves user information for "peppy". You can also find the corresponding example code `peppy.rs` in the `examples` directory.
+### Example 1: Complete CCG certification with V2 and obtain Peppy's user information
+
+The following code is from `examples/peppy.rs`, you can directly run `cargo run --example peppy` to see the effect
 
 ```rust
 // Client Credentials Grant and Get Peppy's User Info
@@ -105,12 +107,34 @@ async fn main() -> Result<()> {
         .get_user_by_username("peppy", None, None)
         .await?;
     println!("{:?}", peppy);
-    println!("osu_account_id: {}", peppy.id);
-    println!("username: {}", peppy.username);
-    println!("join_date: {}", peppy.join_date.unwrap_or_default());
-    println!("country_code: {}", peppy.country.as_ref().map_or("None".to_string(), |c| c.code.clone()));
-    println!("country_name: {}", peppy.country.as_ref().map_or("None".to_string(), |c| c.name.clone()));
-    println!("cover_url: {}", peppy.cover_url.unwrap_or_default());
+
+    Ok(())
+}
+```
+
+### Example 2: Check beatmap information with V1
+
+The following code is from `examples/gb.rs`, you can directly run `cargo run --example gb` to see the effect
+
+```rust
+// Get beatmap by hash
+use osynic_osuapi::error::Result;
+use osynic_osuapi::v1::client::request::client::OsynicOsuApiV1Client;
+use osynic_osuapi::v1::interface::beatmap::IBeatmap;
+use osynic_osuapi::v1::model::beatmap::GetBeatmapsParams;
+
+// You can also import all the client and interface modules by prelude
+// use osynic_osuapi::prelude::*;
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    dotenvy::dotenv().ok();
+    let api_key = std::env::var("API_KEY").expect("API_KEY is not set.");
+    let client = OsynicOsuApiV1Client::new(api_key.clone());
+    let params = GetBeatmapsParams::default().hash("69f77b0dfe67d288c1bf748f91ceb133".to_string());
+
+    let beatmaps = client.beatmap.get_beatmaps(params).await?;
+    println!("{:?}", beatmaps);
 
     Ok(())
 }
