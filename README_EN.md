@@ -30,7 +30,7 @@
 
 # 🧻 V1(WASM) Experience Website (Currently Still Facing CORS Issues)
 
-[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a demonstration website for `osynic_osuapi` quickly built using the [leptos](https://www.leptos.dev/) framework. It primarily utilizes V1's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, due to CORS issues, directly using the V1 API in the browser encounters cross-origin problems (since the WASM portion sends requests from the browser frontend), so this website is currently still affected by CORS and cannot function normally.
+[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a website quickly built with the [leptos](https://www.leptos.dev/) framework to demonstrate `osynic_osuapi`, primarily using V1's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, obviously, due to CORS issues, using the V1 API directly in the browser without a proxy will encounter cross-origin problems (since the WASM part makes requests from the browser frontend). Therefore, a relay server [osynic-cors.deno.dev](https://osynic-cors.deno.dev) was set up using [Deno](https://deno.dev), working with the WASM client's `proxy_url` to implement proxy requests.
 
 The website is currently deployed on [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/) via [Deno](deno.dev), but at this point it's basically just for viewing.
 
