@@ -146,7 +146,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | -------------- | ---------- | ---------------- | ----------------- | --------------- |
 | Authentication | 4          | 4 ✅              | OAuth & Auth      | `oauth`         |
 | Beatmaps       | 10         | 10 ✅             | Beatmap API       | `beatmaps`      |
-| Beatmapsets    | 3          | 2 ⚠️403 Forbidden | Beatmapset API    | `beatmapsets`   |
+| Beatmapsets    | 4          | 2 ⚠️403 Forbidden | Beatmapset API    | `beatmapsets`   |
 | Changelog      | 3          | 3 ✅              | Changelog API     | `changelog`     |
 | Chat           | 11         | 0 ❌403 Forbidden | Chat API          | `chat`          |
 | Comments       | 7          | 2 ⚠️403 Forbidden | Comments API      | `comments`      |
@@ -188,11 +188,12 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 
 ### Beatmapsets
 
-| API             | Support | Note                        | Example Name |
-| --------------- | ------- | --------------------------- | ------------ |
-| /download       | ❌       | Download beatmapset (lazer) | `bsd`        |
-| /get_beatmapset | ✅       | Get beatmapset              | `bsg`        |
-| /search         | ✅       | Search beatmapsets          | `bss`        |
+| API             | Support                  | Note                        | Example Name |
+| --------------- | ------------------------ | --------------------------- | ------------ |
+| /search         | ✅                        | Search beatmapsets          | `bss`        |
+| /lookup         | 🈳(The doc is unclear) | Look up beatmapset          | `bsl`        |
+| /get_beatmapset | ✅                        | Get beatmapset              | `bsg`        |
+| /download       | ❌                        | Download beatmapset (lazer) | `bsd`        |
 
 ### Changelog
 

@@ -5,8 +5,8 @@ edition = "2024"
 authors = ["Hako Chest <zoneherobrine@gmail.com>"]
 rust-version = "1.85.0"
 description = "The osu!api wrapper of Osynic App"
-keywords = ["osynic", "osu", "osu!api"]
-categories = ["game-development", "games"]
+keywords = ["osynic", "osu", "osu!api", "wasm"]
+categories = ["games", "api-bindings"]
 license = "MIT"
 documentation = "https://docs.rs/osynic_osuapi"
 repository = "https://github.com/osynicite/osynic_osuapi"
@@ -16,12 +16,10 @@ serde = { version = "1.0.219", features = ["derive"] }
 serde_json = { version = "1.0.140" }
 chrono = { version = "0.4.41", features = ["serde"] }
 
-tokio = { version = "1.45.0", features = ["full"], optional = true }
+tokio = { version = "1.45.0", features = ["sync","fs","macros","rt-multi-thread"], optional = true }
 reqwest = { version = "0.12.15", default-features = false, features = [
     "rustls-tls",
-    "blocking",
-    "json",
-    "cookies",
+    "json"
 ], optional = true }
 
 gloo-net = { version = "0.6.0", optional = true }

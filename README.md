@@ -146,7 +146,7 @@ async fn main() -> Result<()> {
 | -------------- | ------- | ---------------- | ----------- | --------------- |
 | Authentication | 4       | 4 ✅              | OAuth与认证 | `oauth`         |
 | Beatmaps       | 10      | 10 ✅             | 谱面API     | `beatmaps`      |
-| Beatmapsets    | 3       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
+| Beatmapsets    | 4       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
 | Changelog      | 3       | 3 ✅              | 变更日志API | `changelog`     |
 | Chat           | 11      | 0 ❌403 Forbidden | 聊天API     | `chat`          |
 | Comments       | 7       | 2 ⚠️403 Forbidden | 评论API     | `comments`      |
@@ -188,11 +188,12 @@ async fn main() -> Result<()> {
 
 ### Beatmapsets
 
-| API             | 支持 | 备注                | 示例名 |
-| --------------- | ---- | ------------------- | ------ |
-| /download       | ❌    | 下载谱面集（lazer） | `bsd`  |
-| /get_beatmapset | ✅    | 获取谱面集          | `bsg`  |
-| /search         | ✅    | 搜索谱面集          | `bss`  |
+| API             | 支持        | 备注                | 示例名 |
+| --------------- | ----------- | ------------------- | ------ |
+| /search         | ✅           | 搜索谱面集          | `bss`  |
+| /lookup         | 🈳(文档不明) | 查阅谱面集          | `bsl`  |
+| /get_beatmapset | ✅           | 获取谱面集          | `bsg`  |
+| /download       | ❌           | 下载谱面集（lazer） | `bsd`  |
 
 ### Changelog
 
