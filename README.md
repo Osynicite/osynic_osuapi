@@ -146,7 +146,7 @@ async fn main() -> Result<()> {
 | -------------- | ------- | ---------------- | ----------- | --------------- |
 | Authentication | 4       | 4 ✅              | OAuth与认证 | `oauth`         |
 | Beatmaps       | 10      | 10 ✅             | 谱面API     | `beatmaps`      |
-| Beatmapsets    | 4       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
+| Beatmapsets    | 7       | 2 ⚠️403 Forbidden | 谱面集API   | `beatmapsets`   |
 | Changelog      | 3       | 3 ✅              | 变更日志API | `changelog`     |
 | Chat           | 11      | 0 ❌403 Forbidden | 聊天API     | `chat`          |
 | Comments       | 7       | 2 ⚠️403 Forbidden | 评论API     | `comments`      |
@@ -162,7 +162,7 @@ async fn main() -> Result<()> {
 | Users          | 7       | 7 ✅              | 用户API     | `users`         |
 | Wiki           | 1       | 1 ✅              | Wiki API    | `wiki`          |
 
-### Authentication
+### [Authentication](https://osu.ppy.sh/docs/index.html#authentication)
 
 | API                     | 支持 | 备注                                                                                                        | 示例名    |
 | ----------------------- | ---- | ----------------------------------------------------------------------------------------------------------- | --------- |
@@ -171,7 +171,7 @@ async fn main() -> Result<()> {
 | /refresh_token          | ✅    | CCG认证下，通过拿到的refresh_token刷新token                                                                 | `refresh` |
 | /revoke_current_token   | ✅    | 撤销当前token                                                                                               | `revoke`  |
 
-### Beatmaps
+### [Beatmaps](https://osu.ppy.sh/docs/index.html#beatmaps)
 
 | API                     | 支持 | 备注                 | 示例名  |
 | ----------------------- | ---- | -------------------- | ------- |
@@ -186,16 +186,19 @@ async fn main() -> Result<()> {
 | /get_user_score         | ✅    | 获取用户成绩         | `bgus`  |
 | /get_user_scores        | ✅    | 获取用户多个成绩     | `bguss` |
 
-### Beatmapsets
+### [Beatmapsets](https://osu.ppy.sh/docs/index.html#beatmapsets)
 
 | API             | 支持        | 备注                | 示例名 |
 | --------------- | ----------- | ------------------- | ------ |
+| /get_beatmapsets_discussions_posts| 🈳(不稳定接口)| 获取铺面集讨论区发布| `bsdpg` |
+| /get_beatmapsets_discussions_vote| 🈳(不稳定接口)| 获取铺面集讨论区投票| `bsdvg` |
+| /get_beatmapsets_discussions| 🈳(不稳定接口)| 获取铺面集讨论区| `bsdg` |
 | /search         | ✅           | 搜索谱面集          | `bss`  |
 | /lookup         | 🈳(文档不明) | 查阅谱面集          | `bsl`  |
 | /get_beatmapset | ✅           | 获取谱面集          | `bsg`  |
 | /download       | ❌           | 下载谱面集（lazer） | `bsd`  |
 
-### Changelog
+### [Changelog](https://osu.ppy.sh/docs/index.html#changelog)
 
 | API                     | 支持 | 备注             | 示例名 |
 | ----------------------- | ---- | ---------------- | ------ |
@@ -203,7 +206,7 @@ async fn main() -> Result<()> {
 | /get_changelog_listing  | ✅    | 获取变更日志列表 | `clg`  |
 | /lookup_changelog_build | ✅    | 查阅变更日志     | `cbl`  |
 
-### Chat
+### [Chat](https://osu.ppy.sh/docs/index.html#chat)
 
 | API                      | 支持           | 备注         | 示例名 |
 | ------------------------ | -------------- | ------------ | ------ |
@@ -219,7 +222,7 @@ async fn main() -> Result<()> {
 | /create_channel          | ❌403 Forbidden | 创建频道     | `chc`  |
 | /get_channel             | ❌403 Forbidden | 获取频道     | `chg`  |
 
-### Comments
+### [Comments](https://osu.ppy.sh/docs/index.html#comments)
 
 | API                  | 支持           | 备注         | 示例名 |
 | -------------------- | -------------- | ------------ | ------ |
@@ -231,13 +234,13 @@ async fn main() -> Result<()> {
 | /add_comment_vote    | ❌403 Forbidden | 投票         | `cva`  |
 | /remove_comment_vote | ❌403 Forbidden | 撤销投票     | `cvr`  |
 
-### Events
+### [Events](https://osu.ppy.sh/docs/index.html#events)
 
 | API         | 支持 | 备注     | 示例名   |
 | ----------- | ---- | -------- | -------- |
 | /get_events | ✅    | 获取事件 | `events` |
 
-### Forum
+### [Forum](https://osu.ppy.sh/docs/index.html#forum)
 
 | API                  | 支持              | 备注             | 示例名 |
 | -------------------- | ----------------- | ---------------- | ------ |
@@ -250,20 +253,20 @@ async fn main() -> Result<()> {
 | /get_forum_listing   | ✅                 | 获取论坛列表     | `flg`  |
 | /get_forum_and_topic | ✅                 | 获取论坛及其主题 | `ftg`  |
 
-### Home
+### [Home](https://osu.ppy.sh/docs/index.html#home)
 
 | API     | 支持 | 备注     | 示例名   |
 | ------- | ---- | -------- | -------- |
 | /search | ✅    | 获取首页 | `search` |
 
-### Matches
+### [Matches](https://osu.ppy.sh/docs/index.html#matches)
 
 | API                  | 支持 | 备注         | 示例名 |
 | -------------------- | ---- | ------------ | ------ |
 | /get_matches_listing | ✅    | 获取比赛列表 | `mlg`  |
 | /get_match           | ✅    | 获取比赛     | `mg`   |
 
-### Multiplayer
+### [Multiplayer](https://osu.ppy.sh/docs/index.html#multiplayer)
 
 | API                    | 支持           | 备注         | 示例名  |
 | ---------------------- | -------------- | ------------ | ------- |
@@ -272,21 +275,21 @@ async fn main() -> Result<()> {
 | /get_score             | ❌403 Forbidden | 获取分数     | `msg`   |
 | /get_multiplayer_rooms | ✅              | 获取房间     | `mrg`   |
 
-### News
+### [News](https://osu.ppy.sh/docs/index.html#news)
 
 | API               | 支持 | 备注         | 示例名 |
 | ----------------- | ---- | ------------ | ------ |
 | /get_news_listing | ✅    | 获取新闻列表 | `nlg`  |
 | /get_news_post    | ✅    | 获取新闻     | `npg`  |
 
-### Notifications
+### [Notifications](https://osu.ppy.sh/docs/index.html#notifications)
 
 | API                         | 支持           | 备注     | 示例名 |
 | --------------------------- | -------------- | -------- | ------ |
 | /get_notifications          | ❌403 Forbidden | 获取通知 | `ng`   |
 | /mark_notifications_as_read | ❌403 Forbidden | 标为已读 | `nm`   |
 
-### Rankings
+### [Rankings](https://osu.ppy.sh/docs/index.html#rankings)
 
 | API                 | 支持 | 备注             | 示例名 |
 | ------------------- | ---- | ---------------- | ------ |
@@ -294,13 +297,13 @@ async fn main() -> Result<()> {
 | /get_kudosu_ranking | ✅    | 获取Kudosu排行榜 | `rkg`  |
 | /get_spotlights     | ✅    | 获取聚光灯       | `rsg`  |
 
-### Scores
+### [Scores](https://osu.ppy.sh/docs/index.html#scores)
 
 | API         | 支持 | 备注               | 示例名   |
 | ----------- | ---- | ------------------ | -------- |
 | /get_scores | ✅    | 获取最多1000个成绩 | `scores` |
 
-### Users
+### [Users](https://osu.ppy.sh/docs/index.html#users)
 
 | API                                                | 支持 | 备注                    | 示例名 |
 | -------------------------------------------------- | ---- | ----------------------- | ------ |
@@ -312,7 +315,7 @@ async fn main() -> Result<()> {
 | /get_user, /get_user_by_username                   | ✅    | 获取用户信息            | `ug`   |
 | /get_users                                         | ✅    | 获取多个用户信息        | `usg`  |
 
-### Wiki
+### [Wiki](https://osu.ppy.sh/docs/index.html#wiki)
 
 | API            | 支持 | 备注         | 示例名 |
 | -------------- | ---- | ------------ | ------ |
