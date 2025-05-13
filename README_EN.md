@@ -120,7 +120,7 @@ async fn main() -> Result<()> {
 
 Examples can be run using `cargo run --example example_name`
 
-## V1
+## [V1](https://github.com/ppy/osu-api/wiki)
 
 This section is categorized based on the API classes from the [V1 Official Documentation](https://github.com/ppy/osu-api/wiki).
 
@@ -136,7 +136,7 @@ Interface modules can be found in `src/v1/interface`, with corresponding impleme
 | /get_scores      | ✅       | Get scores        | `gss`        | `scores`      |
 | /get_replay      | ✅       | Get replay        | `gr`         | `replay`      |
 
-## V2
+## [V2](https://osu.ppy.sh/docs/index.html)
 
 This section is categorized based on the API classes from the [V2 Official Documentation](https://osu.ppy.sh/docs/index.html).
 
@@ -162,7 +162,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | Users          | 7          | 7 ✅              | Users API         | `users`         |
 | Wiki           | 1          | 1 ✅              | Wiki API          | `wiki`          |
 
-### Authentication
+### [Authentication](https://osu.ppy.sh/docs/index.html#authentication)
 
 | API                     | Support | Note                                                                                                                                       | Example Name |
 | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
@@ -171,7 +171,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /refresh_token          | ✅       | Refresh token using refresh_token obtained with CCG authentication                                                                         | `refresh`    |
 | /revoke_current_token   | ✅       | Revoke current token                                                                                                                       | `revoke`     |
 
-### Beatmaps
+### [Beatmaps](https://osu.ppy.sh/docs/index.html#beatmaps)
 
 | API                     | Support | Note                        | Example Name |
 | ----------------------- | ------- | --------------------------- | ------------ |
@@ -186,7 +186,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /get_user_score         | ✅       | Get user score              | `bgus`       |
 | /get_user_scores        | ✅       | Get multiple user scores    | `bguss`      |
 
-### Beatmapsets
+### [Beatmapsets](https://osu.ppy.sh/docs/index.html#beatmapsets)
 
 | API                               | Support               | Note                              | Example Name |
 | --------------------------------- | --------------------- | --------------------------------- | ------------ |
@@ -198,7 +198,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /get_beatmapset                   | ✅                     | Get beatmapset                    | `bsg`        |
 | /download                         | ❌                     | Download beatmapset (lazer)       | `bsd`        |
 
-### Changelog
+### [Changelog](https://osu.ppy.sh/docs/index.html#changelog)
 
 | API                     | Support | Note               | Example Name |
 | ----------------------- | ------- | ------------------ | ------------ |
@@ -206,7 +206,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /get_changelog_listing  | ✅       | Get changelog list | `clg`        |
 | /lookup_changelog_build | ✅       | Look up changelog  | `cbl`        |
 
-### Chat
+### [Chat](https://osu.ppy.sh/docs/index.html#chat)
 
 | API                      | Support        | Note                  | Example Name |
 | ------------------------ | -------------- | --------------------- | ------------ |
@@ -222,7 +222,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /create_channel          | ❌403 Forbidden | Create channel        | `chc`        |
 | /get_channel             | ❌403 Forbidden | Get channel           | `chg`        |
 
-### Comments
+### [Comments](https://osu.ppy.sh/docs/index.html#comments)
 
 | API                  | Support        | Note           | Example Name |
 | -------------------- | -------------- | -------------- | ------------ |
@@ -234,13 +234,13 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /add_comment_vote    | ❌403 Forbidden | Add vote       | `cva`        |
 | /remove_comment_vote | ❌403 Forbidden | Remove vote    | `cvr`        |
 
-### Events
+### [Events](https://osu.ppy.sh/docs/index.html#events)
 
 | API         | Support | Note       | Example Name |
 | ----------- | ------- | ---------- | ------------ |
 | /get_events | ✅       | Get events | `events`     |
 
-### Forum
+### [Forum](https://osu.ppy.sh/docs/index.html#forum)
 
 | API                  | Support           | Note                | Example Name |
 | -------------------- | ----------------- | ------------------- | ------------ |
@@ -253,20 +253,20 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /get_forum_listing   | ✅                 | Get forum list      | `flg`        |
 | /get_forum_and_topic | ✅                 | Get forum and topic | `ftg`        |
 
-### Home
+### [Home](https://osu.ppy.sh/docs/index.html#home)
 
 | API     | Support | Note     | Example Name |
 | ------- | ------- | -------- | ------------ |
 | /search | ✅       | Get home | `search`     |
 
-### Matches
+### [Matches](https://osu.ppy.sh/docs/index.html#matches)
 
 | API                  | Support | Note           | Example Name |
 | -------------------- | ------- | -------------- | ------------ |
 | /get_matches_listing | ✅       | Get match list | `mlg`        |
 | /get_match           | ✅       | Get match      | `mg`         |
 
-### Multiplayer
+### [Multiplayer](https://osu.ppy.sh/docs/index.html#multiplayer)
 
 | API                    | Support        | Note                | Example Name |
 | ---------------------- | -------------- | ------------------- | ------------ |
@@ -275,21 +275,21 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /get_score             | ❌403 Forbidden | Get score           | `msg`        |
 | /get_multiplayer_rooms | ✅              | Get rooms           | `mrg`        |
 
-### News
+### [News](https://osu.ppy.sh/docs/index.html#news)
 
 | API               | Support | Note          | Example Name |
 | ----------------- | ------- | ------------- | ------------ |
 | /get_news_listing | ✅       | Get news list | `nlg`        |
 | /get_news_post    | ✅       | Get news      | `npg`        |
 
-### Notifications
+### [Notifications](https://osu.ppy.sh/docs/index.html#notifications)
 
 | API                         | Support        | Note              | Example Name |
 | --------------------------- | -------------- | ----------------- | ------------ |
 | /get_notifications          | ❌403 Forbidden | Get notifications | `ng`         |
 | /mark_notifications_as_read | ❌403 Forbidden | Mark as read      | `nm`         |
 
-### Rankings
+### [Rankings](https://osu.ppy.sh/docs/index.html#rankings)
 
 | API                 | Support | Note               | Example Name |
 | ------------------- | ------- | ------------------ | ------------ |
@@ -297,13 +297,13 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /get_kudosu_ranking | ✅       | Get Kudosu ranking | `rkg`        |
 | /get_spotlights     | ✅       | Get spotlights     | `rsg`        |
 
-### Scores
+### [Scores](https://osu.ppy.sh/docs/index.html#scores)
 
 | API         | Support | Note                  | Example Name |
 | ----------- | ------- | --------------------- | ------------ |
 | /get_scores | ✅       | Get up to 1000 scores | `scores`     |
 
-### Users
+### [Users](https://osu.ppy.sh/docs/index.html#users)
 
 | API                                                | Support | Note                     | Example Name |
 | -------------------------------------------------- | ------- | ------------------------ | ------------ |
@@ -315,7 +315,7 @@ Interface modules can be found in `src/v2/interface`, with corresponding impleme
 | /get_user, /get_user_by_username                   | ✅       | Get user info            | `ug`         |
 | /get_users                                         | ✅       | Get multiple users info  | `usg`        |
 
-### Wiki
+### [Wiki](https://osu.ppy.sh/docs/index.html#wiki)
 
 | API            | Support | Note          | Example Name |
 | -------------- | ------- | ------------- | ------------ |

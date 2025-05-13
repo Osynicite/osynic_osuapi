@@ -120,7 +120,7 @@ async fn main() -> Result<()> {
 
 可通过`cargo run --exmaple 示例名`来运行API对应示例
 
-## V1
+## [V1](https://github.com/ppy/osu-api/wiki)
 
 本条目基于[V1官方文档](https://github.com/ppy/osu-api/wiki)的API大类进行划分，分类如下
 
@@ -136,7 +136,7 @@ async fn main() -> Result<()> {
 | /get_scores      | ✅    | 获取谱面成绩     | `gss`  | `scores`      |
 | /get_replay      | ✅    | 获取回放         | `gr`   | `replay`      |
 
-## V2
+## [V2](https://osu.ppy.sh/docs/index.html)
 
 本条目基于[V2官方文档](https://osu.ppy.sh/docs/index.html)的API大类进行划分，分类如下
 
