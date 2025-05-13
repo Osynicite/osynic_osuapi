@@ -48,7 +48,6 @@ impl ChannelType {
             ChannelType::Announce => "ANNOUNCE",
         }
     }
-
 }
 
 impl std::fmt::Display for ChannelType {
