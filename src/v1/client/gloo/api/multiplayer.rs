@@ -10,6 +10,7 @@ use web_sys::console;
 #[derive(Clone)]
 pub struct GlooMultiplayer {
     pub api_key: Arc<Mutex<String>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl IMultiplayer for GlooMultiplayer {
@@ -21,10 +22,16 @@ impl IMultiplayer for GlooMultiplayer {
             key.clone()
         };
 
+        let proxy_url = {
+            let url = self.proxy_url.lock().unwrap();
+            url.clone()
+        };
+
         let params = params.api_key(key).build_params();
 
         let url = format!(
-            "https://osu.ppy.sh/api/get_match?{}",
+            "{}https://osu.ppy.sh/api/get_match?{}",
+            proxy_url,
             serde_urlencoded::to_string(&params)?
         );
 

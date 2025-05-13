@@ -12,6 +12,7 @@ use web_sys::console;
 #[derive(Clone)]
 pub struct GlooUser {
     pub api_key: Arc<Mutex<String>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl IUser for GlooUser {
@@ -23,10 +24,16 @@ impl IUser for GlooUser {
             key.clone()
         };
 
+        let proxy_url = {
+            let url = self.proxy_url.lock().unwrap();
+            url.clone()
+        };
+
         let params = params.api_key(key).build_params();
 
         let url = format!(
-            "https://osu.ppy.sh/api/get_users?{}",
+            "{}https://osu.ppy.sh/api/get_user?{}",
+            proxy_url,
             serde_urlencoded::to_string(&params)?
         );
 
@@ -51,10 +58,16 @@ impl IUser for GlooUser {
             key.clone()
         };
 
+        let proxy_url = {
+            let url = self.proxy_url.lock().unwrap();
+            url.clone()
+        };
+
         let params = params.api_key(key).build_params();
 
         let url = format!(
-            "https://osu.ppy.sh/api/get_user_best?{}",
+            "{}https://osu.ppy.sh/api/get_user_best?{}",
+            proxy_url,
             serde_urlencoded::to_string(&params)?
         );
 
@@ -79,10 +92,16 @@ impl IUser for GlooUser {
             key.clone()
         };
 
+        let proxy_url = {
+            let url = self.proxy_url.lock().unwrap();
+            url.clone()
+        };
+
         let params = params.api_key(key).build_params();
 
         let url = format!(
-            "https://osu.ppy.sh/api/get_user_recent?{}",
+            "{}https://osu.ppy.sh/api/get_user_recent?{}",
+            proxy_url,
             serde_urlencoded::to_string(&params)?
         );
 

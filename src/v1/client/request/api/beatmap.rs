@@ -34,6 +34,10 @@ impl IBeatmap for ReqwestBeatmap {
         let response = check_res(res)?;
 
         let beatmaps: Vec<Beatmap> = response.json().await?;
+        
+        // let text = response.text().await?;
+        // println!("Response text: {}", text);
+        // let beatmaps: Vec<Beatmap> = serde_json::from_str(&text)?;
 
         Ok(beatmaps)
     }

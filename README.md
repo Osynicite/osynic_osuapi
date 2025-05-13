@@ -72,6 +72,8 @@ API_KEY="你的api_key"
 ```toml
 [dependencies]
 osynic_osuapi = "0.1.0"
+# 默认features是 ["v1", "v2", "not-wasm"]，如果需要在WASM环境中使用，需要关闭`not-wasm`特性，然后添加`wasm`特性，例如：
+# osynic_osuapi = { version = "0.1.0", default-features = false, features = ["v1", "v2", "wasm"] }
 ```
 
 然后在代码中使用即可~

@@ -7,7 +7,8 @@ use osynic_osuapi::v1::model::beatmap::GetBeatmapsParams;
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
-    let api_key = std::env::var("API_KEY").expect("API_KEY is not set.");
+    let api_key = std::env::var("API_KEY")
+        .expect("API_KEY is not set");
     let client = OsynicOsuApiV1Client::new(api_key.clone());
     let params = GetBeatmapsParams::default().hash("69f77b0dfe67d288c1bf748f91ceb133".to_string());
 

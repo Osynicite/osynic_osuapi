@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 pub struct Beatmap {
     pub approved: String, // 4 = loved, 3 = qualified, 2 = approved, 1 = ranked, 0 = pending, -1 = WIP, -2 = graveyard
     pub submit_date: String, // date submitted, in UTC
-    pub approved_date: String, // date ranked, in UTC
+    pub approved_date: Option<String>, // date ranked, in UTC
     pub last_update: String, // last update date, in UTC. May be after approved_date if map was unranked and reranked.
     pub artist: String,
     pub beatmap_id: String,    // beatmap_id is per difficulty
@@ -13,8 +13,8 @@ pub struct Beatmap {
     pub creator: String,
     pub creator_id: String,
     pub difficultyrating: String, // The number of stars the map would have in-game and on the website
-    pub diff_aim: String,
-    pub diff_speed: String,
+    pub diff_aim: Option<String>,
+    pub diff_speed: Option<String>,
     pub diff_size: String,     // Circle size value (CS)
     pub diff_overall: String,  // Overall difficulty (OD)
     pub diff_approach: String, // Approach Rate (AR)
@@ -31,6 +31,7 @@ pub struct Beatmap {
     pub tags: String,        // Beatmap tags separated by spaces.
     pub favourite_count: String, // Number of times the beatmap was favourited. (Americans: notice the ou!)
     pub rating: String,
+    pub packs: Option<String>, // Beatmap packs the beatmap is in. (comma separated)
     pub playcount: String, // Number of times the beatmap was played
     pub passcount: String, // Number of times the beatmap was passed, completed (the user didn't fail or retry)
     pub count_normal: String,

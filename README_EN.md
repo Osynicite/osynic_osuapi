@@ -72,6 +72,8 @@ First, add the dependency to your `Cargo.toml`:
 ```toml
 [dependencies]
 osynic_osuapi = "0.1.0"
+# The default features are ["v1", "v2", "not-wasm"]. If you need to use this in a WASM environment, you need to disable the `not-wasm` feature and add the `wasm` feature, for example:
+# osynic_osuapi = { version = "0.1.0", default-features = false, features = ["v1", "v2", "wasm"] }
 ```
 
 Then you can use it in your code~

@@ -10,6 +10,7 @@ use web_sys::console;
 #[derive(Clone)]
 pub struct GlooBeatmap {
     pub api_key: Arc<Mutex<String>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl IBeatmap for GlooBeatmap {
@@ -21,10 +22,16 @@ impl IBeatmap for GlooBeatmap {
             key.clone()
         };
 
+        let proxy_url = {
+            let url = self.proxy_url.lock().unwrap();
+            url.clone()
+        };
+
         let params = params.api_key(key).build_params();
 
         let url = format!(
-            "https://osu.ppy.sh/api/get_beatmaps?{}",
+            "{}https://osu.ppy.sh/api/get_beatmaps?{}",
+            proxy_url,
             serde_urlencoded::to_string(&params)?
         );
 

@@ -13,29 +13,43 @@ pub struct OsynicOsuApiV1GlooClient {
     pub replay: GlooReplay,
     pub score: GlooScores,
     pub api_key: Arc<Mutex<String>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl OsynicOsuApiV1GlooClient {
     pub fn new(api_key: String) -> Self {
         let api_key = Arc::new(Mutex::new(api_key));
+        let proxy_url = Arc::new(Mutex::new(String::new()));
         OsynicOsuApiV1GlooClient {
             beatmap: GlooBeatmap {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             user: GlooUser {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             multiplayer: GlooMultiplayer {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             replay: GlooReplay {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             score: GlooScores {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             api_key,
+            proxy_url,
         }
+    }
+
+    /// Set the proxy URL for all API calls
+    pub fn set_proxy_url(&self, proxy_url: String) {
+        let mut url = self.proxy_url.lock().unwrap();
+        *url = proxy_url;
     }
 
     pub fn set_api_key(&self, api_key: String) {
@@ -47,23 +61,30 @@ impl OsynicOsuApiV1GlooClient {
 impl Default for OsynicOsuApiV1GlooClient {
     fn default() -> Self {
         let api_key = Arc::new(Mutex::new(String::new()));
+        let proxy_url = Arc::new(Mutex::new(String::new()));
         OsynicOsuApiV1GlooClient {
             beatmap: GlooBeatmap {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             user: GlooUser {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             multiplayer: GlooMultiplayer {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             replay: GlooReplay {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             score: GlooScores {
                 api_key: api_key.clone(),
+                proxy_url: proxy_url.clone(),
             },
             api_key,
+            proxy_url,
         }
     }
 }
