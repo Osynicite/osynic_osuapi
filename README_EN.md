@@ -28,7 +28,7 @@
 - [V1 Documentation](https://github.com/ppy/osu-api/wiki)
 - [V2 Documentation](https://osu.ppy.sh/docs/index.html)
 
-# 🧻 V1(WASM) Experience Website (Currently Still Facing CORS Issues)
+# 🧻 API Experience Website
 
 [LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a website quickly built with the [leptos](https://www.leptos.dev/) framework to demonstrate `osynic_osuapi`, primarily using V1's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, obviously, due to CORS issues, using the V1 API directly in the browser without a proxy will encounter cross-origin problems (since the WASM part makes requests from the browser frontend). Therefore, a relay server [osynic-cors.deno.dev](https://osynic-cors.deno.dev) was set up using [Deno](https://deno.dev), working with the WASM client's `proxy_url` to implement proxy requests.
 
