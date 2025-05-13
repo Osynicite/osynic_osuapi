@@ -18,10 +18,7 @@ async fn main() -> Result<()> {
     });
     let updates = client
         .chat
-        .leave_channel(
-            "Ciallo".to_string(),
-            "Islatri".to_string(),
-        )
+        .leave_channel("Ciallo".to_string(), "Islatri".to_string())
         .await?;
     println!("{:?}", updates);
     Ok(())
@@ -30,22 +27,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestChat leave_channel
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/chat/channels/Ciallo/users/Islatri",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 16:06:11 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93eb296eac1f0973-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/chat/channels/Ciallo/users/Islatri",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 16:06:11 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93eb296eac1f0973-HKG"
+    }
 }
 */

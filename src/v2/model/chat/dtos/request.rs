@@ -1,23 +1,23 @@
 // Body Parameters
-// channel   object  optional  
+// channel   object  optional
 
 // channel details; required if type is ANNOUNCE.
-// name   string  optional  
+// name   string  optional
 
 // the channel name; required if type is ANNOUNCE.
-// description   string  optional  
+// description   string  optional
 
 // the channel description; required if type is ANNOUNCE.
-// message   string  optional  
+// message   string  optional
 
 // message to send with the announcement; required if type is ANNOUNCE.
-// target_id   integer  optional  
+// target_id   integer  optional
 
 // target user id; required if type is PM; ignored, otherwise.
-// target_ids   integer[]  optional  
+// target_ids   integer[]  optional
 
 // target user ids; required if type is ANNOUNCE; ignored, otherwise.
-// type   string   
+// type   string
 
 // channel type (currently only supports PM and ANNOUNCE)
 
@@ -33,14 +33,13 @@ pub struct CreateChannelParams {
     pub channel_type: String,
 }
 
-
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Channel {
     pub id: Option<u32>,
     pub name: Option<String>,
- }
+}
 
- impl CreateChannelParams {
+impl CreateChannelParams {
     pub fn new(
         channel: Option<Channel>,
         message: Option<String>,

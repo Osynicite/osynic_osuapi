@@ -18,34 +18,31 @@ async fn main() -> Result<()> {
     });
     let comment = client
         .comments
-        .delete_comment(
-            "3612366".to_string(),
-        )
+        .delete_comment("3612366".to_string())
         .await?;
     println!("{:?}", comment);
     Ok(())
 }
 
-
 /*
 ReqwestComments delete_comment
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/comments/3612366",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 12:58:47 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1198",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93ea16efdb5e03d7-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/comments/3612366",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 12:58:47 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1198",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93ea16efdb5e03d7-HKG"
+    }
 }
 */

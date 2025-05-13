@@ -28,8 +28,8 @@
 // PollOption
 // Field 	Type 	Notes
 // id 	integer 	Unique only per-topic.
-// text.bbcode 	string 	
-// text.html 	string 	
+// text.bbcode 	string
+// text.html 	string
 // vote_count 	integer? 	Not present if the poll is incomplete and results are hidden.
 
 use serde::{Deserialize, Serialize};

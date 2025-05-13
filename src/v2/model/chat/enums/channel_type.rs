@@ -1,9 +1,9 @@
 // ChannelType
 // Type 	Permission Check for Joining/Messaging
-// PUBLIC 	
+// PUBLIC
 // PRIVATE 	is player in the allowed groups? (channel.allowed_groups)
 // MULTIPLAYER 	is player currently in the mp game?
-// SPECTATOR 	
+// SPECTATOR
 // TEMPORARY 	deprecated
 // PM 	see below (user_channels)
 // GROUP 	is player in channel? (user_channels)

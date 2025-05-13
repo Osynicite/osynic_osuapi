@@ -1,8 +1,8 @@
 use crate::error::Result;
 use crate::v2::client::request::check::check_res;
 use crate::v2::interface::comments::IComments;
-use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::comment::structs::bundle::CommentBundle;
+use crate::v2::model::oauth::structs::o_token::OToken;
 
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -21,7 +21,7 @@ impl IComments for ReqwestComments {
         commentable_id: Option<String>,
         cursor: Option<String>,
         parent_id: Option<String>,
-        sort: Option<String>
+        sort: Option<String>,
     ) -> Result<CommentBundle> {
         println!("ReqwestComments get_comments");
 
@@ -30,7 +30,8 @@ impl IComments for ReqwestComments {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .get("https://osu.ppy.sh/api/v2/comments")
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
@@ -43,7 +44,8 @@ impl IComments for ReqwestComments {
                 ("parent_id", parent_id.map(|s| s.to_string())),
                 ("sort", sort.map(|s| s.to_string())),
             ])
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
@@ -61,7 +63,7 @@ impl IComments for ReqwestComments {
         commentable_id: Option<String>,
         parent_id: Option<String>,
         message: Option<String>,
-    ) -> Result<CommentBundle>{
+    ) -> Result<CommentBundle> {
         println!("ReqwestComments post_comment");
 
         let access_token = {
@@ -69,30 +71,34 @@ impl IComments for ReqwestComments {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .post("https://osu.ppy.sh/api/v2/comments")
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
             .query(&[
-                ("comment.commentable_type", commentable_type.map(|s| s.to_string())),
-                ("comment.commentable_id", commentable_id.map(|s| s.to_string())),
+                (
+                    "comment.commentable_type",
+                    commentable_type.map(|s| s.to_string()),
+                ),
+                (
+                    "comment.commentable_id",
+                    commentable_id.map(|s| s.to_string()),
+                ),
                 ("comment.message", message.map(|s| s.to_string())),
                 ("comment.parent_id", parent_id.map(|s| s.to_string())),
             ])
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let comments: CommentBundle = response.json().await?;
 
         Ok(comments)
-
     }
-    async fn get_comment(
-        &self,
-        comment: String,
-    ) -> Result<CommentBundle>{
+    async fn get_comment(&self, comment: String) -> Result<CommentBundle> {
         println!("ReqwestComments get_comment");
 
         let access_token = {
@@ -100,25 +106,26 @@ impl IComments for ReqwestComments {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .get(format!("https://osu.ppy.sh/api/v2/comments/{}", comment))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let comments: CommentBundle = response.json().await?;
 
         Ok(comments)
-
     }
     async fn edit_comment(
         &self,
         comment: String,
         message: Option<String>,
-    ) -> Result<CommentBundle>{
+    ) -> Result<CommentBundle> {
         println!("ReqwestComments edit_comment");
 
         let access_token = {
@@ -126,7 +133,8 @@ impl IComments for ReqwestComments {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .patch(format!("https://osu.ppy.sh/api/v2/comments/{}", comment))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
@@ -134,19 +142,16 @@ impl IComments for ReqwestComments {
             .json(&serde_json::json!({
                 "message": message,
             }))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let comments: CommentBundle = response.json().await?;
 
         Ok(comments)
-
     }
-    async fn delete_comment(
-        &self,
-        comment: String,
-    ) -> Result<CommentBundle>{
+    async fn delete_comment(&self, comment: String) -> Result<CommentBundle> {
         println!("ReqwestComments delete_comment");
 
         let access_token = {
@@ -154,24 +159,22 @@ impl IComments for ReqwestComments {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .delete(format!("https://osu.ppy.sh/api/v2/comments/{}", comment))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let comments: CommentBundle = response.json().await?;
 
         Ok(comments)
-
     }
-    async fn add_comment_vote(
-        &self,
-        comment: String,
-    ) -> Result<CommentBundle>{
+    async fn add_comment_vote(&self, comment: String) -> Result<CommentBundle> {
         println!("ReqwestComments add_comment_vote");
 
         let access_token = {
@@ -179,24 +182,25 @@ impl IComments for ReqwestComments {
             token.access_token.clone()
         };
 
-        let res = self.client
-            .post(format!("https://osu.ppy.sh/api/v2/comments/{}/vote", comment))
+        let res = self
+            .client
+            .post(format!(
+                "https://osu.ppy.sh/api/v2/comments/{}/vote",
+                comment
+            ))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let comments: CommentBundle = response.json().await?;
 
         Ok(comments)
-
     }
-    async fn remove_comment_vote(
-        &self,
-        comment: String,
-    ) -> Result<CommentBundle>{
+    async fn remove_comment_vote(&self, comment: String) -> Result<CommentBundle> {
         println!("ReqwestComments remove_comment_vote");
 
         let access_token = {
@@ -204,18 +208,22 @@ impl IComments for ReqwestComments {
             token.access_token.clone()
         };
 
-        let res = self.client
-            .delete(format!("https://osu.ppy.sh/api/v2/comments/{}/vote", comment))
+        let res = self
+            .client
+            .delete(format!(
+                "https://osu.ppy.sh/api/v2/comments/{}/vote",
+                comment
+            ))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let comments: CommentBundle = response.json().await?;
 
         Ok(comments)
-
     }
 }

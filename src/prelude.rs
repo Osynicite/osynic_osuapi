@@ -12,30 +12,14 @@ pub use crate::v2::client::gloo::client::OsynicOsuApiV2GlooClient;
 
 #[cfg(feature = "v1")]
 pub use crate::v1::interface::{
-    beatmap::IBeatmap,
-    user::IUser,
-    replay::IReplay,
-    scores::IScores as IScoresV1,
-    multiplayer::IMultiplayer as IMultiplayerV1,
+    beatmap::IBeatmap, multiplayer::IMultiplayer as IMultiplayerV1, replay::IReplay,
+    scores::IScores as IScoresV1, user::IUser,
 };
 
 #[cfg(feature = "v2")]
 pub use crate::v2::interface::{
-    oauth::IOauth,
-    beatmapsets::IBeatmapsets,
-    beatmaps::IBeatmaps,
-    changelog::IChangelog,
-    chat::IChat,
-    comments::IComments,
-    events::IEvents,
-    forum::IForum,
-    search::ISearch,
-    matches::IMatches,
-    multiplayer::IMultiplayer,
-    news::INews,
-    notifications::INotifications,
-    ranking::IRanking,
-    scores::IScores,
-    users::IUsers,
-    wiki::IWiki,
+    beatmaps::IBeatmaps, beatmapsets::IBeatmapsets, changelog::IChangelog, chat::IChat,
+    comments::IComments, events::IEvents, forum::IForum, matches::IMatches,
+    multiplayer::IMultiplayer, news::INews, notifications::INotifications, oauth::IOauth,
+    ranking::IRanking, scores::IScores, search::ISearch, users::IUsers, wiki::IWiki,
 };

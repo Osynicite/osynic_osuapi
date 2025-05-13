@@ -4,7 +4,7 @@
 // \"with_poll\": true,
 // \"forum_topic_poll[options]\": \"item A...\",
 // \"forum_topic_poll[title]\": \"my poll\"
-    
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -112,5 +112,4 @@ impl CreateTopicParams {
         }
         self
     }
-
 }

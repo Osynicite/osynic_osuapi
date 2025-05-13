@@ -1,12 +1,12 @@
 pub mod beatmaps;
 pub mod beatmapsets;
 pub mod changelog;
+pub mod chat;
+pub mod comments;
 pub mod events;
+pub mod forum;
 pub mod matches;
 pub mod multiplayer;
-pub mod comments;
-pub mod chat;
-pub mod forum;
 pub mod news;
 pub mod notifications;
 pub mod oauth;

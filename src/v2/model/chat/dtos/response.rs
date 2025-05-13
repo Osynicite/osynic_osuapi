@@ -15,7 +15,7 @@ pub struct CreateNewPMResponse {
 pub struct GetUpdatesResponse {
     pub presence: Option<Vec<ChatMessage>>,
     // `messages` field is not used and will be removed.
-    pub messages: (), 
+    pub messages: (),
     pub silences: Option<Vec<UserSilence>>,
 }
 

@@ -1,6 +1,8 @@
 use crate::error::Result;
 use crate::v2::model::forum::dtos::request::CreateTopicParams;
-use crate::v2::model::forum::dtos::response::{CreateTopicResponse, GetForumAndTopicsResponse, GetTopicAndPostsResponse};
+use crate::v2::model::forum::dtos::response::{
+    CreateTopicResponse, GetForumAndTopicsResponse, GetTopicAndPostsResponse,
+};
 use crate::v2::model::forum::structs::forums::Forums;
 use crate::v2::model::forum::structs::post::ForumPost;
 use crate::v2::model::forum::structs::topic::{ForumTopic, TopicListing};

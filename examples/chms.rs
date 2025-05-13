@@ -18,11 +18,7 @@ async fn main() -> Result<()> {
     });
     let updates = client
         .chat
-        .send_message_to_channel(
-            114514,
-            "Ciallo～(∠・ω< )⌒★".to_string(),
-            false
-        )
+        .send_message_to_channel(114514, "Ciallo～(∠・ω< )⌒★".to_string(), false)
         .await?;
     println!("{:?}", updates);
     Ok(())
@@ -31,22 +27,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestChat send_message_to_channel
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/chat/channels/114514/messages",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 16:03:53 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93eb260ffc888065-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/chat/channels/114514/messages",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 16:03:53 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93eb260ffc888065-HKG"
+    }
 }
 */

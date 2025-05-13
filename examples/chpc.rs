@@ -19,12 +19,7 @@ async fn main() -> Result<()> {
     // 给SisypheOVO(35628968)发私信，内容为"Ciallo～(∠・ω< )⌒★"
     let pm = client
         .chat
-        .create_new_pm(
-            35628968,
-            "Ciallo～(∠・ω< )⌒★".to_string(),
-            false,
-            None
-        )
+        .create_new_pm(35628968, "Ciallo～(∠・ω< )⌒★".to_string(), false, None)
         .await?;
     println!("{:?}", pm);
     Ok(())
@@ -33,22 +28,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestChat create_new_pm
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/chat/new",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 14:19:38 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93ea8d5f4aba0470-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/chat/new",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 14:19:38 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93ea8d5f4aba0470-HKG"
+    }
 }
 */

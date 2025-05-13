@@ -3,9 +3,9 @@ use crate::v2::client::request::check::check_res;
 use crate::v2::interface::beatmaps::IBeatmaps;
 use crate::v2::model::beatmap::structs::beatmap::Beatmap;
 use crate::v2::model::beatmap::structs::beatmaps::Beatmaps;
+use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 use crate::v2::model::beatmap::structs::pack::BeatmapPack;
 use crate::v2::model::beatmap::structs::packs::BeatmapPacks;
-use crate::v2::model::beatmap::structs::difficulty_attributes::Attributes;
 use crate::v2::model::mode::enums::mode::Mode;
 use crate::v2::model::oauth::structs::o_token::OToken;
 use crate::v2::model::score::structs::beatmap_scores::BeatmapScores;
@@ -23,10 +23,10 @@ pub struct ReqwestBeatmaps {
 
 impl IBeatmaps for ReqwestBeatmaps {
     async fn get_beatmap_packs(
-            &self,
-            pack_type: Option<String>,
-            cursor_string: Option<String>,
-        ) -> Result<BeatmapPacks> {
+        &self,
+        pack_type: Option<String>,
+        cursor_string: Option<String>,
+    ) -> Result<BeatmapPacks> {
         println!("ReqwestBeatmaps get_beatmap_packs");
         let access_token = {
             let token = self.o_token.read().await;
@@ -38,10 +38,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .query(&[
-                ("type", pack_type),
-                ("cursor", cursor_string),
-            ])
+            .query(&[("type", pack_type), ("cursor", cursor_string)])
             .send()
             .await?;
         let response = check_res(res)?;
@@ -49,10 +46,10 @@ impl IBeatmaps for ReqwestBeatmaps {
         Ok(beatmap_packs)
     }
     async fn get_beatmap_pack(
-            &self,
-            pack: String,
-            legacy_only: Option<u32>,
-        ) -> Result<BeatmapPack> {
+        &self,
+        pack: String,
+        legacy_only: Option<u32>,
+    ) -> Result<BeatmapPack> {
         println!("ReqwestBeatmaps get_beatmap_pack");
         let access_token = {
             let token = self.o_token.read().await;
@@ -72,11 +69,11 @@ impl IBeatmaps for ReqwestBeatmaps {
         Ok(beatmap_pack)
     }
     async fn lookup(
-            &self,
-            checksum: Option<String>,
-            filename: Option<String>,
-            id: Option<String>,
-        ) -> Result<Beatmap> {
+        &self,
+        checksum: Option<String>,
+        filename: Option<String>,
+        id: Option<String>,
+    ) -> Result<Beatmap> {
         println!("ReqwestBeatmaps lookup");
         let access_token = {
             let token = self.o_token.read().await;
@@ -88,11 +85,7 @@ impl IBeatmaps for ReqwestBeatmaps {
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .query(&[
-                ("checksum", checksum),
-                ("filename", filename),
-                ("id", id),
-            ])
+            .query(&[("checksum", checksum), ("filename", filename), ("id", id)])
             .send()
             .await?;
         let response = check_res(res)?;

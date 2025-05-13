@@ -2,11 +2,13 @@ use crate::error::Result;
 use crate::v2::client::request::check::check_res;
 use crate::v2::interface::forum::IForum;
 use crate::v2::model::forum::dtos::request::CreateTopicParams;
-use crate::v2::model::forum::dtos::response::{CreateTopicResponse, GetForumAndTopicsResponse, GetTopicAndPostsResponse};
+use crate::v2::model::forum::dtos::response::{
+    CreateTopicResponse, GetForumAndTopicsResponse, GetTopicAndPostsResponse,
+};
 use crate::v2::model::forum::structs::forums::Forums;
+use crate::v2::model::forum::structs::post::ForumPost;
 use crate::v2::model::forum::structs::topic::{ForumTopic, TopicListing};
 use crate::v2::model::oauth::structs::o_token::OToken;
-use crate::v2::model::forum::structs::post::ForumPost;
 
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -18,11 +20,7 @@ pub struct ReqwestForum {
 }
 
 impl IForum for ReqwestForum {
-    async fn reply_topic(
-        &self,
-        topic: String,
-        body: String,
-    ) -> Result<ForumPost> {
+    async fn reply_topic(&self, topic: String, body: String) -> Result<ForumPost> {
         println!("ReqwestForum reply_topic");
 
         let access_token = {
@@ -30,15 +28,20 @@ impl IForum for ReqwestForum {
             token.access_token.clone()
         };
 
-        let res = self.client
-            .post(format!("https://osu.ppy.sh/api/v2/forums/topics/{}/reply", topic))
+        let res = self
+            .client
+            .post(format!(
+                "https://osu.ppy.sh/api/v2/forums/topics/{}/reply",
+                topic
+            ))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
             .json(&serde_json::json!({
                 "body": body
             }))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
@@ -60,7 +63,8 @@ impl IForum for ReqwestForum {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .get("https://osu.ppy.sh/api/v2/forums/topics")
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
@@ -71,7 +75,8 @@ impl IForum for ReqwestForum {
                 ("limit", limit.map(|s| s.to_string())),
                 ("cursor_string", cursor_string.map(|s| s.to_string())),
             ])
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
@@ -80,26 +85,24 @@ impl IForum for ReqwestForum {
         Ok(topic_listing)
     }
 
-    async fn create_topic(
-            &self,
-            params: CreateTopicParams,
-        ) -> Result<CreateTopicResponse> {
+    async fn create_topic(&self, params: CreateTopicParams) -> Result<CreateTopicResponse> {
         println!("ReqwestForum create_topic");
         let access_token = {
             let token = self.o_token.read().await;
             token.access_token.clone()
         };
-        let res = self.client
+        let res = self
+            .client
             .post("https://osu.ppy.sh/api/v2/forums/topics")
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
             .json(&params)
-            .send().await?;
+            .send()
+            .await?;
         let response = check_res(res)?;
         let create_topic_response: CreateTopicResponse = response.json().await?;
         Ok(create_topic_response)
-        
     }
     async fn get_topic_and_posts(
         &self,
@@ -117,8 +120,9 @@ impl IForum for ReqwestForum {
             token.access_token.clone()
         };
 
-        let res = self.client
-            .get(format!("https://osu.ppy.sh/api/v2/forums/topics/{}",topic))
+        let res = self
+            .client
+            .get(format!("https://osu.ppy.sh/api/v2/forums/topics/{}", topic))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
@@ -129,7 +133,8 @@ impl IForum for ReqwestForum {
                 ("end", end.map(|s| s.to_string())),
                 ("cursor_string", cursor_string.map(|s| s.to_string())),
             ])
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
@@ -142,11 +147,7 @@ impl IForum for ReqwestForum {
         Ok(topic_and_posts)
     }
 
-    async fn edit_topic(
-            &self,
-            topic: String,
-            topic_title: String,
-        ) -> Result<ForumTopic> {
+    async fn edit_topic(&self, topic: String, topic_title: String) -> Result<ForumTopic> {
         println!("ReqwestForum edit_topic");
 
         let access_token = {
@@ -154,7 +155,8 @@ impl IForum for ReqwestForum {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .patch(format!("https://osu.ppy.sh/api/v2/forums/topics/{}", topic))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
@@ -162,7 +164,8 @@ impl IForum for ReqwestForum {
             .json(&serde_json::json!({
                 "forum_topic[topic_title]": topic_title
             }))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
@@ -170,11 +173,7 @@ impl IForum for ReqwestForum {
         Ok(forum_topic)
     }
 
-    async fn edit_post(
-            &self,
-            post: String,
-            body: String,
-        ) -> Result<ForumPost> {
+    async fn edit_post(&self, post: String, body: String) -> Result<ForumPost> {
         println!("ReqwestForum edit_post");
 
         let access_token = {
@@ -182,7 +181,8 @@ impl IForum for ReqwestForum {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .patch(format!("https://osu.ppy.sh/api/v2/forums/posts/{}", post))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
@@ -190,7 +190,8 @@ impl IForum for ReqwestForum {
             .json(&serde_json::json!({
                 "body": body
             }))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
@@ -206,25 +207,23 @@ impl IForum for ReqwestForum {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .get("https://osu.ppy.sh/api/v2/forums")
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let forums: Forums = response.json().await?;
 
         Ok(forums)
-        
     }
 
-    async fn get_forum_and_topic(
-            &self,
-            forum: u64,
-        ) -> Result<GetForumAndTopicsResponse> {
+    async fn get_forum_and_topic(&self, forum: u64) -> Result<GetForumAndTopicsResponse> {
         println!("ReqwestForum get_forum_and_topic");
 
         let access_token = {
@@ -232,18 +231,19 @@ impl IForum for ReqwestForum {
             token.access_token.clone()
         };
 
-        let res = self.client
+        let res = self
+            .client
             .get(format!("https://osu.ppy.sh/api/v2/forums/{}", forum))
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", access_token))
-            .send().await?;
+            .send()
+            .await?;
 
         let response = check_res(res)?;
 
         let forum_and_topic: GetForumAndTopicsResponse = response.json().await?;
 
         Ok(forum_and_topic)
-        
     }
 }

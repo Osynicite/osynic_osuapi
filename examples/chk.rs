@@ -16,12 +16,7 @@ async fn main() -> Result<()> {
         expires_in: 86400,
         token_type: "Bearer".to_string(),
     });
-    let silences = client
-        .chat
-        .chat_keepalive(
-            None,None
-        )
-        .await?;
+    let silences = client.chat.chat_keepalive(None, None).await?;
     println!("{:?}", silences);
     Ok(())
 }
@@ -29,22 +24,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestChat chat_keepalive
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/chat/ack",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 14:09:51 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93ea7f087e9885d0-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/chat/ack",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 14:09:51 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93ea7f087e9885d0-HKG"
+    }
 }
 */

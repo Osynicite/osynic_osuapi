@@ -32,22 +32,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestChat mark_channel_as_read
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/chat/channels/Ciallo/mark-as-read/Ciallo%EF%BD%9E(%E2%88%A0%E3%83%BB%CF%89%3C%20)%E2%8C%92%E2%98%85?channel_id=114514&message_id=1919810",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 16:08:28 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93eb2cca88010978-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/chat/channels/Ciallo/mark-as-read/Ciallo%EF%BD%9E(%E2%88%A0%E3%83%BB%CF%89%3C%20)%E2%8C%92%E2%98%85?channel_id=114514&message_id=1919810",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 16:08:28 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93eb2cca88010978-HKG"
+    }
 }
 */

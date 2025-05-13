@@ -18,10 +18,7 @@ async fn main() -> Result<()> {
     });
     let post = client
         .forum
-        .edit_topic(
-            "Ciallo".to_string(),
-            "Ciallo～(∠・ω< )⌒★".to_string(),
-        )
+        .edit_topic("Ciallo".to_string(), "Ciallo～(∠・ω< )⌒★".to_string())
         .await?;
     println!("{:?}", post);
     Ok(())
@@ -30,22 +27,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestForum edit_topic
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/forums/topics/Ciallo",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 13:49:01 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1198",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93ea607ffc7f9fe0-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/forums/topics/Ciallo",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 13:49:01 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1198",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93ea607ffc7f9fe0-HKG"
+    }
 }
 */

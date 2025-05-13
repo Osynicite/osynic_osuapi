@@ -23,12 +23,12 @@
 
 // Represents an individual chat "channel" in the game.
 // Field 	Type 	Description
-// channel_id 	integer 	
-// name 	string 	
-// description 	string? 	
+// channel_id 	integer
+// name 	string
+// description 	string?
 // icon 	string? 	display icon for the channel
 // type 	ChannelType 	type of channel
-// message_length_limit 	integer 	
+// message_length_limit 	integer
 // moderated 	boolean 	user can't send message when the value is true
 // uuid 	string? 	value from requests that is relayed back to the sender.
 
@@ -42,8 +42,8 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::v2::model::comment::structs::meta::CurrentUserAttributes;
 use crate::v2::model::chat::structs::message::ChatMessage;
+use crate::v2::model::comment::structs::meta::CurrentUserAttributes;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ChatChannel {

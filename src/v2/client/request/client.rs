@@ -1,4 +1,3 @@
-use super::api::oauth::ReqwestOauth;
 use super::api::beatmaps::ReqwestBeatmaps;
 use super::api::beatmapsets::ReqwestBeatmapsets;
 use super::api::changelog::ReqwestChangelog;
@@ -10,6 +9,7 @@ use super::api::matches::ReqwestMatches;
 use super::api::multiplayer::ReqwestMultiplayer;
 use super::api::news::ReqwestNews;
 use super::api::notifications::ReqwestNotifications;
+use super::api::oauth::ReqwestOauth;
 use super::api::ranking::ReqwestRanking;
 use super::api::scores::ReqwestScores;
 use super::api::search::ReqwestSearch;

@@ -1,13 +1,13 @@
 // Forum Post
 // Field 	Type 	Description
-// created_at 	Timestamp 	
-// deleted_at 	Timestamp? 	
-// edited_at 	Timestamp? 	
-// edited_by_id 	integer? 	
-// forum_id 	integer 	
-// id 	integer 	
-// topic_id 	integer 	
-// user_id 	integer 	
+// created_at 	Timestamp
+// deleted_at 	Timestamp?
+// edited_at 	Timestamp?
+// edited_by_id 	integer?
+// forum_id 	integer
+// id 	integer
+// topic_id 	integer
+// user_id 	integer
 
 // Following fields are optional.
 // Field 	Type 	Description

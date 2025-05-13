@@ -18,37 +18,31 @@ async fn main() -> Result<()> {
     });
     let comment = client
         .comments
-        .post_comment(
-            None,
-            None,
-            None,
-			Some("Ciallo～(∠・ω< )⌒★".to_string())
-        )
+        .post_comment(None, None, None, Some("Ciallo～(∠・ω< )⌒★".to_string()))
         .await?;
     println!("{:?}", comment);
     Ok(())
 }
 
-
 /*
 ReqwestComments post_comment
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/comments?comment.message=Ciallo%EF%BD%9E%28%E2%88%A0%E3%83%BB%CF%89%3C+%29%E2%8C%92%E2%98%85",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 13:02:01 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93ea1baccf22e903-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/comments?comment.message=Ciallo%EF%BD%9E%28%E2%88%A0%E3%83%BB%CF%89%3C+%29%E2%8C%92%E2%98%85",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 13:02:01 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93ea1baccf22e903-HKG"
+    }
 }
 */

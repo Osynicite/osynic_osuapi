@@ -1,6 +1,8 @@
 use crate::error::Result;
 use crate::v2::model::chat::dtos::request::CreateChannelParams;
-use crate::v2::model::chat::dtos::response::{CreateNewPMResponse, GetChannelResponse, GetUpdatesResponse};
+use crate::v2::model::chat::dtos::response::{
+    CreateNewPMResponse, GetChannelResponse, GetUpdatesResponse,
+};
 use crate::v2::model::chat::structs::channel::ChatChannel;
 use crate::v2::model::chat::structs::message::ChatMessage;
 use crate::v2::model::chat::structs::silences::Silences;

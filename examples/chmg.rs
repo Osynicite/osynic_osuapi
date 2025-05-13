@@ -18,12 +18,7 @@ async fn main() -> Result<()> {
     });
     let messages = client
         .chat
-        .get_channel_messages(
-            "Ciallo".to_string(),
-            None,
-            None,
-            None
-        )
+        .get_channel_messages("Ciallo".to_string(), None, None, None)
         .await?;
     println!("{:?}", messages);
     Ok(())
@@ -32,22 +27,22 @@ async fn main() -> Result<()> {
 /*
 ReqwestChat get_channel_messages
 Error: NetworkError: Response {
-	url: "https://osu.ppy.sh/api/v2/chat/channels/Ciallo/messages",
-	status: 403,
-	headers: {
-		"date": "Mon, 12 May 2025 16:05:09 GMT",
-		"content-type": "application/json",
-		"transfer-encoding": "chunked",
-		"connection": "keep-alive",
-		"cache-control": "no-cache, private",
-		"x-ratelimit-limit": "1200",
-		"x-ratelimit-remaining": "1199",
-		"strict-transport-security": "max-age=31536000; includeSubDomains; preload",
-		"vary": "accept-encoding",
-		"cf-cache-status": "DYNAMIC",
-		"x-content-type-options": "nosniff",
-		"server": "cloudflare",
-		"cf-ray": "93eb27ec0c68af12-HKG"
-	}
+    url: "https://osu.ppy.sh/api/v2/chat/channels/Ciallo/messages",
+    status: 403,
+    headers: {
+        "date": "Mon, 12 May 2025 16:05:09 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cache-control": "no-cache, private",
+        "x-ratelimit-limit": "1200",
+        "x-ratelimit-remaining": "1199",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "cf-cache-status": "DYNAMIC",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "93eb27ec0c68af12-HKG"
+    }
 }
 */
