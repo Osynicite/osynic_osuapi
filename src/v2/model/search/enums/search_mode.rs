@@ -19,14 +19,17 @@ impl SearchMode {
             SearchMode::WikiPage => "WikiPage",
         }
     }
-    pub fn to_string(&self) -> String {
-        self.as_str().to_string()
-    }
     pub fn to_search_param(&self) -> String {
         match self {
             SearchMode::All => "all".to_string(),
             SearchMode::User => "user".to_string(),
             SearchMode::WikiPage => "wiki_page".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for SearchMode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

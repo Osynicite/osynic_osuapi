@@ -107,10 +107,10 @@ impl GetReplayParams {
             k: self.api_key.clone(),
             b: self.beatmap_id.clone(),
             u: self.user.clone(),
-            m: self.mode.clone(),
+            m: self.mode,
             s: self.score_id.clone(),
             t: self.typee.clone(),
-            mods: self.mods.clone(),
+            mods: self.mods,
         }
     }
 }

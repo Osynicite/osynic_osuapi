@@ -19,22 +19,22 @@ pub enum Sort {
 }
 
 impl Sort {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            Sort::TitleDesc => "TitleDesc".to_string(),
-            Sort::TitleAsc => "TitleAsc".to_string(),
-            Sort::ArtistDesc => "ArtistDesc".to_string(),
-            Sort::ArtistAsc => "ArtistAsc".to_string(),
-            Sort::DifficultyDesc => "DifficultyDesc".to_string(),
-            Sort::DifficultyAsc => "DifficultyAsc".to_string(),
-            Sort::RankedDesc => "RankedDesc".to_string(),
-            Sort::RankedAsc => "RankedAsc".to_string(),
-            Sort::RatingDesc => "RatingDesc".to_string(),
-            Sort::RatingAsc => "RatingAsc".to_string(),
-            Sort::PlaysDesc => "PlaysDesc".to_string(),
-            Sort::PlaysAsc => "PlaysAsc".to_string(),
-            Sort::FavouritesDesc => "FavouritesDesc".to_string(),
-            Sort::FavouritesAsc => "FavouritesAsc".to_string(),
+            Sort::TitleDesc => "TitleDesc",
+            Sort::TitleAsc => "TitleAsc",
+            Sort::ArtistDesc => "ArtistDesc",
+            Sort::ArtistAsc => "ArtistAsc",
+            Sort::DifficultyDesc => "DifficultyDesc",
+            Sort::DifficultyAsc => "DifficultyAsc",
+            Sort::RankedDesc => "RankedDesc",
+            Sort::RankedAsc => "RankedAsc",
+            Sort::RatingDesc => "RatingDesc",
+            Sort::RatingAsc => "RatingAsc",
+            Sort::PlaysDesc => "PlaysDesc",
+            Sort::PlaysAsc => "PlaysAsc",
+            Sort::FavouritesDesc => "FavouritesDesc",
+            Sort::FavouritesAsc => "FavouritesAsc",
         }
     }
     pub fn to_beatmapset_search(&self) -> String {
@@ -54,5 +54,11 @@ impl Sort {
             Sort::FavouritesDesc => "favourites_desc".to_string(),
             Sort::FavouritesAsc => "favourites_asc".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for Sort {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

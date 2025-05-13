@@ -28,9 +28,6 @@ impl Scope {
             Scope::Public => "public",
         }
     }
-    pub fn to_string(&self) -> String {
-        self.as_str().to_string()
-    }
     pub fn to_param(&self) -> String {
         match self {
             Scope::ChatRead => "chat.read".to_string(),

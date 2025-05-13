@@ -19,22 +19,22 @@ pub enum Language {
 }
 
 impl Language {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            Language::Other => "Other".to_string(),
-            Language::English => "English".to_string(),
-            Language::Japanese => "Japanese".to_string(),
-            Language::Chinese => "Chinese".to_string(),
-            Language::Instrumental => "Instrumental".to_string(),
-            Language::Korean => "Korean".to_string(),
-            Language::French => "French".to_string(),
-            Language::German => "German".to_string(),
-            Language::Swedish => "Swedish".to_string(),
-            Language::Spanish => "Spanish".to_string(),
-            Language::Italian => "Italian".to_string(),
-            Language::Russian => "Russian".to_string(),
-            Language::Polish => "Polish".to_string(),
-            Language::Unspecified => "Unspecified".to_string(),
+            Language::Other => "Other",
+            Language::English => "English",
+            Language::Japanese => "Japanese",
+            Language::Chinese => "Chinese",
+            Language::Instrumental => "Instrumental",
+            Language::Korean => "Korean",
+            Language::French => "French",
+            Language::German => "German",
+            Language::Swedish => "Swedish",
+            Language::Spanish => "Spanish",
+            Language::Italian => "Italian",
+            Language::Russian => "Russian",
+            Language::Polish => "Polish",
+            Language::Unspecified => "Unspecified",
         }
     }
     pub fn to_beatmapset_search(&self) -> String {
@@ -73,5 +73,12 @@ impl Language {
             14 => Language::Unspecified,
             _ => Language::Unspecified,
         }
+    }
+}
+
+
+impl std::fmt::Display for Language {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

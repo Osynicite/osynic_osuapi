@@ -122,10 +122,10 @@ impl GetScoresParams {
             k: self.api_key.clone(),
             b: self.beatmap_id.clone(),
             u: self.user.clone(),
-            m: self.mode.clone(),
-            mods: self.mods.clone(),
+            m: self.mode,
+            mods: self.mods,
             t: self.typee.clone(),
-            limit: self.limit.clone(),
+            limit: self.limit,
         }
     }
 }

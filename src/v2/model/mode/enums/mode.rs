@@ -16,12 +16,12 @@ pub enum Mode {
 }
 
 impl Mode {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            Mode::Osu => "Osu".to_string(),
-            Mode::Mania => "Mania".to_string(),
-            Mode::Taiko => "Taiko".to_string(),
-            Mode::Catch => "Catch".to_string(),
+            Mode::Osu => "Osu",
+            Mode::Mania => "Mania",
+            Mode::Taiko => "Taiko",
+            Mode::Catch => "Catch",
         }
     }
 
@@ -41,5 +41,11 @@ impl Mode {
             Mode::Taiko => "2".to_string(),
             Mode::Catch => "3".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for Mode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

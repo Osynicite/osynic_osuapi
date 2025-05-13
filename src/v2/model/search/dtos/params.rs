@@ -90,7 +90,7 @@ impl BeatmapsetsSearchParams {
             for i in 0..general.len() {
                 general_str.push_str(&general[i].to_beatmapset_search());
                 if i != general.len() - 1 {
-                    general_str.push_str(".");
+                    general_str.push('.');
                 }
             }
             params.push(("c".to_string(), general_str));
@@ -115,7 +115,7 @@ impl BeatmapsetsSearchParams {
             for i in 0..extra.len() {
                 extra_str.push_str(&extra[i].to_beatmapset_search());
                 if i != extra.len() - 1 {
-                    extra_str.push_str(".");
+                    extra_str.push('.');
                 }
             }
             params.push(("e".to_string(), extra_str));
@@ -125,7 +125,7 @@ impl BeatmapsetsSearchParams {
             for i in 0..rank_achieved.len() {
                 rank_achieved_str.push_str(&rank_achieved[i].to_beatmapset_search());
                 if i != rank_achieved.len() - 1 {
-                    rank_achieved_str.push_str(".");
+                    rank_achieved_str.push('.');
                 }
             }
             params.push(("r".to_string(), rank_achieved_str));
@@ -147,15 +147,15 @@ impl BeatmapsetsSearchParams {
         BeatmapsetsSearchParamsRaw {
             q: self.query.clone(),
             c: self.general.clone(),
-            m: self.mode.clone(),
-            s: self.categories.clone(),
-            nsfw: self.explicit_content.clone(),
-            g: self.genre.clone(),
-            l: self.language.clone(),
+            m: self.mode,
+            s: self.categories,
+            nsfw: self.explicit_content,
+            g: self.genre,
+            l: self.language,
             e: self.extra.clone(),
             r: self.rank_achieved.clone(),
-            played: self.played.clone(),
-            sort: self.sort.clone(),
+            played: self.played,
+            sort: self.sort,
         }
     }
 }
@@ -242,7 +242,7 @@ impl BeatmapsetsSearchParamsRaw {
             for i in 0..general.len() {
                 general_str.push_str(&general[i].to_beatmapset_search());
                 if i != general.len() - 1 {
-                    general_str.push_str(".");
+                    general_str.push('.');
                 }
             }
             params.push(("c".to_string(), general_str));
@@ -267,7 +267,7 @@ impl BeatmapsetsSearchParamsRaw {
             for i in 0..extra.len() {
                 extra_str.push_str(&extra[i].to_beatmapset_search());
                 if i != extra.len() - 1 {
-                    extra_str.push_str(".");
+                    extra_str.push('.');
                 }
             }
             params.push(("e".to_string(), extra_str));
@@ -277,7 +277,7 @@ impl BeatmapsetsSearchParamsRaw {
             for i in 0..rank_achieved.len() {
                 rank_achieved_str.push_str(&rank_achieved[i].to_beatmapset_search());
                 if i != rank_achieved.len() - 1 {
-                    rank_achieved_str.push_str(".");
+                    rank_achieved_str.push('.');
                 }
             }
             params.push(("r".to_string(), rank_achieved_str));

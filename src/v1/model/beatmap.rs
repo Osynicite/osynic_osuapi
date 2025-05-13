@@ -177,11 +177,11 @@ impl GetBeatmapsParams {
             b: self.bid.clone(),
             u: self.uid.clone(),
             t: self.typee.clone(),
-            m: self.mode.clone(),
-            a: self.has_converted.clone(),
+            m: self.mode,
+            a: self.has_converted,
             h: self.hash.clone(),
-            limit: self.limit.clone(),
-            mods: self.mods.clone(),
+            limit: self.limit,
+            mods: self.mods,
         }
     }
 }

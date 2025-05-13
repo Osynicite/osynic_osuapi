@@ -21,21 +21,21 @@ pub enum Genre {
 }
 
 impl Genre {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            Genre::Unspecified => "Unspecified".to_string(),
-            Genre::VideoGame => "VideoGame".to_string(),
-            Genre::Anime => "Anime".to_string(),
-            Genre::Rock => "Rock".to_string(),
-            Genre::Pop => "Pop".to_string(),
-            Genre::Other => "Other".to_string(),
-            Genre::Novelty => "Novelty".to_string(),
-            Genre::HipHop => "HipHop".to_string(),
-            Genre::Electronic => "Electronic".to_string(),
-            Genre::Metal => "Metal".to_string(),
-            Genre::Classical => "Classical".to_string(),
-            Genre::Folk => "Folk".to_string(),
-            Genre::Jazz => "Jazz".to_string(),
+            Genre::Unspecified => "Unspecified",
+            Genre::VideoGame => "VideoGame",
+            Genre::Anime => "Anime",
+            Genre::Rock => "Rock",
+            Genre::Pop => "Pop",
+            Genre::Other => "Other",
+            Genre::Novelty => "Novelty",
+            Genre::HipHop => "HipHop",
+            Genre::Electronic => "Electronic",
+            Genre::Metal => "Metal",
+            Genre::Classical => "Classical",
+            Genre::Folk => "Folk",
+            Genre::Jazz => "Jazz",
         }
     }
     pub fn to_beatmapset_search(&self) -> String {
@@ -72,5 +72,11 @@ impl Genre {
             14 => Genre::Jazz,
             _ => Genre::Unspecified,
         }
+    }
+}
+
+impl std::fmt::Display for Genre {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

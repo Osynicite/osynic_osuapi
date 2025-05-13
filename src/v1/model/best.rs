@@ -101,8 +101,8 @@ impl GetUserBestParams {
         GetUserBestParamsRaw {
             k: self.api_key.clone(),
             u: self.user.clone(),
-            m: self.mode.clone(),
-            limit: self.limit.clone(),
+            m: self.mode,
+            limit: self.limit,
             t: self.typee.clone(),
         }
     }

@@ -11,13 +11,13 @@ pub enum General {
 }
 
 impl General {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            General::Recommended => "Recommended".to_string(),
-            General::Converts => "Converts".to_string(),
-            General::Follows => "Follows".to_string(),
-            General::Spotlights => "Spotlights".to_string(),
-            General::FeaturedArtists => "FeaturedArtists".to_string(),
+            General::Recommended => "Recommended",
+            General::Converts => "Converts",
+            General::Follows => "Follows",
+            General::Spotlights => "Spotlights",
+            General::FeaturedArtists => "FeaturedArtists",
         }
     }
     pub fn to_beatmapset_search(&self) -> String {
@@ -28,5 +28,11 @@ impl General {
             General::Spotlights => "spotlights".to_string(),
             General::FeaturedArtists => "featured_artists".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for General {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

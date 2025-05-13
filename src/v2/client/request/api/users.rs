@@ -308,17 +308,15 @@ impl IUsers for ReqwestUsers {
 
         let params = [("key", key.map(|x| x.to_string()))];
 
-        let url: String;
-
-        if mode.is_none() {
-            url = format!("https://osu.ppy.sh/api/v2/users/{}", username);
+        let url: String = if mode.is_none() {
+            format!("https://osu.ppy.sh/api/v2/users/{}", username)
         } else {
-            url = format!(
+            format!(
                 "https://osu.ppy.sh/api/v2/users/{}/{}",
                 username,
                 mode.map(|x| x.to_ruleset()).unwrap_or_default()
-            );
-        }
+            )
+        };
 
         let res = self
             .client
@@ -351,17 +349,15 @@ impl IUsers for ReqwestUsers {
 
         // 如果mode是None，则是url1，否则是url2
 
-        let url: String;
-
-        if mode.is_none() {
-            url = format!("https://osu.ppy.sh/api/v2/users/{}", id);
+        let url: String = if mode.is_none() {
+            format!("https://osu.ppy.sh/api/v2/users/{}", id)
         } else {
-            url = format!(
+            format!(
                 "https://osu.ppy.sh/api/v2/users/{}/{}",
                 id,
                 mode.map(|x| x.to_ruleset()).unwrap_or_default()
-            );
-        }
+            )
+        };
 
         let res = self
             .client
@@ -413,8 +409,7 @@ impl IUsers for ReqwestUsers {
         let ids_params = ids
             .iter()
             .take(50)
-            .enumerate()
-            .map(|(_, id)| ("ids[]".to_string(), id.to_string()))
+            .map(|id| ("ids[]".to_string(), id.to_string()))
             .collect::<Vec<(String, String)>>();
         let ivs_params = [("include_variant_statistics", include_variant_statistics)];
 

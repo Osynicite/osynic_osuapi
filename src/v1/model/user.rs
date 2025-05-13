@@ -117,9 +117,9 @@ impl GetUserParams {
         GetUserParamsRaw {
             k: self.api_key.clone(),
             u: self.user.clone(),
-            m: self.mode.clone(),
+            m: self.mode,
             t: self.typee.clone(),
-            event_days: self.event_days.clone(),
+            event_days: self.event_days,
         }
     }
 }

@@ -14,17 +14,17 @@ pub enum Categories {
 }
 
 impl Categories {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            Categories::Any => "Any".to_string(),
-            Categories::Ranked => "Ranked".to_string(),
-            Categories::Qualified => "Qualified".to_string(),
-            Categories::Loved => "Loved".to_string(),
-            Categories::Favourites => "Favourites".to_string(),
-            Categories::Pending => "Pending".to_string(),
-            Categories::WIP => "WIP".to_string(),
-            Categories::Graveyard => "Graveyard".to_string(),
-            Categories::Mine => "Mine".to_string(),
+            Categories::Any => "Any",
+            Categories::Ranked => "Ranked",
+            Categories::Qualified => "Qualified",
+            Categories::Loved => "Loved",
+            Categories::Favourites => "Favourites",
+            Categories::Pending => "Pending",
+            Categories::WIP => "WIP",
+            Categories::Graveyard => "Graveyard",
+            Categories::Mine => "Mine",
         }
     }
     pub fn to_beatmapset_search(&self) -> String {
@@ -39,5 +39,11 @@ impl Categories {
             Categories::Graveyard => "graveyard".to_string(),
             Categories::Mine => "mine".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for Categories {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

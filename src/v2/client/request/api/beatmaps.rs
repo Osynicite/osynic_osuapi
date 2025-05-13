@@ -323,8 +323,7 @@ impl IBeatmaps for ReqwestBeatmaps {
         let params = beatmap_ids
             .iter()
             .take(50)
-            .enumerate()
-            .map(|(_, id)| ("ids[]".to_string(), id.to_string()))
+            .map(|id| ("ids[]".to_string(), id.to_string()))
             .collect::<Vec<(String, String)>>();
         // println!("{:?}", params);
 

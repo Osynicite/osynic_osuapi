@@ -13,16 +13,16 @@ pub enum RankAchieved {
 }
 
 impl RankAchieved {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            RankAchieved::XH => "XH".to_string(),
-            RankAchieved::X => "X".to_string(),
-            RankAchieved::SH => "SH".to_string(),
-            RankAchieved::S => "S".to_string(),
-            RankAchieved::A => "A".to_string(),
-            RankAchieved::B => "B".to_string(),
-            RankAchieved::C => "C".to_string(),
-            RankAchieved::D => "D".to_string(),
+            RankAchieved::XH => "XH",
+            RankAchieved::X => "X",
+            RankAchieved::SH => "SH",
+            RankAchieved::S => "S",
+            RankAchieved::A => "A",
+            RankAchieved::B => "B",
+            RankAchieved::C => "C",
+            RankAchieved::D => "D",
         }
     }
 
@@ -37,5 +37,11 @@ impl RankAchieved {
             RankAchieved::C => "C".to_string(),
             RankAchieved::D => "D".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for RankAchieved {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

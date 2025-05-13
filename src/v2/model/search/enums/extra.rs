@@ -7,10 +7,10 @@ pub enum Extra {
 }
 
 impl Extra {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            Extra::Video => "Video".to_string(),
-            Extra::Storyboard => "Storyboard".to_string(),
+            Extra::Video => "Video",
+            Extra::Storyboard => "Storyboard",
         }
     }
     pub fn to_beatmapset_search(&self) -> String {
@@ -18,5 +18,11 @@ impl Extra {
             Extra::Video => "video".to_string(),
             Extra::Storyboard => "storyboard".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for Extra {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

@@ -25,12 +25,12 @@ pub enum RankingType {
 }
 
 impl RankingType {
-    pub fn to_string(&self) -> String {
+    pub fn as_str(&self) -> &str {
         match self {
-            RankingType::Charts => "Charts".to_string(),
-            RankingType::Country => "Country".to_string(),
-            RankingType::Performance => "Performance".to_string(),
-            RankingType::Score => "Score".to_string(),
+            RankingType::Charts => "Charts",
+            RankingType::Country => "Country",
+            RankingType::Performance => "Performance",
+            RankingType::Score => "Score",
         }
     }
 
@@ -41,5 +41,11 @@ impl RankingType {
             RankingType::Performance => "performance".to_string(),
             RankingType::Score => "score".to_string(),
         }
+    }
+}
+
+impl std::fmt::Display for RankingType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }
