@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD033 MD041 MD045 -->
+<!-- markdownlint-disable MD033 MD041 MD045 MD026 -->
 <p align="center" dir="auto">
     <img style="height:240px;width:240px" src="https://s2.loli.net/2025/03/10/GSsjOcHqdtBkyu9.png" alt="Logo逃走啦~"/>
 </p>
@@ -9,8 +9,9 @@
   <a href="https://www.rust-lang.org/" target="_blank"><img src="https://img.shields.io/badge/Rust-1.85%2B-blue"/></a>
   <a href="https://crates.io/crates/osynic_osuapi" target="_blank"><img src="https://img.shields.io/crates/v/osynic_osuapi"/></a>
   <a href="https://docs.rs/osynic_osuapi" target="_blank"><img src="https://img.shields.io/docsrs/osynic_osuapi/0.1.0"/></a>
+  <a href="https://osynic-osuapi.deno.dev" target="_blank"><img src="https://img.shields.io/badge/Deno-white?logo=deno&logoColor=black"/></a>
   <a href="https://github.com/osynicite/osynic_osuapi" target="_blank"><img src="https://img.shields.io/badge/License-MIT-green.svg"/></a>
-  <a href="https://discord.gg/JWyvc6M5" target="_blank"><img src="https://img.shields.io/badge/chat-discord-7289da.svg"/></a>
+  <a href="https://discord.gg/DRnZSES3BC" target="_blank"><img src="https://img.shields.io/badge/chat-discord-7289da.svg"/></a>
   <a href="https://github.com/osynicite" target="_blank"><img src="https://img.shields.io/badge/buy%20me-a%20coffee-orange.svg?style=flat-square"/></a>
 
 </p>
@@ -356,6 +357,24 @@ async fn main() -> Result<()> {
 在`osynic_osuapi`的开发过程中，还是参考了`rosu-v2`的接口设计（但并未沿用）和部分类型（比如u64和u32的选取），感谢[rosu-v2](https://crates.io/crates/rosu-v2)的作者们！
 
 `rosu-v2`项目基于[MIT License](./licenses/LICENSE-rosu-v2)，项目证书放置在`licenses/LICENSE-rosu-v2`中
+
+I'll help you add a special notice section to your README that focuses on potential issues with the OSU API integration. Here's how I'd craft that section:I'll help you add a special notice section to your README highlighting potential issues with the OSU API integration. Based on your request and the content in your README, here's a well-organized "Special Notice" section that focuses on the API structure issues:
+
+# ⚠️ 特别注意！！！
+
+使用本库时，最常见的问题来源于osu!API官方实体结构的变动：
+
+- **实体结构变动**：osu!API的结构可能会随时变化，但官方文档更新可能不及时
+- **返回字段变动**：某些接口的返回字段可能会发生变化，尤其是较少使用的端点
+- **异常空值**：某些字段可能在特定情况下返回null，但在文档中未标明为可选
+
+这些问题的主要原因是osu!API官方文档对实体属性的描述不够全面。如果您在使用过程中遇到解析错误或类型不匹配等问题，请不要犹豫，直接提交Issue并附上：
+
+1. 使用的API端点
+2. 请求参数
+3. 错误信息或异常堆栈
+
+我会尽快处理并更新库以适应API的变化。本库的大部分模型都是基于实际请求返回结果构建的，但仍可能存在遗漏或错误。您的反馈对完善本库至关重要！
 
 # 🤝 贡献指南
 

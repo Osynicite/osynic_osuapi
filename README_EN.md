@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD033 MD041 MD045 -->
+<!-- markdownlint-disable MD033 MD041 MD045 MD026-->
 <p align="center" dir="auto">
     <img style="height:240px;width:240px" src="https://s2.loli.net/2025/03/10/GSsjOcHqdtBkyu9.png" alt="logo"/>
 </p>
@@ -9,14 +9,15 @@
   <a href="https://www.rust-lang.org/" target="_blank"><img src="https://img.shields.io/badge/Rust-1.85%2B-blue"/></a>
   <a href="https://crates.io/crates/osynic_osuapi" target="_blank"><img src="https://img.shields.io/crates/v/osynic_osuapi"/></a>
   <a href="https://docs.rs/osynic_osuapi" target="_blank"><img src="https://img.shields.io/docsrs/osynic_osuapi/0.1.0"/></a>
+  <a href="https://osynic-osuapi.deno.dev" target="_blank"><img src="https://img.shields.io/badge/Deno-white?logo=deno&logoColor=black"/></a>
   <a href="https://github.com/osynicite/osynic_osuapi" target="_blank"><img src="https://img.shields.io/badge/License-MIT-green.svg"/></a>
-  <a href="https://discord.gg/JWyvc6M5" target="_blank"><img src="https://img.shields.io/badge/chat-discord-7289da.svg"/></a>
+  <a href="https://discord.gg/DRnZSES3BC" target="_blank"><img src="https://img.shields.io/badge/chat-discord-7289da.svg"/></a>
   <a href="https://github.com/osynicite" target="_blank"><img src="https://img.shields.io/badge/buy%20me-a%20coffee-orange.svg?style=flat-square"/></a>
 
 </p>
 
 <p align="center">
-    High performance, well-structured, extensible Rust osu! API client.
+    High performance, well-structured, extensible Rust osu! API client. Supports both WASM and native environments.
 </p>
 
 <hr />
@@ -356,6 +357,22 @@ Originally, this project was intended to directly use the [rosu-v2](https://crat
 During the development of `osynic_osuapi`, I still referenced the interface design of `rosu-v2` (though not adopted) and some type choices (such as the selection between u64 and u32). Thanks to the authors of [rosu-v2](https://crates.io/crates/rosu-v2)!
 
 The `rosu-v2` project is based on the [MIT License](./licenses/LICENSE-rosu-v2), with the project license located in `licenses/LICENSE-rosu-v2`
+
+# ⚠️ Special Attention!!!
+
+When using this library, the most common issues stem from changes in the official osu!API entity structure:
+
+- **Entity structure changes**: The structure of osu!API may change at any time, but the official documentation may not be updated promptly
+- **Return field changes**: The return fields of some interfaces may change, especially for less frequently used endpoints
+- **Unexpected null values**: Some fields may return null under certain conditions, but are not marked as optional in the documentation
+
+The main reason for these issues is that the official osu!API documentation doesn't provide comprehensive descriptions of entity properties. If you encounter parsing errors or type mismatches during use, please don't hesitate to submit an Issue with the following information:
+
+1. The API endpoint used
+2. Request parameters
+3. Error message or exception stack trace
+
+I will handle and update the library as quickly as possible to adapt to API changes. Most models in this library are built based on actual request response results, but there may still be omissions or errors. Your feedback is crucial for improving this library!
 
 # 🤝 Contribution Guidelines
 
