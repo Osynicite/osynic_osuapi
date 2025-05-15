@@ -32,7 +32,7 @@ pub struct Beatmap {
     pub favourite_count: String, // Number of times the beatmap was favourited. (Americans: notice the ou!)
     pub rating: String,
     pub packs: Option<String>, // Beatmap packs the beatmap is in. (comma separated)
-    pub playcount: String, // Number of times the beatmap was played
+    pub playcount: String,     // Number of times the beatmap was played
     pub passcount: String, // Number of times the beatmap was passed, completed (the user didn't fail or retry)
     pub count_normal: String,
     pub count_slider: String,

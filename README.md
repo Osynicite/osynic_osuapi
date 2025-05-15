@@ -358,8 +358,6 @@ async fn main() -> Result<()> {
 
 `rosu-v2`项目基于[MIT License](./licenses/LICENSE-rosu-v2)，项目证书放置在`licenses/LICENSE-rosu-v2`中
 
-I'll help you add a special notice section to your README that focuses on potential issues with the OSU API integration. Here's how I'd craft that section:I'll help you add a special notice section to your README highlighting potential issues with the OSU API integration. Based on your request and the content in your README, here's a well-organized "Special Notice" section that focuses on the API structure issues:
-
 # ⚠️ 特别注意！！！
 
 使用本库时，最常见的问题来源于osu!API官方实体结构的变动：

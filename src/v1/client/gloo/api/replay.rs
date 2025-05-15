@@ -26,7 +26,7 @@ impl IReplay for GlooReplay {
             let url = self.proxy_url.lock().unwrap();
             url.clone()
         };
-        
+
         let params = params.api_key(key).build_params();
 
         let url = format!(
