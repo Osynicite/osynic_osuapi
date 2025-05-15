@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    Osynic的OSU!API封装
+    高性能, 结构优良, 拓展性好的 Rust osu! API 客户端 支持 WASM 和 native 环境.
 </p>
 
 <hr />
@@ -30,11 +30,11 @@
 
 # 🧻 [API体验网站](https://osynic-osuapi.deno.dev/)
 
-[![osynic-osuapi](https://s2.loli.net/2025/05/13/XrvbeEaPL3CWcRg.png)](https://osynic-osuapi.deno.dev/)
+[![OsynicOsuapiCN.png](https://s2.loli.net/2025/05/15/Ww1hovEL4PmKdD6.png)](https://osynic-osuapi.deno.dev/)
 
 [LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground)是基于[leptos](https://www.leptos.dev/)框架快速搭建了一个`osynic_osuapi`体验网站，主要使用了的V1的WASM客户端支持（基于[gloo-net](https://crates.io/crates/gloo-net)）,不过很显然，由于CORS的问题，不代理直接在浏览器中使用V1的API会遇到跨域问题（毕竟WASM部分是浏览器前端发的请求嘛），所以用[Deno](https://deno.dev)来搭建了一个中转服务器[osynic-cors.deno.dev](https://osynic-cors.deno.dev)，配合WASM客户端的`proxy_url`来实现代理请求；
 
-目前网站通过[Deno](https://deno.dev)部署在[osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/)上，目前基本上仅供观赏了
+目前网站通过[Deno](https://deno.dev)部署在[osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/)，支持中日韩德法俄英等多种语言；
 
 # 📜 特性
 

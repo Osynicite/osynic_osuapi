@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    Osu!Api wrapper for Osynic
+    High performance, well-structured, extensible Rust osu! API client.
 </p>
 
 <hr />
@@ -30,11 +30,11 @@
 
 # 🧻 [API Experience Website](https://osynic-osuapi.deno.dev/)
 
-[![osynic-osuapi](https://s2.loli.net/2025/05/13/XrvbeEaPL3CWcRg.png)](https://osynic-osuapi.deno.dev/)
+[![OsynicOsuapiEN.png](https://s2.loli.net/2025/05/15/qlgvPVuZhM5Gcod.png)](https://osynic-osuapi.deno.dev/)
 
 [LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a website quickly built with the [leptos](https://www.leptos.dev/) framework to demonstrate `osynic_osuapi`, primarily using V1's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, obviously, due to CORS issues, using the V1 API directly in the browser without a proxy will encounter cross-origin problems (since the WASM part makes requests from the browser frontend). Therefore, a relay server [osynic-cors.deno.dev](https://osynic-cors.deno.dev) was set up using [Deno](https://deno.dev), working with the WASM client's `proxy_url` to implement proxy requests.
 
-The website is currently deployed on [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/) via [Deno](deno.dev), but at this point it's basically just for viewing.
+The website is currently deployed on [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/) via [Deno](deno.dev). Chinese, Japanese, Korean, German, French, Russian, and English are supported.
 
 # 📜 Features
 
