@@ -13,16 +13,16 @@ repository = "https://github.com/osynicite/osynic_osuapi"
 
 [dependencies]
 serde = { version = "1.0.219", features = ["derive"] }
-serde_json = { version = "1.0.140" }
+serde_json = { version = "1.0.143" }
 chrono = { version = "0.4.41", features = ["serde"] }
 
-tokio = { version = "1.45.0", features = [
+tokio = { version = "1.47.1", features = [
     "rt-multi-thread",
     "macros",
     "sync",
     "fs",
 ], optional = true }
-reqwest = { version = "0.12.15", default-features = false, features = [
+reqwest = { version = "0.12.23", default-features = false, features = [
     "rustls-tls",
     "json",
 ], optional = true }
@@ -39,7 +39,7 @@ web-sys = { version = "0.3.77", features = [
     "Performance",
 ], optional = true }
 
-bitflags = { version = "2.9.1", optional = true }
+bitflags = { version = "2.9.2", optional = true }
 [dev-dependencies]
 dotenvy = "0.15.7"
 
