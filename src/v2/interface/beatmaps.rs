@@ -15,18 +15,18 @@ pub trait IBeatmaps {
         &self,
         pack_type: Option<String>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<BeatmapPacks>> + Send;
+    ) -> impl std::future::Future<Output = Result<BeatmapPacks>>;
     fn get_beatmap_pack(
         &self,
         pack: String,
         legacy_only: Option<u32>,
-    ) -> impl std::future::Future<Output = Result<BeatmapPack>> + Send;
+    ) -> impl std::future::Future<Output = Result<BeatmapPack>>;
     fn lookup(
         &self,
         checksum: Option<String>,
         filename: Option<String>,
         id: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Beatmap>> + Send;
+    ) -> impl std::future::Future<Output = Result<Beatmap>>;
     fn get_user_score(
         &self,
         beatmap_id: u32,
@@ -34,7 +34,7 @@ pub trait IBeatmaps {
         legacy_only: Option<u32>,
         mode: Option<Mode>,
         mods: Option<String>,
-    ) -> impl std::future::Future<Output = Result<BeatmapUserScore>> + Send;
+    ) -> impl std::future::Future<Output = Result<BeatmapUserScore>>;
     fn get_user_scores(
         &self,
         beatmap_id: u32,
@@ -42,7 +42,7 @@ pub trait IBeatmaps {
         legacy_only: Option<u32>,
         mode: Option<Mode>,
         ruleset: Option<Mode>,
-    ) -> impl std::future::Future<Output = Result<Scores>> + Send;
+    ) -> impl std::future::Future<Output = Result<Scores>>;
     fn get_scores(
         &self,
         beatmap_id: u32,
@@ -50,27 +50,27 @@ pub trait IBeatmaps {
         mode: Option<Mode>,
         mods: Option<String>,
         ranking_type: Option<String>,
-    ) -> impl std::future::Future<Output = Result<BeatmapScores>> + Send;
+    ) -> impl std::future::Future<Output = Result<BeatmapScores>>;
     fn get_solo_scores(
         &self,
         beatmap_id: u32,
         mode: Option<Mode>,
         mods: Option<String>,
         ranking_type: Option<String>,
-    ) -> impl std::future::Future<Output = Result<NonLegacyScores>> + Send;
+    ) -> impl std::future::Future<Output = Result<NonLegacyScores>>;
     fn get_beatmaps(
         &self,
         beatmap_ids: Vec<u32>,
-    ) -> impl std::future::Future<Output = Result<Beatmaps>> + Send;
+    ) -> impl std::future::Future<Output = Result<Beatmaps>>;
     fn get_beatmap(
         &self,
         beatmap_id: u32,
-    ) -> impl std::future::Future<Output = Result<Beatmap>> + Send;
+    ) -> impl std::future::Future<Output = Result<Beatmap>>;
     fn get_beatmap_attributes(
         &self,
         beatmap_id: u32,
         mods: Option<Vec<String>>,
         ruleset: Option<Mode>,
         ruleset_id: Option<i32>,
-    ) -> impl std::future::Future<Output = Result<Attributes>> + Send;
+    ) -> impl std::future::Future<Output = Result<Attributes>>;
 }

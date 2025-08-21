@@ -1,8 +1,5 @@
 pub mod oauth;
 pub mod users;
-
-// Following module now are unimplmented
-
 pub mod beatmaps;
 pub mod beatmapsets;
 pub mod changelog;

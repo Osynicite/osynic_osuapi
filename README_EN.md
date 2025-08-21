@@ -33,14 +33,14 @@
 
 [![OsynicOsuapiEN.png](https://s2.loli.net/2025/05/15/qlgvPVuZhM5Gcod.png)](https://osynic-osuapi.deno.dev/)
 
-[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a website quickly built with the [leptos](https://www.leptos.dev/) framework to demonstrate `osynic_osuapi`, primarily using V1's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, obviously, due to CORS issues, using the V1 API directly in the browser without a proxy will encounter cross-origin problems (since the WASM part makes requests from the browser frontend). Therefore, a relay server [osynic-cors.deno.dev](https://osynic-cors.deno.dev) was set up using [Deno](https://deno.dev), working with the WASM client's `proxy_url` to implement proxy requests.
+[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a website quickly built with the [leptos](https://www.leptos.dev/) framework to demonstrate `osynic_osuapi`, primarily using V1 and V2's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, obviously, due to CORS issues, using the API directly in the browser without a proxy will encounter cross-origin problems (since the WASM part makes requests from the browser frontend). Therefore, a relay server [osynic-cors.deno.dev](https://osynic-cors.deno.dev) was set up using [Deno](https://deno.dev), working with the WASM client's `proxy_url` to implement proxy requests.
 
 The website is currently deployed on [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/) via [Deno](deno.dev). Chinese, Japanese, Korean, German, French, Russian, and English are supported.
 
 # 📜 Features
 
 - **Support for both old and new APIs**: Supports all V1 endpoints and most V2 endpoints (except for the undocumented modules)
-- **WASM Compatibility**: Provides WebAssembly support for V1 interfaces, allowing direct access to the OSU API from web applications (though you may encounter CORS issues)
+- **WASM Compatibility**: Provides WebAssembly support for both V1 and V2 interfaces, allowing direct access to the OSU API from web applications (though you may encounter CORS issues)
 - **Well-structured project**: Based on a three-module division of `client`, `interface`, and `model`; the `client` part aggregates `interface` interfaces and supports various HTTP clients for easy extension
 - **Very complete example support**: The `examples` directory contains very complete example code and return data, see the [API Checklist](#-api-checklist) section below for details
 - **Learn by example**: The best way to learn how to use this library is to directly view the rich example code in `examples`, or run `cargo run --example example_name` to see the corresponding return data. Once you get used to the style of the examples, you'll quickly be able to use it
@@ -74,9 +74,9 @@ First, add the dependency to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-osynic_osuapi = "0.1.0"
+osynic_osuapi = "0.1.1"
 # The default features are ["v1", "v2", "not-wasm"]. If you need to use this in a WASM environment, you need to disable the `not-wasm` feature and add the `wasm` feature, for example:
-# osynic_osuapi = { version = "0.1.0", default-features = false, features = ["v1", "v2", "wasm"] }
+# osynic_osuapi = { version = "0.1.1", default-features = false, features = ["v1", "v2", "wasm"] }
 ```
 
 Then you can use it in your code~
@@ -378,9 +378,9 @@ I will handle and update the library as quickly as possible to adapt to API chan
 
 This library is basically a module developed for the Osynic application, but it is also a complete Rust encapsulation of the osu!api.
 
-Currently, the V1 API is fully supported, and the V2 API is almost complete(except for the undocumented modules).
+Currently, V1 and V2 APIs are mostly implemented (except for the undocumented modules), and WASM support for both V1 and V2 is also complete.
 
-The library is still in the early stages of development, and there may be some bugs or missing features.
+The library is still in development, and there may be some bugs or missing features.
 
 So, if there is any problem with the code, or if you have any suggestions, please submit a PR or Issue, and I will deal with it as soon as possible~
 

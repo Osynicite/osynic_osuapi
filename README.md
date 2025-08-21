@@ -33,14 +33,14 @@
 
 [![OsynicOsuapiCN.png](https://s2.loli.net/2025/05/15/Ww1hovEL4PmKdD6.png)](https://osynic-osuapi.deno.dev/)
 
-[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground)是基于[leptos](https://www.leptos.dev/)框架快速搭建了一个`osynic_osuapi`体验网站，主要使用了的V1的WASM客户端支持（基于[gloo-net](https://crates.io/crates/gloo-net)）,不过很显然，由于CORS的问题，不代理直接在浏览器中使用V1的API会遇到跨域问题（毕竟WASM部分是浏览器前端发的请求嘛），所以用[Deno](https://deno.dev)来搭建了一个中转服务器[osynic-cors.deno.dev](https://osynic-cors.deno.dev)，配合WASM客户端的`proxy_url`来实现代理请求；
+[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground)是基于[leptos](https://www.leptos.dev/)框架快速搭建了一个`osynic_osuapi`体验网站，主要使用了V1和V2的WASM客户端支持（基于[gloo-net](https://crates.io/crates/gloo-net)），不过很显然，由于CORS的问题，不代理直接在浏览器中使用API会遇到跨域问题（毕竟WASM部分是浏览器前端发的请求嘛），所以用[Deno](https://deno.dev)来搭建了一个中转服务器[osynic-cors.deno.dev](https://osynic-cors.deno.dev)，配合WASM客户端的`proxy_url`来实现代理请求；
 
 目前网站通过[Deno](https://deno.dev)部署在[osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/)，支持中日韩德法俄英等多种语言；
 
 # 📜 特性
 
 - **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了文档未归类的接口）
-- **WASM 兼容性**: 为 V1 接口 提供了 WebAssembly 支持，支持直接从网页应用访问 OSU API（但是会遇到CORS）
+- **WASM 兼容性**: 为 V1 和 V2 接口都提供了 WebAssembly 支持，支持直接从网页应用访问 OSU API（但是会遇到CORS问题）
 - **项目结构良好**: 基于`client`、`interface`、`model`三重模块划分；`client`部分聚合`interface`接口并支持多种HTTP客户端，便于拓展
 - **非常完整的示例支持**: 在`examples`目录下，我们提供了非常完整的示例代码与返回数据，详见下方的[API检查表](#-api检查表)部分
 - **在示例中学习使用**: 学习使用本库的最佳方式就是直接查看`examples`中丰富的示例代码，或者直接运行`cargo run --example 示例名`来查看对应的返回数据，只要习惯示例的代码风格，很快就能上手使用
@@ -74,9 +74,9 @@ API_KEY="你的api_key"
 
 ```toml
 [dependencies]
-osynic_osuapi = "0.1.0"
+osynic_osuapi = "0.1.1"
 # 默认features是 ["v1", "v2", "not-wasm"]，如果需要在WASM环境中使用，需要关闭`not-wasm`特性，然后添加`wasm`特性，例如：
-# osynic_osuapi = { version = "0.1.0", default-features = false, features = ["v1", "v2", "wasm"] }
+# osynic_osuapi = { version = "0.1.1", default-features = false, features = ["v1", "v2", "wasm"] }
 ```
 
 然后在代码中使用即可~
@@ -378,7 +378,7 @@ async fn main() -> Result<()> {
 
 这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装；
 
-目前，v1和v2的大部分(除了文档未归类的接口)已经实现，v2的WASM支持暂时还没有做。
+目前，V1和V2的大部分API接口(除了文档未归类的接口)已经实现，V1和V2的WASM支持也都已完成。
 
 这个库仍然在开发中，可能会有一些bug或者不完善的地方；
 
