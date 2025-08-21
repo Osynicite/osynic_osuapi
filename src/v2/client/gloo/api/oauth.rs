@@ -30,11 +30,10 @@ impl IOauth for GlooOauth {
         };
 
         let form_data = format!(
-            "client_id={}&client_secret={}&code={}&grant_type=authorization_code&redirect_uri={}",
-            client_id, client_secret, code, redirect_uri
+            "client_id={client_id}&client_secret={client_secret}&code={code}&grant_type=authorization_code&redirect_uri={redirect_uri}"
         );
 
-        let url = format!("{}https://osu.ppy.sh/oauth/token", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/oauth/token");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
@@ -68,11 +67,10 @@ impl IOauth for GlooOauth {
         };
 
         let form_data = format!(
-            "client_id={}&client_secret={}&grant_type=client_credentials&scope=public",
-            client_id, client_secret
+            "client_id={client_id}&client_secret={client_secret}&grant_type=client_credentials&scope=public"
         );
 
-        let url = format!("{}https://osu.ppy.sh/oauth/token", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/oauth/token");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
@@ -121,11 +119,10 @@ impl IOauth for GlooOauth {
             .unwrap_or_else(|| "public".to_string());
 
         let form_data = format!(
-            "client_id={}&client_secret={}&grant_type=refresh_token&refresh_token={}&scope={}",
-            client_id, client_secret, refresh_token, scope_str
+            "client_id={client_id}&client_secret={client_secret}&grant_type=refresh_token&refresh_token={refresh_token}&scope={scope_str}"
         );
 
-        let url = format!("{}https://osu.ppy.sh/oauth/token", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/oauth/token");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
@@ -159,11 +156,11 @@ impl IOauth for GlooOauth {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/oauth/tokens/current", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/oauth/tokens/current");
 
         let res = Request::delete(&url)
             .header("Accept", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

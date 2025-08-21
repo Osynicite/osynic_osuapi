@@ -118,20 +118,20 @@ pub enum ErrorKind {
 impl std::fmt::Display for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {}", e),
-            ErrorKind::ParseIntError(e) => write!(f, "std::num::ParseIntError: {}", e),
-            ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {}", e),
-            ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {}", e),
+            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {e}"),
+            ErrorKind::ParseIntError(e) => write!(f, "std::num::ParseIntError: {e}"),
+            ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {e}"),
+            ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {e}"),
             #[cfg(feature = "not-wasm")]
             ErrorKind::RqwestError(e) => write!(f, "reqwest::Error: {}", e),
             #[cfg(feature = "not-wasm")]
             ErrorKind::NetworkError(e) => write!(f, "NetworkError: {:?}", e),
             #[cfg(feature = "wasm")]
-            ErrorKind::GlooError(e) => write!(f, "gloo_net::Error: {}", e),
+            ErrorKind::GlooError(e) => write!(f, "gloo_net::Error: {e}"),
             #[cfg(feature = "wasm")]
-            ErrorKind::GlooNetworkError(e) => write!(f, "GlooNetworkError: {:?}", e),
+            ErrorKind::GlooNetworkError(e) => write!(f, "GlooNetworkError: {e:?}"),
             #[cfg(feature = "wasm")]
-            ErrorKind::SerdeUrlencodedError(e) => write!(f, "serde_urlencoded::Error: {}", e),
+            ErrorKind::SerdeUrlencodedError(e) => write!(f, "serde_urlencoded::Error: {e}"),
         }
     }
 }
@@ -139,20 +139,20 @@ impl std::fmt::Display for ErrorKind {
 impl std::fmt::Debug for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {}", e),
-            ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {:?}", e),
-            ErrorKind::ParseIntError(e) => write!(f, "std::num::ParseIntError: {:?}", e),
-            ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {:?}", e),
+            ErrorKind::OsynicOsuApiV2Error(e) => write!(f, "OsynicOsuApiV2Error: {e}"),
+            ErrorKind::StdIoError(e) => write!(f, "std::io::Error: {e:?}"),
+            ErrorKind::ParseIntError(e) => write!(f, "std::num::ParseIntError: {e:?}"),
+            ErrorKind::SerdeJsonError(e) => write!(f, "serde_json::Error: {e:?}"),
             #[cfg(feature = "not-wasm")]
             ErrorKind::RqwestError(e) => write!(f, "reqwest::Error: {:?}", e),
             #[cfg(feature = "not-wasm")]
             ErrorKind::NetworkError(e) => write!(f, "NetworkError: {:?}", e),
             #[cfg(feature = "wasm")]
-            ErrorKind::GlooError(e) => write!(f, "gloo_net::Error: {}", e),
+            ErrorKind::GlooError(e) => write!(f, "gloo_net::Error: {e}"),
             #[cfg(feature = "wasm")]
-            ErrorKind::GlooNetworkError(e) => write!(f, "GlooNetworkError: {:?}", e),
+            ErrorKind::GlooNetworkError(e) => write!(f, "GlooNetworkError: {e:?}"),
             #[cfg(feature = "wasm")]
-            ErrorKind::SerdeUrlencodedError(e) => write!(f, "serde_urlencoded::Error: {:?}", e),
+            ErrorKind::SerdeUrlencodedError(e) => write!(f, "serde_urlencoded::Error: {e:?}"),
         }
     }
 }

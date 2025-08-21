@@ -47,15 +47,15 @@ impl ISearch for GlooSearch {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/search", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/search")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/search?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/search?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

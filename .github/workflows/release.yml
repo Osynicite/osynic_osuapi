@@ -8,60 +8,164 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  RUST_BACKTRACE: short
 
 jobs:
-  release-check:
-    name: Release Check
+  release-validation:
+    name: Release Validation
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - name: "Package & Native Features"
+            target: ""
+            features: "v1,v2,not-wasm"
+            check_package: true
+            run_tests: true
+            build_docs: true
+          - name: "WASM Features"
+            target: "wasm32-unknown-unknown"
+            features: "v1,v2,wasm"
+            check_package: false
+            run_tests: false
+            build_docs: false
     steps:
     - uses: actions/checkout@v4
     
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
       with:
-        toolchain: stable
         targets: wasm32-unknown-unknown
     
-    - name: Cache cargo registry
+    - name: Setup optimized cache
       uses: actions/cache@v4
       with:
         path: |
-          ~/.cargo/registry
-          ~/.cargo/git
+          ~/.cargo/registry/index
+          ~/.cargo/registry/cache
+          ~/.cargo/git/db
           target
-        key: ${{ runner.os }}-cargo-release-${{ hashFiles('**/Cargo.lock') }}
+        key: release-${{ runner.os }}-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
+        restore-keys: |
+          release-${{ runner.os }}-${{ matrix.target }}-
+          release-${{ runner.os }}-
     
     - name: Check package can be built
+      if: matrix.check_package
       run: cargo package --no-verify
     
-    - name: Check all feature combinations
+    - name: Validate core features combinations
       run: |
-        echo "Testing all feature combinations..."
-        cargo check --no-default-features --features v1
-        cargo check --no-default-features --features v2
-        cargo check --no-default-features --features wasm
-        cargo check --no-default-features --features not-wasm
-        cargo check --no-default-features --features v1,v2
-        cargo check --no-default-features --features v1,wasm
-        cargo check --no-default-features --features v2,wasm
-        cargo check --no-default-features --features v1,not-wasm
-        cargo check --no-default-features --features v2,not-wasm
-        cargo check --no-default-features --features v1,v2,wasm
-        cargo check --no-default-features --features v1,v2,not-wasm
-    
-    - name: Check WASM targets
-      run: |
-        echo "Testing WASM targets..."
-        cargo check --target wasm32-unknown-unknown --no-default-features --features v1,wasm
-        cargo check --target wasm32-unknown-unknown --no-default-features --features v2,wasm
-        cargo check --target wasm32-unknown-unknown --no-default-features --features v1,v2,wasm
+        echo "Validating core feature combinations for ${{ matrix.name }}..."
+        
+        # 核心功能组合 - 针对当前矩阵优化
+        if [ "${{ matrix.target }}" = "" ]; then
+          # Native 目标的核心组合
+          core_features=(
+            "${{ matrix.features }}"
+            "v1,not-wasm"
+            "v2,not-wasm"
+            "v1"
+            "v2"
+          )
+        else
+          # WASM 目标的核心组合
+          core_features=(
+            "${{ matrix.features }}"
+            "v1,wasm"
+            "v2,wasm"
+          )
+        fi
+        
+        for features in "${core_features[@]}"; do
+          echo "Checking: $features"
+          if [ -n "${{ matrix.target }}" ]; then
+            cargo check --target ${{ matrix.target }} --no-default-features --features "$features" || exit 1
+          else
+            cargo check --no-default-features --features "$features" || exit 1
+          fi
+        done
     
     - name: Run comprehensive tests
-      run: |
-        echo "Running comprehensive tests..."
-        cargo test --no-default-features --features v1,v2,not-wasm --verbose
+      if: matrix.run_tests
+      run: cargo test --no-default-features --features ${{ matrix.features }} --verbose
     
-    - name: Check documentation builds
+    - name: Validate documentation
+      if: matrix.build_docs
       run: |
-        echo "Checking documentation..."
-        cargo doc --no-default-features --features v1,v2,not-wasm --no-deps --document-private-items
+        echo "Building documentation..."
+        cargo doc --no-default-features --features ${{ matrix.features }} --no-deps --document-private-items
+        
+        # 检查文档警告
+        cargo doc --no-default-features --features ${{ matrix.features }} --no-deps 2>&1 | \
+          grep -E "(warning|error)" && exit 1 || echo "Documentation builds cleanly"
+  
+  # 完整功能兼容性检查 - 仅在手动触发时运行
+  comprehensive-check:
+    name: Comprehensive Feature Matrix
+    runs-on: ubuntu-latest
+    needs: release-validation
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        targets: wasm32-unknown-unknown
+    
+    - name: Restore cache
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          ~/.cargo/registry/index
+          ~/.cargo/registry/cache
+          ~/.cargo/git/db
+          target
+        key: release-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+    
+    - name: Full feature compatibility matrix
+      run: |
+        echo "Running comprehensive feature compatibility check..."
+        
+        # 所有可能的功能组合
+        all_combinations=(
+          "v1" "v2" "wasm" "not-wasm"
+          "v1,v2" "v1,wasm" "v2,wasm" 
+          "v1,not-wasm" "v2,not-wasm"
+          "v1,v2,wasm" "v1,v2,not-wasm"
+        )
+        
+        failed_combinations=()
+        
+        for features in "${all_combinations[@]}"; do
+          echo "Testing combination: $features"
+          
+          # 选择合适的目标
+          if [[ "$features" == *"wasm"* ]]; then
+            if cargo check --target wasm32-unknown-unknown --no-default-features --features "$features"; then
+              echo "✅ $features (WASM)"
+            else
+              echo "❌ $features (WASM)"
+              failed_combinations+=("$features (WASM)")
+            fi
+          else
+            if cargo check --no-default-features --features "$features"; then
+              echo "✅ $features (Native)"
+            else
+              echo "❌ $features (Native)"
+              failed_combinations+=("$features (Native)")
+            fi
+          fi
+        done
+        
+        if [ ${#failed_combinations[@]} -ne 0 ]; then
+          echo "Failed combinations:"
+          printf '%s\n' "${failed_combinations[@]}"
+          exit 1
+        else
+          echo "All feature combinations validated successfully!"
+        fi

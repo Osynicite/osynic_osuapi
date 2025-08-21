@@ -36,14 +36,13 @@ impl IMultiplayer for GlooMultiplayer {
         };
 
         let url = format!(
-            "{}https://osu.ppy.sh/api/v2/rooms/{}/playlist/{}/scores/users/{}",
-            proxy_url, room, playlist, user
+            "{proxy_url}https://osu.ppy.sh/api/v2/rooms/{room}/playlist/{playlist}/scores/users/{user}"
         );
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -86,20 +85,18 @@ impl IMultiplayer for GlooMultiplayer {
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
             format!(
-                "{}https://osu.ppy.sh/api/v2/rooms/{}/playlist/{}/scores",
-                proxy_url, room, playlist
+                "{proxy_url}https://osu.ppy.sh/api/v2/rooms/{room}/playlist/{playlist}/scores"
             )
         } else {
             format!(
-                "{}https://osu.ppy.sh/api/v2/rooms/{}/playlist/{}/scores?{}",
-                proxy_url, room, playlist, query_string
+                "{proxy_url}https://osu.ppy.sh/api/v2/rooms/{room}/playlist/{playlist}/scores?{query_string}"
             )
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -127,14 +124,13 @@ impl IMultiplayer for GlooMultiplayer {
         };
 
         let url = format!(
-            "{}https://osu.ppy.sh/api/v2/rooms/{}/playlist/{}/scores/{}",
-            proxy_url, room, playlist, score
+            "{proxy_url}https://osu.ppy.sh/api/v2/rooms/{room}/playlist/{playlist}/scores/{score}"
         );
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -182,15 +178,15 @@ impl IMultiplayer for GlooMultiplayer {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/rooms", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/rooms")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/rooms?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/rooms?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

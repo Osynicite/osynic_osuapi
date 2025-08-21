@@ -8,84 +8,152 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0  # Disable incremental compilation for faster CI
+  CARGO_NET_RETRY: 10
+  RUST_BACKTRACE: short
 
 jobs:
-  check:
-    name: Check
+  # 快速格式检查 - 最先运行，失败快速停止
+  quick-checks:
+    name: Quick Checks
     runs-on: ubuntu-latest
+    outputs:
+      should_continue: ${{ steps.check_changes.outputs.rust_changed }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2  # 只获取最近两次提交以检查变更
+    
+    - name: Check if Rust files changed
+      id: check_changes
+      run: |
+        if git diff --name-only HEAD~1 | grep -E '\.(rs|toml)$'; then
+          echo "rust_changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "rust_changed=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Install Rust (minimal)
+      if: steps.check_changes.outputs.rust_changed == 'true'
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        components: rustfmt
+    
+    - name: Check formatting
+      if: steps.check_changes.outputs.rust_changed == 'true'
+      run: cargo fmt --all -- --check
+
+  # 主要构建和测试 - 使用矩阵但优化并发
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    needs: quick-checks
+    if: needs.quick-checks.outputs.should_continue == 'true'
     strategy:
+      fail-fast: true  # 一个失败就停止其他作业
       matrix:
-        features:
-          - "v1,v2,not-wasm"  # Default features (native)
-          - "v1,wasm"         # V1 WASM only
-          - "v2,wasm"         # V2 WASM only
-          - "v1,v2,wasm"      # Both V1 and V2 WASM
+        include:
+          - name: "Native (v1+v2)"
+            features: "v1,v2,not-wasm"
+            target: ""
+            run_tests: true
+            run_clippy: true
+          - name: "WASM (v1+v2)"
+            features: "v1,v2,wasm"
+            target: "wasm32-unknown-unknown"
+            run_tests: false
+            run_clippy: true
     steps:
     - uses: actions/checkout@v4
     
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
       with:
-        toolchain: stable
-        targets: wasm32-unknown-unknown
+        components: clippy
+        targets: ${{ matrix.target }}
     
-    - name: Cache cargo registry
+    - name: Setup cache
       uses: actions/cache@v4
       with:
         path: |
-          ~/.cargo/registry
-          ~/.cargo/git
+          ~/.cargo/registry/index
+          ~/.cargo/registry/cache
+          ~/.cargo/git/db
           target
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+        key: ${{ runner.os }}-cargo-${{ matrix.features }}-${{ hashFiles('**/Cargo.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-${{ matrix.features }}-
+          ${{ runner.os }}-cargo-
     
-    - name: Check with features (${{ matrix.features }})
-      run: cargo check --no-default-features --features ${{ matrix.features }}
+    - name: Check compilation
+      run: |
+        if [ -n "${{ matrix.target }}" ]; then
+          cargo check --target ${{ matrix.target }} --no-default-features --features ${{ matrix.features }}
+        else
+          cargo check --no-default-features --features ${{ matrix.features }}
+        fi
     
-    - name: Check WASM target (if WASM features)
-      if: contains(matrix.features, 'wasm')
-      run: cargo check --target wasm32-unknown-unknown --no-default-features --features ${{ matrix.features }}
+    - name: Run Clippy
+      if: matrix.run_clippy
+      run: |
+        if [ -n "${{ matrix.target }}" ]; then
+          cargo clippy --target ${{ matrix.target }} --no-default-features --features ${{ matrix.features }} -- -D warnings
+        else
+          cargo clippy --no-default-features --features ${{ matrix.features }} -- -D warnings
+        fi
+    
+    - name: Run tests
+      if: matrix.run_tests
+      run: cargo test --no-default-features --features ${{ matrix.features }}
+    
+    - name: Check docs
+      if: matrix.run_tests  # 只在 native 版本检查文档
+      run: cargo doc --no-default-features --features ${{ matrix.features }} --no-deps
 
-  fmt:
-    name: Rustfmt
+  # 额外的功能组合检查 - 只在主分支或重要PR时运行
+  extended-checks:
+    name: Extended Feature Checks
     runs-on: ubuntu-latest
+    needs: [quick-checks, build-and-test]
+    if: |
+      needs.quick-checks.outputs.should_continue == 'true' && 
+      (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || 
+       contains(github.event.pull_request.labels.*.name, 'extended-ci'))
     steps:
     - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
       with:
-        components: rustfmt
-    - run: cargo fmt --all -- --check
-
-  clippy:
-    name: Clippy
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        features:
-          - "v1,v2,not-wasm"  # Default features (native)
-          - "v1,v2,wasm"      # Both V1 and V2 WASM
-    steps:
-    - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
-      with:
-        components: clippy
         targets: wasm32-unknown-unknown
-    - name: Run clippy with features (${{ matrix.features }})
-      run: cargo clippy --no-default-features --features ${{ matrix.features }} -- -D warnings
-
-  test:
-    name: Test Suite
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
-    - name: Run tests (native features only)
-      run: cargo test --no-default-features --features v1,v2,not-wasm
-
-  docs:
-    name: Documentation
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
-    - name: Check documentation
-      run: cargo doc --no-default-features --features v1,v2,not-wasm --no-deps
+    
+    - name: Restore cache
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          ~/.cargo/registry/index
+          ~/.cargo/registry/cache
+          ~/.cargo/git/db
+          target
+        key: ${{ runner.os }}-cargo-v1,v2,not-wasm-${{ hashFiles('**/Cargo.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-
+    
+    - name: Check individual features
+      run: |
+        echo "Checking individual feature combinations..."
+        features_to_check=(
+          "v1,not-wasm"
+          "v2,not-wasm" 
+          "v1,wasm"
+          "v2,wasm"
+        )
+        
+        for features in "${features_to_check[@]}"; do
+          echo "Testing: $features"
+          cargo check --no-default-features --features "$features" || exit 1
+          
+          if [[ "$features" == *"wasm"* ]]; then
+            cargo check --target wasm32-unknown-unknown --no-default-features --features "$features" || exit 1
+          fi
+        done

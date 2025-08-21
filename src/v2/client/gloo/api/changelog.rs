@@ -29,12 +29,12 @@ impl IChangelog for GlooChangelog {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/changelog/{}/{}", proxy_url, stream, build);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/changelog/{stream}/{build}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -84,15 +84,15 @@ impl IChangelog for GlooChangelog {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/changelog", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/changelog")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/changelog?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/changelog?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -131,15 +131,15 @@ impl IChangelog for GlooChangelog {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/changelog/{}", proxy_url, changelog)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/changelog/{changelog}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/changelog/{}?{}", proxy_url, changelog, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/changelog/{changelog}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

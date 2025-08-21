@@ -46,8 +46,7 @@ pub fn osu_account_facade(user: User) -> OsuAccountFacadeA {
     )
     .unwrap_or_else(|| "XX".to_string());
     let country_svg_url = format!(
-        "https://osu.ppy.sh/assets/images/flags/{}.svg",
-        country_flag
+        "https://osu.ppy.sh/assets/images/flags/{country_flag}.svg"
     );
     OsuAccountFacadeA {
         id: user.id,

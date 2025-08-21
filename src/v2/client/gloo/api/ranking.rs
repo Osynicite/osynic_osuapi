@@ -38,15 +38,15 @@ impl IRanking for GlooRanking {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/rankings/kudosu", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/rankings/kudosu")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/rankings/kudosu?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/rankings/kudosu?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -96,15 +96,15 @@ impl IRanking for GlooRanking {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/rankings/{}/{}", proxy_url, mode.to_string(), ranking_type)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/rankings/{mode}/{ranking_type}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/rankings/{}/{}?{}", proxy_url, mode.to_string(), ranking_type, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/rankings/{mode}/{ranking_type}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -126,12 +126,12 @@ impl IRanking for GlooRanking {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/spotlights", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/spotlights");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

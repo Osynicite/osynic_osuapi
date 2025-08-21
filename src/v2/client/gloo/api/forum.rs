@@ -34,14 +34,14 @@ impl IForum for GlooForum {
             url.clone()
         };
 
-        let form_data = vec![format!("body={}", body)];
+        let form_data = [format!("body={body}")];
         let body_content = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/forums/topics/{}/reply", proxy_url, topic);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/topics/{topic}/reply");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body_content)?
             .send()
             .await?;
@@ -86,15 +86,15 @@ impl IForum for GlooForum {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/forums/topics", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/topics")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/forums/topics?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/topics?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -117,12 +117,12 @@ impl IForum for GlooForum {
         };
 
         let body = serde_json::to_string(&params)?;
-        let url = format!("{}https://osu.ppy.sh/api/v2/forums/topics", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/topics");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -172,15 +172,15 @@ impl IForum for GlooForum {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/forums/topics/{}", proxy_url, topic)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/topics/{topic}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/forums/topics/{}?{}", proxy_url, topic, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/topics/{topic}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -202,14 +202,14 @@ impl IForum for GlooForum {
             url.clone()
         };
 
-        let form_data = vec![format!("forum_topic_title={}", topic_title)];
+        let form_data = [format!("forum_topic_title={topic_title}")];
         let body = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/forums/topics/{}", proxy_url, topic);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/topics/{topic}");
 
         let res = Request::put(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -232,14 +232,14 @@ impl IForum for GlooForum {
             url.clone()
         };
 
-        let form_data = vec![format!("body={}", body)];
+        let form_data = [format!("body={body}")];
         let body_content = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/forums/posts/{}", proxy_url, post);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/posts/{post}");
 
         let res = Request::put(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body_content)?
             .send()
             .await?;
@@ -262,12 +262,12 @@ impl IForum for GlooForum {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/forums", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/forums");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -289,12 +289,12 @@ impl IForum for GlooForum {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/forums/{}", proxy_url, forum);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/forums/{forum}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

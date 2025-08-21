@@ -58,15 +58,15 @@ impl IComments for GlooComments {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/comments", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/comments")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/comments?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/comments?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -96,25 +96,25 @@ impl IComments for GlooComments {
 
         let mut form_data = Vec::new();
         if let Some(commentable_type) = commentable_type {
-            form_data.push(format!("commentable_type={}", commentable_type));
+            form_data.push(format!("commentable_type={commentable_type}"));
         }
         if let Some(commentable_id) = commentable_id {
-            form_data.push(format!("commentable_id={}", commentable_id));
+            form_data.push(format!("commentable_id={commentable_id}"));
         }
         if let Some(parent_id) = parent_id {
-            form_data.push(format!("parent_id={}", parent_id));
+            form_data.push(format!("parent_id={parent_id}"));
         }
         if let Some(message) = message {
-            form_data.push(format!("message={}", message));
+            form_data.push(format!("message={message}"));
         }
 
         let body = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/comments", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/comments");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -137,12 +137,12 @@ impl IComments for GlooComments {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/comments/{}", proxy_url, comment);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/comments/{comment}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -170,16 +170,16 @@ impl IComments for GlooComments {
 
         let mut form_data = Vec::new();
         if let Some(message) = message {
-            form_data.push(format!("message={}", message));
+            form_data.push(format!("message={message}"));
         }
 
         let body = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/comments/{}", proxy_url, comment);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/comments/{comment}");
 
         let res = Request::put(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -202,11 +202,11 @@ impl IComments for GlooComments {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/comments/{}", proxy_url, comment);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/comments/{comment}");
 
         let res = Request::delete(&url)
             .header("Accept", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -228,12 +228,12 @@ impl IComments for GlooComments {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/comments/{}/vote", proxy_url, comment);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/comments/{comment}/vote");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -255,11 +255,11 @@ impl IComments for GlooComments {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/comments/{}/vote", proxy_url, comment);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/comments/{comment}/vote");
 
         let res = Request::delete(&url)
             .header("Accept", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

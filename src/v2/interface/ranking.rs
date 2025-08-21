@@ -10,6 +10,7 @@ pub trait IRanking {
         page: Option<u32>,
     ) -> impl std::future::Future<Output = Result<KudosuRankings>>;
 
+    #[allow(clippy::too_many_arguments)]
     fn get_ranking(
         &self,
         mode: Mode,

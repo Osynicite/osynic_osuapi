@@ -46,15 +46,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/me", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/me")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/me?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/me?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -91,15 +91,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/kudosu", proxy_url, id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/kudosu")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/kudosu?{}", proxy_url, id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/kudosu?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -141,15 +141,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/scores/{}", proxy_url, id, score_type.to_string())
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/scores/{score_type}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/scores/{}?{}", proxy_url, id, score_type.to_string(), query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/scores/{score_type}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -187,15 +187,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/beatmapsets/{}", proxy_url, id, beatmap_type)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/{beatmap_type}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/beatmapsets/{}?{}", proxy_url, id, beatmap_type, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/{beatmap_type}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -232,15 +232,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/beatmapsets/most_played", proxy_url, id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/most_played")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/beatmapsets/most_played?{}", proxy_url, id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/most_played?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -277,15 +277,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/recent_activity", proxy_url, id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/recent_activity")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}/recent_activity?{}", proxy_url, id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/recent_activity?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -322,15 +322,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}", proxy_url, id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}?{}", proxy_url, id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -367,15 +367,15 @@ impl IUsers for GlooUsers {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}", proxy_url, username)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{username}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/users/{}?{}", proxy_url, username, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{username}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -412,12 +412,12 @@ impl IUsers for GlooUsers {
         }
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
-        let url = format!("{}https://osu.ppy.sh/api/v2/users?{}", proxy_url, query_string);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/users?{query_string}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

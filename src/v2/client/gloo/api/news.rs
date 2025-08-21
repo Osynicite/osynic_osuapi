@@ -47,15 +47,15 @@ impl INews for GlooNews {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/news", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/news")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/news?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/news?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -84,15 +84,15 @@ impl INews for GlooNews {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/news/{}", proxy_url, news_id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/news/{news_id}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/news/{}?{}", proxy_url, news_id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/news/{news_id}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

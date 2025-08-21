@@ -39,15 +39,15 @@ impl INotifications for GlooNotifications {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/notifications", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/notifications")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/notifications?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/notifications?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -72,14 +72,14 @@ impl INotifications for GlooNotifications {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/notifications/mark-read", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/notifications/mark-read");
 
         let res = if let Some(params) = params {
             let body = serde_json::to_string(&params)?;
             Request::post(&url)
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
-                .header("Authorization", &format!("Bearer {}", access_token))
+                .header("Authorization", &format!("Bearer {access_token}"))
                 .body(body)?
                 .send()
                 .await?
@@ -87,7 +87,7 @@ impl INotifications for GlooNotifications {
             Request::post(&url)
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
-                .header("Authorization", &format!("Bearer {}", access_token))
+                .header("Authorization", &format!("Bearer {access_token}"))
                 .send()
                 .await?
         };

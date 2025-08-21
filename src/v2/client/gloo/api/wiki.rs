@@ -29,14 +29,13 @@ impl IWiki for GlooWiki {
         };
 
         let url = format!(
-            "{}https://osu.ppy.sh/api/v2/wiki/{}/{}",
-            proxy_url, locale, path
+            "{proxy_url}https://osu.ppy.sh/api/v2/wiki/{locale}/{path}"
         );
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

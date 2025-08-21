@@ -48,15 +48,15 @@ impl IChat for GlooChat {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/chat/ack", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/ack")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/chat/ack?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/ack?{query_string}")
         };
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -91,16 +91,16 @@ impl IChat for GlooChat {
         ];
 
         if let Some(uuid) = uuid {
-            form_data.push(format!("uuid={}", uuid));
+            form_data.push(format!("uuid={uuid}"));
         }
 
         let body = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/new", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/new");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -143,15 +143,15 @@ impl IChat for GlooChat {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/chat/updates", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/updates")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/chat/updates?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/updates?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -192,15 +192,15 @@ impl IChat for GlooChat {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/chat/channels/{}/messages", proxy_url, channel)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/messages")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/chat/channels/{}/messages?{}", proxy_url, channel, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/messages?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -227,18 +227,18 @@ impl IChat for GlooChat {
             url.clone()
         };
 
-        let form_data = vec![
-            format!("message={}", message),
-            format!("is_action={}", is_action),
+        let form_data = [
+            format!("message={message}"),
+            format!("is_action={is_action}"),
         ];
 
         let body = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/channels/{}/messages", proxy_url, channel);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/messages");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -261,14 +261,14 @@ impl IChat for GlooChat {
             url.clone()
         };
 
-        let form_data = vec![format!("user={}", user)];
+        let form_data = [format!("user={user}")];
         let body = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/channels/{}/users/{}", proxy_url, channel, user);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/users/{user}");
 
         let res = Request::put(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -291,11 +291,11 @@ impl IChat for GlooChat {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/channels/{}/users/{}", proxy_url, channel, user);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/users/{user}");
 
         let res = Request::delete(&url)
             .header("Accept", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -322,19 +322,19 @@ impl IChat for GlooChat {
             url.clone()
         };
 
-        let form_data = vec![
-            format!("message={}", message),
-            format!("channel_id={}", channel_id),
-            format!("message_id={}", message_id),
+        let form_data = [
+            format!("message={message}"),
+            format!("channel_id={channel_id}"),
+            format!("message_id={message_id}"),
         ];
 
         let body = form_data.join("&");
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/channels/{}/mark-as-read", proxy_url, channel);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/mark-as-read");
 
         let res = Request::put(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/x-www-form-urlencoded")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -356,12 +356,12 @@ impl IChat for GlooChat {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/channels", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -384,12 +384,12 @@ impl IChat for GlooChat {
         };
 
         let body = serde_json::to_string(&params)?;
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/channels", proxy_url);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels");
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .body(body)?
             .send()
             .await?;
@@ -412,12 +412,12 @@ impl IChat for GlooChat {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/chat/channels/{}", proxy_url, channel);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

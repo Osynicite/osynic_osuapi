@@ -35,12 +35,12 @@ impl IBeatmapsets for GlooBeatmapsets {
 
         // Convert search params to query string
         let query_string = serde_urlencoded::to_string(&params)?;
-        let url = format!("{}https://osu.ppy.sh/api/v2/beatmapsets/search?{}", proxy_url, query_string);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmapsets/search?{query_string}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -62,12 +62,12 @@ impl IBeatmapsets for GlooBeatmapsets {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/beatmapsets/{}", proxy_url, beatmapset_id);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmapsets/{beatmapset_id}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -89,11 +89,11 @@ impl IBeatmapsets for GlooBeatmapsets {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/beatmapsets/{}/download", proxy_url, beatmapset_id);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmapsets/{beatmapset_id}/download");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 

@@ -51,15 +51,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/packs", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/packs")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/packs?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/packs?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -92,15 +92,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/packs/{}", proxy_url, pack)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/packs/{pack}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/packs/{}?{}", proxy_url, pack, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/packs/{pack}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -140,15 +140,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/lookup", proxy_url)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/lookup")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/lookup?{}", proxy_url, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/lookup?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -190,15 +190,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/scores/users/{}", proxy_url, beatmap_id, user_id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/scores/users/{}?{}", proxy_url, beatmap_id, user_id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -240,15 +240,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/scores/users/{}/all", proxy_url, beatmap_id, user_id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}/all")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/scores/users/{}/all?{}", proxy_url, beatmap_id, user_id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}/all?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -293,15 +293,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/scores", proxy_url, beatmap_id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/scores?{}", proxy_url, beatmap_id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -342,15 +342,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/solo-scores", proxy_url, beatmap_id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/solo-scores")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/solo-scores?{}", proxy_url, beatmap_id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/solo-scores?{query_string}")
         };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -382,12 +382,12 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_params = vec![("ids", ids_string)];
         let query_string = serde_urlencoded::to_string(&query_params)?;
-        let url = format!("{}https://osu.ppy.sh/api/v2/beatmaps?{}", proxy_url, query_string);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps?{query_string}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -412,12 +412,12 @@ impl IBeatmaps for GlooBeatmaps {
             url.clone()
         };
 
-        let url = format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}", proxy_url, beatmap_id);
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
@@ -460,15 +460,15 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/attributes", proxy_url, beatmap_id)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/attributes")
         } else {
-            format!("{}https://osu.ppy.sh/api/v2/beatmaps/{}/attributes?{}", proxy_url, beatmap_id, query_string)
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/attributes?{query_string}")
         };
 
         let res = Request::post(&url)
             .header("Accept", "application/json")
             .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
+            .header("Authorization", &format!("Bearer {access_token}"))
             .send()
             .await?;
 
