@@ -64,9 +64,7 @@ pub trait IChat {
         message_id: String,
     ) -> impl std::future::Future<Output = Result<()>>;
 
-    fn get_channel_list(
-        &self,
-    ) -> impl std::future::Future<Output = Result<Vec<ChatChannel>>>;
+    fn get_channel_list(&self) -> impl std::future::Future<Output = Result<Vec<ChatChannel>>>;
 
     fn create_channel(
         &self,

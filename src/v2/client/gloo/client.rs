@@ -46,7 +46,7 @@ impl OsynicOsuApiV2GlooClient {
     pub fn new(o_token: OToken) -> Self {
         let o_token = Arc::new(Mutex::new(o_token));
         let proxy_url = Arc::new(Mutex::new(String::new()));
-        
+
         OsynicOsuApiV2GlooClient {
             oauth: GlooOauth {
                 o_token: o_token.clone(),
@@ -137,7 +137,7 @@ impl Default for OsynicOsuApiV2GlooClient {
     fn default() -> Self {
         let o_token = Arc::new(Mutex::new(OToken::default()));
         let proxy_url = Arc::new(Mutex::new(String::new()));
-        
+
         OsynicOsuApiV2GlooClient {
             oauth: GlooOauth {
                 o_token: o_token.clone(),

@@ -17,10 +17,7 @@ pub struct GlooBeatmapsets {
 }
 
 impl IBeatmapsets for GlooBeatmapsets {
-    async fn search(
-        &self,
-        params: BeatmapsetsSearchParams,
-    ) -> Result<BeatmapsetsSearchResponse> {
+    async fn search(&self, params: BeatmapsetsSearchParams) -> Result<BeatmapsetsSearchResponse> {
         console::log_1(&JsValue::from_str("GlooBeatmapsets search"));
 
         let access_token = {
@@ -89,7 +86,8 @@ impl IBeatmapsets for GlooBeatmapsets {
             url.clone()
         };
 
-        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmapsets/{beatmapset_id}/download");
+        let url =
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmapsets/{beatmapset_id}/download");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")

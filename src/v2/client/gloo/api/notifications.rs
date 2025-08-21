@@ -16,10 +16,7 @@ pub struct GlooNotifications {
 }
 
 impl INotifications for GlooNotifications {
-    async fn get_notifications(
-        &self,
-        max_id: Option<String>,
-    ) -> Result<GetNotificationsResponse> {
+    async fn get_notifications(&self, max_id: Option<String>) -> Result<GetNotificationsResponse> {
         console::log_1(&JsValue::from_str("GlooNotifications get_notifications"));
 
         let access_token = {
@@ -60,7 +57,9 @@ impl INotifications for GlooNotifications {
         &self,
         params: Option<MarkNotificationsRequest>,
     ) -> Result<()> {
-        console::log_1(&JsValue::from_str("GlooNotifications mark_notifications_as_read"));
+        console::log_1(&JsValue::from_str(
+            "GlooNotifications mark_notifications_as_read",
+        ));
 
         let access_token = {
             let token = self.o_token.lock().unwrap();

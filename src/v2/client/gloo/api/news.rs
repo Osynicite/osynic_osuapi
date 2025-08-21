@@ -1,4 +1,5 @@
 use crate::error::Result;
+use crate::v2::client::gloo::check::check_res;
 use crate::v2::interface::news::INews;
 use crate::v2::model::news::dtos::response::GetNewsListingResponse;
 use crate::v2::model::news::structs::news::News;
@@ -7,7 +8,6 @@ use gloo_net::http::Request;
 use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
 use web_sys::console;
-use crate::v2::client::gloo::check::check_res;
 
 #[derive(Clone)]
 pub struct GlooNews {

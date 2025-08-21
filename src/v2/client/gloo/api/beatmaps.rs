@@ -190,9 +190,13 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}"
+            )
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -240,9 +244,13 @@ impl IBeatmaps for GlooBeatmaps {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}/all")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}/all"
+            )
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}/all?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores/users/{user_id}/all?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -295,7 +303,9 @@ impl IBeatmaps for GlooBeatmaps {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/scores?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -344,7 +354,9 @@ impl IBeatmaps for GlooBeatmaps {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/solo-scores")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/solo-scores?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/solo-scores?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -359,10 +371,7 @@ impl IBeatmaps for GlooBeatmaps {
         Ok(non_legacy_scores)
     }
 
-    async fn get_beatmaps(
-        &self,
-        beatmap_ids: Vec<u32>,
-    ) -> Result<Beatmaps> {
+    async fn get_beatmaps(&self, beatmap_ids: Vec<u32>) -> Result<Beatmaps> {
         console::log_1(&JsValue::from_str("GlooBeatmaps get_beatmaps"));
 
         let access_token = {
@@ -375,7 +384,8 @@ impl IBeatmaps for GlooBeatmaps {
             url.clone()
         };
 
-        let ids_string = beatmap_ids.iter()
+        let ids_string = beatmap_ids
+            .iter()
             .map(|id| id.to_string())
             .collect::<Vec<_>>()
             .join(",");
@@ -396,10 +406,7 @@ impl IBeatmaps for GlooBeatmaps {
         Ok(beatmaps)
     }
 
-    async fn get_beatmap(
-        &self,
-        beatmap_id: u32,
-    ) -> Result<Beatmap> {
+    async fn get_beatmap(&self, beatmap_id: u32) -> Result<Beatmap> {
         console::log_1(&JsValue::from_str("GlooBeatmaps get_beatmap"));
 
         let access_token = {
@@ -462,7 +469,9 @@ impl IBeatmaps for GlooBeatmaps {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/attributes")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/attributes?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/beatmaps/{beatmap_id}/attributes?{query_string}"
+            )
         };
 
         let res = Request::post(&url)

@@ -44,21 +44,17 @@ impl IOauth for GlooOauth {
 
         let response = check_res(res)?;
         let token: OToken = response.json().await?;
-        
+
         // Update stored token
         {
             let mut stored_token = self.o_token.lock().unwrap();
             *stored_token = token.clone();
         }
-        
+
         Ok(token)
     }
 
-    async fn get_token_without_code(
-        &self,
-        client_id: u64,
-        client_secret: &str,
-    ) -> Result<OToken> {
+    async fn get_token_without_code(&self, client_id: u64, client_secret: &str) -> Result<OToken> {
         console::log_1(&JsValue::from_str("GlooOauth get_token_without_code"));
 
         let proxy_url = {
@@ -81,13 +77,13 @@ impl IOauth for GlooOauth {
 
         let response = check_res(res)?;
         let token: OToken = response.json().await?;
-        
+
         // Update stored token
         {
             let mut stored_token = self.o_token.lock().unwrap();
             *stored_token = token.clone();
         }
-        
+
         Ok(token)
     }
 
@@ -111,7 +107,8 @@ impl IOauth for GlooOauth {
 
         let scope_str = scope
             .map(|scopes| {
-                scopes.iter()
+                scopes
+                    .iter()
                     .map(|s| s.to_string())
                     .collect::<Vec<_>>()
                     .join(" ")
@@ -133,13 +130,13 @@ impl IOauth for GlooOauth {
 
         let response = check_res(res)?;
         let token: OToken = response.json().await?;
-        
+
         // Update stored token
         {
             let mut stored_token = self.o_token.lock().unwrap();
             *stored_token = token.clone();
         }
-        
+
         Ok(token)
     }
 

@@ -28,9 +28,7 @@ impl IWiki for GlooWiki {
             url.clone()
         };
 
-        let url = format!(
-            "{proxy_url}https://osu.ppy.sh/api/v2/wiki/{locale}/{path}"
-        );
+        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/wiki/{locale}/{path}");
 
         let res = Request::get(&url)
             .header("Accept", "application/json")

@@ -62,10 +62,7 @@ pub trait IBeatmaps {
         &self,
         beatmap_ids: Vec<u32>,
     ) -> impl std::future::Future<Output = Result<Beatmaps>>;
-    fn get_beatmap(
-        &self,
-        beatmap_id: u32,
-    ) -> impl std::future::Future<Output = Result<Beatmap>>;
+    fn get_beatmap(&self, beatmap_id: u32) -> impl std::future::Future<Output = Result<Beatmap>>;
     fn get_beatmap_attributes(
         &self,
         beatmap_id: u32,

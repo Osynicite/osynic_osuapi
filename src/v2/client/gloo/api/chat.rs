@@ -194,7 +194,9 @@ impl IChat for GlooChat {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/messages")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/messages?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/messages?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -263,7 +265,8 @@ impl IChat for GlooChat {
 
         let form_data = [format!("user={user}")];
         let body = form_data.join("&");
-        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/users/{user}");
+        let url =
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/users/{user}");
 
         let res = Request::put(&url)
             .header("Accept", "application/json")
@@ -291,7 +294,8 @@ impl IChat for GlooChat {
             url.clone()
         };
 
-        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/users/{user}");
+        let url =
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/users/{user}");
 
         let res = Request::delete(&url)
             .header("Accept", "application/json")
@@ -329,7 +333,8 @@ impl IChat for GlooChat {
         ];
 
         let body = form_data.join("&");
-        let url = format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/mark-as-read");
+        let url =
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/chat/channels/{channel}/mark-as-read");
 
         let res = Request::put(&url)
             .header("Accept", "application/json")

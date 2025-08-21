@@ -17,12 +17,7 @@ pub struct GlooMultiplayer {
 }
 
 impl IMultiplayer for GlooMultiplayer {
-    async fn get_user_high_score(
-        &self,
-        room: String,
-        playlist: u64,
-        user: u64,
-    ) -> Result<Score> {
+    async fn get_user_high_score(&self, room: String, playlist: u64, user: u64) -> Result<Score> {
         console::log_1(&JsValue::from_str("GlooMultiplayer get_user_high_score"));
 
         let access_token = {
@@ -84,9 +79,7 @@ impl IMultiplayer for GlooMultiplayer {
 
         let query_string = serde_urlencoded::to_string(&query_params)?;
         let url = if query_string.is_empty() {
-            format!(
-                "{proxy_url}https://osu.ppy.sh/api/v2/rooms/{room}/playlist/{playlist}/scores"
-            )
+            format!("{proxy_url}https://osu.ppy.sh/api/v2/rooms/{room}/playlist/{playlist}/scores")
         } else {
             format!(
                 "{proxy_url}https://osu.ppy.sh/api/v2/rooms/{room}/playlist/{playlist}/scores?{query_string}"
@@ -105,12 +98,7 @@ impl IMultiplayer for GlooMultiplayer {
         Ok(multiplayer_scores)
     }
 
-    async fn get_score(
-        &self,
-        room: String,
-        playlist: u64,
-        score: u64,
-    ) -> Result<Score> {
+    async fn get_score(&self, room: String, playlist: u64, score: u64) -> Result<Score> {
         console::log_1(&JsValue::from_str("GlooMultiplayer get_score"));
 
         let access_token = {

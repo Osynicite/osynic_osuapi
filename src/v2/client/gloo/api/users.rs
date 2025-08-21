@@ -143,7 +143,9 @@ impl IUsers for GlooUsers {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/scores/{score_type}")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/scores/{score_type}?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/scores/{score_type}?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -189,7 +191,9 @@ impl IUsers for GlooUsers {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/{beatmap_type}")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/{beatmap_type}?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/{beatmap_type}?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -210,7 +214,9 @@ impl IUsers for GlooUsers {
         limit: Option<i32>,
         offset: Option<String>,
     ) -> Result<Vec<BeatmapPlaycount>> {
-        console::log_1(&JsValue::from_str("GlooUsers get_user_beatmaps_most_played"));
+        console::log_1(&JsValue::from_str(
+            "GlooUsers get_user_beatmaps_most_played",
+        ));
 
         let access_token = {
             let token = self.o_token.lock().unwrap();
@@ -234,7 +240,9 @@ impl IUsers for GlooUsers {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/most_played")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/most_played?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/beatmapsets/most_played?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -279,7 +287,9 @@ impl IUsers for GlooUsers {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/recent_activity")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/recent_activity?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/users/{id}/recent_activity?{query_string}"
+            )
         };
 
         let res = Request::get(&url)
@@ -294,12 +304,7 @@ impl IUsers for GlooUsers {
         Ok(events)
     }
 
-    async fn get_user(
-        &self,
-        id: u32,
-        mode: Option<Mode>,
-        key: Option<String>,
-    ) -> Result<User> {
+    async fn get_user(&self, id: u32, mode: Option<Mode>, key: Option<String>) -> Result<User> {
         console::log_1(&JsValue::from_str("GlooUsers get_user"));
 
         let access_token = {
@@ -401,7 +406,8 @@ impl IUsers for GlooUsers {
             url.clone()
         };
 
-        let ids_string = ids.iter()
+        let ids_string = ids
+            .iter()
             .map(|id| id.to_string())
             .collect::<Vec<_>>()
             .join(",");

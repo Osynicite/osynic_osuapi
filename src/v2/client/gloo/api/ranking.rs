@@ -98,7 +98,9 @@ impl IRanking for GlooRanking {
         let url = if query_string.is_empty() {
             format!("{proxy_url}https://osu.ppy.sh/api/v2/rankings/{mode}/{ranking_type}")
         } else {
-            format!("{proxy_url}https://osu.ppy.sh/api/v2/rankings/{mode}/{ranking_type}?{query_string}")
+            format!(
+                "{proxy_url}https://osu.ppy.sh/api/v2/rankings/{mode}/{ranking_type}?{query_string}"
+            )
         };
 
         let res = Request::get(&url)

@@ -1,5 +1,3 @@
-pub mod oauth;
-pub mod users;
 pub mod beatmaps;
 pub mod beatmapsets;
 pub mod changelog;
@@ -11,8 +9,10 @@ pub mod matches;
 pub mod multiplayer;
 pub mod news;
 pub mod notifications;
+pub mod oauth;
 pub mod ranking;
 pub mod scores;
 pub mod search;
 pub mod session;
+pub mod users;
 pub mod wiki;
