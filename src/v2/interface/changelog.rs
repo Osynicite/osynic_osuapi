@@ -8,7 +8,7 @@ pub trait IChangelog {
         &self,
         stream: String,
         build: String,
-    ) -> impl std::future::Future<Output = Result<ChanglogBuild>> + Send;
+    ) -> impl std::future::Future<Output = Result<ChanglogBuild>>;
 
     fn get_changelog_listing(
         &self,
@@ -17,12 +17,12 @@ pub trait IChangelog {
         stream: Option<String>,
         to: Option<String>,
         message_formats: Option<Vec<String>>,
-    ) -> impl std::future::Future<Output = Result<ChangelogListing>> + Send;
+    ) -> impl std::future::Future<Output = Result<ChangelogListing>>;
 
     fn lookup_changelog_build(
         &self,
         changelog: String,
         key: Option<String>,
         message_formats: Option<Vec<String>>,
-    ) -> impl std::future::Future<Output = Result<ChanglogBuild>> + Send;
+    ) -> impl std::future::Future<Output = Result<ChanglogBuild>>;
 }

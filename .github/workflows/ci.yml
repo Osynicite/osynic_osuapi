@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        features:
+          - "v1,v2,not-wasm"  # Default features (native)
+          - "v1,wasm"         # V1 WASM only
+          - "v2,wasm"         # V2 WASM only
+          - "v1,v2,wasm"      # Both V1 and V2 WASM
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+        targets: wasm32-unknown-unknown
+    
+    - name: Cache cargo registry
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    
+    - name: Check with features (${{ matrix.features }})
+      run: cargo check --no-default-features --features ${{ matrix.features }}
+    
+    - name: Check WASM target (if WASM features)
+      if: contains(matrix.features, 'wasm')
+      run: cargo check --target wasm32-unknown-unknown --no-default-features --features ${{ matrix.features }}
+
+  fmt:
+    name: Rustfmt
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+      with:
+        components: rustfmt
+    - run: cargo fmt --all -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        features:
+          - "v1,v2,not-wasm"  # Default features (native)
+          - "v1,v2,wasm"      # Both V1 and V2 WASM
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+      with:
+        components: clippy
+        targets: wasm32-unknown-unknown
+    - name: Run clippy with features (${{ matrix.features }})
+      run: cargo clippy --no-default-features --features ${{ matrix.features }} -- -D warnings
+
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - name: Run tests (native features only)
+      run: cargo test --no-default-features --features v1,v2,not-wasm
+
+  docs:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - name: Check documentation
+      run: cargo doc --no-default-features --features v1,v2,not-wasm --no-deps

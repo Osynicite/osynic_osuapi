@@ -12,7 +12,7 @@ pub trait IChat {
         &self,
         history_since: Option<u64>,
         since: Option<u64>,
-    ) -> impl std::future::Future<Output = Result<Silences>> + Send;
+    ) -> impl std::future::Future<Output = Result<Silences>>;
 
     fn create_new_pm(
         &self,
@@ -20,14 +20,14 @@ pub trait IChat {
         message: String,
         is_action: bool,
         uuid: Option<String>,
-    ) -> impl std::future::Future<Output = Result<CreateNewPMResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<CreateNewPMResponse>>;
 
     fn get_updates(
         &self,
         history_since: Option<u64>,
         includes: Option<Vec<String>>,
         since: Option<u64>,
-    ) -> impl std::future::Future<Output = Result<GetUpdatesResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetUpdatesResponse>>;
 
     fn get_channel_messages(
         &self,
@@ -35,26 +35,26 @@ pub trait IChat {
         limit: Option<u64>,
         since: Option<u64>,
         until: Option<u64>,
-    ) -> impl std::future::Future<Output = Result<Vec<ChatMessage>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<ChatMessage>>>;
 
     fn send_message_to_channel(
         &self,
         channel: u64,
         message: String,
         is_action: bool,
-    ) -> impl std::future::Future<Output = Result<ChatMessage>> + Send;
+    ) -> impl std::future::Future<Output = Result<ChatMessage>>;
 
     fn join_channel(
         &self,
         channel: String,
         user: String,
-    ) -> impl std::future::Future<Output = Result<ChatChannel>> + Send;
+    ) -> impl std::future::Future<Output = Result<ChatChannel>>;
 
     fn leave_channel(
         &self,
         channel: String,
         user: String,
-    ) -> impl std::future::Future<Output = Result<()>> + Send;
+    ) -> impl std::future::Future<Output = Result<()>>;
 
     fn mark_channel_as_read(
         &self,
@@ -62,19 +62,19 @@ pub trait IChat {
         message: String,
         channel_id: String,
         message_id: String,
-    ) -> impl std::future::Future<Output = Result<()>> + Send;
+    ) -> impl std::future::Future<Output = Result<()>>;
 
     fn get_channel_list(
         &self,
-    ) -> impl std::future::Future<Output = Result<Vec<ChatChannel>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<ChatChannel>>>;
 
     fn create_channel(
         &self,
         params: CreateChannelParams,
-    ) -> impl std::future::Future<Output = Result<ChatChannel>> + Send;
+    ) -> impl std::future::Future<Output = Result<ChatChannel>>;
 
     fn get_channel(
         &self,
         channel: String,
-    ) -> impl std::future::Future<Output = Result<GetChannelResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetChannelResponse>>;
 }

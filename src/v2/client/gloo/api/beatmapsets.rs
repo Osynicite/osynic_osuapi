@@ -3,40 +3,39 @@ use crate::v2::client::gloo::check::check_res;
 use crate::v2::interface::beatmapsets::IBeatmapsets;
 use crate::v2::model::beatmapset::structs::beatmapset::Beatmapset;
 use crate::v2::model::oauth::structs::o_token::OToken;
-
+use crate::v2::model::search::dtos::params::BeatmapsetsSearchParams;
+use crate::v2::model::search::dtos::response::BeatmapsetsSearchResponse;
 use gloo_net::http::Request;
-use std::sync::Arc;
-use tokio::sync::RwLock;
+use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
 use web_sys::console;
 
 #[derive(Clone)]
 pub struct GlooBeatmapsets {
-    pub o_token: Arc<RwLock<OToken>>,
-    pub proxy_url: Arc<RwLock<String>>,
+    pub o_token: Arc<Mutex<OToken>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl IBeatmapsets for GlooBeatmapsets {
-    async fn lookup_beatmapset(&self, beatmap_id: u32) -> Result<Beatmapset> {
-        console::log_1(&JsValue::from_str("GlooBeatmapsets lookup_beatmapset"));
+    async fn search(
+        &self,
+        params: BeatmapsetsSearchParams,
+    ) -> Result<BeatmapsetsSearchResponse> {
+        console::log_1(&JsValue::from_str("GlooBeatmapsets search"));
 
         let access_token = {
-            let token = self.o_token.read().await;
+            let token = self.o_token.lock().unwrap();
             token.access_token.clone()
         };
 
         let proxy_url = {
-            let url = self.proxy_url.read().await;
+            let url = self.proxy_url.lock().unwrap();
             url.clone()
         };
 
-        let params = [("beatmap_id", beatmap_id.to_string())];
-
-        let url = format!(
-            "{}https://osu.ppy.sh/api/v2/beatmapsets/lookup?{}",
-            proxy_url,
-            serde_urlencoded::to_string(&params)?
-        );
+        // Convert search params to query string
+        let query_string = serde_urlencoded::to_string(&params)?;
+        let url = format!("{}https://osu.ppy.sh/api/v2/beatmapsets/search?{}", proxy_url, query_string);
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
@@ -46,28 +45,24 @@ impl IBeatmapsets for GlooBeatmapsets {
             .await?;
 
         let response = check_res(res)?;
-        let beatmapset: Beatmapset = response.json().await?;
-
-        Ok(beatmapset)
+        let search_response: BeatmapsetsSearchResponse = response.json().await?;
+        Ok(search_response)
     }
 
     async fn get_beatmapset(&self, beatmapset_id: u32) -> Result<Beatmapset> {
         console::log_1(&JsValue::from_str("GlooBeatmapsets get_beatmapset"));
 
         let access_token = {
-            let token = self.o_token.read().await;
+            let token = self.o_token.lock().unwrap();
             token.access_token.clone()
         };
 
         let proxy_url = {
-            let url = self.proxy_url.read().await;
+            let url = self.proxy_url.lock().unwrap();
             url.clone()
         };
 
-        let url = format!(
-            "{}https://osu.ppy.sh/api/v2/beatmapsets/{}",
-            proxy_url, beatmapset_id
-        );
+        let url = format!("{}https://osu.ppy.sh/api/v2/beatmapsets/{}", proxy_url, beatmapset_id);
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
@@ -78,7 +73,31 @@ impl IBeatmapsets for GlooBeatmapsets {
 
         let response = check_res(res)?;
         let beatmapset: Beatmapset = response.json().await?;
-
         Ok(beatmapset)
+    }
+
+    async fn download(&self, beatmapset_id: u32) -> Result<()> {
+        console::log_1(&JsValue::from_str("GlooBeatmapsets download"));
+
+        let access_token = {
+            let token = self.o_token.lock().unwrap();
+            token.access_token.clone()
+        };
+
+        let proxy_url = {
+            let url = self.proxy_url.lock().unwrap();
+            url.clone()
+        };
+
+        let url = format!("{}https://osu.ppy.sh/api/v2/beatmapsets/{}/download", proxy_url, beatmapset_id);
+
+        let res = Request::get(&url)
+            .header("Accept", "application/json")
+            .header("Authorization", &format!("Bearer {}", access_token))
+            .send()
+            .await?;
+
+        check_res(res)?;
+        Ok(())
     }
 }

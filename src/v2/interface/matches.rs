@@ -8,12 +8,12 @@ pub trait IMatches {
         limit: Option<u32>,
         sort: Option<String>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<GetMatchesListingResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetMatchesListingResponse>>;
     fn get_match(
         &self,
         match_id: u64,
         before: Option<u64>,
         after: Option<u64>,
         limit: Option<u32>,
-    ) -> impl std::future::Future<Output = Result<GetMatchResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetMatchResponse>>;
 }

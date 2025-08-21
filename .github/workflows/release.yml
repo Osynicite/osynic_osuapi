@@ -1,0 +1,67 @@
+name: Release Check
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  release-check:
+    name: Release Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+        targets: wasm32-unknown-unknown
+    
+    - name: Cache cargo registry
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-release-${{ hashFiles('**/Cargo.lock') }}
+    
+    - name: Check package can be built
+      run: cargo package --no-verify
+    
+    - name: Check all feature combinations
+      run: |
+        echo "Testing all feature combinations..."
+        cargo check --no-default-features --features v1
+        cargo check --no-default-features --features v2
+        cargo check --no-default-features --features wasm
+        cargo check --no-default-features --features not-wasm
+        cargo check --no-default-features --features v1,v2
+        cargo check --no-default-features --features v1,wasm
+        cargo check --no-default-features --features v2,wasm
+        cargo check --no-default-features --features v1,not-wasm
+        cargo check --no-default-features --features v2,not-wasm
+        cargo check --no-default-features --features v1,v2,wasm
+        cargo check --no-default-features --features v1,v2,not-wasm
+    
+    - name: Check WASM targets
+      run: |
+        echo "Testing WASM targets..."
+        cargo check --target wasm32-unknown-unknown --no-default-features --features v1,wasm
+        cargo check --target wasm32-unknown-unknown --no-default-features --features v2,wasm
+        cargo check --target wasm32-unknown-unknown --no-default-features --features v1,v2,wasm
+    
+    - name: Run comprehensive tests
+      run: |
+        echo "Running comprehensive tests..."
+        cargo test --no-default-features --features v1,v2,not-wasm --verbose
+    
+    - name: Check documentation builds
+      run: |
+        echo "Checking documentation..."
+        cargo doc --no-default-features --features v1,v2,not-wasm --no-deps --document-private-items

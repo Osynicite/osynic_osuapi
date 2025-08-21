@@ -2,18 +2,16 @@ use crate::error::Result;
 use crate::v2::client::gloo::check::check_res;
 use crate::v2::interface::wiki::IWiki;
 use crate::v2::model::oauth::structs::o_token::OToken;
-use crate::v2::model::wiki::structs::wiki_page::WikiPage;
-
+use crate::v2::model::wiki::WikiPage;
 use gloo_net::http::Request;
-use std::sync::Arc;
-use tokio::sync::RwLock;
+use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
 use web_sys::console;
 
 #[derive(Clone)]
 pub struct GlooWiki {
-    pub o_token: Arc<RwLock<OToken>>,
-    pub proxy_url: Arc<RwLock<String>>,
+    pub o_token: Arc<Mutex<OToken>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl IWiki for GlooWiki {
@@ -21,12 +19,12 @@ impl IWiki for GlooWiki {
         console::log_1(&JsValue::from_str("GlooWiki get_wiki_page"));
 
         let access_token = {
-            let token = self.o_token.read().await;
+            let token = self.o_token.lock().unwrap();
             token.access_token.clone()
         };
 
         let proxy_url = {
-            let url = self.proxy_url.read().await;
+            let url = self.proxy_url.lock().unwrap();
             url.clone()
         };
 
@@ -44,7 +42,6 @@ impl IWiki for GlooWiki {
 
         let response = check_res(res)?;
         let wiki_page: WikiPage = response.json().await?;
-
         Ok(wiki_page)
     }
 }

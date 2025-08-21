@@ -9,7 +9,7 @@ pub trait IMultiplayer {
         room: String,
         playlist: u64,
         user: u64,
-    ) -> impl std::future::Future<Output = Result<Score>> + Send;
+    ) -> impl std::future::Future<Output = Result<Score>>;
     fn get_scores(
         &self,
         room: String,
@@ -17,13 +17,13 @@ pub trait IMultiplayer {
         limit: Option<u32>,
         sort: Option<String>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<MultiplayerScores>> + Send;
+    ) -> impl std::future::Future<Output = Result<MultiplayerScores>>;
     fn get_score(
         &self,
         room: String,
         playlist: u64,
         score: u64,
-    ) -> impl std::future::Future<Output = Result<Score>> + Send;
+    ) -> impl std::future::Future<Output = Result<Score>>;
     fn get_multiplayer_rooms(
         &self,
         limit: Option<u32>,
@@ -31,5 +31,5 @@ pub trait IMultiplayer {
         season_id: Option<u32>,
         sort: Option<String>,
         type_group: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Vec<Room>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<Room>>>;
 }

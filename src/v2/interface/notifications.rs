@@ -8,11 +8,11 @@ pub trait INotifications {
     fn get_notifications(
         &self,
         max_id: Option<String>,
-    ) -> impl std::future::Future<Output = Result<GetNotificationsResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetNotificationsResponse>>;
     fn mark_notifications_as_read(
         &self,
         params: Option<MarkNotificationsRequest>,
-    ) -> impl std::future::Future<Output = Result<()>> + Send;
+    ) -> impl std::future::Future<Output = Result<()>>;
 }
 
 // identities   object  optional

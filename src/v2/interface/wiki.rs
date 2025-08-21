@@ -6,5 +6,5 @@ pub trait IWiki {
         &self,
         locale: String,
         path: String,
-    ) -> impl std::future::Future<Output = Result<WikiPage>> + Send;
+    ) -> impl std::future::Future<Output = Result<WikiPage>>;
 }

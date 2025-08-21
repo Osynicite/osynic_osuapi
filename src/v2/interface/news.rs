@@ -9,10 +9,10 @@ pub trait INews {
         limit: Option<u32>,
         year: Option<u32>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<GetNewsListingResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetNewsListingResponse>>;
     fn get_news_post(
         &self,
         news: String,
         key: Option<String>,
-    ) -> impl std::future::Future<Output = Result<News>> + Send;
+    ) -> impl std::future::Future<Output = Result<News>>;
 }

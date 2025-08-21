@@ -17,8 +17,7 @@ use super::api::users::GlooUsers;
 use super::api::wiki::GlooWiki;
 use crate::v2::model::oauth::structs::o_token::OToken;
 
-use std::sync::Arc;
-use tokio::sync::RwLock;
+use std::sync::{Arc, Mutex};
 
 #[derive(Clone)]
 pub struct OsynicOsuApiV2GlooClient {
@@ -39,14 +38,14 @@ pub struct OsynicOsuApiV2GlooClient {
     pub scores: GlooScores,
     pub users: GlooUsers,
     pub wiki: GlooWiki,
-    pub o_token: Arc<RwLock<OToken>>,
-    pub proxy_url: Arc<RwLock<String>>,
+    pub o_token: Arc<Mutex<OToken>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl OsynicOsuApiV2GlooClient {
     pub fn new(o_token: OToken) -> Self {
-        let o_token = Arc::new(RwLock::new(o_token));
-        let proxy_url = Arc::new(RwLock::new(String::new()));
+        let o_token = Arc::new(Mutex::new(o_token));
+        let proxy_url = Arc::new(Mutex::new(String::new()));
         
         OsynicOsuApiV2GlooClient {
             oauth: GlooOauth {
@@ -123,21 +122,21 @@ impl OsynicOsuApiV2GlooClient {
     }
 
     /// Set the proxy URL for all API calls
-    pub async fn set_proxy_url(&self, proxy_url: String) {
-        let mut url = self.proxy_url.write().await;
+    pub fn set_proxy_url(&self, proxy_url: String) {
+        let mut url = self.proxy_url.lock().unwrap();
         *url = proxy_url;
     }
 
-    pub async fn set_o_token(&self, o_token: OToken) {
-        let mut token = self.o_token.write().await;
+    pub fn set_o_token(&self, o_token: OToken) {
+        let mut token = self.o_token.lock().unwrap();
         *token = o_token;
     }
 }
 
 impl Default for OsynicOsuApiV2GlooClient {
     fn default() -> Self {
-        let o_token = Arc::new(RwLock::new(OToken::default()));
-        let proxy_url = Arc::new(RwLock::new(String::new()));
+        let o_token = Arc::new(Mutex::new(OToken::default()));
+        let proxy_url = Arc::new(Mutex::new(String::new()));
         
         OsynicOsuApiV2GlooClient {
             oauth: GlooOauth {

@@ -6,5 +6,5 @@ pub trait IEvents {
         &self,
         sort: Option<String>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<GetEventsResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetEventsResponse>>;
 }

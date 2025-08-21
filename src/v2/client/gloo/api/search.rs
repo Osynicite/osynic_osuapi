@@ -2,44 +2,55 @@ use crate::error::Result;
 use crate::v2::client::gloo::check::check_res;
 use crate::v2::interface::search::ISearch;
 use crate::v2::model::oauth::structs::o_token::OToken;
-use crate::v2::model::search::structs::search_result::SearchResult;
-
+use crate::v2::model::search::dtos::response::SearchResponse;
+use crate::v2::model::search::enums::search_mode::SearchMode;
 use gloo_net::http::Request;
-use std::sync::Arc;
-use tokio::sync::RwLock;
+use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
 use web_sys::console;
 
 #[derive(Clone)]
 pub struct GlooSearch {
-    pub o_token: Arc<RwLock<OToken>>,
-    pub proxy_url: Arc<RwLock<String>>,
+    pub o_token: Arc<Mutex<OToken>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl ISearch for GlooSearch {
-    async fn search_all(&self, query: String, page: Option<i32>) -> Result<SearchResult> {
-        console::log_1(&JsValue::from_str("GlooSearch search_all"));
+    async fn search(
+        &self,
+        mode: Option<SearchMode>,
+        query: Option<String>,
+        page: Option<u32>,
+    ) -> Result<SearchResponse> {
+        console::log_1(&JsValue::from_str("GlooSearch search"));
 
         let access_token = {
-            let token = self.o_token.read().await;
+            let token = self.o_token.lock().unwrap();
             token.access_token.clone()
         };
 
         let proxy_url = {
-            let url = self.proxy_url.read().await;
+            let url = self.proxy_url.lock().unwrap();
             url.clone()
         };
 
-        let mut params = vec![("query", query)];
+        let mut query_params = Vec::new();
+        if let Some(mode) = mode {
+            query_params.push(("mode", mode.to_string()));
+        }
+        if let Some(query) = query {
+            query_params.push(("query", query));
+        }
         if let Some(page) = page {
-            params.push(("page", page.to_string()));
+            query_params.push(("page", page.to_string()));
         }
 
-        let url = format!(
-            "{}https://osu.ppy.sh/api/v2/search?{}",
-            proxy_url,
-            serde_urlencoded::to_string(&params)?
-        );
+        let query_string = serde_urlencoded::to_string(&query_params)?;
+        let url = if query_string.is_empty() {
+            format!("{}https://osu.ppy.sh/api/v2/search", proxy_url)
+        } else {
+            format!("{}https://osu.ppy.sh/api/v2/search?{}", proxy_url, query_string)
+        };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
@@ -49,8 +60,7 @@ impl ISearch for GlooSearch {
             .await?;
 
         let response = check_res(res)?;
-        let search_result: SearchResult = response.json().await?;
-
-        Ok(search_result)
+        let search_response: SearchResponse = response.json().await?;
+        Ok(search_response)
     }
 }

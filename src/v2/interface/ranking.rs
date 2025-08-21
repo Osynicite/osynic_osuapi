@@ -8,7 +8,7 @@ pub trait IRanking {
     fn get_kudosu_ranking(
         &self,
         page: Option<u32>,
-    ) -> impl std::future::Future<Output = Result<KudosuRankings>> + Send;
+    ) -> impl std::future::Future<Output = Result<KudosuRankings>>;
 
     fn get_ranking(
         &self,
@@ -19,7 +19,7 @@ pub trait IRanking {
         filter: Option<String>,
         spotlight: Option<String>,
         variant: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Rankings>> + Send;
+    ) -> impl std::future::Future<Output = Result<Rankings>>;
 
-    fn get_spotlights(&self) -> impl std::future::Future<Output = Result<Spotlights>> + Send;
+    fn get_spotlights(&self) -> impl std::future::Future<Output = Result<Spotlights>>;
 }

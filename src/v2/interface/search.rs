@@ -8,5 +8,5 @@ pub trait ISearch {
         mode: Option<SearchMode>,
         query: Option<String>,
         page: Option<u32>,
-    ) -> impl std::future::Future<Output = Result<SearchResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<SearchResponse>>;
 }

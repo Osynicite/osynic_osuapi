@@ -12,18 +12,18 @@ pub trait IForum {
         &self,
         topic: String,
         body: String,
-    ) -> impl std::future::Future<Output = Result<ForumPost>> + Send;
+    ) -> impl std::future::Future<Output = Result<ForumPost>>;
     fn get_topics_listing(
         &self,
         forum_id: Option<String>,
         sort: Option<String>,
         limit: Option<u32>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<TopicListing>> + Send;
+    ) -> impl std::future::Future<Output = Result<TopicListing>>;
     fn create_topic(
         &self,
         params: CreateTopicParams,
-    ) -> impl std::future::Future<Output = Result<CreateTopicResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<CreateTopicResponse>>;
     fn get_topic_and_posts(
         &self,
         topic: u32,
@@ -32,20 +32,20 @@ pub trait IForum {
         start: Option<String>,
         end: Option<String>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<GetTopicAndPostsResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetTopicAndPostsResponse>>;
     fn edit_topic(
         &self,
         topic: String,
         topic_title: String,
-    ) -> impl std::future::Future<Output = Result<ForumTopic>> + Send;
+    ) -> impl std::future::Future<Output = Result<ForumTopic>>;
     fn edit_post(
         &self,
         post: String,
         body: String,
-    ) -> impl std::future::Future<Output = Result<ForumPost>> + Send;
-    fn get_forum_listing(&self) -> impl std::future::Future<Output = Result<Forums>> + Send;
+    ) -> impl std::future::Future<Output = Result<ForumPost>>;
+    fn get_forum_listing(&self) -> impl std::future::Future<Output = Result<Forums>>;
     fn get_forum_and_topic(
         &self,
         forum: u64,
-    ) -> impl std::future::Future<Output = Result<GetForumAndTopicsResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetForumAndTopicsResponse>>;
 }

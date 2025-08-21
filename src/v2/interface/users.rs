@@ -14,13 +14,13 @@ pub trait IUsers {
         &self,
         mode: Option<Mode>,
         key: Option<String>,
-    ) -> impl std::future::Future<Output = Result<User>> + Send;
+    ) -> impl std::future::Future<Output = Result<User>>;
     fn get_user_kudosu(
         &self,
         id: u32,
         limit: Option<i32>,
         offset: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Vec<KudosuHisotry>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<KudosuHisotry>>>;
     fn get_user_scores(
         &self,
         id: u32,
@@ -28,41 +28,41 @@ pub trait IUsers {
         legacy_only: Option<u32>,
         limit: Option<i32>,
         offset: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Vec<Score>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<Score>>>;
     fn get_user_beatmaps(
         &self,
         id: u32,
         beatmap_type: String,
         limit: Option<i32>,
         offset: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Vec<Beatmapset>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<Beatmapset>>>;
     fn get_user_beatmaps_most_played(
         &self,
         id: u32,
         limit: Option<i32>,
         offset: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Vec<BeatmapPlaycount>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<BeatmapPlaycount>>>;
     fn get_user_recent_activity(
         &self,
         id: u32,
         limit: Option<i32>,
         offset: Option<String>,
-    ) -> impl std::future::Future<Output = Result<Vec<Event>>> + Send;
+    ) -> impl std::future::Future<Output = Result<Vec<Event>>>;
     fn get_user(
         &self,
         id: u32,
         mode: Option<Mode>,
         key: Option<String>,
-    ) -> impl std::future::Future<Output = Result<User>> + Send;
+    ) -> impl std::future::Future<Output = Result<User>>;
     fn get_user_by_username(
         &self,
         username: &str,
         mode: Option<Mode>,
         key: Option<String>,
-    ) -> impl std::future::Future<Output = Result<User>> + Send;
+    ) -> impl std::future::Future<Output = Result<User>>;
     fn get_users(
         &self,
         ids: Vec<u32>,
         include_variant_statistics: Option<bool>,
-    ) -> impl std::future::Future<Output = Result<Users>> + Send;
+    ) -> impl std::future::Future<Output = Result<Users>>;
 }

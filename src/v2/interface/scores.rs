@@ -7,5 +7,5 @@ pub trait IScores {
         &self,
         ruleset: Option<Mode>,
         cursor_string: Option<String>,
-    ) -> impl std::future::Future<Output = Result<GetScoresResponse>> + Send;
+    ) -> impl std::future::Future<Output = Result<GetScoresResponse>>;
 }

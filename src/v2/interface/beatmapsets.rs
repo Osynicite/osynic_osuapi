@@ -7,12 +7,12 @@ pub trait IBeatmapsets {
     fn search(
         &self,
         params: BeatmapsetsSearchParams,
-    ) -> impl std::future::Future<Output = Result<BeatmapsetsSearchResponse>> + Send;
-    // fn lookup(&self) -> impl std::future::Future<Output = Result<()>> + Send;
+    ) -> impl std::future::Future<Output = Result<BeatmapsetsSearchResponse>>;
+    // fn lookup(&self) -> impl std::future::Future<Output = Result<()>>;
     fn get_beatmapset(
         &self,
         beatmapset_id: u32,
-    ) -> impl std::future::Future<Output = Result<Beatmapset>> + Send;
-    fn download(&self, beatmapset_id: u32) -> impl std::future::Future<Output = Result<()>> + Send;
+    ) -> impl std::future::Future<Output = Result<Beatmapset>>;
+    fn download(&self, beatmapset_id: u32) -> impl std::future::Future<Output = Result<()>>;
     // {"authentication":"basic"}
 }

@@ -1,52 +1,48 @@
 use crate::error::Result;
 use crate::v2::client::gloo::check::check_res;
 use crate::v2::interface::notifications::INotifications;
-use crate::v2::model::notification::structs::notification::Notification;
+use crate::v2::model::notification::dtos::request::MarkNotificationsRequest;
+use crate::v2::model::notification::dtos::response::GetNotificationsResponse;
 use crate::v2::model::oauth::structs::o_token::OToken;
-
 use gloo_net::http::Request;
-use std::sync::Arc;
-use tokio::sync::RwLock;
+use std::sync::{Arc, Mutex};
 use wasm_bindgen::JsValue;
 use web_sys::console;
 
 #[derive(Clone)]
 pub struct GlooNotifications {
-    pub o_token: Arc<RwLock<OToken>>,
-    pub proxy_url: Arc<RwLock<String>>,
+    pub o_token: Arc<Mutex<OToken>>,
+    pub proxy_url: Arc<Mutex<String>>,
 }
 
 impl INotifications for GlooNotifications {
     async fn get_notifications(
         &self,
-        max_id: Option<u32>,
-        unread_only: Option<bool>,
-    ) -> Result<Vec<Notification>> {
+        max_id: Option<String>,
+    ) -> Result<GetNotificationsResponse> {
         console::log_1(&JsValue::from_str("GlooNotifications get_notifications"));
 
         let access_token = {
-            let token = self.o_token.read().await;
+            let token = self.o_token.lock().unwrap();
             token.access_token.clone()
         };
 
         let proxy_url = {
-            let url = self.proxy_url.read().await;
+            let url = self.proxy_url.lock().unwrap();
             url.clone()
         };
 
-        let mut params = Vec::new();
+        let mut query_params = Vec::new();
         if let Some(max_id) = max_id {
-            params.push(("max_id", max_id.to_string()));
-        }
-        if let Some(unread_only) = unread_only {
-            params.push(("unread_only", unread_only.to_string()));
+            query_params.push(("max_id", max_id));
         }
 
-        let url = format!(
-            "{}https://osu.ppy.sh/api/v2/notifications?{}",
-            proxy_url,
-            serde_urlencoded::to_string(&params)?
-        );
+        let query_string = serde_urlencoded::to_string(&query_params)?;
+        let url = if query_string.is_empty() {
+            format!("{}https://osu.ppy.sh/api/v2/notifications", proxy_url)
+        } else {
+            format!("{}https://osu.ppy.sh/api/v2/notifications?{}", proxy_url, query_string)
+        };
 
         let res = Request::get(&url)
             .header("Accept", "application/json")
@@ -56,40 +52,47 @@ impl INotifications for GlooNotifications {
             .await?;
 
         let response = check_res(res)?;
-        let notifications: Vec<Notification> = response.json().await?;
-
-        Ok(notifications)
+        let notifications_response: GetNotificationsResponse = response.json().await?;
+        Ok(notifications_response)
     }
 
-    async fn mark_notifications_as_read(&self, identities: Vec<serde_json::Value>) -> Result<()> {
+    async fn mark_notifications_as_read(
+        &self,
+        params: Option<MarkNotificationsRequest>,
+    ) -> Result<()> {
         console::log_1(&JsValue::from_str("GlooNotifications mark_notifications_as_read"));
 
         let access_token = {
-            let token = self.o_token.read().await;
+            let token = self.o_token.lock().unwrap();
             token.access_token.clone()
         };
 
         let proxy_url = {
-            let url = self.proxy_url.read().await;
+            let url = self.proxy_url.lock().unwrap();
             url.clone()
         };
 
-        let body = serde_json::json!({
-            "identities": identities
-        });
-
         let url = format!("{}https://osu.ppy.sh/api/v2/notifications/mark-read", proxy_url);
 
-        let res = Request::post(&url)
-            .header("Accept", "application/json")
-            .header("Content-Type", "application/json")
-            .header("Authorization", &format!("Bearer {}", access_token))
-            .body(body.to_string())
-            .send()
-            .await?;
+        let res = if let Some(params) = params {
+            let body = serde_json::to_string(&params)?;
+            Request::post(&url)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", &format!("Bearer {}", access_token))
+                .body(body)?
+                .send()
+                .await?
+        } else {
+            Request::post(&url)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", &format!("Bearer {}", access_token))
+                .send()
+                .await?
+        };
 
-        let _response = check_res(res)?;
-
+        check_res(res)?;
         Ok(())
     }
 }
