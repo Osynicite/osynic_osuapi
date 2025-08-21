@@ -17,12 +17,28 @@
 </p>
 
 <p align="center">
-    High performance, well-structured, extensible Rust osu! API client. Supports both WASM and native environments.
+    🚀 High Performance · 🏗️ Well Structured · 🔧 Highly Extensible<br/>
+    Complete Rust osu! API client library supporting both WASM and Native environments
+</p>
+
+<p align="center">
+  <a href="README.md">🇨🇳 中文</a> ·
+  <a href="README_EN.md">🇺🇸 English</a>
 </p>
 
 <hr />
 
-[中文版本](README.md) | [English Version](README_EN.md)
+# 📚 Table of Contents
+
+- [📄 OSU!API Official Documentation](#-osuapi-official-documentation)
+- [🧻 API Experience Website](#-api-experience-website)
+- [✨ Features](#-features)
+- [🚀 Quick Start](#-quick-start)
+- [🍕 API Checklist](#-api-checklist)
+- [❤️ Acknowledgements](#️-acknowledgements)
+- [⚠️ Special Attention](#️-special-attention)
+- [🤝 Contribution Guidelines](#-contribution-guidelines)
+- [📜 License](#-license)
 
 # 📄 OSU!API Official Documentation
 
@@ -33,66 +49,85 @@
 
 [![OsynicOsuapiEN.png](https://s2.loli.net/2025/05/15/qlgvPVuZhM5Gcod.png)](https://osynic-osuapi.deno.dev/)
 
-[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground) is a website quickly built with the [leptos](https://www.leptos.dev/) framework to demonstrate `osynic_osuapi`, primarily using V1 and V2's WASM client support (based on [gloo-net](https://crates.io/crates/gloo-net)). However, obviously, due to CORS issues, using the API directly in the browser without a proxy will encounter cross-origin problems (since the WASM part makes requests from the browser frontend). Therefore, a relay server [osynic-cors.deno.dev](https://osynic-cors.deno.dev) was set up using [Deno](https://deno.dev), working with the WASM client's `proxy_url` to implement proxy requests.
+## Website Features
 
-The website is currently deployed on [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/) via [Deno](deno.dev). Chinese, Japanese, Korean, German, French, Russian, and English are supported.
+**🌐 Online Experience**: An online demonstration platform for `osynic_osuapi` built with the [leptos](https://www.leptos.dev/) framework
 
-# 📜 Features
+**✨ Core Features**:
 
-- **Support for both old and new APIs**: Supports all V1 endpoints and most V2 endpoints (except for the undocumented modules)
-- **WASM Compatibility**: Provides WebAssembly support for both V1 and V2 interfaces, allowing direct access to the OSU API from web applications (though you may encounter CORS issues)
-- **Well-structured project**: Based on a three-module division of `client`, `interface`, and `model`; the `client` part aggregates `interface` interfaces and supports various HTTP clients for easy extension
-- **Very complete example support**: The `examples` directory contains very complete example code and return data, see the [API Checklist](#-api-checklist) section below for details
-- **Learn by example**: The best way to learn how to use this library is to directly view the rich example code in `examples`, or run `cargo run --example example_name` to see the corresponding return data. Once you get used to the style of the examples, you'll quickly be able to use it
+- WASM client demonstrations for both V1 and V2 APIs
+- Network requests based on [gloo-net](https://crates.io/crates/gloo-net)
+- CORS cross-origin issue resolution via [osynic-cors.deno.dev](https://osynic-cors.deno.dev) proxy
+- Multi-language support: Chinese, English, Japanese, Korean, German, French, Russian
+
+**🚀 Deployment**: Deployed on [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/) using [Deno](https://deno.dev)
+
+> **💡 Technical Note**: Due to browser CORS restrictions, WASM clients need to access the osu! API through a proxy server
+
+# ✨ Features
+
+- **🔄 Complete API Support**: Full support for all V1 endpoints + most V2 endpoints (except undocumented interfaces)
+- **🌐 WASM Compatibility**: WebAssembly support for both V1 and V2 interfaces, enabling direct use in web applications
+- **🏗️ Well-Architected**: Three-layer module design based on `client`, `interface`, and `model` for easy extension and maintenance
+- **📖 Comprehensive Examples**: Rich example code and response data in the `examples` directory, see [API Checklist](#-api-checklist)
+- **🎓 Example-Driven Learning**: Quick start by viewing example code or running `cargo run --example example_name`
 
 # 🚀 Quick Start
 
-## 1. Applying for OSU! API OAuth (V2) or Legacy API (V1)
+## Step 1: Apply for OSU! API Authorization
 
-You can apply for API access through your [osu settings page](https://osu.ppy.sh/home/account/edit). Simply navigate to either the OAuth (V2) or Legacy API (V1) section to complete your application.
+Visit your [osu! settings page](https://osu.ppy.sh/home/account/edit) and apply for the appropriate API authorization:
 
-## 2. Setting Up Environment Variables
+- **V2 API**: Apply in the "OAuth" section
+- **V1 API**: Apply in the "Legacy API" section
 
-Create a `.env` file in your project's root directory with the following content:
+## Step 2: Configure Environment Variables
+
+Create a `.env` file in your project root directory:
 
 ```env
-# V2 API
+# V2 API Configuration
 CLIENT_ID="your_client_id"
 CLIENT_SECRET="your_client_secret"
 REDIRECT_URI="your_redirect_uri"
 CODE="your_code"  # Required for Authorization Code Grant authentication
 
-# V1 API
+# V1 API Configuration
 API_KEY="your_api_key"
 ```
 
-After setting up this file, you can use the `dotenvy` dependency to read these environment variables from the `.env` file in your project.
+## Step 3: Add Dependencies
 
-### 3. Installing and Using the Library
-
-First, add the dependency to your `Cargo.toml`:
+Add dependencies to your `Cargo.toml`:
 
 ```toml
 [dependencies]
 osynic_osuapi = "0.1.1"
-# The default features are ["v1", "v2", "not-wasm"]. If you need to use this in a WASM environment, you need to disable the `not-wasm` feature and add the `wasm` feature, for example:
+dotenvy = "0.15"  # For reading .env files
+
+# WASM Environment Configuration (Optional)
 # osynic_osuapi = { version = "0.1.1", default-features = false, features = ["v1", "v2", "wasm"] }
 ```
 
-Then you can use it in your code~
+> **💡 Feature Description**:
+>
+> - Default features: `["v1", "v2", "not-wasm"]` (for Native environments)
+> - WASM environment: Disable `not-wasm` and enable `wasm` feature
 
-### Example 1: Complete CCG certification with V2 and obtain Peppy's user information
+## Usage Examples
 
-The following code is from `examples/peppy.rs`, you can directly run `cargo run --example peppy` to see the effect
+### Example 1: V2 API - CCG Authentication and User Information
+
+Use Client Credentials Grant authentication to get peppy's user information:
 
 ```rust
-// Client Credentials Grant and Get Peppy's User Info
+// examples/peppy.rs - Run cargo run --example peppy to see the effect
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
 use osynic_osuapi::v2::interface::oauth::IOauth;
 use osynic_osuapi::v2::interface::users::IUsers;
 
-// You can also import all the client and interface modules by prelude
+// You can also import all client and interface modules by prelude
 // use osynic_osuapi::prelude::*;
 
 #[tokio::main]
@@ -100,50 +135,56 @@ async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
     let client_id = std::env::var("CLIENT_ID").expect("CLIENT_ID not set");
     let client_secret = std::env::var("CLIENT_SECRET").expect("CLIENT_SECRET not set");
+    
     let client = OsynicOsuApiV2Client::default();
+    
+    // Get access token
     let token = client
         .oauth
         .get_token_without_code(client_id.parse()?, &client_secret)
         .await?;
-    println!("{:?}", token);
+    println!("Token: {:?}", token);
 
+    // Get user information
     let peppy = client
         .users
         .get_user_by_username("peppy", None, None)
         .await?;
-    println!("{:?}", peppy);
+    println!("User: {:?}", peppy);
 
     Ok(())
 }
 ```
 
-### Example 2: Check beatmap information with V1
+### Example 2: V1 API - Query Beatmap Information
 
-The following code is from `examples/gb.rs`, you can directly run `cargo run --example gb` to see the effect
+Query beatmap details by beatmap hash:
 
 ```rust
-// Get beatmap by hash
+// examples/gb.rs - Run cargo run --example gb to see the effect
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v1::client::request::client::OsynicOsuApiV1Client;
 use osynic_osuapi::v1::interface::beatmap::IBeatmap;
 use osynic_osuapi::v1::model::beatmap::GetBeatmapsParams;
 
-// You can also import all the client and interface modules by prelude
-// use osynic_osuapi::prelude::*;
-
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
     let api_key = std::env::var("API_KEY").expect("API_KEY is not set.");
-    let client = OsynicOsuApiV1Client::new(api_key.clone());
-    let params = GetBeatmapsParams::default().hash("69f77b0dfe67d288c1bf748f91ceb133".to_string());
+    let client = OsynicOsuApiV1Client::new(api_key);
+    
+    // Query beatmap by hash
+    let params = GetBeatmapsParams::default()
+        .hash("69f77b0dfe67d288c1bf748f91ceb133".to_string());
 
     let beatmaps = client.beatmap.get_beatmaps(params).await?;
-    println!("{:?}", beatmaps);
+    println!("Beatmaps: {:?}", beatmaps);
 
     Ok(())
 }
 ```
+
+> **🎯 More Examples**: Check the `examples/` directory for complete examples, or run `cargo run --example example_name` to see actual results.
 
 # 🍕 API Checklist
 
@@ -358,37 +399,57 @@ During the development of `osynic_osuapi`, I still referenced the interface desi
 
 The `rosu-v2` project is based on the [MIT License](./licenses/LICENSE-rosu-v2), with the project license located in `licenses/LICENSE-rosu-v2`
 
-# ⚠️ Special Attention!!!
+# ⚠️ Special Attention
 
-When using this library, the most common issues stem from changes in the official osu!API entity structure:
+When using this library, the most common issues stem from changes in the official osu! API entity structure:
 
-- **Entity structure changes**: The structure of osu!API may change at any time, but the official documentation may not be updated promptly
-- **Return field changes**: The return fields of some interfaces may change, especially for less frequently used endpoints
-- **Unexpected null values**: Some fields may return null under certain conditions, but are not marked as optional in the documentation
+## Common Issue Types
 
-The main reason for these issues is that the official osu!API documentation doesn't provide comprehensive descriptions of entity properties. If you encounter parsing errors or type mismatches during use, please don't hesitate to submit an Issue with the following information:
+- **🔄 Entity Structure Changes**: The structure of osu! API may change at any time, but official documentation updates may not be timely
+- **📝 Return Field Changes**: Return fields of some interfaces may change, especially for less frequently used endpoints
+- **❓ Unexpected Null Values**: Some fields may return null under certain conditions, but are not marked as optional in the documentation
 
-1. The API endpoint used
-2. Request parameters
-3. Error message or exception stack trace
+## Issue Reporting
+
+If you encounter parsing errors or type mismatches during use, please submit an Issue with the following information:
+
+1. **API endpoint used**
+2. **Request parameters**
+3. **Error message or exception stack trace**
 
 I will handle and update the library as quickly as possible to adapt to API changes. Most models in this library are built based on actual request response results, but there may still be omissions or errors. Your feedback is crucial for improving this library!
 
 # 🤝 Contribution Guidelines
 
-This library is basically a module developed for the Osynic application, but it is also a complete Rust encapsulation of the osu!api.
+## Project Overview
 
-Currently, V1 and V2 APIs are mostly implemented (except for the undocumented modules), and WASM support for both V1 and V2 is also complete.
+This library is primarily developed for the Osynic application, but also serves as a complete Rust wrapper for the osu! API.
 
-The library is still in development, and there may be some bugs or missing features.
+## Current Status
 
-So, if there is any problem with the code, or if you have any suggestions, please submit a PR or Issue, and I will deal with it as soon as possible~
+✅ **Completed**:
 
-If you want to contribute code, please follow these rules:
+- Most V1 and V2 API interfaces (except undocumented interfaces)
+- WASM support for both V1 and V2
 
-- Follow the official Rust coding specifications
-- New features must be accompanied by test cases
-- Run `cargo fmt` and `cargo clippy` before submitting
+⚠️ **In Development**: May have bugs or incomplete features
+
+## How to Contribute
+
+We welcome PRs and Issues! If you find any problems or have suggestions for improvement, please follow these guidelines:
+
+### Code Contribution Standards
+
+- **Coding Standards**: Follow official Rust coding conventions
+- **Testing Requirements**: New features must include test cases
+- **Code Quality**: Run `cargo fmt` and `cargo clippy` before submitting
+- **Documentation Updates**: Update relevant documentation and examples when necessary
+
+### Issue Submission Guidelines
+
+- Describe the specific scenario of the problem
+- Provide reproduction steps and error information
+- Include relevant API endpoints and parameter information
 
 # 📜 License
 

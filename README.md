@@ -17,12 +17,28 @@
 </p>
 
 <p align="center">
-    高性能, 结构优良, 拓展性好的 Rust osu! API 客户端 支持 WASM 和 native 环境.
+    🚀 高性能 · 🏗️ 结构优良 · 🔧 易于扩展<br/>
+    功能完整的 Rust osu! API 客户端库，支持 WASM 和 Native 环境
+</p>
+
+<p align="center">
+  <a href="README.md">🇨🇳 中文</a> ·
+  <a href="README_EN.md">🇺🇸 English</a>
 </p>
 
 <hr />
 
-[中文版本](README.md) | [English Version](README_EN.md)
+# 📚 目录
+
+- [📄 OSU!API 官方文档](#-osuapi-官方文档)
+- [🧻 API体验网站](#-api体验网站)
+- [✨ 特性](#-特性)
+- [🚀 快速开始](#-快速开始)
+- [🍕 API检查表](#-api检查表)
+- [❤️ 鸣谢](#️-鸣谢)
+- [⚠️ 特别注意](#️-特别注意)
+- [🤝 贡献指南](#-贡献指南)
+- [📜 开源协议](#-开源协议)
 
 # 📄 OSU!API 官方文档
 
@@ -33,66 +49,85 @@
 
 [![OsynicOsuapiCN.png](https://s2.loli.net/2025/05/15/Ww1hovEL4PmKdD6.png)](https://osynic-osuapi.deno.dev/)
 
-[LeptosOsuapiPlayground](https://github.com/islatri/leptos_osuapi_playground)是基于[leptos](https://www.leptos.dev/)框架快速搭建了一个`osynic_osuapi`体验网站，主要使用了V1和V2的WASM客户端支持（基于[gloo-net](https://crates.io/crates/gloo-net)），不过很显然，由于CORS的问题，不代理直接在浏览器中使用API会遇到跨域问题（毕竟WASM部分是浏览器前端发的请求嘛），所以用[Deno](https://deno.dev)来搭建了一个中转服务器[osynic-cors.deno.dev](https://osynic-cors.deno.dev)，配合WASM客户端的`proxy_url`来实现代理请求；
+## 网站特色
 
-目前网站通过[Deno](https://deno.dev)部署在[osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/)，支持中日韩德法俄英等多种语言；
+**🌐 在线体验**：基于 [leptos](https://www.leptos.dev/) 框架构建的 `osynic_osuapi` 在线体验平台
 
-# 📜 特性
+**✨ 核心功能**：
 
-- **新旧 API 支持**: 支持 V1 的所有端点 以及 V2 的大部分端点（除了文档未归类的接口）
-- **WASM 兼容性**: 为 V1 和 V2 接口都提供了 WebAssembly 支持，支持直接从网页应用访问 OSU API（但是会遇到CORS问题）
-- **项目结构良好**: 基于`client`、`interface`、`model`三重模块划分；`client`部分聚合`interface`接口并支持多种HTTP客户端，便于拓展
-- **非常完整的示例支持**: 在`examples`目录下，我们提供了非常完整的示例代码与返回数据，详见下方的[API检查表](#-api检查表)部分
-- **在示例中学习使用**: 学习使用本库的最佳方式就是直接查看`examples`中丰富的示例代码，或者直接运行`cargo run --example 示例名`来查看对应的返回数据，只要习惯示例的代码风格，很快就能上手使用
+- 支持 V1 和 V2 API 的 WASM 客户端演示
+- 基于 [gloo-net](https://crates.io/crates/gloo-net) 的网络请求
+- 通过 [osynic-cors.deno.dev](https://osynic-cors.deno.dev) 代理解决 CORS 跨域问题
+- 多语言支持：中文、英语、日语、韩语、德语、法语、俄语
+
+**🚀 部署方式**：使用 [Deno](https://deno.dev) 部署在 [osynic-osuapi.deno.dev](https://osynic-osuapi.deno.dev/)
+
+> **💡 技术说明**：由于浏览器 CORS 限制，WASM 客户端需要通过代理服务器来访问 osu! API
+
+# ✨ 特性
+
+- **🔄 新旧 API 全支持**: 完整支持 V1 所有端点 + V2 大部分端点（除文档未归类接口）
+- **🌐 WASM 兼容性**: V1 和 V2 接口均提供 WebAssembly 支持，可直接在网页应用中使用
+- **🏗️ 架构设计优良**: 基于 `client`、`interface`、`model` 三层模块设计，易于扩展和维护
+- **📖 完整示例支持**: `examples` 目录提供丰富的示例代码和返回数据，详见 [API检查表](#-api检查表)
+- **🎓 示例驱动学习**: 通过查看示例代码或运行 `cargo run --example 示例名` 快速上手
 
 # 🚀 快速开始
 
-## 1. 申请OSU!API的开放授权(V2)或者旧版本API(V1)
+## 步骤一：申请 OSU! API 授权
 
-申请网址就在你的[osu设置页](https://osu.ppy.sh/home/account/edit)，在开放授权(V2)或者旧版本API(V1)中申请即可
+访问您的 [osu! 设置页面](https://osu.ppy.sh/home/account/edit)，在以下位置申请相应的 API 授权：
 
-## 2. 设置环境变量
+- **V2 API**: 在 "OAuth" 或 "开放授权" 部分申请
+- **V1 API**: 在 "Legacy API" 或 "旧版本 API" 部分申请
 
-在你的项目根目录下创建一个`.env`文件，内容如下
+## 步骤二：配置环境变量
+
+在项目根目录创建 `.env` 文件：
 
 ```env
-# V2 API
+# V2 API 配置
 CLIENT_ID="你的client_id"
 CLIENT_SECRET="你的client_secret"
 REDIRECT_URI="你的redirect_uri"
-CODE="你的code" # Authorization Code Grant认证时需要
+CODE="你的code"  # Authorization Code Grant 认证时需要
 
-# V1 API
+# V1 API 配置
 API_KEY="你的api_key"
 ```
 
-然后我们就可以通过`dotenvy`依赖来读取`.env`中的环境变量了
+## 步骤三：添加依赖
 
-## 3. 添加依赖并使用
-
-首先在`Cargo.toml`中添加依赖
+在 `Cargo.toml` 中添加依赖：
 
 ```toml
 [dependencies]
 osynic_osuapi = "0.1.1"
-# 默认features是 ["v1", "v2", "not-wasm"]，如果需要在WASM环境中使用，需要关闭`not-wasm`特性，然后添加`wasm`特性，例如：
+dotenvy = "0.15"  # 用于读取 .env 文件
+
+# WASM 环境配置（可选）
 # osynic_osuapi = { version = "0.1.1", default-features = false, features = ["v1", "v2", "wasm"] }
 ```
 
-然后在代码中使用即可~
+> **💡 特性说明**：
+>
+> - 默认特性：`["v1", "v2", "not-wasm"]`（适用于 Native 环境）
+> - WASM 环境：需要关闭 `not-wasm` 并启用 `wasm` 特性
 
-### 示例一：用V2完成CCG认证并获取peppy的用户信息
+## 使用示例
 
-下面的代码来自`examples/peppy.rs`，可以直接运行`cargo run --example peppy`来查看效果
+### 示例一：V2 API - CCG 认证获取用户信息
+
+使用 Client Credentials Grant 认证方式获取 peppy 的用户信息：
 
 ```rust
-// Client Credentials Grant and Get Peppy's User Info
+// examples/peppy.rs - 可运行 cargo run --example peppy 查看效果
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v2::client::request::client::OsynicOsuApiV2Client;
 use osynic_osuapi::v2::interface::oauth::IOauth;
 use osynic_osuapi::v2::interface::users::IUsers;
 
-// You can also import all the client and interface modules by prelude
+// 也可以通过 prelude 导入所有客户端和接口模块
 // use osynic_osuapi::prelude::*;
 
 #[tokio::main]
@@ -100,60 +135,66 @@ async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
     let client_id = std::env::var("CLIENT_ID").expect("CLIENT_ID not set");
     let client_secret = std::env::var("CLIENT_SECRET").expect("CLIENT_SECRET not set");
+    
     let client = OsynicOsuApiV2Client::default();
+    
+    // 获取访问令牌
     let token = client
         .oauth
         .get_token_without_code(client_id.parse()?, &client_secret)
         .await?;
-    println!("{:?}", token);
+    println!("Token: {:?}", token);
 
+    // 获取用户信息
     let peppy = client
         .users
         .get_user_by_username("peppy", None, None)
         .await?;
-    println!("{:?}", peppy);
+    println!("User: {:?}", peppy);
 
     Ok(())
 }
 ```
 
-### 示例二：用V1查阅谱面信息
+### 示例二：V1 API - 查询谱面信息
 
-下面的代码来自`examples/gb.rs`，可以直接运行`cargo run --example gb`来查看效果
+通过谱面哈希值查询谱面详细信息：
 
 ```rust
-// Get beatmap by hash
+// examples/gb.rs - 可运行 cargo run --example gb 查看效果
 use osynic_osuapi::error::Result;
 use osynic_osuapi::v1::client::request::client::OsynicOsuApiV1Client;
 use osynic_osuapi::v1::interface::beatmap::IBeatmap;
 use osynic_osuapi::v1::model::beatmap::GetBeatmapsParams;
 
-// You can also import all the client and interface modules by prelude
-// use osynic_osuapi::prelude::*;
-
 #[tokio::main]
 async fn main() -> Result<()> {
     dotenvy::dotenv().ok();
     let api_key = std::env::var("API_KEY").expect("API_KEY is not set.");
-    let client = OsynicOsuApiV1Client::new(api_key.clone());
-    let params = GetBeatmapsParams::default().hash("69f77b0dfe67d288c1bf748f91ceb133".to_string());
+    let client = OsynicOsuApiV1Client::new(api_key);
+    
+    // 通过哈希值查询谱面
+    let params = GetBeatmapsParams::default()
+        .hash("69f77b0dfe67d288c1bf748f91ceb133".to_string());
 
     let beatmaps = client.beatmap.get_beatmaps(params).await?;
-    println!("{:?}", beatmaps);
+    println!("Beatmaps: {:?}", beatmaps);
 
     Ok(())
 }
 ```
 
+> **🎯 更多示例**：查看 `examples/` 目录获取完整示例，或运行 `cargo run --example 示例名` 查看实际效果。
+
 # 🍕 API检查表
 
-可通过`cargo run --exmaple 示例名`来运行API对应示例
+可通过 `cargo run --example 示例名` 来运行API对应示例
 
 ## [V1](https://github.com/ppy/osu-api/wiki)
 
 本条目基于[V1官方文档](https://github.com/ppy/osu-api/wiki)的API大类进行划分，分类如下
 
-其中接口模块对应可以在`src/v1/interface`中找到，相应实现则在`src/v1/client/request/api`或者`src/v1/client/gloo/api`中可以找到
+其中接口模块对应可以在 `src/v1/interface` 中找到，相应实现则在 `src/v1/client/request/api` 或者 `src/v1/client/gloo/api` 中可以找到
 
 | API              | 支持 | 备注             | 示例名 | 模块名        |
 | ---------------- | ---- | ---------------- | ------ | ------------- |
@@ -169,7 +210,7 @@ async fn main() -> Result<()> {
 
 本条目基于[V2官方文档](https://osu.ppy.sh/docs/index.html)的API大类进行划分，分类如下
 
-其中接口模块对应可以在`src/v2/interface`中找到，相应实现则在`src/v2/client/request/api`中可以找到，示例代码和相应数据在`src/v2/examples`中可以找到
+其中接口模块对应可以在 `src/v2/interface` 中找到，相应实现则在 `src/v2/client/request/api` 中可以找到，示例代码和相应数据在 `src/v2/examples` 中可以找到
 
 | 大类           | API总数 | API支持数        | 备注        | 模块名          |
 | -------------- | ------- | ---------------- | ----------- | --------------- |
@@ -217,15 +258,15 @@ async fn main() -> Result<()> {
 
 ### [Beatmapsets](https://osu.ppy.sh/docs/index.html#beatmapsets)
 
-| API             | 支持        | 备注                | 示例名 |
-| --------------- | ----------- | ------------------- | ------ |
-| /get_beatmapsets_discussions_posts| 🈳(不稳定接口)| 获取铺面集讨论区发布| `bsdpg` |
-| /get_beatmapsets_discussions_vote| 🈳(不稳定接口)| 获取铺面集讨论区投票| `bsdvg` |
-| /get_beatmapsets_discussions| 🈳(不稳定接口)| 获取铺面集讨论区| `bsdg` |
-| /search         | ✅           | 搜索谱面集          | `bss`  |
-| /lookup         | 🈳(文档不明) | 查阅谱面集          | `bsl`  |
-| /get_beatmapset | ✅           | 获取谱面集          | `bsg`  |
-| /download       | ❌           | 下载谱面集（lazer） | `bsd`  |
+| API                                   | 支持        | 备注                    | 示例名  |
+| ------------------------------------- | ----------- | ----------------------- | ------- |
+| /get_beatmapsets_discussions_posts    | 🈳(不稳定接口) | 获取铺面集讨论区发布    | `bsdpg` |
+| /get_beatmapsets_discussions_vote     | 🈳(不稳定接口) | 获取铺面集讨论区投票    | `bsdvg` |
+| /get_beatmapsets_discussions          | 🈳(不稳定接口) | 获取铺面集讨论区        | `bsdg`  |
+| /search                               | ✅           | 搜索谱面集              | `bss`   |
+| /lookup                               | 🈳(文档不明)  | 查阅谱面集              | `bsl`   |
+| /get_beatmapset                       | ✅           | 获取谱面集              | `bsg`   |
+| /download                             | ❌           | 下载谱面集（lazer）     | `bsd`   |
 
 ### [Changelog](https://osu.ppy.sh/docs/index.html#changelog)
 
@@ -358,37 +399,57 @@ async fn main() -> Result<()> {
 
 `rosu-v2`项目基于[MIT License](./licenses/LICENSE-rosu-v2)，项目证书放置在`licenses/LICENSE-rosu-v2`中
 
-# ⚠️ 特别注意！！！
+# ⚠️ 特别注意
 
-使用本库时，最常见的问题来源于osu!API官方实体结构的变动：
+使用本库时，最常见的问题来源于 osu! API 官方实体结构的变动：
 
-- **实体结构变动**：osu!API的结构可能会随时变化，但官方文档更新可能不及时
-- **返回字段变动**：某些接口的返回字段可能会发生变化，尤其是较少使用的端点
-- **异常空值**：某些字段可能在特定情况下返回null，但在文档中未标明为可选
+## 常见问题类型
 
-这些问题的主要原因是osu!API官方文档对实体属性的描述不够全面。如果您在使用过程中遇到解析错误或类型不匹配等问题，请不要犹豫，直接提交Issue并附上：
+- **🔄 实体结构变动**：osu! API 的结构可能随时变化，官方文档更新可能不及时
+- **📝 返回字段变动**：某些接口的返回字段可能发生变化，尤其是较少使用的端点  
+- **❓ 异常空值**：某些字段可能在特定情况下返回 null，但文档中未标明为可选
 
-1. 使用的API端点
-2. 请求参数
-3. 错误信息或异常堆栈
+## 问题反馈
 
-我会尽快处理并更新库以适应API的变化。本库的大部分模型都是基于实际请求返回结果构建的，但仍可能存在遗漏或错误。您的反馈对完善本库至关重要！
+如果您在使用过程中遇到解析错误或类型不匹配等问题，请直接提交 Issue 并附上：
+
+1. **使用的 API 端点**
+2. **请求参数**  
+3. **错误信息或异常堆栈**
+
+我会尽快处理并更新库以适应 API 的变化。本库的大部分模型都是基于实际请求返回结果构建的，但仍可能存在遗漏或错误。您的反馈对完善本库至关重要！
 
 # 🤝 贡献指南
 
-这个库基本上只是为Osynic这个应用开发的一个模块，但是同时也是一个功能完整的osu!api的Rust封装；
+## 项目概述
 
-目前，V1和V2的大部分API接口(除了文档未归类的接口)已经实现，V1和V2的WASM支持也都已完成。
+本库主要为 Osynic 应用开发，同时也是一个功能完整的 osu! API Rust 封装库。
 
-这个库仍然在开发中，可能会有一些bug或者不完善的地方；
+## 当前状态
 
-所以，如果代码有任何问题，或者你有任何建议，欢迎提交PR或者Issue，我会尽快处理~
+✅ **已完成**：
 
-如果你想贡献代码，请遵循以下规则：
+- V1 和 V2 大部分 API 接口（除文档未归类的接口）
+- V1 和 V2 的 WASM 支持
 
-- 遵循Rust官方编码规范
-- 新增功能需附带测试用例
-- 提交前运行`cargo fmt`和`cargo clippy`
+⚠️ **开发中**：可能存在 bug 或不完善的地方
+
+## 如何贡献
+
+欢迎提交 PR 或 Issue！如果您发现任何问题或有改进建议，请遵循以下规则：
+
+### 代码贡献规范
+
+- **编码规范**：遵循 Rust 官方编码规范
+- **测试要求**：新增功能需附带测试用例  
+- **代码质量**：提交前运行 `cargo fmt` 和 `cargo clippy`
+- **文档更新**：必要时更新相关文档和示例
+
+### Issue 提交指南
+
+- 描述问题的具体场景
+- 提供复现步骤和错误信息
+- 附上相关的 API 端点和参数信息
 
 # 📜 开源协议
 

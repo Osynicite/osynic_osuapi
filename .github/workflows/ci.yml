@@ -80,9 +80,9 @@ jobs:
           ~/.cargo/registry/cache
           ~/.cargo/git/db
           target
-        key: ${{ runner.os }}-cargo-${{ matrix.features }}-${{ hashFiles('**/Cargo.lock') }}
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ matrix.name }}
         restore-keys: |
-          ${{ runner.os }}-cargo-${{ matrix.features }}-
+          ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-
           ${{ runner.os }}-cargo-
     
     - name: Check compilation
@@ -135,8 +135,9 @@ jobs:
           ~/.cargo/registry/cache
           ~/.cargo/git/db
           target
-        key: ${{ runner.os }}-cargo-v1,v2,not-wasm-${{ hashFiles('**/Cargo.lock') }}
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-native-v1v2
         restore-keys: |
+          ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-
           ${{ runner.os }}-cargo-
     
     - name: Check individual features
