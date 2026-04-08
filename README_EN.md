@@ -8,7 +8,7 @@
 <p align="center">
   <a href="https://www.rust-lang.org/" target="_blank"><img src="https://img.shields.io/badge/Rust-1.85%2B-blue"/></a>
   <a href="https://crates.io/crates/osynic_osuapi" target="_blank"><img src="https://img.shields.io/crates/v/osynic_osuapi"/></a>
-  <a href="https://docs.rs/osynic_osuapi" target="_blank"><img src="https://img.shields.io/docsrs/osynic_osuapi/0.1.9"/></a>
+  <a href="https://docs.rs/osynic_osuapi" target="_blank"><img src="https://img.shields.io/docsrs/osynic_osuapi/0.1.10"/></a>
   <a href="https://www.npmjs.com/package/@osynicite/osynic-osuapi" target="_blank"><img src="https://img.shields.io/npm/v/@osynicite/osynic-osuapi"/></a>
   <a href="https://www.npmjs.com/package/@osynicite/osynic-osuapi" target="_blank"><img src="https://img.shields.io/npm/dm/@osynicite/osynic-osuapi"/></a>
   <a href="https://hakochest.github.io/osynic-osuapi/" target="_blank"><img src="https://img.shields.io/badge/Typedoc-Documentation-blue"/></a>
@@ -104,11 +104,11 @@ Add dependencies to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-osynic_osuapi = "0.1.9"
+osynic_osuapi = "0.1.10"
 dotenvy = "0.15"  # For reading .env files
 
 # WASM Environment Configuration (Optional)
-# osynic_osuapi = { version = "0.1.9", default-features = false, features = ["v1", "v2", "wasm"] }
+# osynic_osuapi = { version = "0.1.10", default-features = false, features = ["v1", "v2", "wasm"] }
 ```
 
 > **💡 Feature Description**:
