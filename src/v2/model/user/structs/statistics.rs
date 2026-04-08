@@ -49,11 +49,11 @@ pub struct Level {
 #[cfg_attr(feature = "export", tsify(into_wasm_abi, from_wasm_abi))]
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GradeCounts {
-    pub ss: u32,
-    pub ssh: u32,
-    pub s: u32,
+    pub ss: i32,
+    pub ssh: i32,
+    pub s: i32,
     pub sh: i32,
-    pub a: u32,
+    pub a: i32,
 }
 
 #[cfg_attr(feature = "export", derive(tsify::Tsify))]

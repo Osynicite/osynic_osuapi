@@ -1,6 +1,6 @@
 [package]
 name = "osynic_osuapi"
-version = "0.1.10"
+version = "0.1.11"
 edition = "2024"
 authors = ["Hako Chest <zoneherobrine@gmail.com>"]
 rust-version = "1.85.0"
@@ -17,7 +17,7 @@ serde = { version = "1.0.228", features = ["derive"] }
 serde_json = { version = "1.0.149" }
 chrono = { version = "0.4.44", features = ["serde"] }
 
-tokio = { version = "1.51.0", features = [
+tokio = { version = "1.51.1", features = [
     "rt-multi-thread",
     "macros",
     "sync",

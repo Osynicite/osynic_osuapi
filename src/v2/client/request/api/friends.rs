@@ -61,8 +61,11 @@ impl IFriends for ReqwestFriends {
             .await?;
 
         let response = check_res(res)?;
+        // println!("Response: {:?}", response.text().await?);
+        // 太长了帮我保存到本地txt吧！
+        // std::fs::write("response.txt", response.text().await?)?;
         let friends_x_api_version: Vec<FriendXApiVersion> = response.json().await?;
-
+        // let friends_x_api_version: Vec<FriendXApiVersion> = Vec::new();
         Ok(friends_x_api_version)
     }
 }
