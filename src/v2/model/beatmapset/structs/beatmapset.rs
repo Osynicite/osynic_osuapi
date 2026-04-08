@@ -46,7 +46,7 @@ pub struct Beatmapset {
     pub last_updated: Option<String>,
     pub legacy_thread_url: Option<String>,
     pub nominations_summary: Option<NominationsSummary>,
-    pub ranked: Option<u32>,
+    pub ranked: Option<i32>,
     pub ranked_date: Option<String>,
     pub storyboard: Option<bool>,
     pub submitted_date: Option<String>,

@@ -31,7 +31,7 @@ pub struct Convert {
     mode_int: u32,
     passcount: u32,
     playcount: u32,
-    ranked: u32,
+    ranked: i32,
     url: String,
     checksum: String,
     failtimes: Failtimes,

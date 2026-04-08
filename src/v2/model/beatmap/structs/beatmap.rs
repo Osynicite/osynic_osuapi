@@ -35,7 +35,7 @@ pub struct Beatmap {
     pub mode_int: u32,
     pub passcount: u32,
     pub playcount: u32,
-    pub ranked: u32,
+    pub ranked: i32,
     pub url: String,
     pub checksum: String,
 
